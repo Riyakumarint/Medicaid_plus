@@ -31,6 +31,7 @@ mongoose.connect(URI, {
     console.log("Connected to mongodb")
 })
 
+
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
     app.get('*', (req, res)=>{
@@ -44,4 +45,12 @@ app.listen(PORT, () => {
     console.log('Server is running on port', PORT)
 })
 
-/*npm i express mongoose cors dotenv bcrypt jsonwebtoken cookie-parser cloudinary concurrently express-fileupload googleapis node-fetch nodemailer*/
+/*npm i express mongoose cors dotenv bcrypt jsonwebtoken cookie-parser cloudinary concurrently express-fileupload googleapis node-fetch nodemailer next
+
+npm i -D nodemon
+*/
+
+{/* 
+npm i axios react-router-dom redux react-redux redux-thunk redux-devtools-extension moment bcrypt
+
+*/}
