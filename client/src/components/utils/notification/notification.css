@@ -1,21 +1,42 @@
 .errMsg{
+    /* visibility: hidden; */
+    position: absolute;
+    top: 5px;
+    right: 1px;
     background: rgb(214, 10, 10);
     color: white;
     text-align: center;
-    padding: 12px 0;
+    padding: 12px 20px;
     margin-bottom: 10px;
     letter-spacing: 1.3px;
     border-radius: 5px;
-    box-shadow: 0 0 15px rgb(247, 3, 3);
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 0 7px rgb(247, 3, 3);
+    animation: fadeOut 8s;
 }
 
 .successMsg{
+    position: absolute;
+    top: 5px;
+    right: 1px;
     background: rgb(9, 158, 54);
     color: white;
     text-align: center;
-    padding: 12px 0;
+    padding: 12px 20px;
     margin-bottom: 10px;
     letter-spacing: 1.3px;
     border-radius: 5px;
+    font-weight: 700;
     box-shadow: 0 0 15px rgb(12, 163, 58);
+    animation: fadeOut 8s;
+}
+
+@keyframes fadeOut {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
 }

@@ -1,8 +1,7 @@
 const Users = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
-
+const sendMail = require("./sendMail")
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
@@ -42,42 +41,42 @@ const userCtrl = {
       const activation_token = createActivationToken(newUser);
 
       const url = `${CLIENT_URL}/user/activate/${activation_token}`;
+      sendMail( email, url, "Verify your email address");
+      // const transporter = nodemailer.createTransport({
+      //   service: "gmail",
+      //   auth: {
+      //     user: process.env.MAIL_ID,
+      //     pass: process.env.MAIL_PASS,
+      //   },
+      // });
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.MAIL_ID,
-          pass: process.env.MAIL_PASS,
-        },
-      });
-
-      const mailOptions = {
-        from: "riya@gmail.com",
-        to: email,
-        subject: "Pinky Shop: Account Activation Link",
-        html: `
-            <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-            <h2 style="text-align: center; text-transform: uppercase;color: violet;">Welcome to the Pinky channel.</h2>
-            <p>Congratulations! You're almost set to start using Pinky✮SHOP.
-                Just click the button below to validate your email address.
-            </p>
+      // const mailOptions = {
+      //   from: "riya@gmail.com",
+      //   to: email,
+      //   subject: "Pinky Shop: Account Activation Link",
+      //   html: `
+      //       <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+      //       <h2 style="text-align: center; text-transform: uppercase;color: violet;">Welcome to the Pinky channel.</h2>
+      //       <p>Congratulations! You're almost set to start using Pinky✮SHOP.
+      //           Just click the button below to validate your email address.
+      //       </p>
             
-            <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Verify Your Email Address</a>
+      //       <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Verify Your Email Address</a>
         
-            <p>If the button doesn't work for any reason, you can also click on the link below:</p>
+      //       <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
-            <div>${url}</div>
-            </div>
-        `,
-      };
+      //       <div>${url}</div>
+      //       </div>
+      //   `,
+      // };
 
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
+      // transporter.sendMail(mailOptions, function (error, info) {
+      //   if (error) {
+      //     console.log(error);
+      //   } else {
+      //     console.log("Email sent: " + info.response);
+      //   }
+      // });
 
       res.json({
         msg: "Register Success! Please activate your email to start.",
@@ -160,41 +159,43 @@ const userCtrl = {
       const access_token = createAccessToken({ id: user._id });
       const url = `${ CLIENT_URL }/user/reset/${access_token}`;
 
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.MAIL_ID,
-          pass: process.env.MAIL_PASS,
-        },
-      });
-
-      const mailOptions = {
-        from: "riya@gmail.com",
-        to: email,
-        subject: "Pinky Shop: Reset Password",
-        html: `
-            <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-            <h2 style="text-align: center; text-transform: uppercase;color: violet;">Welcome to the Pinky channel.</h2>
-            <p>Congratulations! You're almost set to start using Pinky✮SHOP.
-                Just click the button below to validate your email address.
-            </p>
+      
+      sendMail(email, url, "Verify your email address");
+      
+      // const transporter = nodemailer.createTransport({
+      //   service: "gmail",
+      //   auth: {
+      //     user: process.env.MAIL_ID,
+      //     pass: process.env.MAIL_PASS,
+      //   },
+      // });
+      // const mailOptions = {
+      //   from: "riya@gmail.com",
+      //   to: email,
+      //   subject: "Pinky Shop: Reset Password",
+      //   html: `
+      //       <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+      //       <h2 style="text-align: center; text-transform: uppercase;color: violet;">Welcome to the Pinky channel.</h2>
+      //       <p>Congratulations! You're almost set to start using Pinky✮SHOP.
+      //           Just click the button below to validate your email address.
+      //       </p>
             
-            <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Rest your password</a>
+      //       <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Rest your password</a>
         
-            <p>If the button doesn't work for any reason, you can also click on the link below:</p>
+      //       <p>If the button doesn't work for any reason, you can also click on the link below:</p>
         
-            <div>${url}</div>
-            </div>
-        `,
-      };
+      //       <div>${url}</div>
+      //       </div>
+      //   `,
+      // };
 
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
+      // transporter.sendMail(mailOptions, function (error, info) {
+      //   if (error) {
+      //     console.log(error);
+      //   } else {
+      //     console.log("Email sent: " + info.response);
+      //   }
+      // });
 
       res.json({ msg: "Re-send the password, please check your email." });
     } catch (err) {
