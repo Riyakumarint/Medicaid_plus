@@ -19,7 +19,7 @@ function Body() {
     <section>
       <Switch>
         <Route path="/" component={Home} exact />
-
+        {/* <Route exact path="/" component={auth.token ? Home : Login} /> */}
         <Route path="/login" component={isLogged ? NotFound : Login} exact />
         <Route
           path="/register"

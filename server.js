@@ -23,7 +23,7 @@ app.use('/api', require('./routes/upload'))
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {
     useCreateIndex: true,
-    // useFindAndModify: false,
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, err => {
