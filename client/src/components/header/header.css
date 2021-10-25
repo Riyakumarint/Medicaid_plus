@@ -1,33 +1,47 @@
-header{
+.header{
     width: 100%;
-    min-height: 80px;
+    min-height: 70px;
     background: #681d55;
+    position: sticky;
+    top:0;
+    left: 0;
+    z-index: 2;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
     padding: 0 30px;
 }
-header a{
+
+.header .logo h1{
+    font-size: 2rem;
+    font-family: 'Poppins';
+    color:white;
+} 
+
+.header .logo h1:hover{ 
+    color: white;
+}
+
+.header a{
     color: white;
     text-transform: uppercase;
     letter-spacing: 1.5px;
 }
-header ul li{
+.header ul li{
     display: inline-block;
     padding: 10px 20px;
     opacity: 0.9;
 }
-header ul li:hover{
+.header ul li:hover{
     color: aliceblue;
     opacity: 1;
     font-weight: bold;
 }
 
-header ul li img{
+.header ul li img{
     width: 30px;
     height: 30px;
-    transform: translateY(10px);
+    /* transform: translateY(0px); */
     border-radius: 50%;
 }
 
@@ -65,3 +79,18 @@ header ul li img{
     display: block;
 
 } 
+.menu a{
+    color: rgb(240, 238, 238);
+    opacity: 0.7;
+    font-size: 18px;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    margin: 5px 2px ;
+}
+.menu a:hover{
+    opacity: 1;
+}
+.menu a:active {
+    color: rgb(236, 225, 235);
+    font-weight: bold;
+  }

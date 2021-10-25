@@ -6,21 +6,11 @@ function Home() {
         <div className="home_page">
             <h2>Hello everyone!</h2>
             <p>
-                This site is about user authentication, 
-                so there won't be any other pages here. 
-                If people want to see more about how to 
-                create other websites. You can click on 
-                the link below, visit my youtube channel. 
-                And if you find it useful, please subscribe 
-                for us. Thank you very much!
+            We developed this project to reduce patient harassment, saving time of patient & ensure better treatment. Patients can hospital regular updates & features. Also Patient can Book Doctor's Appointment online here. Some modules here : Admin , Sub-Admin, Doctors, Staffs, Patients etc.
             </p>
-            <a href="https://www.youtube.com/c/DevATHTML" target="_blank" 
-            rel="noopener noreferrer">My Youtube</a>
+            
 
-            <h3>Build a simple e-commerce site.</h3>
-
-            <a href="https://youtu.be/uXl77UFkrkQ" target="_blank" 
-            rel="noopener noreferrer">Build a Ecommerce</a>
+        
         </div>
     )
 }

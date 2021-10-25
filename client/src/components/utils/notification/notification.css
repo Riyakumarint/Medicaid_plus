@@ -1,7 +1,7 @@
 .errMsg{
     position: absolute;
     top: 5px;
-    right: 1px;
+    right: 0;
     background: rgb(214, 10, 10);
     color: white;
     text-align: center;

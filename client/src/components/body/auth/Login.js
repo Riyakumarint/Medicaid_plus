@@ -7,8 +7,10 @@ import {
 } from "../../utils/notification/Notification";
 import { dispatchLogin } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
-import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+import googleIcon from "../../../images/google.png";
+import facebookIcon from "../../../images/facebook.png";
+// import { GoogleLogin } from "react-google-login";
+// import FacebookLogin from "react-facebook-login";
 
 const initialState = {
   email: "",
@@ -21,6 +23,7 @@ function Login() {
   const [user, setUser] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [typePass, setTypePass] = useState(false);
 
   const { email, password, err, success } = user;
 
@@ -84,13 +87,151 @@ function Login() {
   };
 
   return (
-    <div className="login_page">
+    <div className="container_sign">
+      <div className="forms-container">
+        <div className="signin-signup">
+          <form onSubmit={handleSubmit}>
+            {err && showErrMsg(err)}
+            {success && showSuccessMsg(success)}
+            <h3 className="title">Sign in</h3>
+            <div className="form-group">
+              <div className="input-field">
+                <i className="fa fa-envelope" aria-hidden="true"></i>
+
+                <input
+                  type="email"
+                  className="email"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Email"
+                  onChange={handleChangeInput}
+                  name="email"
+                  value={email}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="input-field">
+                <i className="fa fa-lock" aria-hidden="true"></i>
+                <input
+                  type={typePass ? "text" : "password"}
+                  className="password"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                  onChange={handleChangeInput}
+                  value={password}
+                  name="password"
+                />
+                <small className="hide" onClick={() => setTypePass(!typePass)}>
+                  {typePass ? <i class="fa fa-eye-slash" aria-hidden="true"></i> : <i class="fa fa-eye" aria-hidden="true"></i>}
+                </small>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="button"
+              disabled={email && password ? false : true}
+            >
+              Login
+            </button>
+
+            <p className="social-text">Or sign in with social platforms</p>
+            <div className="social-media">
+              <a href="#" className="social-icon">
+                <img src={googleIcon} alt="googleicon" className="socialicon" />
+              </a>
+              <a href="#" className="social-icon">
+                <img
+                  src={facebookIcon}
+                  alt="facebookicon"
+                  className="socialicon"
+                />
+              </a>
+            </div>
+
+            <Link className="my-2" to="forgot_password">
+              Forgot your password?
+            </Link>
+
+            <p className="my-2">
+              You don't have an account?{" "}
+              <Link to="/register" style={{ color: "crimson" }}>
+                Register Now
+              </Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    //   <form onSubmit={handleSubmit}>
+    //     <div  className="input-field">
+    //       <label htmlFor="email">Email Address</label>
+    //       <input
+    //         type="text"
+    //         placeholder="Enter email address"
+    //         id="email"
+    //         value={email}
+    //         name="email"
+    //         onChange={handleChangeInput}
+    //       />
+    //     </div>
+
+    //     <div>
+    //       <label htmlFor="password">Password</label>
+    //       <input
+    //         type={typePass ? "text" : "password"} className="password"
+    //         placeholder="Enter password"
+    //         id="password"
+    //         value={password}
+    //         name="password"
+    //         onChange={handleChangeInput}
+    //       /><small className="hide" onClick={() => setTypePass(!typePass)}>
+    //       {typePass ? "Hide" : "Show"}
+    //     </small>
+    //     </div>
+
+    //     <div className="row">
+    //       <button type="submit" disabled={email && password ? false : true}>Login</button>
+    //       <Link to="/forgot_password">Forgot your password?</Link>
+    //     </div>
+    //   </form>
+
+    //   <div className="hr">Or Login With</div>
+
+    //   <div className="social">
+    //     <GoogleLogin
+    //       clientId="154130108136-uoq52bc2pgofqlclt81il3v3tn1257k2.apps.googleusercontent.com"
+    //       //"Your google client id"
+    //       buttonText="Login with google"
+    //       onSuccess={responseGoogle}
+    //       cookiePolicy={"single_host_origin"}
+    //     />
+
+    //     <FacebookLogin
+    //       appId="311833670513949"
+    //       autoLoad={false}
+    //       fields="name,email,picture"
+    //       callback={responseFacebook}
+    //     />
+    //   </div>
+
+    //   <p>
+    //     New Customer? <Link to="/register">Register</Link>
+    //   </p>
+    // </div>
+  );
+}
+
+export default Login;
+
+{
+  /* <div className="login_page">
       <h2>Login</h2>
       {err && showErrMsg(err)}
       {success && showSuccessMsg(success)}
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <div  className="input-field">
           <label htmlFor="email">Email Address</label>
           <input
             type="text"
@@ -105,17 +246,19 @@ function Login() {
         <div>
           <label htmlFor="password">Password</label>
           <input
-            type="password"
+            type={typePass ? "text" : "password"} className="password"
             placeholder="Enter password"
             id="password"
             value={password}
             name="password"
             onChange={handleChangeInput}
-          />
+          /><small className="hide" onClick={() => setTypePass(!typePass)}>
+          {typePass ? "Hide" : "Show"}
+        </small>
         </div>
 
         <div className="row">
-          <button type="submit">Login</button>
+          <button type="submit" disabled={email && password ? false : true}>Login</button>
           <Link to="/forgot_password">Forgot your password?</Link>
         </div>
       </form>
@@ -142,8 +285,5 @@ function Login() {
       <p>
         New Customer? <Link to="/register">Register</Link>
       </p>
-    </div>
-  );
+    </div> */
 }
-
-export default Login;

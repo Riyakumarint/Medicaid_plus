@@ -1,5 +1,174 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
 
+.container_sign{
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+.forms-container{
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto;
+    padding: 25px;
+    box-shadow: 0 0 19px 0 rgba(134, 160, 212, 0.5);
+    border-radius: 10px;
+    translate: translate(-50%,-50%);
+    top:700px;
+    left:0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content:  center;
+    align-items: center;
+}
+
+.signin-signup .title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    color:#444;
+    margin-bottom: 10px;
+}
+
+/* .titleverfy {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    color:#444;
+    margin: 7px 0 20px 0;
+} */
+
+.signin-signup .input-field {
+    max-width: 780px;
+    width: 300px;
+    height: 55px;
+    background-color: #e8effd;
+    margin: 10px 0;
+    border-radius: 55px;
+    display: grid; 
+    grid-template-columns: 15% 80%;
+    padding: 0 0.8rem;
+    position: relative; 
+}
+
+/* .verifyinput{
+    margin: auto;
+} */
+
+.signin-signup .input-field i {
+    text-align: center;
+    line-height: 55px;
+    color: rgb(129, 170, 247);
+    font-size: 1.5rem;
+}
+
+.signin-signup .input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 0.92rem;
+    color: #333;
+}
+
+
+.signin-signup .input-field .hide {
+    position: absolute;
+    right: 12px;
+    color: rgb(35, 92, 199);
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.signin-signup .input-field input:hover {
+    text-decoration: none;
+    background-color: #edf1fd;
+}
+
+.signin-signup .input-field input:placeholder-shown{
+    color: #aaa;
+    font-weight: 500;
+}
+
+.signin-signup .input-field .form-text {
+    position: absolute;
+    top: 48px;
+    left: 10px;
+    translate: translateY(-50%);
+    color: rgb(211, 44, 22);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.signin-signup .button {
+    width: 150px;
+    height: 49px;
+    outline: none;
+    border:none;
+    border-radius: 48px;
+    background-color:#538bfa;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 10px 0;
+    transition: all 0.5s;
+}
+
+.signin-signup .button:hover{
+    background-color: #3872e6;
+}
+
+.signin-signup .buttonverify {
+    width: 300px;
+    height: 49px;
+    outline: none;
+    border:none;
+    border-radius: 48px;
+    background-color:#538bfa;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: auto;
+    transition: all 0.5s;
+}
+
+.signin-signup .social-text {
+    padding-top: 0.7rem ;
+}
+
+.signin-signup .social-media {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.signin-signup .socialicon{
+    margin: 0 10px;
+    display: inline;
+    padding: 3px;
+    height: 44px;
+    width: 44px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.signin-signup .gender{
+    display: inline;
+    padding: 12px;
+}
+
+
+
 .login_page{
     max-width: 500px;
     margin: auto;
@@ -23,7 +192,7 @@
     border-radius: 5px;
     outline: none;
     padding: 0 10px;
-    
+    /* position: relative;  */
 }
 .login_page .row{
     display: flex;
@@ -34,6 +203,20 @@
 .login_page .row a{
     color: crimson;
 }
+.login_page .password{
+    position: relative;
+}
+.login_page .hide {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    translate: translateX(-20%);
+    color: rgb(35, 92, 199);
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
 .login_page .row button{
     width: 150px;
     padding: 10px 0;
@@ -122,15 +305,15 @@
     left:0;
 }
 
-
-.thanksheader{
+/* -----------Email Activation ----------------------*/
+.active_page .thanksheader{
     font-family: 'Poppins', sans-serif;
     font-size: 2.2rem;
     color:#444;
     margin-bottom: 10px;
 }
 
-.up{
+.active_page .up{
     width: 500px ;
     min-width: 500px;
     height: 250px ;
@@ -139,7 +322,7 @@
     background-color: #e7b62f;
     /* box-shadow: 0 0 19px 0 rgba(50, 129, 219, 0.5); */
 }
-.success_up{
+.active_page .success_up{
     height: 80px ;
     position: relative;
     bottom: 50px;
@@ -147,16 +330,17 @@
     margin: auto;
 }
 
-.up h1{
-    padding: auto;
-    margin: auto;
+.active_page .up h1{
+    padding: 10px auto;
+    margin: 0 35px;
+    width: 100%;
     color: aliceblue;
     position: relative;
-    bottom: 90px;
-    padding: auto;
+    bottom: 99px;
+    align-items: center;
 }
 
-.success_up{
+.active_page .success_up{
     width: 180px;
     height: 180px;
     margin: 50px 50px;
@@ -164,14 +348,14 @@
     justify-content: center;
 }
 
-.thanks {
+.active_page .thanks {
     display: flex;
     flex-direction: column;
     justify-content:  center;
     align-items: center;
 }
 
-.down{
+.active_page .down{
     position: relative;
     width: 500px ;
     min-width: 500px;
@@ -182,7 +366,7 @@
     
 }
 
-.down h2{
+.active_page .down h2{
     width: 100%;
     margin: 10px auto;
     text-align: center;
@@ -191,7 +375,7 @@
     letter-spacing: 1px;
 }
 
-.down .home{
+.active_page .down .home{
     margin: 0 215px;
     display: inline;
     padding: 3px;
