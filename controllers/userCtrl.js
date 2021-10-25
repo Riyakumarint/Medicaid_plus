@@ -13,17 +13,27 @@ const { CLIENT_URL } = process.env;
 const userCtrl = {
   register: async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, username, mobile, email, password, gender } = req.body;
 
-      if (!name || !email || !password)
+      if (!name || !email || !password || !mobile)
         return res.status(400).json({ msg: "Please fill in all fields." });
 
+      let newUserName = username.toLowerCase().replace(/ /g, "");
+      
       if (!validateEmail(email))
         return res.status(400).json({ msg: "Invalid emails." });
 
-      const user = await Users.findOne({ email });
-      if (user)
-        return res.status(400).json({ msg: "This email already exists." });
+      if (!validPhone(mobile))
+          return res.status(400).json({ msg: "Invalid phone number." });
+      
+          const user_email = await Users.findOne({ email });
+          if (user_email)
+            return res.status(400).json({ msg: "This email already exists." });
+    
+          const user_mobile = await Users.findOne({ mobile });
+          if (user_mobile)
+            return res.status(400).json({ msg: "This mobile already exists." });
+    
 
       if (password.length < 6)
         return res
@@ -33,50 +43,13 @@ const userCtrl = {
       const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = {
-        name,
-        email,
-        password: passwordHash,
+        name, username: newUserName, mobile,email, password: passwordHash, gender
       };
 
       const activation_token = createActivationToken(newUser);
 
       const url = `${CLIENT_URL}/user/activate/${activation_token}`;
       sendMail( email, url, "Verify your email address");
-      // const transporter = nodemailer.createTransport({
-      //   service: "gmail",
-      //   auth: {
-      //     user: process.env.MAIL_ID,
-      //     pass: process.env.MAIL_PASS,
-      //   },
-      // });
-
-      // const mailOptions = {
-      //   from: "riya@gmail.com",
-      //   to: email,
-      //   subject: "Pinky Shop: Account Activation Link",
-      //   html: `
-      //       <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-      //       <h2 style="text-align: center; text-transform: uppercase;color: violet;">Welcome to the Pinky channel.</h2>
-      //       <p>Congratulations! You're almost set to start using Pinky✮SHOP.
-      //           Just click the button below to validate your email address.
-      //       </p>
-            
-      //       <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Verify Your Email Address</a>
-        
-      //       <p>If the button doesn't work for any reason, you can also click on the link below:</p>
-        
-      //       <div>${url}</div>
-      //       </div>
-      //   `,
-      // };
-
-      // transporter.sendMail(mailOptions, function (error, info) {
-      //   if (error) {
-      //     console.log(error);
-      //   } else {
-      //     console.log("Email sent: " + info.response);
-      //   }
-      // });
 
       res.json({
         msg: "Register Success! Please activate your email to start.",
@@ -93,16 +66,14 @@ const userCtrl = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { name, email, password } = user;
+      const { name, username, mobile, email, password,gender } = user;
 
       const check = await Users.findOne({ email });
       if (check)
         return res.status(400).json({ msg: "This email already exists." });
 
       const newUser = new Users({
-        name,
-        email,
-        password,
+        name, username, mobile, email, password,gender
       });
 
       await newUser.save();
@@ -366,6 +337,11 @@ const userCtrl = {
     }
   }
 };
+
+function validPhone(mobile) {
+  const re = /^[+]/g;
+  return re.test(mobile);
+}
 
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

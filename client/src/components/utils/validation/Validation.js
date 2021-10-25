@@ -2,7 +2,11 @@ export const isEmpty = value => {
     if(!value) return true
     return false
 }
-
+export const isPhone = mobile => {
+    const re = /^[+]/g;
+    return re.test(mobile);
+  }
+  
 export const isEmail = email => {
     // eslint-disable-next-line
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

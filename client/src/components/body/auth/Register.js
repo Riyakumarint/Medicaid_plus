@@ -5,13 +5,16 @@ import {
   showErrMsg,
   showSuccessMsg,
 } from "../../utils/notification/Notification";
-import {isEmpty, isEmail, isLength, isMatch} from '../../utils/validation/Validation'
+import {isEmpty,isPhone, isEmail, isLength, isMatch} from '../../utils/validation/Validation'
 
 const initialState = {
   name: "",
+  username: "",
+  mobile:"",
   email: "",
   password: "",
   cf_password: "",
+  gender :"male",
   err: "",
   success: "",
 };
@@ -19,7 +22,7 @@ const initialState = {
 function Register() {
   const [user, setUser] = useState(initialState);
 
-  const { name, email, password, cf_password, err, success } = user;
+  const {  name, username, mobile, email, password, cf_password, err, success } = user;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -28,7 +31,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEmpty(name) || isEmpty(password))
+    if (isEmpty(name) || isEmpty(username) || isEmpty(mobile) || isEmpty(email) || isEmpty(password) )
       return setUser({
         ...user,
         err: "Please fill in all fields.",
@@ -37,6 +40,11 @@ function Register() {
 
     if (!isEmail(email))
       return setUser({ ...user, err: "Invalid emails.", success: "" });
+    
+      if (!isPhone(mobile))
+      return setUser({ ...user, err: "Invalid phone number.", success: "" });
+    
+    
 
     if (isLength(password))
       return setUser({
@@ -50,9 +58,7 @@ function Register() {
 
     try {
       const res = await axios.post("/user/register", {
-        name,
-        email,
-        password,
+        name, username, mobile, email, password,
       });
 
       setUser({ ...user, err: "", success: res.data.msg });
@@ -80,6 +86,32 @@ function Register() {
             onChange={handleChangeInput}
           />
         </div>
+
+        <div>
+          <label htmlFor="username">User Name</label>
+          <input
+            type="text"
+            placeholder="Enter user name"
+            id="username"
+            value={username}
+            name="username"
+            onChange={handleChangeInput}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="mobile">Phone Number</label>
+          <input
+            type="text"
+            placeholder="Phone Number"
+            id="mobile"
+            value={mobile}
+            name="mobile"
+            onChange={handleChangeInput}
+          />
+        </div>
+
+
 
         <div>
           <label htmlFor="email">Email Address</label>
