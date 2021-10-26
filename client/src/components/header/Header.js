@@ -22,20 +22,22 @@ function Header() {
   const userLink = () => {
     return (
       <li className="drop-nav">
-        <Link to="#" className="avatar">
-          <img src={user.avatar} alt="" /> {user.name}{" "}
-          <i className="fas fa-angle-down"></i>
-        </Link>
-        <ul className="dropdown">
-          <li>
-            <Link to="/profile">Profile</Link>
+        <NavLink to="#" className="avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img className="avatar_user" src={user.avatar} alt="" />{" "}
+          {user.username} <i className="fas fa-angle-down"></i>
+        </NavLink>
+<div className="dropdown">
+        <ul className="dropmenu">
+          <li className="dropdown-profile">
+            <NavLink to="/profile" onClick={() => window.scrollTo({ top: 0 })}>Profile</NavLink>
           </li>
-          <li>
-            <Link to="/" onClick={handleLogout}>
+          <li className="dropdown-profile">
+            <NavLink to="/" onClick={handleLogout}>
               Logout
-            </Link>
+            </NavLink>
           </li>
         </ul>
+       </div>
       </li>
     );
   };
@@ -45,92 +47,103 @@ function Header() {
   };
 
   return (
-    // <header>
-      <div className="header ">
-    <nav className="navbar navbar-expand-lg navbar-light  
-    " >
-      <Link to="/" className="logo">
-        <h1
-          className="navbar-brand text-uppercase p-0 m-0"
-          onClick={() => window.scrollTo({ top: 0 })}
-        >
-          Medicare
-        </h1>
-      </Link>
-          
-          <button class="navbar-toggler justify-content-end" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div className="header fixed-top">
+      <div className="menu-bar">
+        <nav
+          className="navbar navbar-expand-lg navbar-light">
+          <a href="/" className="navbar-brand">
+            <h1 onClick={() => window.scrollTo({ top: 0 })}>Medicaid</h1>
+          </a>
 
-  <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
-        <ul className="navbar-nav menu justify-content-end ms-auto">
-          <NavLink
-            exact
-            to="/get_appointments"
-            class="main-nav"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "white",
-              opacity: "1",
-            }}
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            Appoin
-          </NavLink>
-          <NavLink
-            exact
-            to="/find_video_consult"
-            class="main-nav"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "white",
-              opacity: "1",
-            }}
-          >
-            Video
-          </NavLink>
-          <NavLink
-            exact
-            to="/find_lab_test"
-            class="main-nav"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "white",
-              opacity: "1",
-            }}
-          >
-            Lab
-          </NavLink>
-          <NavLink
-            exact
-            to="/articles"
-            class="main-nav"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "white",
-              opacity: "1",
-            }}
-          >
-            Articles
-          </NavLink>
-        
+            <i class="fa fa-bars"></i>
+          </button>
 
-        <NavLink to="/" class="main-nav" style={transForm}>
-          <i className="fas fa-bookmark"></i> Appoint
-        </NavLink>
-        {isLogged ? (
-          userLink()
-        ) : (
-          <NavLink to="/login" class="main-nav" style={transForm}>
-            <i className="fas fa-user"></i> Sign in
-          </NavLink>
-        )}
-        </ul>
-        </div>
-         
-          </nav>
-</div>
-    // </header>
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul className="navbar-nav menu ml-auto">
+              <NavLink
+                exact
+                to="/get_appointments"
+                class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }} onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Get Appoinments
+              </NavLink>
+              <NavLink
+                exact
+                to="/find_video_consult"
+                class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }} onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Video Consult
+              </NavLink>
+              <NavLink
+                exact
+                to="/find_lab_test"
+                class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }} onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Lab tests
+              </NavLink>
+              <NavLink
+                exact
+                to="/articles"
+                class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }} onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Articles
+              </NavLink>
+
+              <li className="nav-item dropdown" style={{ opacity: 1 }}>
+                <div
+                  className="dropdown"
+                  style={{ transform: "translateX(75px)" }}
+                >
+                  {/* <NotifyModal /> */}
+                </div>
+              </li>
+
+              {isLogged ? (
+                userLink()
+              ) : (
+                <li style={transForm}>
+                  <NavLink exact to="/login"class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }} onClick={() => window.scrollTo({ top: 0 })}>
+                    <i className="fas fa-user"></i> Sign in
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
   );
 }
 
 export default Header;
+
+

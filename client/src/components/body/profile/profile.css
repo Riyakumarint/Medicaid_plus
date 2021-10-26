@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding-top: 90px;
 }
 .profile_page .col-left{
     max-width: 400px;
@@ -16,7 +17,7 @@
     overflow: hidden;
     position: relative;
     margin: 15px auto;
-    border: 1px solid #7c1d64;
+    border: 2px solid  #911F27;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -33,11 +34,11 @@
     left: 0;
     width: 100%;
     height: 50%;
-    background: #fff8;
+    background: rgba(255, 233, 233, 0.533);
     text-align: center;
     font-weight: 400;
     text-transform: uppercase;
-    color: #7c1d64;
+    color: #911F27;
     font-weight: bolder;
     transition: 0.3s ease-in-out;
 }
@@ -58,7 +59,7 @@
     text-align: center;
     font-size: 1.7rem;
     text-transform: uppercase;
-    color: #681d55;
+    color: #911F27;
     margin: 10px 0;
 }
 .profile_page .col-left label{
@@ -69,13 +70,14 @@
     width: 100%;
     height: 40px;
     margin: 5px 0;
-    border: none;
+    border-color: #c0454d;
     outline: none;
-    background: #f5ecf3;
+    background: #f8e2e3;
+    border-radius: 5px;
     padding: 0 5px;
 }
 .profile_page .col-left button{
-    background: #3d0f31;
+    background: #911F27;
     color: white;
     padding: 10px 25px;
     text-transform: uppercase;
@@ -95,7 +97,7 @@
 .profile_page .col-right h2{
     font-size: 1.7rem;
     text-transform: uppercase;
-    color: #681d55;
+    color: #911F27;
     margin: 10px 0;
 }
 
@@ -107,18 +109,18 @@
 }
 .customers td,
 .customers th{
-    border: 1px solid #aa8ca3;
+    border: 2px solid #ad5157;
     padding: 8px;
     min-width: 100px;
 }
 .customers tr:nth-child(even){
-    background: #f5ecf3;
+    background: #fce8e9;
 }
 .customers th{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background: #681d55;
+    background: #911F27;
     color: white;
 }
 .customers i{
@@ -133,7 +135,7 @@
 .customers .fa-edit{
     background: rgb(245, 245, 245);
     padding: 7px;
-    color: #7c1d64;
+    color: #911F27;
     font-size: 15px;
 }
 .customers .fa-trash-alt{
@@ -149,7 +151,7 @@
 
 .edit_user .go_back{
     background: white;
-    color: #5a1449;
+    color: #911F27;
     margin: 20px;
     font-size: 1.2rem;
 }
@@ -158,11 +160,11 @@
 }
 
 .edit_user .form-group{
-    color: #5a1449;
+    color: #911F27;
 }
 
 .edit_user .col-left input{
-    background: #f5ecf3;
+    background: #fce8e9;
 }
 .edit_user .col-left #isAdmin{
     width: 20px;

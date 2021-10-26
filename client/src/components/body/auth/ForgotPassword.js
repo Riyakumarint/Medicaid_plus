@@ -33,19 +33,44 @@ function ForgotPassword() {
     }
     
     return (
-        <div className="fg_pass">
-            <h2>Forgot Your Password?</h2>
+        <div className="container_sign">
+      <div className="forms-container">
+                <div className="signin-signup">
+                    <form>
+        <h3 className="title">Forgot Password?</h3>
 
-            <div className="row">
+            {/* <div className="row"> */}
                 {err && showErrMsg(err)}
                 {success && showSuccessMsg(success)}
 
-                <label htmlFor="email">Enter your email address</label>
-                <input type="email" name="email" id="email" value={email}
-                onChange={handleChangeInput} />
-                <button onClick={forgotPassword}>Verify your email</button>
-            </div>
-        </div>
+                <div className="form-group">
+              <div className="input-field">
+                <i className="fa fa-envelope" aria-hidden="true"></i>
+
+                <input
+                  type="email"
+                  className="email"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Email"
+                  onChange={handleChangeInput}
+                  name="email"
+                  value={email}
+                />
+              </div>
+                    </div>
+                    
+                    <button
+              type="submit"
+              className="button" onClick={forgotPassword}
+              disabled={email? false : true}
+            >
+              Verify email
+                    </button>
+                    
+                
+            </form>
+        </div></div></div>
     )
 }
 

@@ -1,31 +1,93 @@
 .home_page{
-    min-height: calc(100vh - 100px);
-    padding: 20px;
-    background: rgb(255, 249, 215);
-    color: #333;
-}
-.home_page h2{
-    font-size: 2rem;
-    margin: 10px 0;
-    color: teal;
-}
-.home_page p{
-    color: #777;
-    line-height: 1.5;
-    margin: 10px 0;
-    font-style: italic;
+    /* min-height: calc(100vh - 100px); */
+    /* position: absolute; */
+    background-image: white;
+    color: rgb(27, 27, 27);
+    font-family: 'Poppins', sans-serif;
+    margin-top: 80px;
 }
 
-.home_page a{
-    color: white;
-    background: crimson;
-    padding: 15px 40px;
-    display: inline-block;
-    border-radius: 3px;
-    margin: 10px 0;
-    letter-spacing: 1.2px;
+
+
+.carousel-caption {
+    max-height: 90;
+    margin-bottom: 10%;
+    width: 70%;
 }
-.home_page h3{
-    color: chocolate;
-    margin-top: 30px;
+
+.carousel-caption h5{
+    font-size:50px;
+}
+
+.carousel-caption p{
+    font-size:16px;
+}
+ 
+
+@media only screen and (max-width: 1600px) {
+    .carousel-caption {
+    margin-bottom: 10%;
+    width: 70%;
+}
+}
+
+@media only screen and (max-width: 1300px) {
+    .carousel-caption {
+    margin-bottom: 5%;
+}
+    .carousel-caption h5{
+    font-size:50px;
+}
+
+.carousel-caption p{
+    font-size:16px;
+}
+}
+
+@media only screen and (max-width: 960px) {
+    .carousel-caption {
+    margin-bottom: 0%;
+}
+    .btn-primary,.btn-success,.btn-danger {
+        width: 150px !important;
+        margin:5px 8px !important;
+        padding: 5px 10px !important;
+}
+    
+    .c3 {
+        margin-bottom:-5%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .btn {
+        display:none;
+    } 
+    .carousel-caption {
+    margin-bottom: 5%;
+    padding:25px;
+}
+     .carousel-caption h5{
+    font-size:20px;
+}
+
+.carousel-caption p{
+    font-size:12px;
+}
+}
+
+@media only screen and (max-width: 400px) {
+    .carousel-caption {
+    margin-bottom: 0%;
+}
+}
+
+
+.special {
+    height: 600px;
+    width: 100%;
+    justify-content: center;
+    background: rgb(145,31,39);
+background: linear-gradient(180deg, rgba(145,31,39,1) 0%, rgb(245, 198, 165) 20%, rgba(252,250,248,1) 100%);
+    translate: translateY(-1000px);
 }
