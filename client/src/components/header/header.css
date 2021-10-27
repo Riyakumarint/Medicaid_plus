@@ -33,7 +33,7 @@
 
 .menu-bar ul li{
     display: inline-block;
-    padding: 10px 20px;
+    padding: 0 20px;
 }
 .menu-bar ul li:hover{
     outline: none;
@@ -84,7 +84,7 @@
     opacity: 1;
     width: 110px;
     /* width: calc(100% + 55px); */
-    top: 45px;
+    top: 35px;
     right: 0;
     border-radius: 5px;
     text-transform: uppercase;
@@ -95,7 +95,8 @@
 }
 .drop-nav .dropdown li{
     display: block;
-    right: 40px;
+    right: 20px;
+    padding: 10px 0;
 }
 .drop-nav .dropdown .dropdown-profile{
     position: relative;
