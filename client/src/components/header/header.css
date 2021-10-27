@@ -34,12 +34,10 @@
 .menu-bar ul li{
     display: inline-block;
     padding: 10px 20px;
-    /* opacity: 0.9; */
 }
 .menu-bar ul li:hover{
     outline: none;
     color: aliceblue;
-    opacity: 1;
     font-weight: bold;
 }
 
@@ -51,7 +49,6 @@
 .menu-bar a{
     color: rgb(240, 238, 238);
     opacity: 0.9;
-    font-size: 18px;
     padding: 5px ;
     font-family: 'Poppins', sans-serif;
     margin: 5px 5px ;
@@ -63,7 +60,6 @@
 .menu-bar a:active {
     color: rgb(236, 225, 235);
     font-weight: bold;
-    opacity: 1;
   }
 
 /* --------- Dropdown ---------- */

@@ -177,10 +177,10 @@ function Profile() {
                     * If you update your password here, you will not be able 
                         to login quickly using google and facebook.
                     </em>
-                </div>
-
+                    </div>
+                    <div className="update_btn" onClick={() => window.scrollTo({ top: 0 })}>
                 <button disabled={loading} onClick={handleUpdate}>Update</button>
-            </div>
+            </div></div>
 
             <div className="col-right">
                 <h2>{isAdmin ? "Users" : "My Orders"}</h2>
