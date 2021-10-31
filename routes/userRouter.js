@@ -1,7 +1,11 @@
-const router = require('express').Router()
+const express = require('express')
+const bodyParser = require('body-parser')
 const userCtrl = require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
+
+const router = express();
+router.use(bodyParser.urlencoded({extended: true}));
 
 router.post('/register', userCtrl.register)
 

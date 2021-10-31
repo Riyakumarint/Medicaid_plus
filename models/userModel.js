@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -25,21 +24,42 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    gender: { 
+        type: String, 
+        default: 'male' 
+    },
     avatar:{
         type: String,
         default: 'https://res.cloudinary.com/dgejdmzwv/image/upload/v1634523773/myimage/user_1_gxw4jy.png'
     },
     role: {
         type: Number,
-        default: 0 // 0 = user, 1 = admin
+        default: 2 // 0 = admin, 1 = doctor, 2 = user, 
     },
-    gender: { type: String, default: 'male' },
-    age:{type:String,default:''},
-    mobile: {type: String,required: true, default: ''},
-    address: { type: String, default: '' },
-    website: {type: String, default: ''}
-}, {
+    profile:{
+        medicalHistoryId: String,
+        medicalProfileId: String
+    },
+    mobile: {
+        type: String,
+        required: true, 
+        default: ''
+    },
+    address: { 
+        type: String, 
+        default: '' 
+    },
+    website: {
+        type: String, 
+        default: ''
+    },
+    
+}, 
+{
     timestamps: true
 })
 
-module.exports = mongoose.model("Users", userSchema)
+module.exports = {
+    userSchema : userSchema,
+    userModel : mongoose.model("Users", userSchema)
+}
