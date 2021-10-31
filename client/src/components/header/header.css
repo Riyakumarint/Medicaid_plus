@@ -2,6 +2,7 @@
     background-image: linear-gradient(-90deg,#911F27,#911F27,#911F27);
     opacity: 0.95;
     box-shadow: 0 0 15px #911F27;
+    text-transform: uppercase;
 }
 
 .navbar-nav {
@@ -66,7 +67,6 @@
 
 .drop-nav{
     position: relative;
-    /* padding: 5px 5px; */
 }
 
 .drop-nav .avatar_user {
@@ -77,6 +77,7 @@
 .drop-nav a{
     text-transform: capitalize;
     overflow: hidden;
+    text-transform: uppercase;
 }
 .drop-nav .dropdown{
     position: absolute;
@@ -95,8 +96,9 @@
 }
 .drop-nav .dropdown li{
     display: block;
-    right: 20px;
+    left: 10px;
     padding: 10px 0;
+    opacity: 1;
 }
 .drop-nav .dropdown .dropdown-profile{
     position: relative;

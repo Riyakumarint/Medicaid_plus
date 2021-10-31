@@ -1,157 +1,218 @@
-.home_page{
-    /* min-height: calc(100vh - 100px); */
-    /* position: absolute; */
-    background-image: white;
-    color: rgb(27, 27, 27);
-    font-family: 'Poppins', sans-serif;
-    margin-top: 80px;
+.home_page {
+  /* min-height: calc(100vh - 100px); */
+  /* position: absolute; */
+  background-image: white;
+  color: rgb(252, 248, 248);
+  font-family: "Poppins", sans-serif;
 }
 
-
-
+.carousel-item {
+  height: 100vh;
+  min-height: 300px;
+}
 .carousel-caption {
-    max-height: 90;
-    margin-bottom: 10%;
-    width: 70%;
+  bottom: 220px;
+  z-index: 2;
+}
+.carousel-caption h5 {
+  font-size: 35px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 25px;
+  font-family: "Poppins", sans-serif;
 }
 
-.carousel-caption h5{
-    font-size:50px;
+.w-100 {
+  height: 100vh;
 }
 
-.carousel-caption p{
-    font-size:16px;
+.carousel-caption p {
+  width: 60%;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.9;
 }
- 
-
-@media only screen and (max-width: 1600px) {
-    .carousel-caption {
-    margin-bottom: 10%;
-    width: 70%;
+.carousel-caption a {
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #911f27;
+  padding: 10px 20px;
+  display: inline-block;
+  color: #fff;
+  margin-top: 15px;
+  border-radius: 5px;
 }
-}
-
-@media only screen and (max-width: 1300px) {
-    .carousel-caption {
-    margin-bottom: 5%;
-}
-    .carousel-caption h5{
-    font-size:50px;
-}
-
-.carousel-caption p{
-    font-size:16px;
-}
-}
-
-@media only screen and (max-width: 960px) {
-    .carousel-caption {
-    margin-bottom: 0%;
-}
-    .btn-primary,.btn-success,.btn-danger {
-        width: 150px !important;
-        margin:5px 8px !important;
-        padding: 5px 10px !important;
-}
-    
-    .c3 {
-        margin-bottom:-5%;
-    }
+.carousel-inner:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 @media only screen and (max-width: 767px) {
-    .btn {
-        display:none;
-    } 
-    .carousel-caption {
-    margin-bottom: 5%;
-    padding:25px;
-}
-     .carousel-caption h5{
-    font-size:20px;
-}
-
-.carousel-caption p{
-    font-size:12px;
-}
+  .carousel-caption {
+    bottom: 165px;
+  }
+  .carousel-caption h5 {
+    font-size: 17px;
+  }
+  .carousel-caption a {
+    padding: 10px 15px;
+    font-size: 15px;
+  }
 }
 
 @media only screen and (max-width: 400px) {
-    .carousel-caption {
-    margin-bottom: 0%;
-}
-}
-
-.border{
-    width: 100%;
-    height: 60px;
-    padding: auto;
-    margin: auto;
-    background-color: lightcoral;
-    top: 0;
+  .carousel-caption {
+    bottom: 125px;
+  }
+  .carousel-caption h5 {
+    font-size: 12px;
+  }
+  .carousel-caption a {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 }
 
-.border .icon {
-    /* width: 100%; */
-    height: 10px;
-    padding: 50px;
-    margin: 30px auto;
-    justify-content: center;
-    /* background-color: lightcoral; */
-}
-
+/*--------------specialist----------------*/
 .special {
-    width: 100%;
-    justify-content: center;
-    background: rgb(233, 205, 207);
-/* background: linear-gradient(180deg, rgba(145,31,39,1) 0%, rgb(245, 198, 165) 20%, rgba(252,250,248,1) 100%); */
-    translate: translateY(-1000px);
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  background: #f8bec1;
+  /* background: linear-gradient(180deg, rgba(145,31,39,1) 0%, rgb(245, 198, 165) 20%, rgba(252,250,248,1) 100%); */
+  translate: translateY(-1000px);
+  align-items: center;
+  font-weight: bold;
 }
 
-.special h1{
-    color: white;
-    font-weight: bold;
-    font-family: 'Poppins';
-    text-align: center;
+.special .header {
+	text-align: center;
+	font-size: 50px;
+    padding-top: 20px;
+	text-transform: uppercase;
+	font-weight: 700;
 }
-.special .content{
-    color: #911F27;
-    text-align: center;
-    font-weight: bold;
+.special .header span {
+	color: #911f27;
+}
+
+.special .specialist {
+  color: #911f27;
+  font-weight: bold;
+  font-family: "Poppins";
+  padding: 40px 20px 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  /* text-align: center; */
+}
+
+.special .specialist h2 {
+	font-size: 25px;
+	font-weight: 800;
+}
+
+.special .specialist a {
+  color: rgb(7, 6, 6);
+  background-color: white;
+  padding: 10px 15px;
+  margin: 5px;
+  right: 10px;
+  font-size: 15px;
+  box-shadow: 0 0 5px 1px #911f27;
+  border-radius: 10px;
+}
+
+.special .specialist a:hover {
+  text-decoration: none;
+}
+
+.specialist_text {
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.special .content {
+  color: #911f27;
+  text-align: center;
+  font-weight: bold;
 }
 
 .card-body {
-box-shadow: 0 0 5px 1px #911F27;
-border-radius: 20px;
+  box-shadow: 0 0 5px 1px #911f27;
+  border-radius: 20px;
 }
 
-.card{
-    margin: 14px 0;
-    border-radius: 20px;
-    width: 250px;
+.card {
+  margin: 14px 0;
+  border-radius: 20px;
+  width: 270px;
 }
 
 .card-body a {
-    color: #63a6b0;
-    text-decoration: none;
-    font-size: 15px;
-    margin-top: auto;
-    font-weight: 600;
+  color: #63a6b0;
+  text-decoration: none;
+  font-size: 15px;
+  margin-top: auto;
+  font-weight: 600;
 }
 
-.card-body a:hover{
-    color: #63a6b0;
-    text-decoration: none;
+.card-body a:hover {
+  color: #63a6b0;
+  text-decoration: none;
 }
 
-.card-img-top{
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 5px solid rgb(233, 213, 213);
-    overflow: hidden;
-    top: 15px;
-    left: 130px;
-    border-radius: 50%;
-    justify-content: center;
+.card-img-top {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 5px solid #fab8bc;
+  overflow: hidden;
+  top: 15px;
+  left: 155px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 20px;
+  width: 200px;
+  font-weight: bold;
+}
+
+
+/*----------Service------------*/
+
+.service .header {
+	text-align: center;
+	font-size: 50px;
+	margin: 50px;
+	text-transform: uppercase;
+	font-weight: 700;
+  color: white;
+}
+.service .header span {
+	color: #911f27;
+}
+.single-service {
+	padding: 25px;
+	transition: all .5s ease;
+    text-align: center;
+    color: #911f27;
+}
+.single-service i {
+	font-size: 60px;
+}
+.single-service h2 {
+	font-size: 25px;
+	font-weight: 800;
+}
+.single-service:hover {
+	background: radial-gradient(circle,#ec737b, #b9323b, #911f27);
+	color: #fff;
 }

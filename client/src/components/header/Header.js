@@ -52,7 +52,7 @@ function Header() {
         <nav
           className="navbar navbar-expand-lg navbar-light">
           <a href="/" className="navbar-brand">
-            <h1 onClick={() => window.scrollTo({ top: 0 })}>Medicaid</h1>
+            <h1 onClick={() => window.scrollTo({ top: 0 })}>Medicaid+</h1>
           </a>
 
           <button
@@ -132,7 +132,7 @@ function Header() {
                   fontWeight: "bold",
                   color: "white",
                 }} onClick={() => window.scrollTo({ top: 0 })}>
-                    <i className="fas fa-user"></i> Sign in
+                   <i class="fa fa-user" aria-hidden="true"></i> Sign in
                   </NavLink>
                 </li>
               )}

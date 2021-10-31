@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {isLength, isMatch} from '../../utils/validation/Validation'
+import { isLength, isMatch } from '../../utils/validation/Validation'
+import Loading from '../../utils/notification/Loading'
 import {showSuccessMsg, showErrMsg} from '../../utils/notification/Notification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 
@@ -130,10 +131,12 @@ function Profile() {
 
     return (
         <>
-        <div>
+        <div className="pro">
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
-            {loading && <h3>Loading.....</h3>}
+                {loading &&
+                    // <h3>Loading.....</h3>
+                <Loading/>}
         </div>
         <div className="profile_page">
             <div className="col-left">

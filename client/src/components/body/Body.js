@@ -10,6 +10,8 @@ import Profile from "../body/profile/Profile";
 import EditUser from "../body/profile/EditUser";
 import Home from "../body/home/Home";
 import Product from "../body/product/Product";
+import appoinment from '../body/pages/get_appointments'
+import specialist from '../body/pages/specialist'
 import { useSelector } from "react-redux";
 
 function Body() {
@@ -55,6 +57,8 @@ function Body() {
           exact
         />
 
+        <Route path="/get_appointments" component={appoinment} />
+        <Route path="/specialist" component={specialist} />
         <Route path="/product" component={Product} />
       </Switch>
     </section>
