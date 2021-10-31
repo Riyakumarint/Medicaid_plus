@@ -17,8 +17,8 @@
 
 .successMsg{
     position: absolute;
-    top: 5px;
-    right: 1px;
+    top: 90px;
+    right: 10px;
     background: rgb(9, 158, 54);
     color: white;
     text-align: center;
