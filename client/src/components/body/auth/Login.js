@@ -49,51 +49,52 @@ function Login() {
     }
   };
 
-  const responseGoogle = async (response) => {
-    console.log(response);
-    try {
-      const res = await axios.post("/user/google_login", {
-        tokenId: response.tokenId,
-      });
+  // const responseGoogle = async (response) => {
+  //   console.log(response);
+  //   try {
+  //     const res = await axios.post("/user/google_login", {
+  //       tokenId: response.tokenId,
+  //     });
 
-      setUser({ ...user, error: "", success: res.data.msg });
-      localStorage.setItem("firstLogin", true);
+  //     setUser({ ...user, error: "", success: res.data.msg });
+  //     localStorage.setItem("firstLogin", true);
 
-      dispatch(dispatchLogin());
-      history.push("/");
-    } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
-    }
-  };
+  //     dispatch(dispatchLogin());
+  //     history.push("/");
+  //   } catch (err) {
+  //     err.response.data.msg &&
+  //       setUser({ ...user, err: err.response.data.msg, success: "" });
+  //   }
+  // };
 
-  const responseFacebook = async (response) => {
-    try {
-      const { accessToken, userID } = response;
-      const res = await axios.post("/user/facebook_login", {
-        accessToken,
-        userID,
-      });
+  // const responseFacebook = async (response) => {
+  //   try {
+  //     const { accessToken, userID } = response;
+  //     const res = await axios.post("/user/facebook_login", {
+  //       accessToken,
+  //       userID,
+  //     });
 
-      setUser({ ...user, error: "", success: res.data.msg });
-      localStorage.setItem("firstLogin", true);
+  //     setUser({ ...user, error: "", success: res.data.msg });
+  //     localStorage.setItem("firstLogin", true);
 
-      dispatch(dispatchLogin());
-      history.push("/");
-    } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
-    }
-  };
+  //     dispatch(dispatchLogin());
+  //     history.push("/");
+  //   } catch (err) {
+  //     err.response.data.msg &&
+  //       setUser({ ...user, err: err.response.data.msg, success: "" });
+  //   }
+  // };
 
   return (
     <div className="container_sign">
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={handleSubmit}>
+            
+            <h3 className="title">Sign in</h3>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
-            <h3 className="title">Sign in</h3>
             <div className="form-group">
               <div className="input-field">
                 <i className="fa fa-envelope" aria-hidden="true"></i>
@@ -123,7 +124,11 @@ function Login() {
                   name="password"
                 />
                 <small className="hide" onClick={() => setTypePass(!typePass)}>
-                  {typePass ? <i class="fa fa-eye-slash" aria-hidden="true"></i> : <i class="fa fa-eye" aria-hidden="true"></i>}
+                  {typePass ? (
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                  ) : (
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  )}
                 </small>
               </div>
             </div>
@@ -131,6 +136,7 @@ function Login() {
               type="submit"
               className="button"
               disabled={email && password ? false : true}
+              onClick={() => window.scrollTo({ top: 0 })}
             >
               Login
             </button>
@@ -149,13 +155,24 @@ function Login() {
               </a>
             </div>
 
-            <Link className="my-2" to="forgot_password">
+            <Link
+              className="my-2"
+              style={{
+                color: "#538bfa"
+              }}
+              to="forgot_password"
+              onClick={() => window.scrollTo({ top: 0 })}
+            >
               Forgot your password?
             </Link>
 
             <p className="my-2">
               You don't have an account?{" "}
-              <Link to="/register" style={{ color: "crimson" }}>
+              <Link
+                to="/register"
+                style={{ color: "crimson" }}
+                onClick={() => window.scrollTo({ top: 0 })}
+              >
                 Register Now
               </Link>
             </p>
@@ -163,127 +180,9 @@ function Login() {
         </div>
       </div>
     </div>
-    //   <form onSubmit={handleSubmit}>
-    //     <div  className="input-field">
-    //       <label htmlFor="email">Email Address</label>
-    //       <input
-    //         type="text"
-    //         placeholder="Enter email address"
-    //         id="email"
-    //         value={email}
-    //         name="email"
-    //         onChange={handleChangeInput}
-    //       />
-    //     </div>
 
-    //     <div>
-    //       <label htmlFor="password">Password</label>
-    //       <input
-    //         type={typePass ? "text" : "password"} className="password"
-    //         placeholder="Enter password"
-    //         id="password"
-    //         value={password}
-    //         name="password"
-    //         onChange={handleChangeInput}
-    //       /><small className="hide" onClick={() => setTypePass(!typePass)}>
-    //       {typePass ? "Hide" : "Show"}
-    //     </small>
-    //     </div>
-
-    //     <div className="row">
-    //       <button type="submit" disabled={email && password ? false : true}>Login</button>
-    //       <Link to="/forgot_password">Forgot your password?</Link>
-    //     </div>
-    //   </form>
-
-    //   <div className="hr">Or Login With</div>
-
-    //   <div className="social">
-    //     <GoogleLogin
-    //       clientId="154130108136-uoq52bc2pgofqlclt81il3v3tn1257k2.apps.googleusercontent.com"
-    //       //"Your google client id"
-    //       buttonText="Login with google"
-    //       onSuccess={responseGoogle}
-    //       cookiePolicy={"single_host_origin"}
-    //     />
-
-    //     <FacebookLogin
-    //       appId="311833670513949"
-    //       autoLoad={false}
-    //       fields="name,email,picture"
-    //       callback={responseFacebook}
-    //     />
-    //   </div>
-
-    //   <p>
-    //     New Customer? <Link to="/register">Register</Link>
-    //   </p>
-    // </div>
   );
 }
 
 export default Login;
 
-{
-  /* <div className="login_page">
-      <h2>Login</h2>
-      {err && showErrMsg(err)}
-      {success && showSuccessMsg(success)}
-
-      <form onSubmit={handleSubmit}>
-        <div  className="input-field">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="text"
-            placeholder="Enter email address"
-            id="email"
-            value={email}
-            name="email"
-            onChange={handleChangeInput}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type={typePass ? "text" : "password"} className="password"
-            placeholder="Enter password"
-            id="password"
-            value={password}
-            name="password"
-            onChange={handleChangeInput}
-          /><small className="hide" onClick={() => setTypePass(!typePass)}>
-          {typePass ? "Hide" : "Show"}
-        </small>
-        </div>
-
-        <div className="row">
-          <button type="submit" disabled={email && password ? false : true}>Login</button>
-          <Link to="/forgot_password">Forgot your password?</Link>
-        </div>
-      </form>
-
-      <div className="hr">Or Login With</div>
-
-      <div className="social">
-        <GoogleLogin
-          clientId="154130108136-uoq52bc2pgofqlclt81il3v3tn1257k2.apps.googleusercontent.com"
-          //"Your google client id"
-          buttonText="Login with google"
-          onSuccess={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
-
-        <FacebookLogin
-          appId="311833670513949"
-          autoLoad={false}
-          fields="name,email,picture"
-          callback={responseFacebook}
-        />
-      </div>
-
-      <p>
-        New Customer? <Link to="/register">Register</Link>
-      </p>
-    </div> */
-}

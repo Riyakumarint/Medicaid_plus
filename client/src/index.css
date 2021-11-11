@@ -22,6 +22,11 @@ code {
   overflow: hidden;
 }
 a{
+  color: white;
+  text-decoration: none;
+}
+a:hover{
+  color: white;
   text-decoration: none;
 }
 ul{

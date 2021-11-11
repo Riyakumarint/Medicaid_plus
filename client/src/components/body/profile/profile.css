@@ -130,11 +130,17 @@
 .customers i{
     cursor: pointer;
 }
-.customers .fa-check{
+.customers .fa-user-plus{
     color: green;
+    font-size: 20px;
 }
-.customers .fa-times{
-    color: red;
+.customers .fa-user{
+    color: rgb(14, 1, 1);
+    font-size: 20px;
+}
+.customers .fa-user-md{
+    color: rgb(83, 16, 240);
+    font-size: 25px;
 }
 .customers .fa-edit{
     background: rgb(245, 245, 245);

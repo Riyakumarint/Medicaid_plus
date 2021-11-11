@@ -8,17 +8,17 @@ const router = express();
 router.use(bodyParser.urlencoded({extended: true}));
 
 
-router.post('/postBlog', blogsCtrl.postBlog)
+router.post('/postBlog',auth, blogsCtrl.postBlog)
 
-router.post('/voteBlog', blogsCtrl.voteBlog)
+router.post('/voteBlog', auth,blogsCtrl.voteBlog)
 
-router.delete('/deleteBlog', blogsCtrl.deleteBlog)
+router.delete('/deleteBlog',auth, blogsCtrl.deleteBlog)
 
-router.post('/postComment', blogsCtrl.postComment)
+router.post('/postComment',auth, blogsCtrl.postComment)
 
-router.post('/voteComment', blogsCtrl.voteComment)
+router.post('/voteComment',auth, blogsCtrl.voteComment)
 
-router.delete('/deleteComment', blogsCtrl.deleteComment)
+router.delete('/deleteComment',auth, blogsCtrl.deleteComment)
 
 
 module.exports = router

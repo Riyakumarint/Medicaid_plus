@@ -14,12 +14,18 @@ export const fetchUser = async (token) => {
     return res
 }
 
+
+
 export const dispatchGetUser = (res) => {
     return {
         type: ACTIONS.GET_USER,
         payload: {
             user: res.data,
-            isAdmin: res.data.role === 1 ? true : false
+            isAdmin: res.data.role === 1 ? true : false,
+            isDoctor: res.data.role === 2 ? true : false
         }
     }
 }
+
+
+

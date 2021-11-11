@@ -169,7 +169,7 @@ function Register() {
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <input
                   type={typePass ? "text" : "password"}
-                  className="confirm_email"
+                  className="password"
                   id="exampleInputPassword1"
                   placeholder="Password"
                   onChange={handleChangeInput}
@@ -243,13 +243,13 @@ function Register() {
               </label>
             </div>
 
-            <button type="submit" className="button">
+            <button type="submit" className="button" onClick={() => window.scrollTo({ top: 0 })}>
               Register
             </button>
 
             <p className="my-2">
               Already have an account?
-              <Link to="/login" style={{ color: "crimson" }}>
+              <Link to="/login" style={{ color: "crimson" }} onClick={() => window.scrollTo({ top: 0 })}>
                 Login Now
               </Link>
             </p>

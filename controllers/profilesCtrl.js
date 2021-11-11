@@ -16,9 +16,9 @@ const profilesCtrl = {
   
     createMedicalHistory: async (req, res) => {
         try {
-            
+            console.log(req.user)
             const newMedicalHistoryData = new MedicalHistory({
-                userId: req.body.userId ,
+                userId: req.user.id ,
 
                 emergencyConstact:{
                     name: req.body.emergencyConstact.name,
@@ -44,7 +44,7 @@ const profilesCtrl = {
             newMedicalHistoryData.save( async (error, result) => {
                 if(!error){
                     await Users.findOneAndUpdate(
-                        { _id: req.body.userId },
+                        { _id: req.user.id },
                         { "profile.medicalHistoryId": result._id }
                     );
                     res.json({ msg: "Medical history saved!" });
@@ -60,10 +60,10 @@ const profilesCtrl = {
 
     createMedicalProfile: async (req, res) => {
         try {
-            
+            console.log(req.user)
             const newMedicalProfileData = new MedicalProfile({
 
-                userId: req.body.userId,
+                userId: req.user.id,
             
                 bloodGroup: req.body.bloodGroup,
                 age: req.body.age,
@@ -77,7 +77,7 @@ const profilesCtrl = {
             newMedicalProfileData.save( async (error, result) => {
                 if(!error){
                     await Users.findOneAndUpdate(
-                        { _id: req.body.userId },
+                        { _id: req.user.id },
                         { "profile.medicalProfileId": result._id }
                     );
                     res.json({ msg: "Profile saved!" });
@@ -101,7 +101,7 @@ const profilesCtrl = {
             await MedicalProfile.findOneAndUpdate(
                 { userId: req.body.doctorId },
                 { 
-                    "$push" : {'reviews.rater' : {userId: req.body.userId}},
+                    "$push" : {'reviews.rater' : {userId: req.user.id}},
                     'reviews.rating' : Number(newRating)  
                 }
             );

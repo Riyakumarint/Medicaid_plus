@@ -25,15 +25,16 @@ const medicalProfileSchema = new mongoose.Schema({
     }],
     speciality: [{
         name: {
-            type: String,
-            required: true
+            type: String
+            // ,
+            // required: true
         }
-        
     }],
     experience: {
         year: {
-            type: String,
-            required: true
+            type: String
+            // ,
+            // required: true
         }
     },
 

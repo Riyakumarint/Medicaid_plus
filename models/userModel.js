@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: Number,
-        default: 2 // 0 = admin, 1 = doctor, 2 = user, 
+        default: 0 // 1= admin, 2 = doctor, 0 = user, 
     },
     profile:{
         medicalHistoryId: String,

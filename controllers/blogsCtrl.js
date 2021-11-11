@@ -24,14 +24,14 @@ const blogsCtrl = {
                 "content.coverImage": req.body.content.coverImage,
                 reletedTo: req.body.reletedTo,
                 hashtags: req.body.hashtags,
-                autherId: req.body.autherId,
+                autherId: req.user.id,
                 
             });
 
             newBlog.save( async (error, result) => {
                 if(!error){
                     await MedicalProfile.findOneAndUpdate(
-                        { userId: req.body.autherId },
+                        { userId: req.user.id },
                         { "$push": { blogRecord: {blogId : result._id} } }
                     );
                     res.json({ msg: "Blog posted" });

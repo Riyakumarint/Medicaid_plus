@@ -137,7 +137,7 @@ function Home() {
         <div className="specialist">
           <h2>Consult with top doctors across specialities</h2>
           <a
-            className=""
+            className="specialist"
             href="/specialist"
             onClick={() => window.scrollTo({ top: 0 })}
           >

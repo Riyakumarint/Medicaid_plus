@@ -11,9 +11,10 @@ const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
 const { CLIENT_URL } = process.env;
 
 const userCtrl = {
+  // Register a User
   register: async (req, res) => {
     try {
-      const { name, username, mobile, email, password, gender } = req.body;
+      const { name, username, mobile, email, password,role, gender } = req.body;
 
       if (!name || !email || !password || !mobile)
         return res.status(400).json({ msg: "Please fill in all fields." });
@@ -43,7 +44,7 @@ const userCtrl = {
       const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = {
-        name, username: newUserName, mobile,email, password: passwordHash, gender
+        name, username: newUserName, mobile,email, password: passwordHash, gender,role
       };
 
       const activation_token = createActivationToken(newUser);
@@ -58,6 +59,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Activation by Email
   activateEmail: async (req, res) => {
     try {
       const { activation_token } = req.body;
@@ -66,14 +68,14 @@ const userCtrl = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { name, username, mobile, email, password,gender } = user;
+      const { name, username, mobile, email, password,gender,role} = user;
 
       const check = await Users.findOne({ email });
       if (check)
         return res.status(400).json({ msg: "This email already exists." });
 
       const newUser = new Users({
-        name, username, mobile, email, password,gender
+        name, username, mobile, email, password,gender,role
       });
 
       await newUser.save();
@@ -82,6 +84,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Login user
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -105,6 +108,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // TOKEN
   getAccessToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshtoken;
@@ -120,6 +124,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Forgot user Password
   forgotPassword: async (req, res) => {
     try {
       const { email } = req.body;
@@ -137,6 +142,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Reset user Password
   resetPassword: async (req, res) => {
     try {
       const { password } = req.body;
@@ -156,6 +162,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Get single user 
   getUserInfor: async (req, res) => {
     try {
       const user = await Users.findById(req.user.id).select("-password");
@@ -165,6 +172,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Get all users(admin)
   getUsersAllInfor: async (req, res) => {
     try {
       // console.log(req.user)
@@ -175,6 +183,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Logout user
   logout: async (req, res) => {
     try {
       res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
@@ -183,6 +192,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // update User Profile
   updateUser: async (req, res) => {
     try {
       const { name, avatar } = req.body;
@@ -199,6 +209,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // update User Role --Admin
   updateUsersRole: async (req, res) => {
     try {
       const { role } = req.body;
@@ -215,6 +226,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Delete User --Admin
   deleteUser: async (req, res) => {
     try {
       await Users.findByIdAndDelete(req.params.id);

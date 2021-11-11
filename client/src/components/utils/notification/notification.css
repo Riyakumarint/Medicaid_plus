@@ -12,11 +12,11 @@
     font-weight: 700;
     font-size: 15px;
     box-shadow: 0 0 7px rgb(247, 3, 3);
-    animation: fadeOut 10s;
+    animation: fadeOut 15s;
 }
 
 .successMsg{
-    position: absolute;
+    position:absolute;
     top: 90px;
     right: 10px;
     background: rgb(9, 158, 54);
@@ -28,7 +28,7 @@
     border-radius: 5px;
     font-weight: 700;
     box-shadow: 0 0 15px rgb(12, 163, 58);
-    animation: fadeOut 10s;
+    animation: fadeOut 12s;
 }
 
 @keyframes fadeOut {
@@ -39,3 +39,11 @@
         opacity: 0;
     }
 }
+
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

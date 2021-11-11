@@ -8,8 +8,9 @@ import ForgotPass from "../body/auth/ForgotPassword";
 import ResetPass from "../body/auth/ResetPassword";
 import Profile from "../body/profile/Profile";
 import EditUser from "../body/profile/EditUser";
+import Patient_profile from '../body/profile/Patient_profile'
 import Home from "../body/home/Home";
-import Product from "../body/product/Product";
+// import Product from "../body/product/Product";
 import appoinment from '../body/pages/get_appointments'
 import specialist from '../body/pages/specialist'
 import { useSelector } from "react-redux";
@@ -52,6 +53,11 @@ function Body() {
           exact
         />
         <Route
+          path="/patient_profile"
+          component={isLogged ? Patient_profile : NotFound}
+          exact
+        />
+        <Route
           path="/edit_user/:id"
           component={isAdmin ? EditUser : NotFound}
           exact
@@ -59,7 +65,9 @@ function Body() {
 
         <Route path="/get_appointments" component={appoinment} />
         <Route path="/specialist" component={specialist} />
-        <Route path="/product" component={Product} />
+
+        <Route path="*" exact component={NotFound}/>
+        {/* <Route path="/product" component={Product} /> */}
       </Switch>
     </section>
   );

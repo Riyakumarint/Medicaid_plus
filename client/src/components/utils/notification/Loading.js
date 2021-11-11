@@ -1,5 +1,6 @@
 import React from "react";
 import load from "../../../images/load.svg";
+import './notification.css'
 
 const Loading = () => {
   return (

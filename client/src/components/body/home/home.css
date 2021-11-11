@@ -4,6 +4,7 @@
   background-image: white;
   color: rgb(252, 248, 248);
   font-family: "Poppins", sans-serif;
+  height: 100%;
 }
 
 .carousel-item {
@@ -58,11 +59,13 @@
     bottom: 165px;
   }
   .carousel-caption h5 {
-    font-size: 17px;
+    font-size: 20px;
+    margin-top: 25px;
+    font-family: "Poppins", sans-serif;
   }
   .carousel-caption a {
-    padding: 10px 15px;
-    font-size: 15px;
+    padding: 12px 17px;
+    font-size: 18px;
   }
 }
 
@@ -71,11 +74,14 @@
     bottom: 125px;
   }
   .carousel-caption h5 {
-    font-size: 12px;
+    font-size: 20px;
+    margin-top: 25px;
+    font-family: "Poppins", sans-serif;
   }
   .carousel-caption a {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: bold;
   }
 }
 
@@ -174,7 +180,6 @@
   border: 5px solid #fab8bc;
   overflow: hidden;
   top: 15px;
-  left: 155px;
   border-radius: 50%;
   justify-content: center;
 }
@@ -184,6 +189,7 @@
   width: 200px;
   font-weight: bold;
 }
+
 
 
 /*----------Service------------*/
