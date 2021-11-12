@@ -1,0 +1,79 @@
+.sidebar{
+    background-color: #911F27;
+    padding-top:100px;
+    position: fixed;
+    left: -190px;
+    width: 250px;
+    height: 100%;
+    transition: 0.7s;
+    z-index: 1;
+    transition-property: right;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+
+.sidebar a{
+    font-size: 25px;
+    margin-left: 186px;
+    width: 60px;
+}
+
+.sidebar a i{
+    font-size: 26px;
+}
+.sidebar .divider{
+    margin: 30px 2px;
+    width: 98%;
+    height: 1px;
+    border-radius: 1px;
+    background: white;
+}
+.sidebar i{
+padding: 0 20px;
+}
+
+label #sidebar_btn{
+    z-index: 1;
+    color: white;
+    position: fixed;
+    cursor: pointer;
+    left: -3px;
+    top: 100px;
+    font-size: 25px;
+    margin: 5px 3px 15px 0;
+}
+
+label #sidebar_btn:hover{
+    color: #f8bec1;
+}
+
+#check:checked ~ .sidebar{
+    right: 0;
+    width: 440px;
+}
+
+#check:checked ~ .sidebar a span{
+    left: 0px;
+}
+
+#check:checked ~ .sidebar a{
+    color: #fff;
+    display: block;
+    width: 100%;
+    line-height: 60px;
+    padding: 5px 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: background;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+}
+
+#check:checked ~ .sidebar a i{
+    font-size: 25px;
+}
+
+#check{
+    display: none;
+}

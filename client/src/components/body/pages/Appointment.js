@@ -1,6 +1,6 @@
 import React from 'react'
 import './get.css'
-function get_appointments() {
+function Appointment() {
     return (
         <div className="get">
             
@@ -9,4 +9,4 @@ function get_appointments() {
     )
 }
 
-export default get_appointments
+export default Appointment

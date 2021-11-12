@@ -10,8 +10,9 @@ import Profile from "../body/profile/Profile";
 import EditUser from "../body/profile/EditUser";
 import Patient_profile from '../body/profile/Patient_profile'
 import Home from "../body/home/Home";
-// import Product from "../body/product/Product";
-import appoinment from '../body/pages/get_appointments'
+import Appoinment from '../body/pages/Appointment'
+import VideoConsult from '../body/pages/VideoConsult'
+import LabTest from '../body/pages/LabTest'
 import specialist from '../body/pages/specialist'
 import { useSelector } from "react-redux";
 
@@ -63,7 +64,9 @@ function Body() {
           exact
         />
 
-        <Route path="/get_appointments" component={appoinment} />
+        <Route path="/get_appointments" component={Appoinment} />
+        <Route path="/find_video_consult" component={VideoConsult} />
+        <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
 
         <Route path="*" exact component={NotFound}/>

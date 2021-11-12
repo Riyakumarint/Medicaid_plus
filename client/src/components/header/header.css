@@ -1,6 +1,6 @@
 .menu-bar{
     background-image: linear-gradient(-90deg,#911F27,#911F27,#911F27);
-    opacity: 0.9;
+    opacity: 1;
     box-shadow: 0 0 15px #911F27;
     text-transform: uppercase;
 }
@@ -13,12 +13,12 @@
     font-size: 2rem;
     font-family: 'Poppins';
     color:rgb(250, 248, 248);
-    opacity: 1;
 } 
 
 .menu-bar .navbar-brand:hover{ 
     color: white;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .menu-bar .navbar-toggler{
@@ -26,7 +26,7 @@
     outline: none !important;
     border: none !important;
 }
-.navbar .fa{
+.navbar .fa-bars{
     color: white !important;
     font-size: 26px;
 }
@@ -49,7 +49,7 @@
 }
 .menu-bar a{
     color: rgb(240, 238, 238);
-    opacity: 0.9;
+    opacity: 0.96;
     padding: 5px ;
     font-family: 'Poppins', sans-serif;
     margin: 5px 5px ;
@@ -60,13 +60,24 @@
 }
 .menu-bar a:active {
     color: rgb(236, 225, 235);
-    font-weight: bold;
+    font-weight: bolder;
   }
+
+.sign-in{
+    position: relative;
+    right: -19px;
+    top: 9px;
+}
+
+.sign-in .fa-user{
+    font-size: 20px;
+}
 
 /* --------- Dropdown ---------- */
 
 .drop-nav{
     position: relative;
+    right: -19px;
 }
 
 .drop-nav .avatar_user {

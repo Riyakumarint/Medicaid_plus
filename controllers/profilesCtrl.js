@@ -20,7 +20,7 @@ const profilesCtrl = {
             const newMedicalHistoryData = new MedicalHistory({
                 userId: req.user.id ,
 
-                emergencyConstact:{
+                emergencyContact:{
                     name: req.body.emergencyConstact.name,
                     relation: req.body.emergencyConstact.relation,
                     emailAdd: req.body.emergencyConstact.emailAdd,
@@ -67,10 +67,13 @@ const profilesCtrl = {
             
                 bloodGroup: req.body.bloodGroup,
                 age: req.body.age,
-            
-                qualification: req.body.qualification,
-                speciality: req.body.speciality,
-                experience: req.body.experience
+                major: req.body.major,
+                college: req.body.college,
+                passingyear: req.body.passingyear,
+
+                
+                speciality_name: req.body.speciality_name,
+                experience_year: req.body.experience_year
             
             });
 

@@ -5,38 +5,66 @@ const medicalProfileSchema = new mongoose.Schema({
 
     userId:{
         type: String,
-        required: true
+        required: true,
+        // unique: true,
+        default: '' 
     },
 
     bloodGroup: {
-        type: String, 
-        required: true
+        type: String,
+        default: '' 
+        // required: true
     },
     age:{
-        type:String,
-        required: true,
-        default:''
+        type: String,
+        default: '' 
+        // required: true,
     },
-
-    qualification: [{
-        major: String,
-        college: String,
-        passingyear: String
-    }],
-    speciality: [{
-        name: {
-            type: String
-            // ,
-            // required: true
-        }
-    }],
-    experience: {
-        year: {
-            type: String
-            // ,
-            // required: true
-        }
+    
+    major: {
+        type: String,
+        default: ''      
+        // required: true
     },
+    college: {
+        type: String,
+        default: '' 
+        // required: true
+    },
+    passingyear: {
+        type: String,
+        default: '' 
+        // required: true
+    },
+    speciality_name: {
+        type: String,
+        default: '' 
+        // required: true
+    },
+    experience_year: {
+        type: String,
+        default: '' 
+        // required: true
+    },
+    // qualification: [{
+    //     major: String,
+    //     college: String,
+    //     passingyear: String
+    // }],
+    // speciality: [{
+    //     name: {
+    //         type: String
+    //         // ,
+    //         // required: true
+    //     }
+    // }],
+    // experience: {
+    //     year: {
+    //         type: String
+    //         // ,
+    //         // required: true
+    //     }
+    // },
 
     reviews: {
         rating :{

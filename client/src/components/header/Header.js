@@ -43,7 +43,7 @@ function Header() {
   };
 
   const transForm = {
-    transform: isLogged ? "translateY(-5px)" : 0,
+    transform: isLogged ? "translateY(180px)" : 0,
   };
 
   return (
@@ -126,13 +126,16 @@ function Header() {
               {isLogged ? (
                 userLink()
               ) : (
-                <li style={transForm}>
-                  <NavLink exact to="/login"class="main-nav"
+                  <li
+                    style={transForm}
+                  >
+                  <NavLink exact to="/login"class="main-nav sign-in"
                 activeStyle={{
                   fontWeight: "bold",
                   color: "white",
                 }} onClick={() => window.scrollTo({ top: 0 })}>
-                   <i class="fa fa-user" aria-hidden="true"></i> Sign in
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      Sign in
                   </NavLink>
                 </li>
               )}
