@@ -145,8 +145,9 @@ function Profile() {
 
   return (
     <>
-      <SideNav />
+       <SideNav />
       <div className="continer-profile">
+     
         <div className="pro">
           {err && showErrMsg(err)}
           {success && showSuccessMsg(success)}
@@ -246,6 +247,7 @@ function Profile() {
           </div>
         </div>
       </div>
+      
     </>
   );
 }

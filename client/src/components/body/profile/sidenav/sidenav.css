@@ -1,82 +1,62 @@
-.sidebar{
-    background-color: #911F27;
-    padding-top:100px;
-    position: fixed;
-    left: -190px;
-    width: 250px;
-    height: 100%;
-    transition: 0.7s;
-    z-index: 1;
-    transition-property: right;
-    text-transform: uppercase;
-    font-size: 25px;
-    font-weight: bolder;
+.sidebar {
+  background-color: #911f27;
+  position: fixed;
+  overflow: hidden;
+  width: 60px;
+  height: 100%;
+  transition: 0.3s;
+  z-index: 1;
+  text-transform: uppercase;
 }
 
-.sidebar a{
-    font-size: 15px;
-    margin-left: 186px;
-    width: 60px;
-    font-weight: bolder;
+.sidebar:hover {
+  width: 220px;
+}
+.sidebar ul {
+  position: absolute;
+  padding-top: 100px;
+  left: 0;
+  width: 100%;
 }
 
-.sidebar a i{
-    font-size: 26px;
-}
-.sidebar .divider{
-    margin: 30px 2px;
-    width: 98%;
-    height: 1px;
-    border-radius: 1px;
-    background: white;
-}
-.sidebar i{
-padding: 0 20px;
+.sidebar ul li {
+  position: relative;
+  width: 100%;
+  color: white;
+  list-style: none;
 }
 
-label #sidebar_btn{
-    z-index: 1;
-    color: white;
-    position: fixed;
-    cursor: pointer;
-    left: -3px;
-    top: 100px;
-    font-size: 25px;
-    margin: 5px 3px 15px 0;
+.sidebar ul li:hover{
+    background-color: #f8bec1;
+}
+.sidebar ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+.sidebar ul li a:hover {
+    color: #911f27
+}
+.sidebar ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 25px;
 }
 
-label #sidebar_btn:hover{
-    color: #f8bec1;
-}
-
-#check:checked ~ .sidebar{
-    right: 0;
-    width: 440px;
-}
-
-#check:checked ~ .sidebar a span{
-    left: 0px;
-}
-
-#check:checked ~ .sidebar a{
-    color: #fff;
-    display: block;
-    width: 100%;
-    line-height: 60px;
-    padding: 5px 0;
-    text-decoration: none;
-    box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: background;
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: bolder;
-}
-
-#check:checked ~ .sidebar a i{
-    font-size: 25px;
-}
-
-#check{
-    display: none;
+.sidebar ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 70px;
+  line-height: 65px;
+  text-align: start;
+  font-weight: bolder;
+  font-family: "Poppins", sans-serif;
 }
