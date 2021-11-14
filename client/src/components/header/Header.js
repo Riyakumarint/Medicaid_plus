@@ -6,9 +6,11 @@ import axios from "axios";
 function Header() {
   const auth = useSelector((state) => state.auth);
   const [menu, setMenu] = useState(false);
-
   const { user, isLogged } = auth;
-
+  const [clicked, setClicked] = useState(false);
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
   const handleLogout = async () => {
     try {
       await axios.get("/user/logout");
@@ -22,22 +24,33 @@ function Header() {
   const userLink = () => {
     return (
       <li className="drop-nav">
-        <NavLink to="#" className="avatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <NavLink
+          to="#"
+          className="avatar"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <img className="avatar_user" src={user.avatar} alt="" />{" "}
           {user.username} <i className="fas fa-angle-down"></i>
         </NavLink>
-<div className="dropdown">
-        <ul className="dropmenu">
-          <li className="dropdown-profile">
-            <NavLink to="/profile" onClick={() => window.scrollTo({ top: 0 })}>Profile</NavLink>
-          </li>
-          <li className="dropdown-profile">
-            <NavLink to="/" onClick={handleLogout}>
-              Logout
-            </NavLink>
-          </li>
-        </ul>
-       </div>
+        <div className="dropdown">
+          <ul className="dropmenu">
+            <li className="dropdown-profile">
+              <NavLink
+                to="/profile"
+                onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Profile
+              </NavLink>
+            </li>
+            <li className="dropdown-profile">
+              <NavLink to="/" onClick={handleLogout}>
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </li>
     );
   };
@@ -49,8 +62,7 @@ function Header() {
   return (
     <div className="header fixed-top">
       <div className="menu-bar">
-        <nav
-          className="navbar navbar-expand-lg navbar-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <a href="/" className="navbar-brand">
             <h1 onClick={() => window.scrollTo({ top: 0 })}>Medicaid+</h1>
           </a>
@@ -64,7 +76,9 @@ function Header() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <i class="fa fa-bars"></i>
+            <div className="hamburger-menu" onClick={handleClick}>
+              <i className={clicked ? "fa fa-times" : "fa fa-bars"}></i>
+            </div>
           </button>
 
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
@@ -76,7 +90,8 @@ function Header() {
                 activeStyle={{
                   fontWeight: "bold",
                   color: "white",
-                }} onClick={() => window.scrollTo({ top: 0 })}
+                }}
+                onClick={() => window.scrollTo({ top: 0 })}
               >
                 Get Appoinments
               </NavLink>
@@ -87,7 +102,8 @@ function Header() {
                 activeStyle={{
                   fontWeight: "bold",
                   color: "white",
-                }} onClick={() => window.scrollTo({ top: 0 })}
+                }}
+                onClick={() => window.scrollTo({ top: 0 })}
               >
                 Video Consult
               </NavLink>
@@ -98,7 +114,8 @@ function Header() {
                 activeStyle={{
                   fontWeight: "bold",
                   color: "white",
-                }} onClick={() => window.scrollTo({ top: 0 })}
+                }}
+                onClick={() => window.scrollTo({ top: 0 })}
               >
                 Lab tests
               </NavLink>
@@ -109,7 +126,8 @@ function Header() {
                 activeStyle={{
                   fontWeight: "bold",
                   color: "white",
-                }} onClick={() => window.scrollTo({ top: 0 })}
+                }}
+                onClick={() => window.scrollTo({ top: 0 })}
               >
                 Articles
               </NavLink>
@@ -126,17 +144,16 @@ function Header() {
               {isLogged ? (
                 userLink()
               ) : (
-                  <li
-                    style={transForm}
+                <li style={transForm}>
+                  <Link
+                    exact
+                    to="/login"
+                    class="main-nav sign-in"
+                    onClick={() => window.scrollTo({ top: 0 })}
                   >
-                  <NavLink exact to="/login"class="main-nav sign-in"
-                activeStyle={{
-                  fontWeight: "bold",
-                  color: "white",
-                }} onClick={() => window.scrollTo({ top: 0 })}>
-                      <i class="fa fa-user" aria-hidden="true"></i>
-                      Sign in
-                  </NavLink>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Sign in
+                  </Link>
                 </li>
               )}
             </ul>
@@ -148,5 +165,3 @@ function Header() {
 }
 
 export default Header;
-
-

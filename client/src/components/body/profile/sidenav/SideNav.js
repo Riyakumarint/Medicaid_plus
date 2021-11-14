@@ -53,6 +53,14 @@ function SideNav() {
         <li>
           <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
+              <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            </span>
+            <span class="title">Articles</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
+            <span class="icon">
               <i class="fa fa-list-alt" aria-hidden="true"></i>
             </span>
             <span class="title">Contact</span>

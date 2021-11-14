@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -28,20 +28,22 @@ function ActivationEmail() {
       activationEmail();
     }
   }, [activation_token]);
-
-  return (
+  
+  return (<>
+   
     <div className="active_page">
       {err && showErrMsg(err)}
       {success && showSuccessMsg(success)}
-
+      
       <div className="container_active">
-        <div className="forms-container_active">
-          <div className="verify">
+      
+            <div className="verify">
+              
             <form className="thanks">
               <div className="thanksheader">Thank you</div>
               <div className="up">
                 <img src={Success} className="success_up" alt="thanks" />
-                <h1>Registration Successful</h1>
+                <h4>Registration Successful</h4>
               </div>
               <div className="down">
                 <h2>Congratulation, your account </h2>
@@ -54,7 +56,8 @@ function ActivationEmail() {
           </div>
         </div>
       </div>
-    </div>
+     
+    </>
   );
 }
 

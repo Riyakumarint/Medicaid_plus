@@ -26,8 +26,8 @@
   list-style: none;
 }
 
-.sidebar ul li:hover{
-    background-color: #f8bec1;
+.sidebar ul li:hover {
+  background-color: #f8bec1;
 }
 .sidebar ul li a {
   position: relative;
@@ -38,7 +38,7 @@
   color: white;
 }
 .sidebar ul li a:hover {
-    color: #911f27
+  color: #911f27;
 }
 .sidebar ul li a .icon {
   position: relative;
@@ -49,7 +49,6 @@
   text-align: center;
   font-size: 25px;
 }
-
 .sidebar ul li a .title {
   position: relative;
   display: block;
