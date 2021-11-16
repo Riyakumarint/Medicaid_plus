@@ -181,6 +181,7 @@
   border: 5px solid #fab8bc;
   overflow: hidden;
   top: 15px;
+  left: 150px;
   border-radius: 50%;
   justify-content: center;
 }

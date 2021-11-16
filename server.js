@@ -21,6 +21,8 @@ app.use('/api', require('./routes/upload'))
 app.use('/profiles', require('./routes/profilesRouter'))
 app.use('/appointments', require('./routes/appointmentsRouter'))
 app.use('/blogs', require('./routes/blogsRouter'))
+app.use('/api', require('./routes/categoryRouter'))
+app.use('/api', require('./routes/specialityRouter'))
 
 // Connect to mongodb
 const URI = process.env.MONGODB_URL

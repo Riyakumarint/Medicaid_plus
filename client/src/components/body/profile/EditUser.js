@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import SideNav from "./sidenav/SideNav";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -61,15 +62,16 @@ function EditUser() {
     setNum(num + 1);
   };
 
-  return (
+  return (<>
+    <SideNav/>
     <div className="continer-profile">
       <div className="edit_pro">
               <div className="profile_page edit_user">
               {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
-          <button onClick={() => history.goBack()} className="go_back">
+          {/* <button onClick={() => history.goBack()} className="go_back">
             <i className="fas fa-long-arrow-alt-left"></i> Go Back
-          </button>
+          </button> */}
           <div className="profile_header">
             <h4>Edit User</h4>
           </div>
@@ -112,7 +114,7 @@ function EditUser() {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 }
 

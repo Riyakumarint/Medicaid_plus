@@ -249,7 +249,7 @@ function Register() {
 
             <p className="my-2">
               Already have an account?
-              <Link to="/login" style={{ color: "crimson" }} onClick={() => window.scrollTo({ top: 0 })}>
+              <Link to="/login" style={{ color: "crimson",padding:"7px" }} onClick={() => window.scrollTo({ top: 0 })}>
                 Login Now
               </Link>
             </p>

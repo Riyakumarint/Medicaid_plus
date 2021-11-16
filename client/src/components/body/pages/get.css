@@ -13,7 +13,7 @@
   font-weight: 700;
 }
 
-.card {
+/* .card {
   margin: 14px 0;
   border-radius: 20px;
   width: 310px;
@@ -53,4 +53,127 @@
   font-size: 20px;
   width: 200px;
   font-weight: bold;
+} */
+
+/* ------------categories-------------*/
+
+.categories {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #f8bec1;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.categories .category_screen {
+  max-width: 350px;
+  min-width: 320px;
+  width: 100%;
+  margin: 100px auto;
+  padding: 35px;
+  box-shadow: 0 0 19px 0 #911f27;
+  background-color: white;
+  border-radius: 10px;
+  top: 700px;
+  left: 0;
+  transition: 0.5s;
+}
+
+.categories .category_screen h4 {
+  text-transform: uppercase;
+  padding: 10px 25px;
+  margin: 10px 0;
+}
+
+.categories .category_screen input {
+  max-width: 400px;
+  min-width: 250px;
+  height: 40px;
+  margin: 5px 0;
+  border-color: #c0454d;
+  outline: none;
+  background: #f8e2e3;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.categories .category_screen .category_button {
+  background: #911f27;
+  color: white;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-weight: bolder;
+  letter-spacing: 1.4px;
+  margin: 12px 0;
+}
+
+.categories .category_screen .screen {
+  justify-content: center;
+}
+
+/* ------------ Category Table------------ */
+
+.category_table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.category_table td,
+.category_table th {
+  border: 2px solid #ad5157;
+  padding: 8px;
+  min-width: 100px;
+}
+.category_table tr:nth-child(even) {
+  background: #fce8e9;
+}
+.category_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #911f27;
+  color: white;
+}
+.category_table i {
+  cursor: pointer;
+}
+.category_table .fa-edit {
+  background: rgb(245, 245, 245);
+  padding: 7px;
+  color: #911f27;
+  font-size: 15px;
+}
+.category_table .fa-trash-alt {
+  background: red;
+  padding: 7px;
+  color: white;
+  font-size: 10px;
+  margin-left: 7px;
+}
+
+/*----------Create Blog----------*/
+
+.create_blog {
+  height: 100%;
+  padding-top: 90px;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #f8bec1;
+  justify-content: center;
+  align-items: center;
+}
+
+.blog_pro {
+  width: 96%;
+  margin: 20px auto;
+  padding: 35px;
+  box-shadow: 0 0 19px 0 #911f27;
+  background-color: white;
+  border-radius: 10px;
+  top: 700px;
+  left: 0;
+  transition: 0.5s;
 }

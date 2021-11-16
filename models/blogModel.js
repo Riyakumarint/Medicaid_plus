@@ -5,6 +5,7 @@ const blogSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
       trim: true,
       maxlength: 75,
     },
@@ -20,7 +21,7 @@ const blogSchema = new mongoose.Schema(
     coverImage: {
       type: String,
       default:
-        "https://res.cloudinary.com/dgejdmzwv/image/upload/v1634523773/myimage/user_1_gxw4jy.png",
+        "https://res.cloudinary.com/dgejdmzwv/image/upload/v1636958159/avatar/pexels-negative-space-48604_hkjoi8.jpg",
     },
     // },
     reletedTo: {

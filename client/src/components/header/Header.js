@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Header() {
   const auth = useSelector((state) => state.auth);
-  const [menu, setMenu] = useState(false);
+  // const [menu, setMenu] = useState(false);
   const { user, isLogged } = auth;
   const [clicked, setClicked] = useState(false);
   const handleClick = () => {

@@ -22,7 +22,9 @@ const blogsCtrl = {
                 autherId: req.user.id,
                 
             });
-
+            // const title = await Users.findOne({title });
+            // if (title)
+            //   return res.status(400).json({ msg: "This title already exists." });
             newBlog.save( async (error, result) => {
                 if(!error){
                     await MedicalProfile.findOneAndUpdate(
