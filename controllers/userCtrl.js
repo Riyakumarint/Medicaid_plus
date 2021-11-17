@@ -1,5 +1,6 @@
 const Users = require("../models/userModel").userModel;
 const MedicalHistory = require("../models/medicalHistoryModel").medicalHistoryModel;
+const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("./sendMail")
@@ -262,6 +263,42 @@ const userCtrl = {
         }
       );
 
+      await Users.findOneAndUpdate(
+          { _id: req.params.id },
+          { "profile.medicalProfileId": "" }
+      );
+      await MedicalProfile.findOneAndDelete({userId: req.params.id});
+
+      if(role===2){
+        const newMedicalProfileData = new MedicalProfile({
+          userId: req.params.id,
+            
+          bloodGroup: "O+",
+          age: "35",
+          major: "Major",
+          college: "College",
+          passingyear: "Passing year",
+          
+          speciality_name: "Speciality",
+          experience_year: "Experience",
+          caseRecord: [],
+          blogRecord:[]
+      
+        });
+
+        newMedicalProfileData.save( async (error1, result1) => {
+          if(!error1){
+              await Users.findOneAndUpdate(
+                  { _id: req.params.id },
+                  { "profile.medicalProfileId": result1._id }
+              );
+          } else {
+            console.log(error1.message);
+            res.status(500).json({ msg: "failed to create medical profile" });
+          }
+        });
+      }
+
       res.json({ msg: "Update Success!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -271,7 +308,8 @@ const userCtrl = {
   deleteUser: async (req, res) => {
     try {
       await Users.findByIdAndDelete(req.params.id);
-
+      await MedicalProfile.findOneAndDelete({userId: req.params.id});
+      await MedicalHistory.findOneAndDelete({userId: req.params.id});
       res.json({ msg: "Deleted Success!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

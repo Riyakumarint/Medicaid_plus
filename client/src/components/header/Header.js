@@ -38,7 +38,7 @@ function Header() {
           <ul className="dropmenu">
             <li className="dropdown-profile">
               <NavLink
-                to="/profile"
+                to="/dash_board"
                 onClick={() => window.scrollTo({ top: 0 })}
               >
                 Profile

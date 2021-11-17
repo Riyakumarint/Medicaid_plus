@@ -17,16 +17,16 @@ function EditUser() {
   const token = useSelector((state) => state.token);
 
   const [checkAdmin, setCheckAdmin] = useState(false);
+  const [role, setRole] = useState("0");
   const [err, setErr] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [num, setNum] = useState(0);
 
   useEffect(() => {
     if (users.length !== 0) {
       users.forEach((user) => {
         if (user._id === id) {
           setEditUser(user);
-          setCheckAdmin(user.role === 1 ? true : false);
+          setRole(user.role);
         }
       });
     } else {
@@ -36,11 +36,10 @@ function EditUser() {
 
   const handleUpdate = async () => {
     try {
-      if (num % 2 !== 0) {
         const res = await axios.patch(
           `/user/update_role/${editUser._id}`,
           {
-            role: checkAdmin ? 1 : 0,
+            role
           },
           {
             headers: { Authorization: token },
@@ -48,18 +47,17 @@ function EditUser() {
         );
 
         setSuccess(res.data.msg);
-        setNum(0);
-      }
+      
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
     }
   };
 
-  const handleCheck = () => {
-    setSuccess("");
-    setErr("");
-    setCheckAdmin(!checkAdmin);
-    setNum(num + 1);
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    if(value==="0" || value==="1" || value==="2"){
+      setRole(Number(value));
+    }
   };
 
   return (<>
@@ -97,18 +95,20 @@ function EditUser() {
             </div>
             <div className="row">
               <div className="form-group mycheck">
-                <label htmlFor="isAdmin">isAdmin</label>
+                <label htmlFor="role">Role</label>
                 <input
-                  type="checkbox"
-                  class="mycheck"
-                  id="isAdmin"
-                  checked={checkAdmin}
-                  onChange={handleCheck}
+                  className="role"
+                  id="role"
+                  placeholder="role"
+                  onChange={handleChangeInput}
+                  value={role}
+                  name="role"
                 />
               </div>
-                      </div>
-                    <div className="edit_btn">
-            <button onClick={handleUpdate}>Update</button></div>
+            </div>
+            <div className="edit_btn">
+              <button onClick={handleUpdate}>Update</button>
+            </div>
 
            
           </div>

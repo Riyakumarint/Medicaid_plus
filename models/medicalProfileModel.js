@@ -76,7 +76,7 @@ const medicalProfileSchema = new mongoose.Schema({
         rater: [{
             userId: {
                 type: String,
-                unique: true
+                // unique: true
             }
         }],
         comments: [{

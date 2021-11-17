@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 function SideNav() {
   const auth = useSelector((state) => state.auth);
+  const { user, isAdmin, isDoctor } = auth;
   
   // const users = useSelector((state) => state.users);
   // const [callback, setCallback] = useState(false);
 
   // const dispatch = useDispatch();
 
-  const { isAdmin } = auth;
   return (
     <div id="mySidenav" className="sidebar fixed-left">
       <ul>
@@ -32,24 +32,13 @@ function SideNav() {
         </li>
         <li>
           <a
-            href="/medical_profile"
+            href={isDoctor? "/medical_profile": "/medical_history"}
             onClick={() => window.scrollTo({ top: 0 })}
           >
             <span class="icon">
               <i class="fa fa-medkit" aria-hidden="true"></i>
             </span>
             <span class="title">Medical</span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="/medical_history"
-            onClick={() => window.scrollTo({ top: 0 })}
-          >
-            <span class="icon">
-              <i class="fa fa-history" aria-hidden="true"></i>
-            </span>
-            <span class="title">History</span>
           </a>
         </li>
         <li>

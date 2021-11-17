@@ -9,8 +9,11 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 
 router.post('/createMedicalHistory',auth, profilesCtrl.createMedicalHistory)
+router.patch('/updateMedicalHistory',auth, profilesCtrl.updateMedicalHistory)
+router.get('/getMedicalHistory',auth, profilesCtrl.getMedicalHistory)
 
 router.post('/createMedicalProfile',auth, profilesCtrl.createMedicalProfile)
+router.patch('/updateMedicalProfile',auth, profilesCtrl.updateMedicalProfile)
 router.get('/getMedicalProfile',auth, profilesCtrl.getMedicalProfile)
 
 router.post('/rateDoctor', auth,profilesCtrl.rateDoctor)

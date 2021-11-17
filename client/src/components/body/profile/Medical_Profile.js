@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {  useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -22,32 +22,20 @@ const initialState = {
 
 const Medical_profile = () => {
   const [profile, setProfile] = useState(initialState);
-  const [medical_profile, setMedicalProfile] = useState(initialState);
 
   const token = useSelector((state) => state.token);
 
-  // const fetchMedicalProfile = async (token) => {
-  //   const res = await axios.get('/profiles/getMedicalProfile', {
-  //     headers: {Authorization: token}
-  //   })
-  //   console.log(res);
-  //   setMedicalProfile(res.data);
-  //   return res.data;
-  // }
-  // const medical_profile_data = fetchMedicalProfile(token);
-  const history = useHistory();
+  useEffect(()=> {
+    axios.get('/profiles/getMedicalProfile', { headers: {Authorization: token}})
+    .then( res => {
+      setProfile(res.data);
+    })
+    .catch( err => {
+      console.log(err);
+    })
+  }, [])
 
-  const {
-    bloodGroup,
-    age,
-    major,
-    college,
-    passingyear,
-    experience_year,
-    speciality_name,
-    err,
-    success,
-  } = profile;
+  // const history = useHistory();
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -57,16 +45,10 @@ const Medical_profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "/profiles/createMedicalProfile",
+      const res = await axios.patch(
+        "/profiles/updateMedicalProfile",
         {
-          bloodGroup,
-          age,
-          major,
-          college,
-          passingyear,
-          speciality_name,
-          experience_year,
+          profile
         },
         {
           headers: { Authorization: token },
@@ -86,21 +68,20 @@ const Medical_profile = () => {
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-        {err && showErrMsg(err)}
-              {success && showSuccessMsg(success)}
+        {profile.err && showErrMsg(profile.err)}
+              {profile.success && showSuccessMsg(profile.success)}
         <form onSubmit={handleSubmit}>
           <div className="profile_page">
            
               
               <div className="profile_header">
-                <h4>Edit Medical Profile</h4>
-                <p> {medical_profile.userId} </p>
+                <h4>Medical Profile</h4>
                 <button
                   type="submit"
                   className="button"
                   onClick={() => window.scrollTo({ top: 0 })}
                 >
-                  Profile
+                  Update Profile
                 </button>
               </div>
               <div className="profile-container">
@@ -117,7 +98,7 @@ const Medical_profile = () => {
                           placeholder="bloodGroup"
                           onChange={handleChangeInput}
                           name="bloodGroup"
-                          value={bloodGroup}
+                          value={profile.bloodGroup}
                         />
                       </div>
                     </div>
@@ -131,7 +112,7 @@ const Medical_profile = () => {
                           id="exampleInputage1"
                           placeholder="age"
                           onChange={handleChangeInput}
-                          value={age}
+                          value={profile.age}
                           name="age"
                         />
                       </div>
@@ -152,7 +133,7 @@ const Medical_profile = () => {
                           id="exampleInputmajor1"
                           placeholder="major"
                           onChange={handleChangeInput}
-                          value={major}
+                          value={profile.major}
                           name="major"
                         />
                       </div>
@@ -168,7 +149,7 @@ const Medical_profile = () => {
                           id="exampleInputcollege1"
                           placeholder="college"
                           onChange={handleChangeInput}
-                          value={college}
+                          value={profile.college}
                           name="college"
                         />
                       </div>
@@ -184,7 +165,7 @@ const Medical_profile = () => {
                           id="exampleInputpassingyear1"
                           placeholder="passingyear"
                           onChange={handleChangeInput}
-                          value={passingyear}
+                          value={profile.passingyear}
                           name="passingyear"
                         />
                       </div>
@@ -204,7 +185,7 @@ const Medical_profile = () => {
                           id="exampleInputspeciality_name1"
                           placeholder="speciality_name"
                           onChange={handleChangeInput}
-                          value={speciality_name}
+                          value={profile.speciality_name}
                           name="speciality_name"
                         />
                       </div>
@@ -220,7 +201,7 @@ const Medical_profile = () => {
                           id="exampleInputexperience_year1"
                           placeholder="experience_year"
                           onChange={handleChangeInput}
-                          value={experience_year}
+                          value={profile.experience_year}
                           name="experience_year"
                         />
                       </div>
