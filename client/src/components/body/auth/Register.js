@@ -30,7 +30,7 @@ function Register() {
   const [typePass, setTypePass] = useState(false);
   const [typeCfPass, setTypeCfPass] = useState(false);
 
-  const { name, username, mobile, email, password, cf_password, err, success } =
+  const { name, username, mobile, email, password, cf_password, gender, err, success } =
     user;
 
   const handleChangeInput = (e) => {
@@ -76,6 +76,7 @@ function Register() {
         mobile,
         email,
         password,
+        gender,
       });
 
       setUser({ ...user, err: "", success: res.data.msg });

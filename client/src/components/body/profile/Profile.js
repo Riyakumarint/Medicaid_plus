@@ -242,9 +242,6 @@ function Profile() {
           <div className="line-2">
             <hr></hr>
           </div>
-          <div className="col-right">
-            <div>{isAdmin ? <AdminProfile /> : "My Orders"}</div>
-          </div>
         </div>
       </div>
       

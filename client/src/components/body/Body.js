@@ -8,7 +8,9 @@ import ForgotPass from "../body/auth/ForgotPassword";
 import ResetPass from "../body/auth/ResetPassword";
 import Profile from "../body/profile/Profile";
 import EditUser from "../body/profile/EditUser";
-import Patient_profile from '../body/profile/Patient_profile'
+import Medical_profile from './profile/Medical_Profile'
+import Medical_history from './profile/Medical_History'
+import Dash_board from '../body/profile/dash_board'
 import Home from "../body/home/Home";
 import Appoinment from '../body/pages/Appointment'
 import VideoConsult from '../body/pages/VideoConsult'
@@ -54,8 +56,18 @@ function Body() {
           exact
         />
         <Route
-          path="/patient_profile"
-          component={isLogged ? Patient_profile : NotFound}
+          path="/medical_profile"
+          component={isLogged ? Medical_profile : NotFound}
+          exact
+        />
+        <Route
+          path="/medical_history"
+          component={isLogged ? Medical_history : NotFound}
+          exact
+        />
+        <Route
+          path="/dash_board"
+          component={isLogged ? Dash_board : NotFound}
           exact
         />
         <Route

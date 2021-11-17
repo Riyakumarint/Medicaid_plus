@@ -8,7 +8,7 @@ const medicalHistorySchema = new mongoose.Schema({
         required: true
     },
 
-    emergency_Contact:{
+    emergencyContact:{
         name: {
             type: String,
             required: true

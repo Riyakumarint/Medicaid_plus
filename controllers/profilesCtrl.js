@@ -93,6 +93,15 @@ const profilesCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
+    getMedicalProfile: async (req, res) => {
+        try {
+            const medical_profile = await MedicalProfile.find({userId: req.user.id});
+            console.log(medical_profile[0]);
+            res.json(medical_profile[0]);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
     rateDoctor: async (req, res) => {
         try {
             const doctor = await MedicalProfile.findOne( {userId: req.body.doctorId} );

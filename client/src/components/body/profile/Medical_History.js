@@ -20,7 +20,7 @@ const initialState = {
   success: "",
 };
 
-const Medical_History_profile = () => {
+const Medical_history = () => {
   const [profile, setProfile] = useState(initialState);
 
   const token = useSelector((state) => state.token);
@@ -77,7 +77,7 @@ const Medical_History_profile = () => {
           {success && showSuccessMsg(success)}
           <div className="profile_page">
             <div className="profile_header">
-              <h4 className="title">Edit Profile</h4>
+              <h4 className="title">Edit Medical History</h4>
               <button type="submit" className="button" onSubmit={handleSubmit}>
                 Profile
               </button>{" "}
@@ -212,4 +212,4 @@ const Medical_History_profile = () => {
   );
 };
 
-export default Medical_History_profile;
+export default Medical_history;

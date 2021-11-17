@@ -20,10 +20,21 @@ const initialState = {
   success: "",
 };
 
-const Patient_profile = () => {
+const Medical_profile = () => {
   const [profile, setProfile] = useState(initialState);
+  const [medical_profile, setMedicalProfile] = useState(initialState);
 
   const token = useSelector((state) => state.token);
+
+  // const fetchMedicalProfile = async (token) => {
+  //   const res = await axios.get('/profiles/getMedicalProfile', {
+  //     headers: {Authorization: token}
+  //   })
+  //   console.log(res);
+  //   setMedicalProfile(res.data);
+  //   return res.data;
+  // }
+  // const medical_profile_data = fetchMedicalProfile(token);
   const history = useHistory();
 
   const {
@@ -82,7 +93,8 @@ const Patient_profile = () => {
            
               
               <div className="profile_header">
-                <h4>Edit Profile</h4>
+                <h4>Edit Medical Profile</h4>
+                <p> {medical_profile.userId} </p>
                 <button
                   type="submit"
                   className="button"
@@ -225,7 +237,20 @@ const Patient_profile = () => {
   );
 };
 
-export default Patient_profile;
+export default Medical_profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const initial_State = {
 //   bloodGroup: "",

@@ -5,27 +5,35 @@ function SideNav() {
     <div id="mySidenav" className="sidebar fixed-left">
       <ul>
         <li>
+          <a href="/dash_board" onClick={() => window.scrollTo({ top: 0 })}>
+            <span class="icon">
+              <i class="fas fa-columns" aria-hidden="true"></i>
+            </span>
+            <span class="title">Dash board</span>
+          </a>
+        </li>
+        <li>
           <a href="/profile" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
-              <i class="fa fa-medkit" aria-hidden="true"></i>
+              <i class="fa fa-product-hunt" aria-hidden="true"></i>
             </span>
             <span class="title">Profile</span>
           </a>
         </li>
         <li>
           <a
-            href="/patient_profile"
+            href="/medical_profile"
             onClick={() => window.scrollTo({ top: 0 })}
           >
             <span class="icon">
-              <i class="fa fa-product-hunt" aria-hidden="true"></i>
+              <i class="fa fa-medkit" aria-hidden="true"></i>
             </span>
-            <span class="title">Patient</span>
+            <span class="title">Medical</span>
           </a>
         </li>
         <li>
           <a
-            href="/patient_profile"
+            href="/medical_history"
             onClick={() => window.scrollTo({ top: 0 })}
           >
             <span class="icon">

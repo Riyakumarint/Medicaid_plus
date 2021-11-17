@@ -11,6 +11,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.post('/createMedicalHistory',auth, profilesCtrl.createMedicalHistory)
 
 router.post('/createMedicalProfile',auth, profilesCtrl.createMedicalProfile)
+router.get('/getMedicalProfile',auth, profilesCtrl.getMedicalProfile)
 
 router.post('/rateDoctor', auth,profilesCtrl.rateDoctor)
 

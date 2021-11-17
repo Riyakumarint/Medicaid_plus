@@ -1,4 +1,5 @@
 const Users = require("../models/userModel").userModel;
+const MedicalHistory = require("../models/medicalHistoryModel").medicalHistoryModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("./sendMail")
@@ -78,8 +79,48 @@ const userCtrl = {
         name, username, mobile, email, password,gender,role
       });
 
-      await newUser.save();
-      res.json({ msg: "Account has been activated!" });
+      newUser.save( async (error, result) => {
+        if(!error){
+          const newMedicalHistoryData = new MedicalHistory({
+            userId: result._id ,
+  
+            emergencyContact:{
+                name: "Name",
+                relation: "Relation",
+                emailAdd: "Email",
+                mobile: "Mobile",
+                address: "Address"
+            },
+        
+            bloodGroup: "BG",
+            age: "Age",
+            height: "height",
+            weight: "Kg",
+        
+            currentMedication: [],
+            medicalCondition: [],
+            allergies: [],
+            useTobacco: "No",
+            useAlcohol: "No",
+        
+          });
+
+          newMedicalHistoryData.save( async (error1, result1) => {
+            if(!error1){
+                await Users.findOneAndUpdate(
+                    { _id: result._id },
+                    { "profile.medicalHistoryId": result1._id }
+                );
+                res.json({ msg: "Account has been activated!" });
+            } else {
+              console.log(error1.message);
+              res.status(500).json({ msg: "failed to create medical history" });
+            }
+          });
+        } else {
+            res.status(500).json({ msg: error.message });
+        }
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
