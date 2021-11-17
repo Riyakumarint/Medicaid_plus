@@ -1,3 +1,6 @@
+.header{
+    width: 100%;
+}
 .menu-bar{
     background-image: linear-gradient(-90deg,#911F27,#911F27,#911F27);
     opacity: 1;
@@ -67,10 +70,12 @@
     position: relative;
     right: -19px;
     top: 9px;
+    margin-bottom: 20px;
 }
 
-.sign-in .fa-user{
+.sign-in .fa-user , .fa-times{
     font-size: 20px;
+    color: white;
 }
 
 /* --------- Dropdown ---------- */

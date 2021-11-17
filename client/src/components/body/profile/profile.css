@@ -1,6 +1,6 @@
 .continer-profile{
     width: 100%;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     overflow: hidden;
     /* position: relative; */
     background-color: #f8bec1;
@@ -295,6 +295,11 @@
         height: 24vh;
     } */
 }
+
+
+
+
+
 
 
 

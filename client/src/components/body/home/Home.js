@@ -19,11 +19,11 @@ import s11 from "../../../images/stomach-icon.png";
 import s12 from "../../../images/surgeon.png";
 import s13 from "../../../images/teeth-icon.png";
 import s14 from "../../../images/uro-icon.png";
-import d1 from "../../../images/d1.jpeg";
-import d2 from "../../../images/d2.jpeg";
-import d3 from "../../../images/d3.jpeg";
-import d4 from "../../../images/d4.jpeg";
-import d5 from "../../../images/d5.jpeg";
+// import d1 from "../../../images/d1.jpeg";
+// import d2 from "../../../images/d2.jpeg";
+// import d3 from "../../../images/d3.jpeg";
+// import d4 from "../../../images/d4.jpeg";
+// import d5 from "../../../images/d5.jpeg";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },

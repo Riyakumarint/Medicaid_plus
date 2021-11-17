@@ -7,15 +7,18 @@ import NotFound from "../utils/NotFound/NotFound";
 import ForgotPass from "../body/auth/ForgotPassword";
 import ResetPass from "../body/auth/ResetPassword";
 import Profile from "../body/profile/Profile";
+import Category from "./pages/Categories";
+import Speciality from "./pages/Speciality";
 import EditUser from "../body/profile/EditUser";
 import Medical_profile from './profile/Medical_Profile'
 import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
+import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
-import Appoinment from '../body/pages/Appointment'
-import VideoConsult from '../body/pages/VideoConsult'
-import LabTest from '../body/pages/LabTest'
-import specialist from '../body/pages/specialist'
+import Appoinment from "../body/pages/Appointment";
+import VideoConsult from "../body/pages/VideoConsult";
+import LabTest from "../body/pages/LabTest";
+import specialist from "../body/pages/specialist";
 import { useSelector } from "react-redux";
 
 function Body() {
@@ -71,18 +74,31 @@ function Body() {
           exact
         />
         <Route
+          path="/create_blog"
+          component={isLogged ? Create_blog : NotFound}
+          exact
+        />
+        <Route
           path="/edit_user/:id"
           component={isAdmin ? EditUser : NotFound}
           exact
         />
-
+        <Route
+          path="/category"
+          component={isLogged ? Category : NotFound}
+          exact
+        />
+        <Route
+          path="/speciality"
+          component={isLogged ? Speciality : NotFound}
+          exact
+        />
         <Route path="/get_appointments" component={Appoinment} />
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
 
-        <Route path="*" exact component={NotFound}/>
-        {/* <Route path="/product" component={Product} /> */}
+        <Route path="*" exact component={NotFound} />
       </Switch>
     </section>
   );

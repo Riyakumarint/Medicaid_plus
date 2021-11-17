@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { isLength, isMatch } from "../../utils/validation/Validation";
 import Loading from "../../utils/notification/Loading";
 import AdminProfile from "./Admin_profile";

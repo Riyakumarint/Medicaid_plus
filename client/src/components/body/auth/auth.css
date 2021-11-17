@@ -312,6 +312,10 @@ form {
 }
 
 /* -----------Email Activation ----------------------*/
+.active_page{
+    padding-top: 50px;
+}
+
 .active_page .thanksheader{
     font-family: 'Poppins', sans-serif;
     font-size: 2.2rem;
@@ -336,11 +340,12 @@ form {
     margin: auto;
 }
 
-.active_page .up h1{
-    padding: 10px auto;
+.active_page .up h4{
+    padding: 10px 0;
     margin: 0 35px;
+
     width: 100%;
-    color: aliceblue;
+    color: rgb(17, 54, 87);
     position: relative;
     bottom: 99px;
     align-items: center;

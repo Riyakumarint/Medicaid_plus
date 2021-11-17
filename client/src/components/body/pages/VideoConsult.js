@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function VideoConsult() {
+    
     return (
         <div>
             
@@ -9,3 +10,6 @@ function VideoConsult() {
 }
 
 export default VideoConsult
+
+
+

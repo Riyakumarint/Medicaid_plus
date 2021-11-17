@@ -3,14 +3,9 @@ const MedicalProfile = require("../models/medicalProfileModel").medicalProfileMo
 const Blog = require("../models/blogModel").blogModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sendMail = require("./sendMail")
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
-
-const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
-
-const { CLIENT_URL } = process.env;
 
 const blogsCtrl = {
 
@@ -19,15 +14,19 @@ const blogsCtrl = {
             
             const newBlog = new Blog({
                 title: req.body.title,
-                "content.body" : req.body.content.body,
-                "content.links" : req.body.content.links,
-                "content.coverImage": req.body.content.coverImage,
+                content : req.body.content,
+                links : req.body.links,
+                coverImage: req.body.coverImage,
                 reletedTo: req.body.reletedTo,
-                hashtags: req.body.hashtags,
+                
+                // hashtags: req.body.hashtags,
                 autherId: req.user.id,
+               
                 
             });
-
+            // const title = await Users.findOne({title });
+            // if (title)
+            //   return res.status(400).json({ msg: "This title already exists." });
             newBlog.save( async (error, result) => {
                 if(!error){
                     await MedicalProfile.findOneAndUpdate(

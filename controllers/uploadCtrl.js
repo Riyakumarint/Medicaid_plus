@@ -7,8 +7,6 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-
-
 const uploadCtrl = {
     uploadAvatar: (req, res) => {
         try {
@@ -16,6 +14,24 @@ const uploadCtrl = {
             
             cloudinary.v2.uploader.upload(file.tempFilePath, {
                 folder: 'avatar', width: 150, height: 150, crop: "fill"
+            }, async(err, result) => {
+                if(err) throw err;
+
+                removeTmp(file.tempFilePath)
+
+                res.json({url: result.secure_url})
+            })
+        
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    uploadCoverImage: (req, res) => {
+        try {
+            const file = req.files.file;
+            
+            cloudinary.v2.uploader.upload(file.tempFilePath, {
+                folder: 'coverImage', width: 950, height: 650, crop: "fill"
             }, async(err, result) => {
                 if(err) throw err;
 
