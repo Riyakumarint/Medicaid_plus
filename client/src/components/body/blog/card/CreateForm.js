@@ -27,6 +27,8 @@ function CreateForm({ blog, setBlog }) {
     e.preventDefault();
     try {
       const file = e.target.files[0];
+      if(file)
+      console.log(file)
         if (!file)
         return setBlog({
           ...blog,

@@ -18,8 +18,10 @@ const blogsCtrl = {
                 links : req.body.links,
                 coverImage: req.body.coverImage,
                 reletedTo: req.body.reletedTo,
+                
                 // hashtags: req.body.hashtags,
                 autherId: req.user.id,
+               
                 
             });
             // const title = await Users.findOne({title });

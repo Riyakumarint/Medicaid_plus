@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-
+import './card.css'
 function CardHoriz({blog}) {
     
     return (
-        <div className="card md-12" style={{minWidth: "260px"}}>
+        <div className="card mb-3" style={{minWidth: "260px"}}>
         <div className="row g-0 p-2">
           <div className="col-md-12" style={{
             minHeight: '150px', maxHeight: '170px', overflow: 'hidden'
@@ -29,7 +29,7 @@ function CardHoriz({blog}) {
             
           </div>
           
-          <div className="col-md-12">
+          <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">
                 {/* <Link to={`/blog/${blog._id}`}

@@ -40,6 +40,7 @@ const blogSchema = new mongoose.Schema(
 
     upvote: Number,
     downvote: Number,
+    // date: { type: Date, required: true },
     comments: [
       {
         autherId: String,
