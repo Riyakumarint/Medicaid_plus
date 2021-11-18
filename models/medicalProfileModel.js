@@ -21,21 +21,6 @@ const medicalProfileSchema = new mongoose.Schema({
         // required: true,
     },
     
-    major: {
-        type: String,
-        default: ''      
-        // required: true
-    },
-    college: {
-        type: String,
-        default: '' 
-        // required: true
-    },
-    passingyear: {
-        type: String,
-        default: '' 
-        // required: true
-    },
     speciality_name: {
         type: String,
         default: '' 
@@ -46,25 +31,11 @@ const medicalProfileSchema = new mongoose.Schema({
         default: '' 
         // required: true
     },
-    // qualification: [{
-    //     major: String,
-    //     college: String,
-    //     passingyear: String
-    // }],
-    // speciality: [{
-    //     name: {
-    //         type: String
-    //         // ,
-    //         // required: true
-    //     }
-    // }],
-    // experience: {
-    //     year: {
-    //         type: String
-    //         // ,
-    //         // required: true
-    //     }
-    // },
+    qualification: [{
+        major: String,
+        college: String,
+        passingyear: String
+    }],
 
     reviews: {
         rating :{

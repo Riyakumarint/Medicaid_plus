@@ -201,10 +201,10 @@ const profilesCtrl = {
     },
     updateMedicalProfile: async (req, res) => {
         try {
-            const {bloodGroup, age, major, college, passingyear, speciality_name, experience_year} = req.body.profile;
+            const {bloodGroup, age, speciality_name, experience_year} = req.body.profile;
             await MedicalProfile.findOneAndUpdate(
                 { userId: req.user.id },
-                {bloodGroup, age, major, college, passingyear, speciality_name, experience_year}
+                {bloodGroup, age, speciality_name, experience_year}
             );
             res.json({ msg: "Profile updated!" });
         } catch (err) {
@@ -217,6 +217,35 @@ const profilesCtrl = {
             res.json(medical_profile[0]);
         } catch (err) {
             return res.status(500).json({ msg: err.message });
+        }
+    },
+    addQualification: async (req, res) => {
+        try {
+            const newQualification = {
+                major: req.body.qualification.major,
+                college: req.body.qualification.college,
+                passingyear: req.body.qualification.passingyear
+            };
+            await MedicalProfile.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$push": { qualification: newQualification } }
+            );
+            res.json({ msg: "New qualification added!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+    deleteQualification: async (req, res) => {
+        try {
+            await MedicalProfile.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$pull": { qualification: {_id : req.body.qualificationId} } }
+            );
+            res.json({ msg: "qualification delete Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
         }
     },
     rateDoctor: async (req, res) => {

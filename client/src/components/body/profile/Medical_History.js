@@ -41,6 +41,7 @@ const Medical_history = () => {
 
   const token = useSelector((state) => state.token);
 
+  // fetching data
   useEffect(()=> {
     axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
     .then( res => {

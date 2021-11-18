@@ -275,9 +275,7 @@ const userCtrl = {
             
           bloodGroup: "O+",
           age: "35",
-          major: "Major",
-          college: "College",
-          passingyear: "Passing year",
+          qualification: [],
           
           speciality_name: "Speciality",
           experience_year: "Experience",
