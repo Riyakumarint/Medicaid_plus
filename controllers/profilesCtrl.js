@@ -78,6 +78,93 @@ const profilesCtrl = {
         }
     },
 
+    addCurrMedicines: async (req, res) => {
+        try {
+            const newMedicine = {
+                name: req.body.currMed.name,
+                dose: req.body.currMed.dose
+            };
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$push": { currentMedication: newMedicine } }
+            );
+            res.json({ msg: "New med. added!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+    deleteCurrMedicines: async (req, res) => {
+        try {
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$pull": { currentMedication: {_id : req.body.medId} } }
+            );
+            res.json({ msg: "Medicine delete Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
+    addMedCondition: async (req, res) => {
+        try {
+            const newMedicalCondition = {
+                name: req.body.medCond.name,
+                fromWhen: req.body.medCond.fromWhen,
+                currentStatus: req.body.medCond.currentStatus,
+            };
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$push": { medicalCondition: newMedicalCondition } }
+            );
+            res.json({ msg: "New cond. added!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+    deleteMedCondition: async (req, res) => {
+        try {
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$pull": { medicalCondition: {_id : req.body.condId} } }
+            );
+            res.json({ msg: "Condition delete Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
+    addAllergies: async (req, res) => {
+        try {
+            const newAllergie = {
+                name: req.body.allergie.name,
+            };
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$push": { allergies: newAllergie } }
+            );
+            res.json({ msg: "New allergies. added!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+    deleteAllergies: async (req, res) => {
+        try {
+            await MedicalHistory.findOneAndUpdate(
+                { userId: req.user.id },
+                { "$pull": { allergies: {_id : req.body.allergieId} } }
+            );
+            res.json({ msg: "Allergie delete Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
     createMedicalProfile: async (req, res) => {
         try {
             const newMedicalProfileData = new MedicalProfile({

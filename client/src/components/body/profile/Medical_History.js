@@ -32,6 +32,12 @@ const initialStateEmergency = {
 const Medical_history = () => {
   const [profile, setProfile] = useState(initialState);
   const [emergencyContact, setEmergencyContact] = useState(initialStateEmergency);
+  const [currentMedication, setCurrentMedication] = useState([]);
+  const [currMed, setCurrMed] = useState({name:"", dose:""});
+  const [medicalCondition, setMedicalCondition] = useState([]);
+  const [medCond, setMedCond] = useState({name:"", fromWhen:"", currentStatus:""});
+  const [allergies, setAllergies] = useState([]);
+  const [allergie, setAllergie] = useState({name:""});
 
   const token = useSelector((state) => state.token);
 
@@ -40,14 +46,16 @@ const Medical_history = () => {
     .then( res => {
       setProfile(res.data);
       setEmergencyContact(res.data.emergencyContact);
+      setCurrentMedication(res.data.currentMedication);
+      setMedicalCondition(res.data.medicalCondition);
+      setAllergies(res.data.allergies);
     })
     .catch( err => {
       setProfile({ ...profile, err: err, success: "" });
     })
   }, [])
 
-  // const history = useHistory();
-
+  // handle changes
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value, err: "", success: "" });
@@ -56,7 +64,20 @@ const Medical_history = () => {
     const { name, value } = e.target;
     setEmergencyContact({ ...emergencyContact, [name]: value, err: "", success: "" });
   };
+  const handleCurrMedChangeInput = (e) => {
+    const { name, value } = e.target;
+    setCurrMed({ ...currMed, [name]: value, err: "", success: "" });
+  };
+  const handleMedCondChangeInput = (e) => {
+    const { name, value } = e.target;
+    setMedCond({ ...medCond, [name]: value, err: "", success: "" });
+  };
+  const handleAllergieChangeInput = (e) => {
+    const { name, value } = e.target;
+    setAllergie({ ...allergie, [name]: value, err: "", success: "" });
+  };
 
+  // handle submits
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,17 +87,242 @@ const Medical_history = () => {
           profile,
           emergencyContact
         },
-        {
-          headers: { Authorization: token },
-        }
+        { headers: { Authorization: token } }
       );
 
       setProfile({ ...profile, err: "", success: "Updated Success!" });
-
-      // history.push("/profile");
     } catch (err) {
       setProfile({ ...profile, err: err.response.data.msg, success: "" });
     }
+  };
+
+  const handleAddMed = async () => {
+    try {
+      const res = await axios.post(
+        "/profiles/addCurrMedicines",
+        { currMed },
+        { headers: { Authorization: token } }
+      );
+
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setCurrentMedication(res.data.currentMedication);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+
+      setCurrMed({ name:"", dose:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setCurrMed({ ...currMed, err: err.response.data.msg, success: "" });
+    }
+  };
+  const handleDeleteMed = async (medId) => {
+    try {
+      const res = await axios.post(
+        "/profiles/deleteCurrMedicines",
+        { medId },
+        { headers: { Authorization: token } }
+      );
+
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setCurrentMedication(res.data.currentMedication);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+
+      setCurrMed({ name:"", dose:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setCurrMed({ ...currMed, err: err.response.data.msg, success: "" });
+    }
+  };
+
+  const handleAddMedCond = async () => {
+    try {
+      const res = await axios.post(
+        "/profiles/addMedCondition",
+        { medCond },
+        { headers: { Authorization: token } }
+      );
+      
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setMedicalCondition(res.data.medicalCondition);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+
+      setMedCond({ name:"", fromWhen:"", currentStatus:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setMedCond({ ...medCond, err: err.response.data.msg, success: "" });
+    }
+  };
+  const handleDeleteMedCond = async (condId) => {
+    try {
+      const res = await axios.post(
+        "/profiles/deleteMedCondition",
+        { condId },
+        { headers: { Authorization: token } }
+      );
+      
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setMedicalCondition(res.data.medicalCondition);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+      
+      setMedCond({ name:"", fromWhen:"", currentStatus:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setMedCond({ ...medCond, err: err.response.data.msg, success: "" });
+    }
+  };
+
+  const handleAddAllergie = async () => {
+    try {
+      const res = await axios.post(
+        "/profiles/addAllergies",
+        { allergie },
+        { headers: { Authorization: token } }
+      );
+      
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setAllergies(res.data.allergies);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+
+      setAllergie({ name:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+    }
+  };
+  const handleDeleteAllergie = async (allergieId) => {
+    try {
+      const res = await axios.post(
+        "/profiles/deleteAllergies",
+        { allergieId },
+        { headers: { Authorization: token } }
+      );
+      
+      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      .then( res => {
+        setAllergies(res.data.allergies);
+      })
+      .catch( err => {
+        setProfile({ ...profile, err: err, success: "" });
+      })
+      
+      setAllergie({ name:"", err: "", success: "Updated Success!" });
+    } catch (err) {
+      setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+    }
+  };
+
+  // renders
+  const renderCurrentMedication = () =>{
+    if(currentMedication.length===0) return ('');
+    return (
+      <div className="col-right">
+      <div style={{ overflowX: "auto" }}>
+          <table className="currentMedication">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Dose</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentMedication.map((currMed) => (
+                <tr key={currMed._id}>
+                  <td>{currMed.name}</td>
+                  <td>{currMed.dose}</td>
+                  <td>
+                    <i className="fas fa-trash-alt"
+                      title="Remove"
+                      onClick={() => handleDeleteMed(currMed._id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </div>
+      </div>
+    )
+  };
+
+  const renderMedicalCondition = () =>{
+    if(medicalCondition.length===0) return ('');
+    return (
+      <div className="col-right">
+      <div style={{ overflowX: "auto" }}>
+          <table className="medicalCondition">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>From</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {medicalCondition.map((medCond) => (
+                <tr key={medCond._id}>
+                  <td>{medCond.name}</td>
+                  <td>{medCond.fromWhen}</td>
+                  <td>{medCond.currentStatus}</td>
+                  <td>
+                    <i className="fas fa-trash-alt"
+                      title="Remove"
+                      onClick={() => handleDeleteMedCond(medCond._id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </div>
+      </div>
+    )
+  };
+
+  const renderAllergies = () =>{
+    if(allergies.length===0) return ('');
+    return (
+      <div className="col-right">
+      <div style={{ overflowX: "auto" }}>
+          <table className="allergies">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allergies.map((allergie) => (
+                <tr key={allergie._id}>
+                  <td>{allergie.name}</td>
+                  <td>
+                    <i className="fas fa-trash-alt"
+                      title="Remove"
+                      onClick={() => handleDeleteAllergie(allergie._id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </div>
+      </div>
+    )
   };
 
   return (
@@ -100,6 +346,8 @@ const Medical_history = () => {
                   Update History
                 </button>
               </div>
+
+              {/* general block */}
               <div className="profile-container">
                 <div className="row">
                   <div class="col s12 m6 l4">
@@ -169,6 +417,167 @@ const Medical_history = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* current medicine block */}
+                <div className="line-2">
+                  <hr></hr>
+                </div>
+                <div>
+                  <h5>Current Medication</h5>
+                  {renderCurrentMedication()}
+                  <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="name">Name</label>
+                        <input
+                          className="name"
+                          id="exampleInputname1"
+                          placeholder="name"
+                          onChange={handleCurrMedChangeInput}
+                          value={currMed.name}
+                          name="name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="dose">Dose</label>
+                        <input
+                          className="dose"
+                          id="exampleInputdose1"
+                          placeholder="dose"
+                          onChange={handleCurrMedChangeInput}
+                          value={currMed.dose}
+                          name="dose"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                        className="fas fa-plus-circle"
+                        title="Add"
+                        onClick={() => handleAddMed()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                
+                {/* medical condition block */}
+                <div className="line-2">
+                  <hr></hr>
+                </div>
+                <div>
+                  <h5>Medical Condition</h5>
+                  {renderMedicalCondition()}
+                  <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="name">Name</label>
+                        <input
+                          className="name"
+                          id="exampleInputname1"
+                          placeholder="name"
+                          onChange={handleMedCondChangeInput}
+                          value={medCond.name}
+                          name="name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="fromWhen">From</label>
+                        <input
+                          className="fromWhen"
+                          id="exampleInputfromWhen1"
+                          placeholder="fromWhen"
+                          onChange={handleMedCondChangeInput}
+                          value={medCond.fromWhen}
+                          name="fromWhen"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="currentStatus">Status</label>
+                        <input
+                          className="currentStatus"
+                          id="exampleInputcurrentStatus1"
+                          placeholder="currentStatus"
+                          onChange={handleMedCondChangeInput}
+                          value={medCond.currentStatus}
+                          name="currentStatus"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div >
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                        className="fas fa-plus-circle"
+                        title="Add"
+                        onClick={() => handleAddMedCond()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                {/* allergies block */}
+                <div className="line-2">
+                  <hr></hr>
+                </div>
+                <div>
+                  <h5>Allergies</h5>
+                  {renderAllergies()}
+                  <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="name">Name</label>
+                        <input
+                          className="name"
+                          id="exampleInputname1"
+                          placeholder="name"
+                          onChange={handleAllergieChangeInput}
+                          value={allergie.name}
+                          name="name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                        className="fas fa-plus-circle"
+                        title="Add"
+                        onClick={() => handleAddAllergie()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                {/* habits block */}
+                <div className="line-2">
+                  <hr></hr>
+                </div>
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
@@ -185,7 +594,6 @@ const Medical_history = () => {
                       </div>
                     </div>
                   </div>
-
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
@@ -202,6 +610,8 @@ const Medical_history = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* emergency contact block */}
                 <div className="line-2">
                   <hr></hr>
                 </div>
