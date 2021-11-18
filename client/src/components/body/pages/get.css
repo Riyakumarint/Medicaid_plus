@@ -2,7 +2,6 @@
 .specialist_items{
   background-color: #f8bec1;
   height: 100%;
-  justify-content: center;
 }
 
 .specialist_items h1 {
@@ -17,53 +16,19 @@
 }
 
 .container{
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-/* .card {
-  margin: 14px 0;
-  border-radius: 20px;
-  width: 310px;
+.item_box{
+  display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 50px;
+    margin: 0 10px ;
 }
 
-.card-body {
-  box-shadow: 0 0 5px 1px #911f27;
-  border-radius: 20px;
-}
-
-.card-body a {
-  color: #63a6b0;
-  text-decoration: none;
-  font-size: 15px;
-  margin-top: auto;
-  font-weight: 600;
-}
-
-.card-body a:hover {
-  color: #63a6b0;
-  text-decoration: none;
-}
-
-.card-img-top {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 5px solid #fab8bc;
-  overflow: hidden;
-  top: 15px;
-  left: 185px;
-  border-radius: 50%;
-  justify-content: center;
-}
-
-.card-title {
-  font-size: 20px;
-  width: 200px;
-  font-weight: bold;
-} */
-
-/* ------------categories-------------*/
+/*------------categories-------------*/
 
 .categories {
   width: 100%;

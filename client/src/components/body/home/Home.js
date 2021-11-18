@@ -1,8 +1,9 @@
 import React from "react";
-
+import Card from './Cards'
 import "./home.css";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
+import Sdata from './Sdata'
 import Carousel1 from "../../../images/doc1.jpg";
 import Carousel2 from "../../../images/doc2.jpg";
 import Carousel3 from "../../../images/doc3.jpg";
@@ -132,7 +133,7 @@ function Home() {
           </div>
         </div>
       </div>
-      
+
       <div className="special">
       <h1 class="header">10+ <span>Specialities</span></h1>
         <div className="specialist">
@@ -152,172 +153,116 @@ function Home() {
 
         <Carousel breakPoints={breakPoints}>
           <Item>
-            <div class="card_speciality">
-              <img src={s1} alt="s1" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Ayurveda</h5>
-                <p className="card_text">₹500</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[0].imgsrc}
+          title={Sdata[0].title}
+          price={Sdata[0].price}
+          link={Sdata[0].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s2} alt="s2" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Cardiology</h5>
-                <p className="card_text">₹2500</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[1].imgsrc}
+          title={Sdata[1].title}
+          price={Sdata[1].price}
+          link={Sdata[1].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s3} alt="s3" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Dermatology</h5>
-                <p className="card_text">₹1500</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[2].imgsrc}
+          title={Sdata[2].title}
+          price={Sdata[2].price}
+          link={Sdata[2].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s4} alt="s4" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Gynecology</h5>
-                <p className="card_text">₹600</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[3].imgsrc}
+          title={Sdata[3].title}
+          price={Sdata[3].price}
+          link={Sdata[3].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s5} alt="s5" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Ophthalmology</h5>
-                <p className="card_text">₹500</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[4].imgsrc}
+          title={Sdata[4].title}
+          price={Sdata[4].price}
+          link={Sdata[4].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s6} alt="s6" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Orthopedic</h5>
-                <p className="card_text">₹800</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[5].imgsrc}
+          title={Sdata[5].title}
+          price={Sdata[5].price}
+          link={Sdata[5].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s7} alt="s7" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Padiatrics</h5>
-                <p className="card_text">₹500</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[6].imgsrc}
+          title={Sdata[6].title}
+          price={Sdata[6].price}
+          link={Sdata[6].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s8} alt="s8" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Psychiatry</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[7].imgsrc}
+          title={Sdata[7].title}
+          price={Sdata[7].price}
+          link={Sdata[7].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s9} alt="s9" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Sexology</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[8].imgsrc}
+          title={Sdata[8].title}
+          price={Sdata[8].price}
+          link={Sdata[8].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s10} alt="s10" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">General Physician</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[9].imgsrc}
+          title={Sdata[9].title}
+          price={Sdata[9].price}
+          link={Sdata[9].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s11} alt="s11" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Gastroenterologist</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[10].imgsrc}
+          title={Sdata[10].title}
+          price={Sdata[10].price}
+          link={Sdata[10].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s12} alt="s12" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Surgeon</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[0].imgsrc}
+          title={Sdata[0].title}
+          price={Sdata[0].price}
+          link={Sdata[0].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s13} alt="s13" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Dentist</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[11].imgsrc}
+          title={Sdata[11].title}
+          price={Sdata[11].price}
+          link={Sdata[11].link}
+        />
           </Item>
           <Item>
-          <div class="card_speciality">
-              <img src={s14} alt="s14" className="card_img" />
-              <div className="card_body">
-                <h5 className="card_title">Urology</h5>
-                <p className="card_text">₹550</p>
-                <a href="#">
-                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                </a>{" "}
-              </div>
-            </div>
+          <Card
+          imgsrc={Sdata[12].imgsrc}
+          title={Sdata[12].title}
+          price={Sdata[12].price}
+          link={Sdata[12].link}
+        />
           </Item>
         </Carousel>
         
