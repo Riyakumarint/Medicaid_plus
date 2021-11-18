@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./home.css";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
@@ -151,11 +152,11 @@ function Home() {
 
         <Carousel breakPoints={breakPoints}>
           <Item>
-            <div class="card">
-              <img src={s1} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Ayurveda</h5>
-                <p className="card-text">₹500</p>
+            <div class="card_speciality">
+              <img src={s1} alt="s1" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Ayurveda</h5>
+                <p className="card_text">₹500</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -163,11 +164,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s2} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Cardiology</h5>
-                <p className="card-text">₹2500</p>
+          <div class="card_speciality">
+              <img src={s2} alt="s2" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Cardiology</h5>
+                <p className="card_text">₹2500</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -175,11 +176,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s3} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Dermatology</h5>
-                <p className="card-text">₹1500</p>
+          <div class="card_speciality">
+              <img src={s3} alt="s3" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Dermatology</h5>
+                <p className="card_text">₹1500</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -187,11 +188,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s4} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Gynecology</h5>
-                <p className="card-text">₹600</p>
+          <div class="card_speciality">
+              <img src={s4} alt="s4" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Gynecology</h5>
+                <p className="card_text">₹600</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -199,11 +200,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s5} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Ophthalmology</h5>
-                <p className="card-text">₹500</p>
+          <div class="card_speciality">
+              <img src={s5} alt="s5" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Ophthalmology</h5>
+                <p className="card_text">₹500</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -211,11 +212,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s6} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Orthopedic</h5>
-                <p className="card-text">₹800</p>
+          <div class="card_speciality">
+              <img src={s6} alt="s6" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Orthopedic</h5>
+                <p className="card_text">₹800</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -223,11 +224,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s7} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Padiatrics</h5>
-                <p className="card-text">₹500</p>
+          <div class="card_speciality">
+              <img src={s7} alt="s7" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Padiatrics</h5>
+                <p className="card_text">₹500</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -235,11 +236,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s8} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Psychiatry</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s8} alt="s8" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Psychiatry</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -247,11 +248,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s9} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Sexology</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s9} alt="s9" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Sexology</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -259,11 +260,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s10} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">General Physician</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s10} alt="s10" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">General Physician</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -271,11 +272,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s11} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Gastroenterologist</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s11} alt="s11" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Gastroenterologist</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -283,11 +284,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s12} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Surgeon</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s12} alt="s12" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Surgeon</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -295,11 +296,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s13} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Dentist</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s13} alt="s13" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Dentist</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -307,11 +308,11 @@ function Home() {
             </div>
           </Item>
           <Item>
-            <div class="card">
-              <img src={s14} alt="s1" className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">Urology</h5>
-                <p className="card-text">₹550</p>
+          <div class="card_speciality">
+              <img src={s14} alt="s14" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Urology</h5>
+                <p className="card_text">₹550</p>
                 <a href="#">
                   Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 </a>{" "}
@@ -319,7 +320,7 @@ function Home() {
             </div>
           </Item>
         </Carousel>
-
+        
         <div className="service">
         <div class="container">
 		<h1 class="header">Our <span>GOAL</span></h1>

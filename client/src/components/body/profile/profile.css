@@ -115,6 +115,18 @@
     border-radius: 5px;
     padding: 0 5px;
 }
+
+.profile_page .speciality_name{
+    max-width: 250px;
+    height: 40px;
+    margin: 5px 0;
+    border: 2px solid  #911F27;
+    outline: none;
+    background: #f8e2e3;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+
 .profile_page button{
     background: #911F27;
     color: white;

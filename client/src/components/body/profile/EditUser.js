@@ -101,7 +101,7 @@ function EditUser() {
                   id="role"
                   placeholder="role"
                   onChange={handleChangeInput}
-                  value={role}
+                  defaultValue={role}
                   name="role"
                 />
               </div>

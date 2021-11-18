@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import {
@@ -22,18 +22,28 @@ const initialState = {
 
 const Medical_profile = () => {
   const [profile, setProfile] = useState(initialState);
+  const [specialities, setSpecialities] = useState([]);
+  const [callback, setCallback] = useState(false);
+  useEffect(() => {
+    const getSpecialities = async () => {
+      const res = await axios.get("/api/speciality");
+      setSpecialities(res.data);
+    };
 
+    getSpecialities();
+  }, [callback]);
   const token = useSelector((state) => state.token);
 
-  useEffect(()=> {
-    axios.get('/profiles/getMedicalProfile', { headers: {Authorization: token}})
-    .then( res => {
-      setProfile(res.data);
-    })
-    .catch( err => {
-      console.log(err);
-    })
-  }, [])
+  useEffect(() => {
+    axios
+      .get("/profiles/getMedicalProfile", { headers: { Authorization: token } })
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // const history = useHistory();
 
@@ -48,7 +58,7 @@ const Medical_profile = () => {
       const res = await axios.patch(
         "/profiles/updateMedicalProfile",
         {
-          profile
+          profile,
         },
         {
           headers: { Authorization: token },
@@ -68,12 +78,10 @@ const Medical_profile = () => {
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-        {profile.err && showErrMsg(profile.err)}
-              {profile.success && showSuccessMsg(profile.success)}
-        <form onSubmit={handleSubmit}>
-          <div className="profile_page">
-           
-              
+          {profile.err && showErrMsg(profile.err)}
+          {profile.success && showSuccessMsg(profile.success)}
+          <form onSubmit={handleSubmit}>
+            <div className="profile_page">
               <div className="profile_header">
                 <h4>Medical Profile</h4>
                 <button
@@ -176,7 +184,7 @@ const Medical_profile = () => {
                   <hr></hr>
                 </div>
                 <div className="row">
-                  <div class="col s12 m6 l4">
+                  {/* <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
                         <label htmlFor="speciality_name">Speciality Name</label>
@@ -190,8 +198,25 @@ const Medical_profile = () => {
                         />
                       </div>
                     </div>
+                  </div> */}
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                    <label htmlFor="speciality_name">Speciality Name</label>
+                      <select
+                        className="form-control text-capitalize speciality_name"
+                        value={profile.speciality_name}
+                        name="speciality_name"
+                        onChange={handleChangeInput}
+                      >
+                        <option value="">Choose a speciality</option>
+                        {specialities.map((speciality) => (
+                          <option key={speciality._id} value={speciality._id}>
+                            {speciality.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
@@ -209,8 +234,7 @@ const Medical_profile = () => {
                   </div>
                 </div>
               </div>
-
-          </div>
+            </div>
           </form>
         </div>
       </div>
@@ -219,19 +243,6 @@ const Medical_profile = () => {
 };
 
 export default Medical_profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const initial_State = {
 //   bloodGroup: "",

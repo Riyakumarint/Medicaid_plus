@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import s1 from "../../../images/ayurvedic.jpeg";
 import s2 from "../../../images/cardiology-icon.jpeg";
 import s3 from "../../../images/dermatology.png";
@@ -16,766 +16,184 @@ import s14 from "../../../images/uro-icon.png";
 
 function specialist() {
   return (
-    <div className="container">
-          
-    
+    <div className="specialist_items">
       <h1>Specialitists</h1>
-      <div className="row">
-      {/* <div className="col-md-12">
-        <div id="inam" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active"> */}
-              
-              <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      {/* <div className="card text-center"> */}
-                      <img src={s1} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Ayurveda</h5>
-                        <p className="card-text">₹400</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s2} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Cardiology</h5>
-                        <p className="card-text">₹2500</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s3} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Dermatology</h5>
-                        <p className="card-text">₹1500</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s4} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Gynecology</h5>
-                        <p className="card-text">₹500</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s5} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Ophthalmology</h5>
-                        <p className="card-text">₹350</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s6} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Orthopedic</h5>
-                        <p className="card-text">₹530</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s7} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Padiatrics</h5>
-                        <p className="card-text">₹900</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s8} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Psychiatry</h5>
-                        <p className="card-text">₹1500</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s9} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Sexology</h5>
-                        <p className="card-text">₹800</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s10} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">General Physician</h5>
-                        <p className="card-text">₹300</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s11} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">
-                        Gastroenterologist
-                        </h5>
-                        <p className="card-text">₹300</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s12} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">surgeon</h5>
-                        <p className="card-text">₹8500</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s13} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Dentist</h5>
-                        <p className="card-text">₹450</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div class="card center-align">
-                      <img src={s14} alt="s1" className="card-img-top" />
-                      <div className="card-body">
-                        <h5 className="card-title">Urology</h5>
-                        <p className="card-text">₹600</p>
-                        <a href="#">
-                          Book now{" "}
-                          <i
-                            class="fa fa-arrow-right"
-                            aria-hidden="true"
-                          ></i>
-                        </a>
-                      </div>
-                </div>
-                    </div>
-                  </div>
-                </div>
-              
-  )
+    <div className="container">
+      
+      <div className="item_box">
+        <div className="row">
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s1} alt="s1" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Ayurveda</h5>
+                <p className="card_text">₹400</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s2} alt="s2" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Cardiology</h5>
+                <p className="card_text">₹2500</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s3} alt="s3" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Dermatology</h5>
+                <p className="card_text">₹1500</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s4} alt="s4" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Gynecology</h5>
+                <p className="card_text">₹500</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s5} alt="s5" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Ophthalmology</h5>
+                <p className="card_text">₹350</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s6} alt="s6" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Orthopedic</h5>
+                <p className="card_text">₹530</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s7} alt="s7" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Padiatrics</h5>
+                <p className="card_text">₹900</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s8} alt="s8" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Psychiatry</h5>
+                <p className="card_text">₹1500</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s9} alt="s9" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Sexology</h5>
+                <p className="card_text">₹800</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s10} alt="s10" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">General Physician</h5>
+                <p className="card_text">₹300</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s11} alt="s11" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Gastroenterologist</h5>
+                <p className="card_text">₹300</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s12} alt="s12" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">surgeon</h5>
+                <p className="card_text">₹8500</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s13} alt="s13" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Dentist</h5>
+                <p className="card_text">₹450</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l4">
+            <div class="card_speciality center-align">
+              <img src={s14} alt="s14" className="card_img" />
+              <div className="card_body">
+                <h5 className="card_title">Urology</h5>
+                <p className="card_text">₹600</p>
+                <a href="#">
+                  Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  );
 }
 
-export default specialist
-
-
-
-
-
-
-
-
-
-{/* <div className="special">
-        <div className="container-fluid">
-          
-          {/* <div className="row"> */}
-        //   <h1>Specialitists</h1>
-        //   <p className="content">
-        //     {" "}
-        //     Consult with top doctors across specialities
-        //   </p>
-            {/* <div className="col-md-12">
-              <div id="inam" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active"> */}
-                    // <div class="container">
-                    //   <div class="row">
-                    //     <div class="col-sm-12 col-lg-4">
-                    //       <div class="card">
-                            {/* <div className="card text-center"> */}
-            //                 <img src={s1} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Ayurveda</h5>
-            //                   <p className="card-text">₹400</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s2} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Cardiology</h5>
-            //                   <p className="card-text">₹2500</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s3} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Dermatology</h5>
-            //                   <p className="card-text">₹1500</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s4} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Gynecology</h5>
-            //                   <p className="card-text">₹500</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s5} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Ophthalmology</h5>
-            //                   <p className="card-text">₹350</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s6} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Orthopedic</h5>
-            //                   <p className="card-text">₹530</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s7} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Padiatrics</h5>
-            //                   <p className="card-text">₹900</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s8} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Psychiatry</h5>
-            //                   <p className="card-text">₹1500</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s9} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Sexology</h5>
-            //                   <p className="card-text">₹800</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s10} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">General Physician</h5>
-            //                   <p className="card-text">₹300</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s11} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">
-            //                   Gastroenterologist
-            //                   </h5>
-            //                   <p className="card-text">₹300</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s12} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">surgeon</h5>
-            //                   <p className="card-text">₹8500</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s13} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Dentist</h5>
-            //                   <p className="card-text">₹450</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //             <div class="col-sm-12 col-lg-4">
-            //               <div class="card">
-            //                 <img src={s14} alt="s1" className="card-img-top" />
-            //                 <div className="card-body">
-            //                   <h5 className="card-title">Urology</h5>
-            //                   <p className="card-text">₹600</p>
-            //                   <a href="#">
-            //                     Book now{" "}
-            //                     <i
-            //                       class="fa fa-arrow-right"
-            //                       aria-hidden="true"
-            //                     ></i>
-            //                   </a>
-            //                 </div>
-            //               </div>
-            //             </div>
-            //           </div>
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div className="container-fluid">
-          
-          {/* <div className="row"> */}
-          <h1>Specialitists</h1>
-          <p className="content">
-            {" "}
-            Consult with top doctors across specialities
-          </p>
-            {/* <div className="col-md-12">
-              <div id="inam" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active"> */}
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            {/* <div className="card text-center"> */}
-                            <img src={s1} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Ayurveda</h5>
-                              <p className="card-text">₹400</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s2} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Cardiology</h5>
-                              <p className="card-text">₹2500</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s3} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Dermatology</h5>
-                              <p className="card-text">₹1500</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s4} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Gynecology</h5>
-                              <p className="card-text">₹500</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s5} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Ophthalmology</h5>
-                              <p className="card-text">₹350</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s6} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Orthopedic</h5>
-                              <p className="card-text">₹530</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s7} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Padiatrics</h5>
-                              <p className="card-text">₹900</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s8} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Psychiatry</h5>
-                              <p className="card-text">₹1500</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s9} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Sexology</h5>
-                              <p className="card-text">₹800</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s10} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">General Physician</h5>
-                              <p className="card-text">₹300</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s11} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">
-                              Gastroenterologist
-                              </h5>
-                              <p className="card-text">₹300</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s12} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">surgeon</h5>
-                              <p className="card-text">₹8500</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s13} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Dentist</h5>
-                              <p className="card-text">₹450</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                          <div class="card">
-                            <img src={s14} alt="s1" className="card-img-top" />
-                            <div className="card-body">
-                              <h5 className="card-title">Urology</h5>
-                              <p className="card-text">₹600</p>
-                              <a href="#">
-                                Book now{" "}
-                                <i
-                                  class="fa fa-arrow-right"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+export default specialist;
