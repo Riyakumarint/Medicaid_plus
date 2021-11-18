@@ -274,7 +274,7 @@ const Medical_history = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="address">address</label>
+                        <label htmlFor="address">Address</label>
                         <input
                           className="address"
                           id="exampleInputpassingyear1"

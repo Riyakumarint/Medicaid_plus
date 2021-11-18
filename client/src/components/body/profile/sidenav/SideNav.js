@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function SideNav() {
   const auth = useSelector((state) => state.auth);
   const { user, isAdmin, isDoctor } = auth;
-  
+
   // const users = useSelector((state) => state.users);
   // const [callback, setCallback] = useState(false);
 
@@ -22,6 +22,7 @@ function SideNav() {
             <span class="title">Dash board</span>
           </a>
         </li>
+
         <li>
           <a href="/profile" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
@@ -32,7 +33,7 @@ function SideNav() {
         </li>
         <li>
           <a
-            href={isDoctor? "/medical_profile": "/medical_history"}
+            href={isDoctor ? "/medical_profile" : "/medical_history"}
             onClick={() => window.scrollTo({ top: 0 })}
           >
             <span class="icon">
@@ -66,31 +67,33 @@ function SideNav() {
           </a>
         </li>
         <li>
-        {isAdmin ? <a href="/speciality" onClick={() => window.scrollTo({ top: 0 })}>
-            <span class="icon">
-              <i class="fa fa-user-md" aria-hidden="true"></i>
-            </span>
-            <span class="title">Create S</span>
-          </a>
-            :
-          ''
-        }
+          {isAdmin ? (
+            <a href="/speciality" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fa fa-user-md" aria-hidden="true"></i>
+              </span>
+              <span class="title">Create S</span>
+            </a>
+          ) : (
+            ""
+          )}
         </li>
         <li>
-        {isAdmin ? <a href="/category" onClick={() => window.scrollTo({ top: 0 })}>
-            <span class="icon">
-              <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-            </span>
-            <span class="title">Create C</span>
-          </a>
-            :
-          <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
-            <span class="icon">
-              <i class="fa fa-list-alt" aria-hidden="true"></i>
-            </span>
-            <span class="title">Contact</span>
-          </a>
-        }
+          {isAdmin ? (
+            <a href="/category" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+              </span>
+              <span class="title">Create C</span>
+            </a>
+          ) : (
+            <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fa fa-list-alt" aria-hidden="true"></i>
+              </span>
+              <span class="title">Contact</span>
+            </a>
+          )}
         </li>
       </ul>
     </div>
