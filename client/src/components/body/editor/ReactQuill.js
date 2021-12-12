@@ -1,19 +1,19 @@
 import React, { useState,useEffect, useRef, useCallback } from 'react'
 import ReactQuill from 'react-quill';
-// import Emoji from 'quill-emoji'
 import { useDispatch } from 'react-redux'
 import 'react-quill/dist/quill.snow.css';
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import {checkImage,imageUpload} from '../../utils/validation/ImageUpload'
+import Loading from '../../utils/notification/Loading';
 function Quill({ setBody,body }) {
     const [callback, setCallback] = useState(false);
-    const [Image, setImage] = useState(false);
+    const [image, setImage] = useState(false);
     const [loading, setLoading] = useState(false);
     const token = useSelector((state) => state.token);
 
     const dispatch = useDispatch()
-    const quillRef = useRef<ReactQuill>(null)
+    const quillRef = useRef()
 
   const modules = { toolbar: { container }}
     const handleChange = (e) => {
@@ -60,22 +60,68 @@ function Quill({ setBody,body }) {
     //         setBody({ ...body, err: err.response.data.msg, success: "" });
     //     }
     //   };
+  
+  const handleChangeImage = useCallback(() => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = "image/*"
+    input.click()
+
+    input.onchange = async () => {
+      const files = input.files
+      if (!files)
+        return alert('No files were uploaded')
+      //   return setImage({
+      //   ...image,
+      //   err: "No files were uploaded.",
+      //   success: "",
+      // });
+
+      const file = files[0]
+      const check = checkImage(file)
+      
+      if (check)
+      return alert('No files were uploaded')
+      // return dispatch({ type: ALERT, payload: { errors: check } });
+      
+      // dispatch({ type: ALERT, payload: { loading: true } })
+      // const photo = await imageUpload(file)
+      // let formData = new FormData();
+      // formData.append("file", file);
+
+      // setLoading(true);
+      // const res = await axios.post("/api/upload_avatar", formData, {
+      //   headers: {
+      //     "content-type": "multipart/form-data",
+      //     Authorization: token,
+      //   },
+      // });
+
+      // setLoading(false);
+      // const quill = quillRef.current;
+      // const range = quill?.getEditor().getSelection()?.index
+      // if (range !== undefined) {
+      //   quill?.getEditor().insertEmbed(range, 'image', `${photo.url}`)
+      // }
+      console.log(file)
+    }
+  },[])
 
     useEffect(() => {
         const quill = quillRef.current;
         if(!quill) return;
     
         let toolbar = quill.getEditor().getModule('toolbar')
-        toolbar.addHandler('image', handleChange)
-      },[handleChange])
+        toolbar.addHandler('image', handleChangeImage)
+      },[handleChangeImage])
     return (
         <ReactQuill theme="snow"
       modules={modules}
       placeholder="Write somethings..."
     //   onChange={e => setBody(e)}
-            // onChange={handleChange}
+            onChange={handleChange}
     //   value={body}
-            // ref={quillRef}
+            ref={quillRef}
         />
     )
 }
