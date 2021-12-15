@@ -150,3 +150,14 @@
   left: 0;
   transition: 0.5s;
 }
+
+.blog_post_btn{
+  background: #911f27;
+  color: white;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-weight: bolder;
+  letter-spacing: 1.4px;
+  margin: 12px 0;
+}

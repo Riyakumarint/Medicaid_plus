@@ -22,3 +22,28 @@ export const isMatch = (password, cf_password) => {
     if(password === cf_password) return true
     return false
 }
+
+export const isTitle = title => {
+    if(title.length < 10) return true
+    return false
+}
+
+export const isDescription = description => {
+    if(description.length < 200) return true
+    return false
+}
+
+export const isContent = content => {
+    if(content.length < 2000) return true
+    return false
+}
+
+export const isCategory = value => {
+    if(!value) return true
+    return false
+}
+
+export const isCoverImage = value => {
+    if(!value) return true
+    return false
+}

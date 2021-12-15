@@ -14,6 +14,7 @@ const blogsCtrl = {
             
             const newBlog = new Blog({
                 title: req.body.title,
+                description : req.body.description,
                 content : req.body.content,
                 links : req.body.links,
                 coverImage: req.body.coverImage,

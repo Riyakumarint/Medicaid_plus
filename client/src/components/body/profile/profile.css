@@ -188,27 +188,27 @@
 
 /* ------------ Table------------ */
 
-.customers{
+.customers,.medical{
     border-collapse: collapse;
     width: 100%;
 }
 .customers td,
-.customers th{
+.customers th,.medical td,.medical th{
     border: 2px solid #ad5157;
     padding: 8px;
     min-width: 100px;
 }
-.customers tr:nth-child(even){
+.customers tr:nth-child(even),.medical tr:nth-child(even){
     background: #fce8e9;
 }
-.customers th{
+.customers th,.medical th{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
     background: #911F27;
     color: white;
 }
-.customers i{
+.customers i,.medical i{
     cursor: pointer;
 }
 .customers .fa-user-plus{

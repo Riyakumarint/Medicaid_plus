@@ -9,7 +9,11 @@ const blogSchema = new mongoose.Schema(
       trim: true,
       maxlength: 75,
     },
-    // content : {
+    description: {
+      type: String,
+      required: true,
+      maxlength: 200,
+    },
     content: {
       type: String,
       required: true,

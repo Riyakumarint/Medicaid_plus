@@ -232,7 +232,7 @@ const Medical_history = () => {
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
-          <table className="currentMedication">
+          <table className="medical">
             <thead>
               <tr>
                 <th>Name</th>
@@ -265,7 +265,7 @@ const Medical_history = () => {
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
-          <table className="medicalCondition">
+          <table className="medical">
             <thead>
               <tr>
                 <th>Name</th>
@@ -300,7 +300,7 @@ const Medical_history = () => {
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
-          <table className="allergies">
+          <table className="medical">
             <thead>
               <tr>
                 <th>Name</th>
