@@ -229,7 +229,7 @@
     color: #911F27;
     font-size: 15px;
 }
-.customers .fa-trash-alt{
+.customers .fa-trash-alt,.medical .fa-trash-alt{
     background: red;
     padding: 7px;
     color: white;
