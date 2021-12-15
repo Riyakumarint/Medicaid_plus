@@ -18,6 +18,8 @@ import {
   isCoverImage,
   isCategory,
 } from "../../utils/validation/Validation";
+
+
 const initialState = {
   title: "",
   content: "",
@@ -28,18 +30,22 @@ const initialState = {
   err: "",
   success: "",
 };
+
+
+
+
 const Create_blog = () => {
   const [blog, setBlog] = useState(initialState);
   const [body, setBody] = useState("");
-  const [text, setText] = useState("");
-  const [oldData, setOldData] = useState(initialState);
+  // const [text, setText] = useState("");
+  // const [oldData, setOldData] = useState(initialState);
 
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
-  const auth = useSelector((state) => state.auth);
+  // const auth = useSelector((state) => state.auth);
   const [categories, setCategories] = useState([]);
   const divRef = useRef(null);
 
@@ -58,7 +64,7 @@ const Create_blog = () => {
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setBlog({ ...blog, [name]: value });
+    setBlog({ ...blog, [name]: value, err: "", success: "" });
   };
 
   const handleChangeThumbnail = async (e) => {
@@ -111,34 +117,28 @@ const Create_blog = () => {
         success: "",
       });
 
-    if (!isTitle(title))
+    if (isTitle(title))
       return setBlog({
         ...blog,
         err: "Title must be at least 10 characters.",
         success: "",
       });
 
-    if (!isContent(content))
-      return setBlog({
-        ...blog,
-        err: "Content must be at least 2000 characters.",
-        success: "",
-      });
-
-    if (!isDescription(description))
-      return setBlog({
-        ...blog,
-        err: "Content must be at least 2000 characters.",
-        success: "",
-      });
-
-    // if (isThumbnail)
+    // if (isContent(content))
     //   return setBlog({
     //     ...blog,
-    //     err: "Thumbnail cannot be left blank.",
+    //     err: "Content must be at least 2000 characters.",
     //     success: "",
     //   });
-    if (isCategory)
+
+    if (isDescription(description))
+      return setBlog({
+        ...blog,
+        err: "Description must be at least 50 characters.",
+        success: "",
+      });
+
+    if (isCategory(reletedTo))
       return setBlog({
         ...blog,
         err: "Category cannot be left blank.",

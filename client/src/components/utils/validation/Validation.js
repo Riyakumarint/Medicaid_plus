@@ -29,7 +29,7 @@ export const isTitle = title => {
 }
 
 export const isDescription = description => {
-    if(description.length < 200) return true
+    if(description.length < 50) return true
     return false
 }
 
