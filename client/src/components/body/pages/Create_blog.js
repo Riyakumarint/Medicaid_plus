@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useSelector, useDispatch } from "react-redux";
-import NotFound from "../../utils/NotFound/NotFound";
+import { useParams, useHistory } from "react-router-dom";
 import CardHoriz from "../blog/card/CardHoriz";
 import CreateForm from "../blog/card/CreateForm";
 import axios from "axios";
-import ReactQuill from "../editor/ReactQuill";
+// import ReactQuill from "../editor/ReactQuill";
 import Loading from "../../utils/notification/Loading";
+import { checkImage, imageUpload } from "../../utils/validation/ImageUpload";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -17,8 +20,8 @@ import {
   isDescription,
   isCoverImage,
   isCategory,
+  getAPI,
 } from "../../utils/validation/Validation";
-
 
 const initialState = {
   title: "",
@@ -31,27 +34,32 @@ const initialState = {
   success: "",
 };
 
-
-
-
 const Create_blog = () => {
+  const { id } = useParams();
+  const history = useHistory();
+  const auth = useSelector((state) => state.auth);
+  const users = useSelector((state) => state.users);
   const [blog, setBlog] = useState(initialState);
-  const [body, setBody] = useState("");
-  // const [text, setText] = useState("");
-  // const [oldData, setOldData] = useState(initialState);
+  // const [content, setContent] = useState("");
+  const [text, setText] = useState("");
+  const [oldData, setOldData] = useState(initialState);
 
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
-  // const auth = useSelector((state) => state.auth);
   const [categories, setCategories] = useState([]);
-  const divRef = useRef(null);
+  const divRef = useRef();
 
   const dispatch = useDispatch();
 
-  const { title, content, description, reletedTo, links, err, success } = blog;
+  const { title, description,content, reletedTo, links, err, success } = blog;
+  const [image, setImage] = useState(initialState);
+  const quillRef = useRef();
+
+  const modules = { toolbar: { container } };
+
 
   useEffect(() => {
     const getCategories = async () => {
@@ -66,6 +74,60 @@ const Create_blog = () => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value, err: "", success: "" });
   };
+
+  const handleChangeImage = useCallback(() => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.click();
+
+    input.onchange = async () => {
+      const files = input.files;
+      if (!files)
+        return setImage({
+          ...image,
+          err: "No files were uploaded.",
+          success: "",
+        });
+      const file = files[0];
+      if (!file)
+        return setImage({
+          ...image,
+          err: "No files were uploaded.",
+          success: "",
+        });
+
+      if (file.size > 1024 * 1024)
+        return setImage({ ...image, err: "Size too large.", success: "" });
+
+      if (file.type !== "image/jpeg" && file.type !== "image/png")
+        return setImage({
+          ...image,
+          err: "File format is incorrect.",
+          success: "",
+        });
+
+      setLoading(true);
+      const photo = await imageUpload(file);
+      console.log(photo);
+      const quill = quillRef.current;
+      const range = quill?.getEditor().getSelection()?.index;
+      if (range !== undefined) {
+        quill?.getEditor().insertEmbed(range, "image", `${photo.url}`);
+      }
+      setLoading(false);
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    const quill = quillRef.current;
+    if (!quill) return;
+
+    let toolbar = quill.getEditor().getModule("toolbar");
+    toolbar.addHandler("image", handleChangeImage);
+  }, [handleChangeImage]);
+  
+
 
   const handleChangeThumbnail = async (e) => {
     e.preventDefault();
@@ -107,6 +169,8 @@ const Create_blog = () => {
     }
   };
 
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -124,8 +188,14 @@ const Create_blog = () => {
         success: "",
       });
 
-    // if (isContent(content))
-    //   return setBlog({
+    if (isContent(content))
+    return setBlog({
+      ...blog,
+      err: "content must be at least 100 characters.",
+      success: "",
+    });
+
+    // setBlog({
     //     ...blog,
     //     err: "Content must be at least 2000 characters.",
     //     success: "",
@@ -150,8 +220,8 @@ const Create_blog = () => {
         "/blogs/postBlog",
         {
           title,
-          content,
           description,
+          content,
           links,
           coverImage,
           reletedTo,
@@ -171,9 +241,9 @@ const Create_blog = () => {
   return (
     <div className="create_blog">
       <div className="blog_pro">
-      {err && showErrMsg(err)}
-          {success && showSuccessMsg(success)}
-          {loading && <Loading />}
+        {err && showErrMsg(err)}
+        {success && showSuccessMsg(success)}
+        {loading && <Loading />}
         <h1>Create_blog</h1>
         <div className="row">
           <div className="col-md-6">
@@ -248,7 +318,34 @@ const Create_blog = () => {
             <CardHoriz blog={blog} />
           </div>
         </div>
-        <ReactQuill setBody={setBody} body={body} />
+        <div className="form-group position-relative">
+              <textarea
+                className="form-control"
+                rows={4}
+                value={content}
+                style={{ resize: "none" }}
+                name="content"
+                onChange={handleChangeInput}
+              />
+
+              <small
+                className="text-muted position-absolute"
+                style={{ bottom: 0, right: "3px", opacity: "0.3" }}
+              >
+                {content.length}/2000
+              </small>
+            </div>
+        {/* <ReactQuill setBody={setBody} body={body} /> */}
+        {/* <ReactQuill
+        theme="snow"
+        modules={modules}
+        placeholder="Write somethings..."
+        // onChange={(e) => setContent(e)}
+          onChange={handleChange}
+          name="content"
+        value={content}
+        ref={quillRef}
+      /> */}
         <button
           className="blog_post_btn mt-3 d-block mx-auto"
           onClick={handleSubmit}
@@ -259,5 +356,27 @@ const Create_blog = () => {
     </div>
   );
 };
+let container = [
+  [{ font: [] }],
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+
+  ["bold", "italic", "underline", "strike"], // toggled buttons
+  // ['emoji'],
+  ["blockquote", "code-block"],
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ script: "sub" }, { script: "super" }], // superscript/subscript
+
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  [{ direction: "rtl" }], // text direction
+  [{ align: [] }],
+
+  ["clean", "link", "image", "video"],
+];
 
 export default Create_blog;
+
+
+
+// asdfghjklqwertyuiopzxcvnbm nvxrufjot hhh hhh hhh jjj hhh ggg ggg hhh

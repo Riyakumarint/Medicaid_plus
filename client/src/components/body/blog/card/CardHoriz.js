@@ -37,7 +37,7 @@ function CardHoriz({blog}) {
                   {blog.title}
                 {/* </Link> */}
               </h5>
-              <p className="card-text">{blog.content}</p>
+              <p className="card-text">{blog.description}</p>
   
               {
                 blog.title &&

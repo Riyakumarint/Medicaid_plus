@@ -1,3 +1,6 @@
+import axios from "axios";
+
+
 export const isEmpty = value => {
     if(!value) return true
     return false
@@ -34,7 +37,7 @@ export const isDescription = description => {
 }
 
 export const isContent = content => {
-    if(content.length < 2000) return true
+    if(content.length < 100) return true
     return false
 }
 
@@ -47,3 +50,11 @@ export const isCoverImage = value => {
     if(!value) return true
     return false
 }
+
+export const getAPI = async (url, token) => {
+    const res = await axios.get(`/api/${url}`, {
+      headers: { Authorization: token }
+    })
+  
+    return res;
+  }
