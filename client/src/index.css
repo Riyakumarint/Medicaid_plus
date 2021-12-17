@@ -50,6 +50,8 @@ button{
 /* ----------------- SideBar ------------------- */
 @import url("./components/body/profile/sidenav/sidenav.css");
 
+/* ----------------- Articles ------------------- */
+@import url("./components/body/articles/articles.css"); 
 
 
 /* ----------------- Footer ------------------- */
