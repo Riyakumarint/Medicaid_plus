@@ -140,13 +140,13 @@
 }
 
 .blog_pro {
-  width: 96%;
-  margin: 20px auto;
+  width: 90%;
+  margin: 50px auto;
   padding: 35px;
   box-shadow: 0 0 19px 0 #911f27;
   background-color: white;
   border-radius: 10px;
-  top: 700px;
+  top: 750px;
   left: 0;
   transition: 0.5s;
 }

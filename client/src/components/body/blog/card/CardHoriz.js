@@ -10,7 +10,7 @@ function CardHoriz({blog}) {
           <div className="col-md-12" style={{
             minHeight: '150px', maxHeight: '170px', overflow: 'hidden'
           }}>
-            {/* {
+            {
               blog.coverImage && 
               <>
                 {
@@ -25,7 +25,7 @@ function CardHoriz({blog}) {
                   alt="coverImage" style={{objectFit: 'cover'}} />
                 }
               </>
-            } */}
+            }
             
           </div>
           

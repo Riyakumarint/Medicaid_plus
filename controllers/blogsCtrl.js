@@ -7,8 +7,10 @@ const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
 
-const blogsCtrl = {
 
+
+const blogsCtrl = {
+    
     postBlog: async (req, res) => {
         try {
             
