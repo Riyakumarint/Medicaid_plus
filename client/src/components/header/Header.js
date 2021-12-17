@@ -93,7 +93,7 @@ function Header() {
                 }}
                 onClick={() => window.scrollTo({ top: 0 })}
               >
-                Get Appoinments
+                Get Appointments
               </NavLink>
               <NavLink
                 exact

@@ -30,5 +30,6 @@ router.post('/updateMeetingDetail', appointmentsCtrl.updateMeetingDetail)
 
 router.post('/updateStatus', appointmentsCtrl.updateStatus)
 
+router.get('/fetchAppointments', auth, appointmentsCtrl.fetchAppointments)
 
 module.exports = router

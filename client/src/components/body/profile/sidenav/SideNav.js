@@ -47,7 +47,7 @@ function SideNav() {
             <span class="icon">
               <i class="fa fa-address-card" aria-hidden="true"></i>
             </span>
-            <span class="title">Appointment</span>
+            <span class="title">Appointments</span>
           </a>
         </li>
         <li>

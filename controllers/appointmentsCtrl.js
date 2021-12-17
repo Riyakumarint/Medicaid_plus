@@ -190,6 +190,25 @@ const appointmentsCtrl = {
         }
     },
 
+    fetchAppointments: async (req, res) => {
+        try {
+            const user = await Users.find({_id: req.user.id});
+            console.log(user[0])
+            if(user[0].role===2){
+                const appointments = await Appointment.find({doctortId: req.user.id});
+                res.json(appointments);
+            }
+            else{
+                const appointments = await Appointment.find({patienttId: req.user.id});
+                res.json(appointments);
+            }
+            
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
 };
 
 

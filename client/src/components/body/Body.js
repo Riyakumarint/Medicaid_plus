@@ -15,7 +15,7 @@ import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
-import Appointment from "../body/pages/Appointment";
+import Appointments from "./pages/Appointments";
 import Create_appointment from "../body/pages/Create_appointment";
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
@@ -106,7 +106,7 @@ function Body() {
         />
         <Route
           path="/get_appointments"
-          component={isLogged ? Appointment : Login}
+          component={isLogged ? Appointments : Login}
           exact
         />
         <Route path="/find_video_consult" component={VideoConsult} />
