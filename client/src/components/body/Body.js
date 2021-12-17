@@ -15,7 +15,8 @@ import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
-import Appoinment from "../body/pages/Appointment";
+import Appointment from "../body/pages/Appointment";
+import Create_appointment from "../body/pages/Create_appointment";
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
@@ -29,7 +30,12 @@ function Body() {
       <Switch>
         <Route path="/" component={Home} exact />
         {/* <Route exact path="/" component={auth.token ? Home : Login} /> */}
-        <Route path="/login" component={isLogged ? NotFound : Login} exact />
+        <Route 
+          path="/login" 
+          component={isLogged ? NotFound : Login} 
+          exact 
+        />
+
         <Route
           path="/register"
           component={isLogged ? NotFound : Register}
@@ -55,45 +61,54 @@ function Body() {
 
         <Route
           path="/profile"
-          component={isLogged ? Profile : NotFound}
+          component={isLogged ? Profile : Login}
           exact
         />
         <Route
           path="/medical_profile"
-          component={isLogged ? Medical_profile : NotFound}
+          component={isLogged ? Medical_profile : Login}
           exact
         />
         <Route
           path="/medical_history"
-          component={isLogged ? Medical_history : NotFound}
+          component={isLogged ? Medical_history : Login}
           exact
         />
         <Route
           path="/dash_board"
-          component={isLogged ? Dash_board : NotFound}
+          component={isLogged ? Dash_board : Login}
           exact
         />
         <Route
           path="/create_blog"
-          component={isLogged ? Create_blog : NotFound}
+          component={isLogged ? Create_blog : Login}
           exact
         />
         <Route
           path="/edit_user/:id"
-          component={isAdmin ? EditUser : NotFound}
+          component={isAdmin ? EditUser : Login}
           exact
         />
         <Route
           path="/category"
-          component={isLogged ? Category : NotFound}
+          component={isLogged ? Category : Login}
           exact
         />
         <Route
           path="/speciality"
-          component={isLogged ? Speciality : NotFound}
+          component={isLogged ? Speciality : Login}
           exact
         />
-        <Route path="/get_appointments" component={Appoinment} />
+        <Route
+          path="/create_appointments"
+          component={isLogged ? Create_appointment : Login}
+          exact
+        />
+        <Route
+          path="/get_appointments"
+          component={isLogged ? Appointment : Login}
+          exact
+        />
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />

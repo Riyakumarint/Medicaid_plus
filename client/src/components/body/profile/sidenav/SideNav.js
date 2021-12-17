@@ -43,7 +43,7 @@ function SideNav() {
           </a>
         </li>
         <li>
-          <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
+          <a href="/get_appointments" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
               <i class="fa fa-address-card" aria-hidden="true"></i>
             </span>

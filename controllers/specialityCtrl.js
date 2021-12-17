@@ -1,4 +1,6 @@
 const Speciality = require('../models/specialityModel').specialityModel
+const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
+const Users = require("../models/userModel").userModel;
 
 const specialityCtrl = {
     getSpecialities: async(req, res) =>{
@@ -48,16 +50,24 @@ const specialityCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    updateSpeciality: async (req, res) => {
+    fetchDoctorBySpeciality: async(req, res) =>{
         try {
-            const { name } = req.body;
-            await Speciality.findOneAndUpdate({ _id: req.params.id }, { name })
-
-            res.json({ msg: "Updated a speciality" })
+            const medical_profiles = await MedicalProfile.find({speciality_name: req.params.speciality_name});
+            // console.log(medical_profiles);
+            const promises = medical_profiles.map(async (medical_profile) => {
+                const doctor = await Users.find({_id: medical_profile.userId});
+                // console.log(doctor);
+                return {name: doctor[0].name, doctortId: doctor[0]._id};
+            })
+            const doctorsNameId = await Promise.all(promises);
+            // confused what's going on? visit-> https://youtu.be/qfNtVh2RALc
+            // console.log(doctorsNameId);
+            res.json(doctorsNameId); // returns all the doctors name and there id of that particular speciality
         } catch (err) {
-            return res.status(500).json({ msg: err.message })
+            return res.status(500).json({ msg: err.message });
         }
-    }
+    },
+
 }
 
 

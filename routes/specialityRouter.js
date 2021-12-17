@@ -1,7 +1,18 @@
-const router = require('express').Router()
+const express = require('express')
+const bodyParser = require('body-parser')
 const specialityCtrl = require('../controllers/specialityCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
+
+const router = express();
+router.use(bodyParser.urlencoded({extended: true}));
+
+
+
+// const router = require('express').Router()
+// const specialityCtrl = require('../controllers/specialityCtrl')
+// const auth = require('../middleware/auth')
+// const authAdmin = require('../middleware/authAdmin')
 
 router.route('/speciality')
     .get(specialityCtrl.getSpecialities)
@@ -11,5 +22,6 @@ router.route('/speciality/:id')
     .delete(auth, authAdmin, specialityCtrl.deletesSpeciality)
     .put(auth, authAdmin, specialityCtrl.updateSpeciality)
 
+router.get('/fetchDoctorBySpeciality/:speciality_name',auth, specialityCtrl.fetchDoctorBySpeciality)
 
 module.exports = router

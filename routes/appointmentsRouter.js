@@ -8,7 +8,7 @@ const router = express();
 router.use(bodyParser.urlencoded({extended: true}));
 
 
-router.post('/createAppointment', appointmentsCtrl.createMedicalAppointment)
+router.post('/createAppointment', auth, appointmentsCtrl.createMedicalAppointment)
 
 router.post('/addMedicines', appointmentsCtrl.addMedicines)
 

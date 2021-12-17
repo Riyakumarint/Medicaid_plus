@@ -85,7 +85,7 @@ function Header() {
             <ul className="navbar-nav menu ml-auto">
               <NavLink
                 exact
-                to="/get_appointments"
+                to="/create_appointments"
                 class="main-nav"
                 activeStyle={{
                   fontWeight: "bold",

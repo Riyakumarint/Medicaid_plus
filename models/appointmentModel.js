@@ -63,8 +63,7 @@ const appointmentSchema = new mongoose.Schema({
     },
 
     meetingDetail:{
-        date: String,
-        time: String
+        type: String
     },
     
 }, 

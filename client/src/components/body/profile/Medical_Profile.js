@@ -126,7 +126,7 @@ const Medical_profile = () => {
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
-          <table className="qualifications">
+          <table className="medical">
             <thead>
               <tr>
                 <th>Major</th>

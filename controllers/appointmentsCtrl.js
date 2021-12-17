@@ -17,32 +17,31 @@ const appointmentsCtrl = {
   
     createMedicalAppointment: async (req, res) => {
         try {
-            
             const newAppointmentData = new Appointment({
 
-                patienttId: req.body.patienttId,
-                doctortId: req.body.doctortId,
-                status: req.body.status,
-                date: req.body.date,
+                patienttId: req.body.appointmentDetail.patienttId,
+                doctortId: req.body.appointmentDetail.doctortId,
+                status: req.body.appointmentDetail.status,
+                date: req.body.appointmentDetail.date,
             
-                title: req.body.title,
-                description: req.body.description,
-                symptoms: req.body.symptoms,
-                previousMedicine: req.body.previousMedicine,
-                previousTestReports: req.body.previousTestReports,
+                title: req.body.appointmentDetail.title,
+                description: req.body.appointmentDetail.description,
+                symptoms: req.body.appointmentDetail.symptoms,
+                previousMedicine: req.body.appointmentDetail.previousMedicine,
+                previousTestReports: req.body.appointmentDetail.previousTestReports,
             
-                meetingDetail: req.body.meetingDetail,
+                meetingDetail: req.body.appointmentDetail.meetingDetail,
                 
             });
 
             newAppointmentData.save( async (error, result) => {
                 if(!error){
                     await MedicalHistory.findOneAndUpdate(
-                        { userId: req.body.patienttId },
+                        { userId: req.body.appointmentDetail.patienttId },
                         { "$push": { caseRecord: {caseId : result._id} } }
                     );
                     await MedicalProfile.findOneAndUpdate(
-                        { userId: req.body.doctortId },
+                        { userId: req.body.appointmentDetail.doctortId },
                         { "$push": { caseRecord: {caseId : result._id} } }
                     );
                     res.json({ msg: "Appointment created!" });
