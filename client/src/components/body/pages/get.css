@@ -151,6 +151,13 @@
   transition: 0.5s;
 }
 
+.blog_pro h1{
+text-align: center;
+text-transform: uppercase;
+letter-spacing: 1.4px;
+font-family: "Poppins", sans-serif;
+}
+
 .blog_post_btn{
   background: #911f27;
   color: white;
@@ -160,4 +167,25 @@
   font-weight: bolder;
   letter-spacing: 1.4px;
   margin: 12px 0;
+}
+
+.articles{
+  height: 100%;
+  padding-top: 90px;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #f8bec1;
+  justify-content: center;
+  align-items: center;
+}
+
+.articles h1{
+  justify-content: center;
+  color: #911f27;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: 700;
 }

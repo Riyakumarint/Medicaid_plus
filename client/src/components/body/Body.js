@@ -15,6 +15,7 @@ import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
+import Articles from "../body/articles/Articles"
 import Appoinment from "../body/pages/Appointment";
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
@@ -97,6 +98,7 @@ function Body() {
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
+        <Route path="/articles" component={Articles} />
 
         <Route path="*" exact component={NotFound} />
       </Switch>

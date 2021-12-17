@@ -7,10 +7,10 @@ const authAdmin = require('../middleware/authAdmin')
 const router = express();
 // const multer = require("multer");
 
-// // STORAGE MULTER CONFIG
+// STORAGE MULTER CONFIG
 // let storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
-//         cb(null, "uploads/");
+//         cb(null, "uploads/../");
 //     },
 //     filename: (req, file, cb) => {
 //         cb(null, `${Date.now()}_${file.originalname}`);
@@ -22,9 +22,26 @@ const router = express();
 //         }
 //         cb(null, true)
 //     }
-// })
+// });
 
+
+//=================================
+//             Blog
+//=================================
+
+// fieldname: 'file',
+// originalname: 'React.png',
+// encoding: '7bit',
+// mimetype: 'image/png',
+// destination: 'uploads/',
+// filename: '1573656172282_React.png',
+// path: 'uploads/1573656172282_React.png',
+// size: 24031 
+
+
+router.use(bodyParser.urlencoded({extended: true}));
 // const upload = multer({ storage: storage }).single("file");
+
 // router.post("/uploadfiles", (req, res) => {
 //     upload(req, res, err => {
 //         if (err) {
@@ -34,14 +51,13 @@ const router = express();
 //     });
 // });
 
-router.use(bodyParser.urlencoded({extended: true}));
+router.post('/postBlog', auth, authAdmin, blogsCtrl.postBlog)
 
-
-router.post('/postBlog',auth, authAdmin,blogsCtrl.postBlog)
+router.get('/getAllBlogs',blogsCtrl.getAllBlogs)
 
 router.post('/voteBlog', auth,blogsCtrl.voteBlog)
 
-router.delete('/deleteBlog',auth,authAdmin, blogsCtrl.deleteBlog)
+router.delete('/deleteBlog/:id',auth,authAdmin, blogsCtrl.deleteBlog)
 
 router.post('/postComment',auth, blogsCtrl.postComment)
 

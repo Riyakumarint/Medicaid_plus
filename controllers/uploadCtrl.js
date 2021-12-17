@@ -43,6 +43,21 @@ const uploadCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+    deleteImage: (req, res) => {
+        try {
+            const {secure_url} = req.body;
+            
+            if (!secure_url) return res.status(400).json({ msg: "No images Selected" });
+
+    cloudinary.v2.uploader.destroy(secure_url, async (err, result) => {
+      if (err) throw err;
+
+      res.json({ msg: "Deleted Image" });
+    });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
     }
 
 }

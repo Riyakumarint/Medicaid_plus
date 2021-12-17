@@ -46,6 +46,15 @@ const blogsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
+    // Get all blogs
+  getAllBlogs: async (req, res) => {
+    try {
+        const blogs = await Blog.find()
+         res.json(blogs)
+     } catch (err) {
+         return res.status(500).json({msg: err.message})
+     }
+  },
     voteBlog: async (req, res) => {
         try {
             if(req.body.vote === "up"){

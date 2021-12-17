@@ -34,21 +34,20 @@ const Create_blog = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
   const users = useSelector((state) => state.users);
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState("");
   const [blog, setBlog] = useState(initialState);
-  const [files, setFiles] = useState([])
-    
+  const [files, setFiles] = useState([]);
+
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
   const [categories, setCategories] = useState([]);
-  
+
   const dispatch = useDispatch();
 
   const { title, description, reletedTo, links, err, success } = blog;
-  
 
   useEffect(() => {
     const getCategories = async () => {
@@ -65,13 +64,13 @@ const Create_blog = () => {
   };
 
   const onEditorChange = (value) => {
-    setContent(value)
-    console.log(content)
-}
+    setContent(value);
+    console.log(content);
+  };
 
-const onFilesChange = (files) => {
-    setFiles(files)
-}
+  const onFilesChange = (files) => {
+    setFiles(files);
+  };
 
   // const handleChangeImage = useCallback(() => {
   //   const input = document.createElement("input");
@@ -124,8 +123,6 @@ const onFilesChange = (files) => {
   //   let toolbar = quill.getEditor().getModule("toolbar");
   //   toolbar.addHandler("image", handleChangeImage);
   // }, [handleChangeImage]);
-  
-
 
   const handleChangeThumbnail = async (e) => {
     e.preventDefault();
@@ -167,8 +164,6 @@ const onFilesChange = (files) => {
     }
   };
 
-  
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -185,14 +180,6 @@ const onFilesChange = (files) => {
         err: "Title must be at least 10 characters.",
         success: "",
       });
-
-    if (isContent(content))
-    return setBlog({
-      ...blog,
-      err: "content must be at least 100 characters.",
-      success: "",
-    });
-
     if (isDescription(description))
       return setBlog({
         ...blog,
@@ -204,6 +191,12 @@ const onFilesChange = (files) => {
       return setBlog({
         ...blog,
         err: "Category cannot be left blank.",
+        success: "",
+      });
+    if (isContent(content))
+      return setBlog({
+        ...blog,
+        err: "content must be at least 100 characters.",
         success: "",
       });
 
@@ -236,16 +229,17 @@ const onFilesChange = (files) => {
         {err && showErrMsg(err)}
         {success && showSuccessMsg(success)}
         {loading && <Loading />}
-        <h1>Create_blog</h1>
+        <h1>Create blog</h1>
         <div className="row">
           <div className="col">
-            <h5>Create</h5>
+            {/* <h5>Create</h5> */}
             {/* <CreateForm blog={blog} setBlog={setBlog} /> */}
             <div className="form-group position-relative">
               <input
                 type="text"
                 className="form-control"
                 value={title}
+                placeholder="Title"
                 name="title"
                 onChange={handleChangeInput}
               />
@@ -275,6 +269,7 @@ const onFilesChange = (files) => {
                 value={description}
                 style={{ resize: "none" }}
                 name="description"
+                placeholder="Description"
                 onChange={handleChangeInput}
               />
 
@@ -310,7 +305,6 @@ const onFilesChange = (files) => {
             <h5>Preview</h5>
             <CardHoriz blog={blog} />
           </div> */}
-
         </div>
         {/* <div className="form-group position-relative">
               <textarea
@@ -341,10 +335,10 @@ const onFilesChange = (files) => {
         ref={quillRef}
       /> */}
         <ReactQuill
-                placeholder={"Start Posting Something"}
-                onEditorChange={onEditorChange}
-                onFilesChange={onFilesChange}
-            />
+          placeholder={"Start Posting Something"}
+          onEditorChange={onEditorChange}
+          onFilesChange={onFilesChange}
+        />
 
         <button
           className="blog_post_btn mt-3 d-block mx-auto"
@@ -358,7 +352,5 @@ const onFilesChange = (files) => {
 };
 
 export default Create_blog;
-
-
 
 // asdfghjklqwertyuiopzxcvnbm nvxrufjot hhh hhh hhh jjj hhh ggg ggg hhh
