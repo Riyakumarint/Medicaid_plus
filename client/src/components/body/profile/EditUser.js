@@ -47,7 +47,9 @@ function EditUser() {
         );
 
         setSuccess(res.data.msg);
-      
+        setTimeout(() => {
+          history.push('/dash_board')
+      }, 3000);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
     }

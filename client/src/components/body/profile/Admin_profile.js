@@ -68,7 +68,7 @@ function Admin_profile() {
           <table className="customers">
             <thead>
               <tr>
-                <th>ID</th>
+                {/* <th>ID</th> */}
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
@@ -78,7 +78,7 @@ function Admin_profile() {
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  <td>{user._id}</td>
+                  {/* <td>{user._id}</td> */}
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>

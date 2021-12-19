@@ -14,7 +14,7 @@ function BtnRender({ blog, deleteBlog }) {
     <div className="row_blogbtn">
       {isAdmin ? (
         <>
-          <Link id="btn_view_blog_admin" to={`/detail/${blog._id}`}>
+          <Link id="btn_view_blog_admin" onClick={() => window.scrollTo({ top: 0 })} to={`/detail/${blog._id}`}>
             View
           </Link>
           <Link
@@ -35,7 +35,7 @@ function BtnRender({ blog, deleteBlog }) {
                         >
                         Buy
                     </Link> */}
-          <Link id="btn_blog_view" to={`/detail/${blog._id}`}>
+          <Link id="btn_blog_view" onClick={() => window.scrollTo({ top: 0 })} to={`/detail/${blog._id}`}>
             View
           </Link>
         </>

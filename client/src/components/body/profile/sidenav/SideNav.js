@@ -59,12 +59,13 @@ function SideNav() {
           </a>
         </li>
         <li>
+          {isDoctor ? (
           <a href="/create_blog" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
               <i class="fa fa-newspaper-o" aria-hidden="true"></i>
             </span>
             <span class="title">Articles</span>
-          </a>
+          </a>):("")}
         </li>
         <li>
           {isAdmin ? (

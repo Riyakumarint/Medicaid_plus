@@ -28,7 +28,7 @@ function Profile() {
 
   const users = useSelector((state) => state.users);
 
-  const { user, isAdmin } = auth;
+  const { user, isAdmin, isDoctor } = auth;
   const [data, setData] = useState(initialState);
   const { name, password, cf_password, err, success } = data;
 
@@ -152,7 +152,7 @@ function Profile() {
 
           <div className="profile_page">
             <div className="profile_header">
-              <h4>{isAdmin ? "Admin" : "User"}</h4>
+              <h4>{isAdmin ? "Admin" :  isDoctor ? "Doctor" : "User"}</h4>
 
               {/* <div className="updatebtn" onClick={() => window.scrollTo({ top: 0 })}> */}
               <button disabled={loading} onClick={handleUpdate}>
