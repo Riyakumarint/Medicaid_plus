@@ -143,9 +143,8 @@ function Profile() {
 
   return (
     <>
-       <SideNav />
+      <SideNav />
       <div className="continer-profile">
-     
         <div className="pro">
           {err && showErrMsg(err)}
           {success && showSuccessMsg(success)}
@@ -163,18 +162,24 @@ function Profile() {
             <div className="profile-container">
               <div className="row">
                 <div class="col s12 m6 l4">
-                  <div className="avatar">
-                    <img src={avatar ? avatar : user.avatar} alt="" />
-                    <span>
-                      <i className="fas fa-camera"></i>
-                      <p>Change</p>
-                      <input
-                        type="file"
-                        name="file"
-                        id="file_up"
-                        onChange={changeAvatar}
-                      />
-                    </span>
+                  <label htmlFor="name">Profile photo</label>
+                  <div className="avatar_box">
+                    <div className="avatar">
+                      <img src={avatar ? avatar : user.avatar} alt="" />
+                      <span>
+                        <i className="fas fa-camera"></i>
+                        <p>Change</p>
+                        <input
+                          type="file"
+                          name="file"
+                          id="file_up"
+                          onChange={changeAvatar}
+                        />
+                      </span>
+                    </div>
+                    <div className="p_a">
+                      <p>Change profile </p><p>photo</p>
+                      </div>
                   </div>
                 </div>
                 <div class="col s12 m6 l4">
@@ -242,7 +247,6 @@ function Profile() {
           </div>
         </div>
       </div>
-      
     </>
   );
 }

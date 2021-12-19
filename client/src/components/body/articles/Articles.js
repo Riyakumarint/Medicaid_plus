@@ -7,6 +7,7 @@ import CardVert from './CardVert'
 const { Title } = Typography;
 const { Meta } = Card;
 function Articles() {
+    // const { id } = useParams();
   const [blogs, setBlogs] = useState([]);
     const [callback, setCallback] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -64,11 +65,38 @@ const deleteAll = () =>{
     })
 }
 
+
+// const renderCards = blogs.map((blog, index) => {
+//     return <Col key={index} lg={8} md={12} xs={24}>
+//         <Card
+//             hoverable
+//             style={{ width: 370, marginTop: 16 }}
+//             actions={[
+//                 // <Icon type="setting" key="setting" />,
+//                 // <Icon type="edit" key="edit" />,
+//                 // <a href={`/blog/post/${blog._id}`}> <Icon type="ellipsis" key="ellipsis" /></a>,
+//             ]}
+//         >
+           
+//             <div style={{ height: 150, overflowY: 'scroll', marginTop: 10 }}>
+//                 <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+//             </div>
+//         </Card>
+//     </Col>
+// })
+    
   if(loading) return <div><Loading /></div>
   return (
       <>
+          {/* <div style={{ width: '85%', margin: '3rem auto' }}>
+            <Title level={2}> Blog Lists </Title>
+            <Row gutter={[32, 16]}>
+                {renderCards}
+            </Row>
+        </div> */}
          
-      <div className="articles">
+          <div className="articles">
+          <h1>Articles</h1>
       {
             isAdmin && 
             <div className="delete-all">
@@ -77,7 +105,7 @@ const deleteAll = () =>{
                 <button onClick={deleteAll}>Delete All</button>
             </div>
         }
-        <h1>Articles</h1>
+       
         <div className="show_blogs">
         {
           blogs.map(blog => (
