@@ -308,6 +308,7 @@ const userCtrl = {
       await Users.findByIdAndDelete(req.params.id);
       await MedicalProfile.findOneAndDelete({userId: req.params.id});
       await MedicalHistory.findOneAndDelete({userId: req.params.id});
+      
       res.json({ msg: "Deleted Success!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

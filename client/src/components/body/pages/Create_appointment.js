@@ -35,6 +35,7 @@ const Create_appointment = () => {
   const [speciality, setSpeciality] = useState({speciality_name: ""});
   const [doctors, setDoctors] = useState([]);
   const [callback, setCallback] = useState(false);
+  const history = useHistory();
 
   const token = useSelector((state) => state.token);
   const {user} = useSelector((state) => state.auth);
@@ -97,7 +98,7 @@ const Create_appointment = () => {
         !appointmentDetails.doctortId ||
         !appointmentDetails.title ||
         !appointmentDetails.description ||
-        !symptoms
+        Lenght(symptoms)===0
       )
         return setAppointmentDetails({ ...appointmentDetails, err: "Please fill in all fields.", success: ""});
 
@@ -119,6 +120,10 @@ const Create_appointment = () => {
       );
 
       setAppointmentDetails({ ...appointmentDetails, err: "", success: "Appointment Created Success!" });
+      setTimeout(() => {
+        history.push('/get_appointments')
+    }, 2000);
+      
     } catch (err) {
       setAppointmentDetails({ ...appointmentDetails, err: err.response.data.msg, success: "" });
     }
@@ -169,7 +174,7 @@ const Create_appointment = () => {
       setPreviousTestReports([...previousTestReports, previousTestReport]);
       setPreviousTestReport({ link: ""});
     } catch (err) {
-        setPreviousTestReport({ ...previousMed});
+        setPreviousTestReport({ ...previousTestReport});
     }
   };
   const handleDeletePreviousTestReport = async (previousReportLink) => {
@@ -180,7 +185,7 @@ const Create_appointment = () => {
         setPreviousTestReports(newPreviousTestReport);
       setPreviousTestReport({ link: ""});
     } catch (err) {
-        setPreviousTestReport({ ...previousMed});
+        setPreviousTestReport({ ...previousTestReport});
     }
   };
 
@@ -259,7 +264,7 @@ const Create_appointment = () => {
           <table className="medical">
             <thead>
               <tr>
-                <th>link</th>
+                <th>Link</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -533,5 +538,7 @@ const Create_appointment = () => {
     </>
   );
 };
+
+const Lenght = (symptoms) => symptoms.length;
 
 export default Create_appointment;

@@ -26,9 +26,9 @@ const blogSchema =  mongoose.Schema(
       default:
         "https://res.cloudinary.com/dgejdmzwv/image/upload/v1639873739/medicare/shutterstock_1475783396_lndeeo.jpg",
     },
-    hashtags: [{
-      name: String
-  }],
+  //   hashtags: [{
+  //     name: String
+  // }],
     reletedTo: {
       type: String,
       required: true,
