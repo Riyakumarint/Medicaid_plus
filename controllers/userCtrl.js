@@ -370,6 +370,19 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  //get name and photo for conversation
+  conInfo: async(req,res)=>{
+    const userId=req.params.id;
+    console.log(userId);
+    try{
+      const user = await Users.findById(userId);
+      res.status(200).json(user);
+    }
+    catch(err){
+      res.status(500).json(err);
+    }
+  }
+  ,
   facebookLogin: async (req, res) => {
     try {
       const { accessToken, userID } = req.body;

@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
+const conversationRoute = require("./routes/conversation");
+const messageRoute = require("./routes/messages");
+const router = express.Router();
 const path = require('path')
 
 const app = express()
@@ -24,6 +27,8 @@ app.use('/blogs', require('./routes/blogsRouter'))
 app.use('/api', require('./routes/categoryRouter'))
 app.use('/api', require('./routes/specialityRouter'))
 app.use('/uploads', express.static('uploads'));
+app.use("/conversations", conversationRoute);
+app.use("/messages", messageRoute);
 // Connect to mongodb
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {

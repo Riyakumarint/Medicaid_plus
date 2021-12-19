@@ -21,6 +21,7 @@ import Articles from "../body/articles/Articles"
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
+import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
 
 function Body() {
@@ -108,6 +109,11 @@ function Body() {
         <Route
           path="/get_appointments"
           component={isLogged ? Appointments : Login}
+          exact
+        />
+        <Route
+          path="/messenger"
+          component={isLogged ? Messenger : Login}
           exact
         />
         <Route path="/find_video_consult" component={VideoConsult} />

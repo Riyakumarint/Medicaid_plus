@@ -110,6 +110,17 @@ const Create_appointment = () => {
       previousTestReports:previousTestReports,
       meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
       err: "", success: "",}
+      const c={
+        senderId:user._id,
+        receiverId:appointmentDetails.doctortId,
+      };
+      try{
+      const conversation = await axios.post("/conversations",c);
+      console.log(conversation);
+      }
+      catch(err){
+        console.log(err);
+      }
     try {
       // await updateAppointmentDetails();
       const res = await axios.post(
