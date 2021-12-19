@@ -18,6 +18,7 @@ import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
 import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
+import ArticlePage from "../body/articles/ArticlePage"
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
@@ -114,7 +115,7 @@ function Body() {
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
         <Route path="/articles" component={Articles} />
-
+        <Route path="/detail/:id" component={ArticlePage} />
         <Route path="*" exact component={NotFound} />
       </Switch>
     </section>

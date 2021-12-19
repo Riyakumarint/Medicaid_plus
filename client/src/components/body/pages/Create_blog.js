@@ -22,10 +22,11 @@ import {
 
 const initialState = {
   title: "",
+  auther: "",
   description: "",
   links: "",
   reletedTo: "",
-  createdAt: new Date().toISOString(),
+  createdDate: new Date(),
   err: "",
   success: "",
 };
@@ -33,13 +34,14 @@ const initialState = {
 const Create_blog = () => {
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
-  const users = useSelector((state) => state.users);
   const [content, setContent] = useState("");
   const [blog, setBlog] = useState(initialState);
   const [files, setFiles] = useState([]);
-
+  const { user } = auth;
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
+  const [hastags, setHastags] = useState([]);
+  const [hastage, setHastage] = useState({name:""});
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
@@ -47,12 +49,12 @@ const Create_blog = () => {
 
   const dispatch = useDispatch();
 
-  const { title, description, reletedTo, links, err, success } = blog;
+  const { title, description, reletedTo, links,createdDate,auther, err, success } = blog;
 
   useEffect(() => {
     const getCategories = async () => {
       const res = await axios.get("/api/category");
-      setCategories(res.data);
+      setCategories(res.data)
     };
 
     getCategories();
@@ -61,6 +63,11 @@ const Create_blog = () => {
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value, err: "", success: "" });
+  };
+
+  const handleHastageChangeInput = (e) => {
+    const { name, value } = e.target;
+    setHastage({ ...hastage, [name]: value, err: "", success: "" });
   };
 
   const onEditorChange = (value) => {
@@ -164,6 +171,44 @@ const Create_blog = () => {
     }
   };
 
+  // const handleAddHastage = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       "/blogs/addHastags",
+  //       { hastage },
+  //       { headers: { Authorization: token } }
+  //     );
+      
+      
+
+  //     setAllergie({ name:"", err: "", success: "Updated Success!" });
+  //   } catch (err) {
+  //     setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+  //   }
+  // };
+  // const handleDeleteAllergie = async (allergieId) => {
+  //   try {
+  //     const res = await axios.post(
+  //       "/profiles/deleteAllergies",
+  //       { allergieId },
+  //       { headers: { Authorization: token } }
+  //     );
+      
+  //     axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+  //     .then( res => {
+  //       setAllergies(res.data.allergies);
+  //     })
+  //     .catch( err => {
+  //       setProfile({ ...profile, err: err, success: "" });
+  //     })
+      
+  //     setAllergie({ name:"", err: "", success: "Updated Success!" });
+  //   } catch (err) {
+  //     setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -208,6 +253,8 @@ const Create_blog = () => {
           description,
           content,
           links,
+          auther:user.name,
+          createdDate,
           coverImage,
           reletedTo,
         },
@@ -251,7 +298,7 @@ const Create_blog = () => {
                 {title.length}/50
               </small>
             </div>
-
+           
             <div className="form-group my-3">
               <input
                 type="file"

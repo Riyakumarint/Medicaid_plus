@@ -15,11 +15,11 @@ const specialityCtrl = {
         try {
             // if user have role = 1 ---> admin
             // only admin can create , delete and update speciality
-            const {name} = req.body;
+            const {name,fee} = req.body;
             const speciality = await Speciality.findOne({name})
             if(speciality) return res.status(400).json({msg: "This speciality already exists."})
 
-            const newSpeciality = new Speciality({name})
+            const newSpeciality = new Speciality({name,fee})
 
             await newSpeciality.save()
             res.json({msg: "Created a speciality"})
@@ -42,7 +42,7 @@ const specialityCtrl = {
     },
     updateSpeciality: async(req, res) =>{
         try {
-            const {name} = req.body;
+            const {name,fee} = req.body;
             await Speciality.findOneAndUpdate({_id: req.params.id}, {name})
 
             res.json({msg: "Updated a speciality"})

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const blogsCtrl = require('../controllers/blogsCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
+const authDoctor = require('../middleware/authDoctor')
 
 const router = express();
 // const multer = require("multer");
@@ -51,13 +52,23 @@ router.use(bodyParser.urlencoded({extended: true}));
 //     });
 // });
 
-router.post('/postBlog', auth, authAdmin, blogsCtrl.postBlog)
+router.post('/postBlog', auth, authDoctor, blogsCtrl.postBlog)
 
-router.get('/getAllBlogs',blogsCtrl.getAllBlogs)
+router.get('/getAllBlogs', blogsCtrl.getAllBlogs)
+router.get('/blog/:id',blogsCtrl.getBlog)
 
+// router.post("/getBlog", (req, res) => {
+//     console.log(req.body)
+//     Blog.findOne({ "_id": req.body.blogId })
+//         // .populate('writer')
+//         .exec((err, blog) => {
+//             if (err) return res.status(400).send(err);
+//             res.status(200).json({ success: true, blog })
+//         })
+// });
 router.post('/voteBlog', auth,blogsCtrl.voteBlog)
 
-router.delete('/deleteBlog/:id',auth,authAdmin, blogsCtrl.deleteBlog)
+router.delete('/deleteBlog/:id',auth, authAdmin, authDoctor, blogsCtrl.deleteBlog)
 
 router.post('/postComment',auth, blogsCtrl.postComment)
 

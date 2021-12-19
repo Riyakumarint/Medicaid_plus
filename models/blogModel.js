@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
-const blogSchema = new mongoose.Schema(
+const Schema = mongoose.Schema;
+const blogSchema =  mongoose.Schema(
   {
     title: {
       type: String,
@@ -17,7 +17,6 @@ const blogSchema = new mongoose.Schema(
     content: {
       type: String,
       required: true,
-      // maxlength: 1000,
     },
     links: {
       type: String,
@@ -25,29 +24,36 @@ const blogSchema = new mongoose.Schema(
     coverImage: {
       type: String,
       default:
-        "https://res.cloudinary.com/dgejdmzwv/image/upload/v1636958159/avatar/pexels-negative-space-48604_hkjoi8.jpg",
+        "https://res.cloudinary.com/dgejdmzwv/image/upload/v1639873739/medicare/shutterstock_1475783396_lndeeo.jpg",
     },
-    // },
+    hashtags: [{
+      name: String
+  }],
     reletedTo: {
       type: String,
       required: true,
       maxlength: 75,
     },
-    // hashtags: [{
-    //     type: String,
-    //     maxlength: 40
-    // }],
-    autherId: {
-      type: String,
-      required: true,
+    createdDate: {
+      type: Date
     },
-
+    autherId: {
+      type: Schema.Types.ObjectId,
+      ref: "UserModel",
+    },
+    auther: {
+      type: String,
+      required: true
+    },
     upvote: Number,
     downvote: Number,
     // date: { type: Date, required: true },
     comments: [
       {
-        autherId: String,
+        autherId: {
+          type: Schema.Types.ObjectId,
+          ref: "UserModel",
+        },
         comment: {
           type: String,
           required: true,

@@ -10,9 +10,10 @@ function CardVert({blog, isAdmin, deleteBlog, handleCheck}) {
                 onChange={() => handleCheck(blog._id)} />
              } 
 
-            <img src={blog.CoverImage} alt="" />
+            <img src={blog.coverImage} alt="" />
             <div className="blog_box">
                 <h2 title={blog.title}>{blog.title}</h2>
+                <h2 title={blog.autherId.name}>{blog.autherId.name}</h2>
                 {/* <span>₹{blog.price}</span> */}
                 <p>{blog.description}</p>
             </div>
