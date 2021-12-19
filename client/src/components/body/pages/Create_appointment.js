@@ -97,7 +97,7 @@ const Create_appointment = () => {
         !appointmentDetails.doctortId ||
         !appointmentDetails.title ||
         !appointmentDetails.description ||
-        !symptoms
+        Lenght(symptoms)===0
       )
         return setAppointmentDetails({ ...appointmentDetails, err: "Please fill in all fields.", success: ""});
 
@@ -169,7 +169,7 @@ const Create_appointment = () => {
       setPreviousTestReports([...previousTestReports, previousTestReport]);
       setPreviousTestReport({ link: ""});
     } catch (err) {
-        setPreviousTestReport({ ...previousMed});
+        setPreviousTestReport({ ...previousTestReport});
     }
   };
   const handleDeletePreviousTestReport = async (previousReportLink) => {
@@ -180,7 +180,7 @@ const Create_appointment = () => {
         setPreviousTestReports(newPreviousTestReport);
       setPreviousTestReport({ link: ""});
     } catch (err) {
-        setPreviousTestReport({ ...previousMed});
+        setPreviousTestReport({ ...previousTestReport});
     }
   };
 
@@ -259,7 +259,7 @@ const Create_appointment = () => {
           <table className="medical">
             <thead>
               <tr>
-                <th>link</th>
+                <th>Link</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -533,5 +533,7 @@ const Create_appointment = () => {
     </>
   );
 };
+
+const Lenght = (symptoms) => symptoms.length;
 
 export default Create_appointment;

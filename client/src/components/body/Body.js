@@ -16,6 +16,8 @@ import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
+import Appointment_doctor from "./pages/Appointment_doctor";
+import Appointment_patient from "./pages/Appointment_patient";
 import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
 import VideoConsult from "../body/pages/VideoConsult";
@@ -25,7 +27,18 @@ import { useSelector } from "react-redux";
 
 function Body() {
   const auth = useSelector((state) => state.auth);
-  const { isLogged, isAdmin } = auth;
+  const { isLogged, isAdmin, isDoctor } = auth;
+
+  // const appointment = ()=>{
+  //   if(isLogged && isDoctor){
+  //     return Appointment_doctor
+  //   } else if(isLogged){
+  //     Appointment_patient
+  //   } else{
+  //     Login
+  //   }
+  // }
+
   return (
     <section>
       <Switch>
@@ -110,6 +123,11 @@ function Body() {
           component={isLogged ? Appointments : Login}
           exact
         />
+        <Route
+          path="/appointment/:caseId"
+          component={isLogged&&isDoctor ? Appointment_doctor : Appointment_patient}
+          exact
+        />
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
@@ -122,3 +140,4 @@ function Body() {
 }
 
 export default Body;
+
