@@ -30,7 +30,7 @@
 
 /*------------categories-------------*/
 
-.categories {
+.categories,.specialities {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
@@ -40,7 +40,7 @@
   padding-top: 50px;
 }
 
-.categories .category_screen {
+.categories .category_screen{
   max-width: 350px;
   min-width: 320px;
   width: 100%;
@@ -54,13 +54,27 @@
   transition: 0.5s;
 }
 
-.categories .category_screen h4 {
+.specialities .speciality_screen {
+  max-width: 390px;
+  min-width: 320px;
+  width: 100%;
+  margin: 100px auto;
+  padding: 20px 15px;
+  box-shadow: 0 0 19px 0 #911f27;
+  background-color: white;
+  border-radius: 10px;
+  top: 700px;
+  left: 0;
+  transition: 0.5s;
+}
+
+.categories .category_screen h4 ,.specialities .speciality_screen h4{
   text-transform: uppercase;
   padding: 10px 25px;
   margin: 10px 0;
 }
 
-.categories .category_screen input {
+.categories .category_screen input,.specialities .speciality_screen input {
   max-width: 400px;
   min-width: 250px;
   height: 40px;
@@ -72,7 +86,7 @@
   padding: 0 5px;
 }
 
-.categories .category_screen .category_button {
+.category_button {
   background: #911f27;
   color: white;
   padding: 8px 20px;
@@ -169,23 +183,3 @@ font-family: "Poppins", sans-serif;
   margin: 12px 0;
 }
 
-.articles{
-  height: 100%;
-  padding-top: 90px;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: #f8bec1;
-  justify-content: center;
-  align-items: center;
-}
-
-.articles h1{
-  justify-content: center;
-  color: #911f27;
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  font-size: 50px;
-  text-transform: uppercase;
-  font-weight: 700;
-}

@@ -6,6 +6,10 @@ const specialitySchema = new mongoose.Schema({
         required: true,
         trim: true,
         unique: true
+    },
+    fee: {
+        type: String,
+        required: true,
     }
 }, {
     timestamps: true

@@ -11,6 +11,7 @@ function Speciality() {
   const [specialities, setSpecialities] = useState([]);
   const [callback, setCallback] = useState(false);
   const [speciality, setSpeciality] = useState("");
+  const [fee, setFee] = useState("");
   const token = useSelector((state) => state.token);
 
   const [onEdit, setOnEdit] = useState(false);
@@ -23,16 +24,19 @@ function Speciality() {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
     };
-
     getSpecialities();
   }, [callback]);
+
   const createSpeciality = async (e) => {
     e.preventDefault();
     try {
       if (onEdit) {
         const res = await axios.put(
           `/api/speciality/${id}`,
-          { name: speciality },
+          {
+            name: speciality,
+            fee,
+          },
           {
             headers: { Authorization: token },
           }
@@ -41,7 +45,10 @@ function Speciality() {
       } else {
         const res = await axios.post(
           "/api/speciality",
-          { name: speciality },
+          {
+            name: speciality,
+            fee,
+          },
           {
             headers: { Authorization: token },
           }
@@ -50,15 +57,17 @@ function Speciality() {
       }
       setOnEdit(false);
       setSpeciality("");
+      setFee("");
       setCallback(!callback);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
     }
   };
 
-  const editSpeciality = async (id, name) => {
+  const editSpeciality = async (id, name, fee) => {
     setID(id);
     setSpeciality(name);
+    setFee(fee);
     setOnEdit(true);
   };
 
@@ -77,18 +86,27 @@ function Speciality() {
   return (
     <>
       <SideNav />
-      <div className="categories">
+      <div className="specialities">
         {err && showErrMsg(err)}
         {success && showSuccessMsg(success)}
-        <div className="category_screen">
+        <div className="speciality_screen">
           <form onSubmit={createSpeciality}>
             <h4>Speciality</h4>
             <input
               type="text"
               name="speciality"
+              placeholder="Speciality"
               value={speciality}
               required
               onChange={(e) => setSpeciality(e.target.value)}
+            />
+            <input
+              type="text"
+              name="fee"
+              placeholder="Fees"
+              value={fee}
+              required
+              onChange={(e) => setFee(e.target.value)}
             />
 
             <button className="category_button" type="submit">
@@ -104,6 +122,7 @@ function Speciality() {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Fee</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -111,13 +130,17 @@ function Speciality() {
                 {specialities.map((speciality) => (
                   <tr key={speciality._id}>
                     <td>{speciality.name}</td>
-
+                    <td>{speciality.fee}</td>
                     <td>
                       <i
                         className="fas fa-edit"
                         title="Edit"
                         onClick={() =>
-                          editSpeciality(speciality._id, speciality.name)
+                          editSpeciality(
+                            speciality._id,
+                            speciality.name,
+                            speciality.fee
+                          )
                         }
                       ></i>
 

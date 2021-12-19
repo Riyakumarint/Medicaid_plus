@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import './get.css'
@@ -66,9 +66,9 @@ const Appointments = () => {
                   <td>{appointment.title}</td>
                   <td>{appointment.doctortId}</td>
                   <td>
-                    <i className="fas fa-stethoscope"
-                      title="Open"
-                    > Open</i>
+                    <Link to={`/appointment/${appointment._id}`}>
+                      <i className="fas fa-stethoscope" title="Open"> Open</i>
+                    </Link>
                   </td>
                 </tr>
               ))}

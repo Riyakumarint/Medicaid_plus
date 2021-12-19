@@ -58,13 +58,9 @@ const appointmentsCtrl = {
 
     addMedicines: async (req, res) => {
         try {
-            const newMedicine = {
-                name: req.body.name,
-                dose: req.body.dose
-            };
             await Appointment.findOneAndUpdate(
                 { _id: req.body.caseId },
-                { "$push": { medicines: newMedicine } }
+                { medicines: req.body.medicines }
             );
             res.json({ msg: "New med. added!" });
 
@@ -72,28 +68,11 @@ const appointmentsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
-    deleteMedicines: async (req, res) => {
-        try {
-            await Appointment.findOneAndUpdate(
-                { _id: req.body.caseId },
-                { "$pull": { medicines: {_id : req.body.medicineId} } }
-            );
-            res.json({ msg: "Medicine delete Success!" });
-
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
-
     addTestReports: async (req, res) => {
         try {
-            const newTestReports = {
-                name: req.body.name,
-                link: ''
-            };
             await Appointment.findOneAndUpdate(
                 { _id: req.body.caseId },
-                { "$push": { testReports: newTestReports } }
+                { testReports: req.body.testReports }
             );
             res.json({ msg: "New test added!" });
 
@@ -113,38 +92,15 @@ const appointmentsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
-    deleteTestReports: async (req, res) => {
-        try {
-            await Appointment.findOneAndUpdate(
-                { _id: req.body.caseId },
-                { "$pull": { testReports: {_id : req.body.testId} } }
-            );
-            res.json({ msg: "Test delete Success!" });
-
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
-
     updateDoctorsNote: async (req, res) => {
         try {
             await Appointment.findOneAndUpdate(
                 { _id: req.body.caseId },
-                { doctorsNote: req.body.note  }
+                { doctorsNote: req.body.doctorsNote,
+                  doctorsNotePrivate: req.body.doctorsNotePrivate,
+                }
             );
             res.json({ msg: "Note updated!" });
-
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
-    updateDoctorsNotePrivate: async (req, res) => {
-        try {
-            await Appointment.findOneAndUpdate(
-                { _id: req.body.caseId },
-                { doctorsNotePrivate: req.body.note  }
-            );
-            res.json({ msg: "Private Note updated!" });
 
         } catch (err) {
         return res.status(500).json({ msg: err.message });
@@ -193,7 +149,7 @@ const appointmentsCtrl = {
     fetchAppointments: async (req, res) => {
         try {
             const user = await Users.find({_id: req.user.id});
-            console.log(user[0])
+            // console.log(user);
             if(user[0].role===2){
                 const appointments = await Appointment.find({doctortId: req.user.id});
                 res.json(appointments);
@@ -204,6 +160,16 @@ const appointmentsCtrl = {
             }
             
 
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
+    fetchAppointment: async (req, res) => {
+        try {
+            // console.log(req.params)
+            const appointments = await Appointment.find({_id: req.params.caseId});
+            res.json(appointments[0]);
         } catch (err) {
         return res.status(500).json({ msg: err.message });
         }

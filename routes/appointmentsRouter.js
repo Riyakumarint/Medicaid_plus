@@ -10,19 +10,13 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post('/createAppointment', auth, appointmentsCtrl.createMedicalAppointment)
 
-router.post('/addMedicines', appointmentsCtrl.addMedicines)
+router.post('/addMedicines', auth, appointmentsCtrl.addMedicines)
 
-router.delete('/deleteMedicines', appointmentsCtrl.deleteMedicines)
+router.post('/addTestReports', auth, appointmentsCtrl.addTestReports)
 
-router.post('/addTestReports', appointmentsCtrl.addTestReports)
+router.post('/updateTestReports', auth, appointmentsCtrl.updateTestReports)
 
-router.post('/updateTestReports', appointmentsCtrl.updateTestReports)
-
-router.delete('/deleteTestReports', appointmentsCtrl.deleteTestReports)
-
-router.post('/updateDoctorsNote', appointmentsCtrl.updateDoctorsNote)
-
-router.post('/updateDoctorsNotePrivate', appointmentsCtrl.updateDoctorsNotePrivate)
+router.post('/updateDoctorsNote',auth, appointmentsCtrl.updateDoctorsNote)
 
 router.post('/updatePrescription', appointmentsCtrl.updatePrescription)
 
@@ -31,5 +25,7 @@ router.post('/updateMeetingDetail', appointmentsCtrl.updateMeetingDetail)
 router.post('/updateStatus', appointmentsCtrl.updateStatus)
 
 router.get('/fetchAppointments', auth, appointmentsCtrl.fetchAppointments)
+
+router.get('/fetchAppointment/:caseId', auth, appointmentsCtrl.fetchAppointment)
 
 module.exports = router

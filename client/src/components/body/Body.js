@@ -16,17 +16,32 @@ import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
+import Appointment_doctor from "./pages/Appointment_doctor";
+import Appointment_patient from "./pages/Appointment_patient";
 import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
+import ArticlePage from "../body/articles/ArticlePage"
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
 import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
+import { Router } from "express";
 
 function Body() {
   const auth = useSelector((state) => state.auth);
-  const { isLogged, isAdmin } = auth;
+  const { isLogged, isAdmin, isDoctor } = auth;
+
+  // const appointment = ()=>{
+  //   if(isLogged && isDoctor){
+  //     return Appointment_doctor
+  //   } else if(isLogged){
+  //     Appointment_patient
+  //   } else{
+  //     Login
+  //   }
+  // }
+
   return (
     <section>
       <Switch>
@@ -114,13 +129,17 @@ function Body() {
         <Route
           path="/messenger"
           component={isLogged ? Messenger : Login}
+        />
+        <Route
+          path="/appointment/:caseId"
+          component={isLogged&&isDoctor ? Appointment_doctor : Appointment_patient}
           exact
         />
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
         <Route path="/articles" component={Articles} />
-
+        <Route path="/detail/:id" component={ArticlePage} />
         <Route path="*" exact component={NotFound} />
       </Switch>
     </section>
@@ -128,3 +147,4 @@ function Body() {
 }
 
 export default Body;
+

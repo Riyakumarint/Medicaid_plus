@@ -21,15 +21,11 @@ const blogsCtrl = {
                 links : req.body.links,
                 coverImage: req.body.coverImage,
                 reletedTo: req.body.reletedTo,
-                
-                // hashtags: req.body.hashtags,
                 autherId: req.user.id,
-               
-                
+                auther: req.body.auther,
+                hashtags: req.body.hashtags,
+                createdDate: req.body.createdDate
             });
-            // const title = await Users.findOne({title });
-            // if (title)
-            //   return res.status(400).json({ msg: "This title already exists." });
             newBlog.save( async (error, result) => {
                 if(!error){
                     await MedicalProfile.findOneAndUpdate(
@@ -46,6 +42,33 @@ const blogsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
+    addHastags: async (req, res) => {
+        try {
+            const newHastag = {
+                name: req.body.hastag.name,
+            };
+            await Blog.findOneAndUpdate(
+                { blogId: req.blog.id },
+                { "$push": { hastags: newHastag } }
+            );
+            res.json({ msg: "New Hastag. added!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+    deleteHashtags: async (req, res) => {
+        try {
+            await Blog.findOneAndUpdate(
+                { blogId: req.blog.id },
+                { "$pull": { hastags: {_id : req.body.hastagId} } }
+            );
+            res.json({ msg: "Hastag delete Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
     // Get all blogs
   getAllBlogs: async (req, res) => {
     try {
@@ -54,7 +77,15 @@ const blogsCtrl = {
      } catch (err) {
          return res.status(500).json({msg: err.message})
      }
-  },
+    },
+    getBlog: async (req, res) => {
+        try {
+            const blog = await Blog.findById(req.params.id);
+            res.json(blog)
+        } catch (error) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
     voteBlog: async (req, res) => {
         try {
             if(req.body.vote === "up"){
