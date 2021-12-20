@@ -12,6 +12,50 @@ const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
 
 const { CLIENT_URL } = process.env;
 
+const createMedicalHistory = async ( userId)=> {
+    try{
+      const newMedicalHistoryData = new MedicalHistory({
+        userId: userId ,
+
+        emergencyContact:{
+            name: "Name",
+            relation: "Relation",
+            emailAdd: "Email",
+            mobile: "Mobile",
+            address: "Address"
+        },
+    
+        bloodGroup: "BG",
+        age: "Age",
+        height: "height",
+        weight: "Kg",
+    
+        currentMedication: [],
+        medicalCondition: [],
+        allergies: [],
+        useTobacco: "No",
+        useAlcohol: "No",
+    
+      });
+
+      newMedicalHistoryData.save( async (error1, result1) => {
+        if(!error1){
+            await Users.findOneAndUpdate(
+                { _id: userId },
+                { "profile.medicalHistoryId": result1._id }
+            );
+            // console.log("profile created");
+            return {status: true, message: "success"};
+        } else {
+          console.log(error1.message);
+          return {status: false, message: "Fail to create medical history"};          ;
+        }
+      });
+    } catch (err){
+      return {status: false, message: err.message};
+    }
+}
+
 const userCtrl = {
   // Register a User
   register: async (req, res) => {
@@ -82,42 +126,9 @@ const userCtrl = {
 
       newUser.save( async (error, result) => {
         if(!error){
-          const newMedicalHistoryData = new MedicalHistory({
-            userId: result._id ,
-  
-            emergencyContact:{
-                name: "Name",
-                relation: "Relation",
-                emailAdd: "Email",
-                mobile: "Mobile",
-                address: "Address"
-            },
-        
-            bloodGroup: "BG",
-            age: "Age",
-            height: "height",
-            weight: "Kg",
-        
-            currentMedication: [],
-            medicalCondition: [],
-            allergies: [],
-            useTobacco: "No",
-            useAlcohol: "No",
-        
-          });
-
-          newMedicalHistoryData.save( async (error1, result1) => {
-            if(!error1){
-                await Users.findOneAndUpdate(
-                    { _id: result._id },
-                    { "profile.medicalHistoryId": result1._id }
-                );
-                res.json({ msg: "Account has been activated!" });
-            } else {
-              console.log(error1.message);
-              res.status(500).json({ msg: "failed to create medical history" });
-            }
-          });
+          const result1 = await createMedicalHistory(result._id);
+          // if(result1.status===false)
+          //   res.status(500).json({ msg: result1.message });
         } else {
             res.status(500).json({ msg: error.message });
         }
@@ -324,7 +335,7 @@ const userCtrl = {
       });
 
 
-      console.log(verify)
+      // console.log(verify)
       const { email_verified, email, name, picture } = verify.payload;
 
       const password = email + process.env.GOOGLE_SECRET;
@@ -351,12 +362,18 @@ const userCtrl = {
         res.json({ msg: "Login success!" });
       } else {
         const newUser = new Users({
+          username : email.split('@')[0],
           name,
           email,
+          mobile: "+911234567890",
           password: passwordHash,
           avatar: picture,
         });
         await newUser.save();
+
+        const result = await createMedicalHistory(newUser._id);
+        // if(result.status===false)
+        //   res.status(500).json({ msg: result.message });
 
         const refresh_token = createRefreshToken({ id: newUser._id });
         res.cookie("refreshtoken", refresh_token, {
@@ -385,7 +402,7 @@ const userCtrl = {
 
       const { email, name, picture } = data;
 
-      const password = email + process.env.FACEBOOK_SECRET;
+      const password = email + process.env.GOOGLE_SECRET;
 
       const passwordHash = await bcrypt.hash(password, 12);
 
@@ -405,13 +422,19 @@ const userCtrl = {
         res.json({ msg: "Login success!" });
       } else {
         const newUser = new Users({
+          username : email.split('@')[0],
           name,
           email,
+          mobile: "+911234567890",
           password: passwordHash,
           avatar: picture.data.url,
         });
 
         await newUser.save();
+
+        const result = await createMedicalHistory(newUser._id);
+        // if(result.status===false)
+        //   res.status(500).json({ msg: result.message });
 
         const refresh_token = createRefreshToken({ id: newUser._id });
         res.cookie("refreshtoken", refresh_token, {
