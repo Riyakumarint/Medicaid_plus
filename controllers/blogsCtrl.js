@@ -89,10 +89,10 @@ const blogsCtrl = {
 
             await MedicalProfile.findOneAndUpdate(
                 { userId: blog.autherId },
-                { "$pull": { blogRecord: {blogId : req.body.blogId} } }
+                { "$pull": { blogRecord: {blogId : req.params.id} } }
             );
 
-            await Blog.findByIdAndDelete(req.body.blogId);
+            await Blog.findByIdAndDelete(req.params.id);
     
             res.json({ msg: "Deleted Success!" });
 

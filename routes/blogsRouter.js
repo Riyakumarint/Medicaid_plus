@@ -60,11 +60,11 @@ router.post('/voteBlog', auth,blogsCtrl.voteBlog)
 
 router.delete('/delete/:id',blogsCtrl.deleteBlog)
 
-router.post('/postComment',auth, blogsCtrl.postComment)
+// router.post('/postComment',auth, blogsCtrl.postComment)
 
-router.post('/voteComment',auth, blogsCtrl.voteComment)
+// router.post('/voteComment',auth, blogsCtrl.voteComment)
 
-router.delete('/deleteComment',auth,authAdmin, blogsCtrl.deleteComment)
+// router.delete('/deleteComment',auth,authAdmin, blogsCtrl.deleteComment)
 
 
 module.exports = router
