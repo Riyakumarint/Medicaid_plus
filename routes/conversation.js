@@ -32,13 +32,16 @@ router.get("/:userId", async (req, res) => {
 
 //get conversation includes 2 userid
 router.get("/find/:firstUID/:secondUID",async (req,res)=>{
+  console.log("vfsv: "+req.params.firstUID+" "+req.params.secondUID);
   try{
     const conversation = await Conversation.findOne({
       members: { $all: [req.params.firstUID,req.params.secondUID] },
     });
+    console.log(conversation);
     res.status(200).json(conversation);
   }
   catch(err){
+    console.log(err);
     res.status(500).json(err);
   }
 });

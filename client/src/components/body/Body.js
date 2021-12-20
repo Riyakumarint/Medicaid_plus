@@ -26,7 +26,6 @@ import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
 import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
-import { Router } from "express";
 
 function Body() {
   const auth = useSelector((state) => state.auth);
@@ -127,12 +126,13 @@ function Body() {
           exact
         />
         <Route
-          path="/messenger"
-          component={isLogged ? Messenger : Login}
-        />
-        <Route
           path="/appointment/:caseId"
           component={isLogged&&isDoctor ? Appointment_doctor : Appointment_patient}
+          exact
+        />
+        <Route
+          path="/messenger"
+          component={isLogged ? Messenger : Login}
           exact
         />
         <Route path="/find_video_consult" component={VideoConsult} />
@@ -147,4 +147,3 @@ function Body() {
 }
 
 export default Body;
-
