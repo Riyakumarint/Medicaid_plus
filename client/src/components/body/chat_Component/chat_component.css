@@ -25,14 +25,15 @@ body{
     border: none;
     height: 200px;
 }
-.message{
-    background-color: gray;
+/* .message{
+    background-color: #f7f2f2;
     width: 50%;
     padding: 10px;
     margin: 17px 2px;
-    border: 2px solid black;
+    border: 2px solid #911f27;
     border-radius: 10px;
-}
+} */
+
 .left{
     float: left;
     clear: both;
@@ -61,9 +62,10 @@ body{
 }
 #VideoInp{
     padding: 10px;
-    height: 80px;
-    width: 80px;
-    border-radius: 13px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    /* background-color: white; */
 }
 .btnM{
     background-color: #04AA6D;
@@ -77,7 +79,7 @@ body{
   opacity: 0.8;
 }
 .Video_chat{
-    border-radius: 10px;
+    border-radius: 50%;
 }
 
 
@@ -87,7 +89,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
-  background-color: #555;
+  background-color: #911f27;
   color: white;
   padding: 16px 20px;
   border: none;
@@ -102,7 +104,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The popup chat - hidden by default */
 .chat-popup {
-    background-image: linear-gradient(rgb(70, 45, 214),rgb(231, 224, 231));
+    background-image: linear-gradient(#911f27,#f8bec1);
     border-radius: 10px;
     opacity:1;
     display: none;

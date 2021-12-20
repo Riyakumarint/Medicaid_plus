@@ -1,6 +1,6 @@
 import React from 'react'
 import './chat_component.css'
-import logo from './logo2.png'
+import logo from './video.png'
 import Message from "../messenger/intComp/Message.js";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
