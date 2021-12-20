@@ -58,14 +58,14 @@ function SideNav() {
             <span class="title">Chats</span>
           </a>
         </li>
-        <li>
+        {/* <li>
           <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
             <span class="icon">
               <i class="fa fa-commenting-o" aria-hidden="true"></i>
             </span>
             <span class="title">Clients</span>
           </a>
-        </li>
+        </li> */}
         <li>
           {isDoctor ? (
           <a href="/create_blog" onClick={() => window.scrollTo({ top: 0 })}>
