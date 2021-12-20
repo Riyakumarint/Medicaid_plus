@@ -6,8 +6,9 @@ const commentSchema =  mongoose.Schema(
       type: String,
       required: true,
     },
-    autherId: {
+    blogId: {
       type: String,
+      required: true
     },
     comments: {
       type: String,

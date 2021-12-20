@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Loading from "../../utils/notification/Loading";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
+import Comments from './Comment/Comments';
 import { getBlog, deleteBlog } from "../../../api/ArticlesAPI";
 function PostPage({ match }) {
   const [blog, setBlog] = useState({});
@@ -13,13 +13,13 @@ function PostPage({ match }) {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getBlog(match.params.id);
-      // console.log(data);
+
       setBlog(data);
     };
+
     fetchData();
   }, []);
 
-  
   const deletePost = async () => {
     await deleteBlog(blog._id);
     history.push("/articles");
@@ -31,14 +31,16 @@ function PostPage({ match }) {
         <Loading />
       </div>
     );
-  return (
+  return (<><img src={blog.coverImage} alt="blog" className="blog_cover_image" />
+    
     <div className="BlogPage">
-      <div className="blog_page">
-        <img src={blog.coverImage} alt="blog" className="blog_image" />
+      
+     
+      <div className="blog_component">
         <h2 className="blog_heading">{blog.title}</h2>
         <p className="blog_auther">DR. {blog.auther}</p>
         <div className="blog_date">
-        <p>{new Date(blog.createdDate).toDateString()}</p>
+          <p>{new Date(blog.createdDate).toDateString()}</p>
           {(isDoctor || isAdmin) && (
             <>
               <button onClick={() => deletePost()} className="blog_delete">
@@ -46,11 +48,16 @@ function PostPage({ match }) {
               </button>
             </>
           )}
-           
         </div>
         <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+        <div className="line-2">
+            <hr></hr>
+        </div>
+        <Comments blog={blog} />
+        </div>
       </div>
-    </div>
+      
+    </>
   );
 }
 

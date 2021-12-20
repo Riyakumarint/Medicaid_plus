@@ -337,7 +337,7 @@ const Create_appointment = () => {
                             rows="3" 
                             cols="30"
                             type="description"
-                            className="description"
+                            className="appointment_description"
                             id="exampleDescription"
                             aria-describedby="description"
                             placeholder="description"

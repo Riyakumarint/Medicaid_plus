@@ -67,9 +67,17 @@ const blogsCtrl = {
     //     }
     // },
     // Get all blogs
-  getAllBlogs: async (req, res) => {
-    try {
-        const blogs = await Blog.find()
+    getAllBlogs: async (req, res) => {
+        let auther = req.query.auther;
+        let category = req.query.reletedTo;
+        let blogs;
+        try {
+            if(username) 
+            blogs = await Blog.find({ auther: auther });
+        else if (category) 
+            blogs = await Blog.find({ reletedTo: category });
+        else 
+        blogs = await Blog.find({})
          res.json(blogs)
      } catch (err) {
          return res.status(500).json({msg: err.message})

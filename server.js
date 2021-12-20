@@ -24,6 +24,7 @@ app.use('/blogs', require('./routes/blogsRouter'))
 app.use('/api', require('./routes/categoryRouter'))
 app.use('/api', require('./routes/specialityRouter'))
 app.use('/uploads', express.static('uploads'));
+app.use('/comment',require('./routes/commentsRouter'))
 // Connect to mongodb
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {

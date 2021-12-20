@@ -43,16 +43,12 @@ const userSchema = new mongoose.Schema({
     mobile: {
         type: String,
         required: true, 
-        default: ''
+        default: '+911234567890'
     },
     address: { 
         type: String, 
-        default: '' 
-    },
-    website: {
-        type: String, 
-        default: ''
-    },
+        default: 'Address' 
+    }
     
 }, 
 {

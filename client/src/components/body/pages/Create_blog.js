@@ -99,7 +99,7 @@ const Create_blog = () => {
           success: "",
         });
 
-      if (file.size > 1024 * 1024)
+      if (file.size > 2048 * 2048)
         return setBlog({ ...blog, err: "Size too large.", success: "" });
 
       if (file.type !== "image/jpeg" && file.type !== "image/png")
