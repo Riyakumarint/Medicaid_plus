@@ -18,6 +18,8 @@ const initialState = {
   name: "",
   password: "",
   cf_password: "",
+  mobile: "",
+  address: "",
   err: "",
   success: "",
 };
@@ -28,9 +30,9 @@ function Profile() {
 
   const users = useSelector((state) => state.users);
 
-  const { user, isAdmin } = auth;
+  const { user, isAdmin, isDoctor } = auth;
   const [data, setData] = useState(initialState);
-  const { name, password, cf_password, err, success } = data;
+  const { name, password, cf_password, mobile, address, err, success } = data;
 
   const [avatar, setAvatar] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -98,6 +100,8 @@ function Profile() {
         {
           name: name ? name : user.name,
           avatar: avatar ? avatar : user.avatar,
+          mobile: mobile ? mobile : user.mbile,
+          address: address ? address : user.address,
         },
         {
           headers: { Authorization: token },
@@ -137,7 +141,7 @@ function Profile() {
   };
 
   const handleUpdate = () => {
-    if (name || avatar) updateInfor();
+    if (name || avatar || mobile || address) updateInfor();
     if (password) updatePassword();
   };
 
@@ -152,7 +156,7 @@ function Profile() {
 
           <div className="profile_page">
             <div className="profile_header">
-              <h4>{isAdmin ? "Admin" : "User"}</h4>
+              <h4>{isAdmin ? "Admin" : isDoctor ? "Doctor" : "User"}</h4>
 
               {/* <div className="updatebtn" onClick={() => window.scrollTo({ top: 0 })}> */}
               <button disabled={loading} onClick={handleUpdate}>
@@ -178,8 +182,9 @@ function Profile() {
                       </span>
                     </div>
                     <div className="p_a">
-                      <p>Change profile </p><p>photo</p>
-                      </div>
+                      <p>Change profile </p>
+                      <p>photo</p>
+                    </div>
                   </div>
                 </div>
                 <div class="col s12 m6 l4">
@@ -213,6 +218,46 @@ function Profile() {
                     />
                   </div>
                 </div>
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <label htmlFor="mobile">Mobile Number</label>
+                    <input
+                      type="text"
+                      name="mobile"
+                      id="mobile"
+                      defaultValue={user.mobile}
+                      placeholder="Mobile Number"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="line-2">
+                <hr></hr>
+              </div>
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <label htmlFor="name">Address</label>
+                    <textarea
+                      rows="3"
+                      cols="30"
+                      type="description"
+                      className="appointment_description"
+                      id="exampleAddress"
+                      aria-describedby="address"
+                      placeholder="Address"
+                      onChange={handleChange}
+                      name="address"
+                      defaultValue={user.address}
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div className="line-2">
+                <hr></hr>
+              </div>
+              <div className="row">
                 <div class="col s12 m6 l4">
                   <div className="form-group">
                     <label htmlFor="password">New Password</label>

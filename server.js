@@ -29,6 +29,7 @@ app.use('/api', require('./routes/specialityRouter'))
 app.use('/uploads', express.static('uploads'));
 app.use("/conversations", conversationRoute);
 app.use("/messages", messageRoute);
+app.use('/comment',require('./routes/commentsRouter'))
 // Connect to mongodb
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {

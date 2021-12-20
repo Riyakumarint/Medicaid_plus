@@ -26,9 +26,6 @@ const blogSchema =  mongoose.Schema(
       default:
         "https://res.cloudinary.com/dgejdmzwv/image/upload/v1639873739/medicare/shutterstock_1475783396_lndeeo.jpg",
     },
-    hashtags: [{
-      name: String
-  }],
     reletedTo: {
       type: String,
       required: true,
@@ -47,22 +44,18 @@ const blogSchema =  mongoose.Schema(
     },
     upvote: Number,
     downvote: Number,
-    // date: { type: Date, required: true },
-    comments: [
-      {
-        autherId: {
-          type: Schema.Types.ObjectId,
-          ref: "UserModel",
-        },
-        comment: {
-          type: String,
-          required: true,
-          maxlength: 200,
-        },
-        upvote: Number,
-        downvote: Number,
-      },
-    ],
+    // comments: [
+    //   {
+    //     autherId: String,
+    //     comment: {
+    //       type: String,
+    //       required: true,
+    //       maxlength: 200,
+    //     },
+    //     upvote: Number,
+    //     downvote: Number,
+    //   },
+    // ],
   },
   {
     timestamps: true,

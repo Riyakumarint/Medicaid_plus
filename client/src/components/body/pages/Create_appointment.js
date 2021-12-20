@@ -35,6 +35,7 @@ const Create_appointment = () => {
   const [speciality, setSpeciality] = useState({speciality_name: ""});
   const [doctors, setDoctors] = useState([]);
   const [callback, setCallback] = useState(false);
+  const history = useHistory();
 
   const token = useSelector((state) => state.token);
   const {user} = useSelector((state) => state.auth);
@@ -130,6 +131,10 @@ const Create_appointment = () => {
       );
 
       setAppointmentDetails({ ...appointmentDetails, err: "", success: "Appointment Created Success!" });
+      setTimeout(() => {
+        history.push('/get_appointments')
+    }, 2000);
+      
     } catch (err) {
       setAppointmentDetails({ ...appointmentDetails, err: err.response.data.msg, success: "" });
     }
@@ -343,7 +348,7 @@ const Create_appointment = () => {
                             rows="3" 
                             cols="30"
                             type="description"
-                            className="description"
+                            className="appointment_description"
                             id="exampleDescription"
                             aria-describedby="description"
                             placeholder="description"

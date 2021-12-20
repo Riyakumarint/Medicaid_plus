@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import CreateForm from "../blog/card/CreateForm";
 import axios from "axios";
 import ReactQuill from "../editor/ReactQuill";
 import Loading from "../../utils/notification/Loading";
-import { checkImage, imageUpload } from "../../utils/validation/ImageUpload";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -17,7 +15,6 @@ import {
   isDescription,
   isCoverImage,
   isCategory,
-  getAPI,
 } from "../../utils/validation/Validation";
 
 const initialState = {
@@ -40,8 +37,8 @@ const Create_blog = () => {
   const { user } = auth;
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
-  const [hastags, setHastags] = useState([]);
-  const [hastage, setHastage] = useState({name:""});
+  // const [hastags, setHastags] = useState([]);
+  // const [hastag, setHastag] = useState({ name: "" });
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
@@ -49,14 +46,22 @@ const Create_blog = () => {
 
   const dispatch = useDispatch();
 
-  const { title, description, reletedTo, links,createdDate,auther, err, success } = blog;
+  const {
+    title,
+    description,
+    reletedTo,
+    links,
+    createdDate,
+    auther,
+    err,
+    success,
+  } = blog;
 
   useEffect(() => {
     const getCategories = async () => {
       const res = await axios.get("/api/category");
-      setCategories(res.data)
+      setCategories(res.data);
     };
-
     getCategories();
   }, [callback]);
 
@@ -65,10 +70,10 @@ const Create_blog = () => {
     setBlog({ ...blog, [name]: value, err: "", success: "" });
   };
 
-  const handleHastageChangeInput = (e) => {
-    const { name, value } = e.target;
-    setHastage({ ...hastage, [name]: value, err: "", success: "" });
-  };
+  // const handleHastagChangeInput = (e) => {
+  //   const { name, value } = e.target;
+  //   setHastag({ ...hastag, [name]: value, err: "", success: "" });
+  // };
 
   const onEditorChange = (value) => {
     setContent(value);
@@ -79,57 +84,8 @@ const Create_blog = () => {
     setFiles(files);
   };
 
-  // const handleChangeImage = useCallback(() => {
-  //   const input = document.createElement("input");
-  //   input.type = "file";
-  //   input.accept = "image/*";
-  //   input.click();
-
-  //   input.onchange = async () => {
-  //     const files = input.files;
-  //     if (!files)
-  //       return setImage({
-  //         ...image,
-  //         err: "No files were uploaded.",
-  //         success: "",
-  //       });
-  //     const file = files[0];
-  //     if (!file)
-  //       return setImage({
-  //         ...image,
-  //         err: "No files were uploaded.",
-  //         success: "",
-  //       });
-
-  //     if (file.size > 1024 * 1024)
-  //       return setImage({ ...image, err: "Size too large.", success: "" });
-
-  //     if (file.type !== "image/jpeg" && file.type !== "image/png")
-  //       return setImage({
-  //         ...image,
-  //         err: "File format is incorrect.",
-  //         success: "",
-  //       });
-
-  //     setLoading(true);
-  //     const photo = await imageUpload(file);
-  //     console.log(photo);
-  //     const quill = quillRef.current;
-  //     const range = quill?.getEditor().getSelection()?.index;
-  //     if (range !== undefined) {
-  //       quill?.getEditor().insertEmbed(range, "image", `${photo.url}`);
-  //     }
-  //     setLoading(false);
-  //   };
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   const quill = quillRef.current;
-  //   if (!quill) return;
-
-  //   let toolbar = quill.getEditor().getModule("toolbar");
-  //   toolbar.addHandler("image", handleChangeImage);
-  // }, [handleChangeImage]);
+  
+  
 
   const handleChangeThumbnail = async (e) => {
     e.preventDefault();
@@ -143,7 +99,7 @@ const Create_blog = () => {
           success: "",
         });
 
-      if (file.size > 1024 * 1024)
+      if (file.size > 2048 * 2048)
         return setBlog({ ...blog, err: "Size too large.", success: "" });
 
       if (file.type !== "image/jpeg" && file.type !== "image/png")
@@ -171,43 +127,33 @@ const Create_blog = () => {
     }
   };
 
-  // const handleAddHastage = async () => {
+  // const handleAddHastag = async () => {
   //   try {
   //     const res = await axios.post(
   //       "/blogs/addHastags",
-  //       { hastage },
+  //       { hastag },
   //       { headers: { Authorization: token } }
   //     );
-      
+
       
 
-  //     setAllergie({ name:"", err: "", success: "Updated Success!" });
+  //     setHastag({ name: "", err: "", success: "Updated Success!" });
   //   } catch (err) {
-  //     setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+  //     setHastag({ ...hastag, err: err.response.data.msg, success: "" });
   //   }
   // };
-  // const handleDeleteAllergie = async (allergieId) => {
+  // const handleDeleteHastag = async (hastagId) => {
   //   try {
   //     const res = await axios.post(
-  //       "/profiles/deleteAllergies",
-  //       { allergieId },
+  //       "/blogs/deleteHastags",
+  //       { hastagId },
   //       { headers: { Authorization: token } }
   //     );
-      
-  //     axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
-  //     .then( res => {
-  //       setAllergies(res.data.allergies);
-  //     })
-  //     .catch( err => {
-  //       setProfile({ ...profile, err: err, success: "" });
-  //     })
-      
-  //     setAllergie({ name:"", err: "", success: "Updated Success!" });
+  //     setHastag({ name: "", err: "", success: "Updated Success!" });
   //   } catch (err) {
-  //     setAllergie({ ...allergie, err: err.response.data.msg, success: "" });
+  //     setHastag({ ...hastag, err: err.response.data.msg, success: "" });
   //   }
   // };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -223,6 +169,12 @@ const Create_blog = () => {
       return setBlog({
         ...blog,
         err: "Title must be at least 10 characters.",
+        success: "",
+      });
+      if (isCoverImage(coverImage))
+      return setBlog({
+        ...blog,
+        err: "Cover Image cannot be left blank.",
         success: "",
       });
     if (isDescription(description))
@@ -253,8 +205,9 @@ const Create_blog = () => {
           description,
           content,
           links,
-          auther:user.name,
+          auther: user.name,
           createdDate,
+          // hastags,
           coverImage,
           reletedTo,
         },
@@ -264,11 +217,46 @@ const Create_blog = () => {
       );
 
       setBlog({ ...blog, err: "", success: res.data.msg });
+      setTimeout(() => {
+        history.push("/articles");
+      }, 2000);
     } catch (err) {
       err.response.data.msg &&
         setBlog({ ...blog, err: err.response.data.msg, success: "" });
     }
   };
+
+  // const renderHastags = () => {
+  //   if (hastags.length === 0) return "";
+  //   return (
+  //     <div className="col-right">
+  //       <div style={{ overflowX: "auto" }}>
+  //         <table className="medical">
+  //           <thead>
+  //             <tr>
+  //               <th>Name</th>
+  //               <th>Action</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             {hastags.map((hastag) => (
+  //               <tr key={hastag._id}>
+  //                 <td>{hastag.name}</td>
+  //                 <td>
+  //                   <i
+  //                     className="fas fa-trash-alt"
+  //                     title="Remove"
+  //                     onClick={() => handleDeleteHastag(hastag._id)}
+  //                   ></i>
+  //                 </td>
+  //               </tr>
+  //             ))}
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="create_blog">
@@ -279,8 +267,6 @@ const Create_blog = () => {
         <h1>Create blog</h1>
         <div className="row">
           <div className="col">
-            {/* <h5>Create</h5> */}
-            {/* <CreateForm blog={blog} setBlog={setBlog} /> */}
             <div className="form-group position-relative">
               <input
                 type="text"
@@ -298,7 +284,7 @@ const Create_blog = () => {
                 {title.length}/50
               </small>
             </div>
-           
+
             <div className="form-group my-3">
               <input
                 type="file"
@@ -344,60 +330,58 @@ const Create_blog = () => {
               </select>
             </div>
           </div>
-          {/* <div className="line-2">
-            <hr></hr>
-          </div> */}
-
-          {/* <div className="col-md-6">
-            <h5>Preview</h5>
-            <CardHoriz blog={blog} />
-          </div> */}
         </div>
-        {/* <div className="form-group position-relative">
-              <textarea
-                className="form-control"
-                rows={4}
-                value={content}
-                style={{ resize: "none" }}
-                name="content"
-                onChange={handleChangeInput}
-              />
 
-              <small
-                className="text-muted position-absolute"
-                style={{ bottom: 0, right: "3px", opacity: "0.3" }}
-              >
-                {content.length}/2000
-              </small>
-            </div> */}
-        {/* <ReactQuill setBody={setBody} body={body} /> */}
-        {/* <ReactQuill
-        theme="snow"
-        modules={modules}
-        placeholder="Write somethings..."
-        // onChange={(e) => setContent(e)}
-          onChange={handleChange}
-          name="content"
-        value={content}
-        ref={quillRef}
-      /> */}
         <ReactQuill
           placeholder={"Start Posting Something"}
           onEditorChange={onEditorChange}
           onFilesChange={onFilesChange}
         />
 
-        <button
-          className="blog_post_btn mt-3 d-block mx-auto"
-          onClick={handleSubmit}
-        >
-          Create Post
-        </button>
+        {/* <div>
+          <h5>Hastags</h5>
+          {renderHastags()}
+          <div className="row">
+            <div class="col s12 m6 l4">
+              <div className="form-group">
+                <div className="input-field">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    className="name"
+                    id="exampleInputname1"
+                    placeholder="Hastag"
+                    onChange={handleHastagChangeInput}
+                    value={hastag.name}
+                    name="name"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col s12 m6 l4">
+              <div className="form-group">
+                <div className="input-field">
+                  <i
+                    className="fas fa-plus-circle"
+                    title="Add"
+                    onClick={() => handleAddHastag()}
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+
+        <div>
+          <button
+            className="blog_post_btn mt-3 d-block mx-auto"
+            onClick={handleSubmit}
+          >
+            Create Post
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Create_blog;
-
-// asdfghjklqwertyuiopzxcvnbm nvxrufjot hhh hhh hhh jjj hhh ggg ggg hhh

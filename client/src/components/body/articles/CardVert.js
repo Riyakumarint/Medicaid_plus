@@ -1,24 +1,18 @@
 import React from 'react'
-import BtnRender from './BtnRender'
+import { Link } from "react-router-dom";
 
-function CardVert({blog, isAdmin, deleteBlog, handleCheck}) {
+function CardVert({blog}) {
     return (
-        <div className="blog_card">
-            
-            {
-                isAdmin && <input type="checkbox" checked={blog.checked}
-                onChange={() => handleCheck(blog._id)} />
-             } 
-
+        <div className="blog_card">           
             <img src={blog.coverImage} alt="" />
             <div className="blog_box">
                 <h2 title={blog.title}>{blog.title}</h2>
-                <h2 title={blog.autherId.name}>{blog.autherId.name}</h2>
-                {/* <span>₹{blog.price}</span> */}
-                <p>{blog.description}</p>
-            </div>
+                 <p>{blog.description}</p>
+            </div>       
+            <Link className='btn_blog_view' onClick={() => window.scrollTo({ top: 0 })} to={`/detail/${blog._id}`}>
+            View
+          </Link>
             
-            <BtnRender blog={blog} deleteBlog={deleteBlog} />
         </div>
     )
 }

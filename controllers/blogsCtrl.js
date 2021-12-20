@@ -1,8 +1,6 @@
 const Users = require("../models/userModel").userModel;
 const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
 const Blog = require("../models/blogModel").blogModel;
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
@@ -23,7 +21,6 @@ const blogsCtrl = {
                 reletedTo: req.body.reletedTo,
                 autherId: req.user.id,
                 auther: req.body.auther,
-                hashtags: req.body.hashtags,
                 createdDate: req.body.createdDate
             });
             newBlog.save( async (error, result) => {
@@ -42,36 +39,45 @@ const blogsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
-    addHastags: async (req, res) => {
-        try {
-            const newHastag = {
-                name: req.body.hastag.name,
-            };
-            await Blog.findOneAndUpdate(
-                { blogId: req.blog.id },
-                { "$push": { hastags: newHastag } }
-            );
-            res.json({ msg: "New Hastag. added!" });
+    // addHastags: async (req, res) => {
+    //     try {
+    //         const newHastag = {
+    //             name: req.body.hastag.name,
+    //         };
+    //         await Blog.findOneAndUpdate(
+    //             { blogId: req.blog.id },
+    //             { "$push": { hastags: newHastag } }
+    //         );
+    //         res.json({ msg: "New Hastag. added!" });
 
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
-    deleteHashtags: async (req, res) => {
-        try {
-            await Blog.findOneAndUpdate(
-                { blogId: req.blog.id },
-                { "$pull": { hastags: {_id : req.body.hastagId} } }
-            );
-            res.json({ msg: "Hastag delete Success!" });
+    //     } catch (err) {
+    //     return res.status(500).json({ msg: err.message });
+    //     }
+    // },
+    // deleteHashtags: async (req, res) => {
+    //     try {
+    //         await Blog.findOneAndUpdate(
+    //             { blogId: req.blog.id },
+    //             { "$pull": { hastags: {_id : req.body.hastagId} } }
+    //         );
+    //         res.json({ msg: "Hastag delete Success!" });
 
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
+    //     } catch (err) {
+    //     return res.status(500).json({ msg: err.message });
+    //     }
+    // },
     // Get all blogs
-  getAllBlogs: async (req, res) => {
-    try {
+    getAllBlogs: async (req, res) => {
+        /*let auther = req.query.auther;
+        let category = req.query.reletedTo;
+        let blogs;
+        try {
+            if(username) 
+            blogs = await Blog.find({ auther: auther });
+        else if (category) 
+            blogs = await Blog.find({ reletedTo: category });
+        else */
+        try{
         const blogs = await Blog.find()
          res.json(blogs)
      } catch (err) {
@@ -86,6 +92,24 @@ const blogsCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    deleteBlog: async (req, res) => {
+        try {
+            const blog = await Blog.findById(req.params.id);
+
+            await MedicalProfile.findOneAndUpdate(
+                { userId: blog.autherId },
+                { "$pull": { blogRecord: {blogId : req.params.id} } }
+            );
+
+            await Blog.findByIdAndDelete(req.params.id);
+    
+            res.json({ msg: "Deleted Success!" });
+
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
+
     voteBlog: async (req, res) => {
         try {
             if(req.body.vote === "up"){
@@ -105,24 +129,7 @@ const blogsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
-    deleteBlog: async (req, res) => {
-        try {
-            const blog = await Blog.findById( req.body.blogId);
-
-            await MedicalProfile.findOneAndUpdate(
-                { userId: blog.autherId },
-                { "$pull": { blogRecord: {blogId : req.body.blogId} } }
-            );
-
-            await Blog.findByIdAndDelete(req.body.blogId);
     
-            res.json({ msg: "Deleted Success!" });
-
-        } catch (err) {
-        return res.status(500).json({ msg: err.message });
-        }
-    },
-
     postComment: async (req, res) => {
         try {
             const comment = {

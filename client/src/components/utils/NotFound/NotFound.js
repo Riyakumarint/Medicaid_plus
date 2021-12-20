@@ -20,7 +20,6 @@ function NotFound() {
   if (loading) {
     return (
       <>
-        {" "}
         <div
           className="loading"
           style={{ background: "#f8bec1", height: "100vh" }}
