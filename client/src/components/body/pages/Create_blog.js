@@ -219,7 +219,7 @@ const Create_blog = () => {
       setBlog({ ...blog, err: "", success: res.data.msg });
       setTimeout(() => {
         history.push("/articles");
-      }, 3000);
+      }, 2000);
     } catch (err) {
       err.response.data.msg &&
         setBlog({ ...blog, err: err.response.data.msg, success: "" });

@@ -1,0 +1,39 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const commentSchema =  mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    autherId: {
+      type: String,
+    },
+    comments: {
+      type: String,
+      required: true
+    },
+    // upvote: Number,
+    // downvote: Number,
+    // comments: [
+    //   {
+    //     autherId: String,
+    //     comment: {
+    //       type: String,
+    //       required: true,
+    //       maxlength: 200,
+    //     },
+    //     upvote: Number,
+    //     downvote: Number,
+    //   },
+    // ],
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = {
+  commentSchema: commentSchema,
+  commentModel: mongoose.model("Comments", commentSchema),
+};
