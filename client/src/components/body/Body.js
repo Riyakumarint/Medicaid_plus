@@ -9,6 +9,7 @@ import ResetPass from "../body/auth/ResetPassword";
 import Profile from "../body/profile/Profile";
 import Category from "./pages/Categories";
 import Speciality from "./pages/Speciality";
+import City from "./pages/City";
 import EditUser from "../body/profile/EditUser";
 import Medical_profile from './profile/Medical_Profile'
 import Medical_history from './profile/Medical_History'
@@ -113,6 +114,11 @@ function Body() {
         <Route
           path="/speciality"
           component={isLogged ? Speciality : Login}
+          exact
+        />
+        <Route
+          path="/city"
+          component={isLogged ? City : Login}
           exact
         />
         <Route

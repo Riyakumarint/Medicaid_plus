@@ -31,7 +31,7 @@ function Header() {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <img className="avatar_user" src={user.avatar} alt="" />{" "}
+          <img className="avatar_user" src={user.avatar} alt="" />
           {user.username} <i className="fas fa-angle-down"></i>
         </NavLink>
         <div className="dropdown">

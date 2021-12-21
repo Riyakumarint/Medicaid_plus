@@ -1,29 +1,27 @@
-.logo{
-    display: block;
-    margin: auto;
-    width: 60px;
-    height: 50px;
+.logo {
+  display: block;
+  margin: auto;
+  width: 60px;
+  height: 50px;
 }
-h1{
-    margin-top: 12px;
-    font-size: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
+h1 {
+  margin-top: 12px;
+  font-size: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
-body{
-    height: 110vh;
+body {
+  height: 110vh;
 }
-.containerM{
-    border: 2px solid black;
-    margin: auto;
-    overflow-y: auto;
-    margin-bottom: 23px;
-    border-radius: 7px;
-    width: 300px;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    height: 200px;
+.containerM {
+  border: 2px solid black;
+  overflow-y: auto;
+  margin-bottom: 5px;
+  /* border-radius: 1px; */
+  width: 300px;
+  padding: 15px;
+  border: none;
+  height: 300px;
 }
 /* .message{
     background-color: #f7f2f2;
@@ -34,110 +32,134 @@ body{
     border-radius: 10px;
 } */
 
-.left{
-    float: left;
-    clear: both;
+.left {
+  float: left;
+  clear: both;
 }
-.right{
-    float: right;
-    clear: both;
+.right {
+  float: right;
+  clear: both;
 }
-#send-container{
-    display: block;
-    margin: auto;
-    text-align: center;
-    max-width: 985px;
-    width: 100%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#send-container {
+  display: block;
+  margin: auto;
+  text-align: center;
+  max-width: 985px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#messageInp{
-    width: 90%;
-    border: 2px solid black;
-    border-radius: 5px;
-    height: 34px;
-    margin: 0 5px;
+#messageInp {
+  max-width: 300px;
+  min-width: 235px;
+  height: 40px;
+  margin: 5px 0;
+  border: 2px solid #911f27;
+  outline: none;
+  background: #f8e2e3;
+  border-radius: 10px;
+  padding: 0 5px;
 }
-#VideoInp{
-    padding: 10px;
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    /* background-color: white; */
-}
-.btnM{
-    background-color: #04AA6D;
-  color: white;
-  margin-right: 3px;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 30%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-.Video_chat{
-    border-radius: 50%;
+#VideoInp {
+  padding: 10px;
+  height: 66px;
+  width: 66px;
+  border-radius: 50%;
 }
 
+.Video_chat {
+  border-radius: 50%;
+}
 
-
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
 
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
-  background-color: #911f27;
-  color: white;
-  padding: 16px 20px;
-  border: none;
+  background-color: white;
+  /* color: white; */
+  /* padding: 16px 20px; */
+  /* border: none; */
   cursor: pointer;
-  opacity: 0.8;
+  border: 6px solid white;
+  box-shadow: 0 0 20px 0 #b91d28;
+  opacity: 1;
   position: fixed;
   bottom: 23px;
   right: 28px;
-  width: 280px;
-  border-radius: 10px;
+  /* width: 100px; */
+  border-radius: 50%;
 }
 
 /* The popup chat - hidden by default */
 .chat-popup {
-    background-image: linear-gradient(#911f27,#f8bec1);
-    border-radius: 10px;
-    opacity:1;
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
+  /* background-image: linear-gradient(#f8dbdc,#f8bec1,#911f27); */
+  background-color: #f8bec1;
+  box-shadow: 0 0 20px 8px #911f27;
+  border-radius: 10px;
+  opacity: 1;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #911f27;
+  z-index: 9;
+}
+
+.chat-popup label {
+  margin-bottom: -10px;
+  padding: 0 0 0 110px;
+  justify-content: center;
 }
 
 .wrapper {
-    display: grid;
-    grid-template-columns: repeat(10);
- }
+  display: grid;
+  grid-template-columns: repeat(10);
+}
 
- .box1 {
-    grid-column-start: 1;
-    grid-column-end: 10;
-    grid-row-start: 1;
- }
- .box2 {
-    grid-column-start: 10;
-    grid-row-start: 1;
- }
+.box1 {
+  grid-column-start: 1;
+  grid-column-end: 11;
+  grid-row-start: 1;
+}
+.box1 h1 {
+  right: 70px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+}
+.box2 {
+  grid-column-start: 10;
+  grid-row-start: 1;
+}
 
+.chat_btns {
+  display: flex;
+}
+
+.btnM {
+  height: 45px;
+  /* width: 35px; */
+  padding: 7px 0 2px 5px;
+  /* margin-bottom: 5px; */
+}
 /* Add a red background color to the cancel button */
-.cancel {
-  opacity: 1;
-  width: 100%;
-  background-color: red;
+.btn_cancel {
+  height: 40px;
+  width: 40px;
+  margin-bottom: 5px;
 }
 
 /* Add some hover effects to buttons */
-.btnM:hover, .open-button:hover {
+.btnM:hover {
   opacity: 1;
+}
+
+.open-button:hover {
+  box-shadow: 0 0 30px 10px #a81e27;
 }

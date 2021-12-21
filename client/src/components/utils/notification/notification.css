@@ -1,6 +1,6 @@
 .errMsg{
     position: fixed;
-    top: 90px;
+    top: 97px;
     right: 10px;
     background: rgb(214, 10, 10);
     color: white;
@@ -18,7 +18,7 @@
 
 .successMsg{
     position:fixed;
-    top: 90px;
+    top: 97px;
     right: 10px;
     background: rgb(9, 158, 54);
     color: white;

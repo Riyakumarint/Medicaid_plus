@@ -4,39 +4,19 @@ import Message from "./intComp/Message.js";
 import ChatOnline from "./intComp/ChatOnline";
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { io } from "socket.io-client";
-import { isLength, isMatch } from "../../utils/validation/Validation";
-import Loading from "../../utils/notification/Loading";
-import {
-    showSuccessMsg,
-    showErrMsg,
-} from "../../utils/notification/Notification";
-import {
-    fetchAllUsers,
-    dispatchGetAllUsers,
-} from "../../../redux/actions/usersAction";
 
-const initialState = {
-    name: "",
-    password: "",
-    cf_password: "",
-    err: "",
-    success: "",
-};
+
 export default function Messenger() {
     const auth = useSelector((state) => state.auth);
     const token = useSelector((state) => state.token);
 
     const users = useSelector((state) => state.users);
 
-    const { user, isAdmin } = auth;
-    const [data, setData] = useState(initialState);
-    const { name, password, cf_password, err, success } = data;
-
-    const [avatar, setAvatar] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [callback, setCallback] = useState(false);
+    const { user } = auth;
+    
+     
     console.log(user);
 
 
@@ -57,6 +37,7 @@ export default function Messenger() {
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
+                avatar: data.avatar,
                 createdAt: Date.now(),
             });
         });
@@ -118,12 +99,14 @@ export default function Messenger() {
         e.preventDefault();
         const message = {
             sender: user._id,
+            avatar: user.avatar,
             text: newMessages,
             conversationId: currentChat._id,
         };
         const receiverId = currentChat.members.find((member) => member !== user._id);
         socket.current.emit("sendMessage", {
             senderId: user._id,
+            avatar: user.avatar,
             receiverId: receiverId,
             text: newMessages,
         })
@@ -144,11 +127,13 @@ export default function Messenger() {
         const message = {
             sender: user._id,
             text: text,
+            avatar: user.avatar,
             conversationId: currentChat._id,
         };
         const receiverId = currentChat.members.find((member) => member !== user._id);
         socket.current.emit("sendMessage", {
             senderId: user._id,
+            avatar: user.avatar,
             receiverId: receiverId,
             text: text,
         });
