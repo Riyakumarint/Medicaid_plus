@@ -289,6 +289,8 @@ const userCtrl = {
           qualification: [],
           
           speciality_name: "Speciality",
+          city_name: "Speciality",
+          clinic_address: "Clinic address",
           experience_year: "Experience",
           caseRecord: [],
           blogRecord:[]

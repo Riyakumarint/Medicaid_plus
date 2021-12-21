@@ -25,9 +25,7 @@ router.post('/addQualification',auth, profilesCtrl.addQualification)
 router.post('/deleteQualification',auth, profilesCtrl.deleteQualification)
 
 router.post('/rateDoctor', auth,profilesCtrl.rateDoctor)
-
 router.post('/commentDoctor',auth, profilesCtrl.commentDoctor)
-
 router.delete('/deleteCommentDoctor', auth, profilesCtrl.deleteCommentDoctor)
 
 

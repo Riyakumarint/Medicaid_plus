@@ -26,6 +26,16 @@ const medicalProfileSchema = new mongoose.Schema({
         default: '' 
         // required: true
     },
+    city_name: {
+        type: String,
+        default: '' 
+        // required: true
+    },
+    clinic_address: {
+        type: String,
+        default: '' 
+        // required: true
+    },
     experience_year: {
         type: String,
         default: '' 

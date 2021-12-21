@@ -15,6 +15,8 @@ const initialState = {
   college: "",
   passingyear: "",
   speciality_name: "",
+  city_name: "",
+  clinic_address: "",
   experience_year: "",
   err: "",
   success: "",
@@ -25,6 +27,7 @@ const Medical_profile = () => {
   const [qualifications, setQualifications] = useState([]);
   const [qualification, setQualification] = useState({major: "", college: "", passingyear: ""});
   const [specialities, setSpecialities] = useState([]);
+  const [cities, setCities] = useState([]);
   const [callback, setCallback] = useState(false);
 
   const token = useSelector((state) => state.token);
@@ -37,6 +40,15 @@ const Medical_profile = () => {
     };
 
     getSpecialities();
+  }, [callback]);
+
+  useEffect(() => {
+    const getCities = async () => {
+      const res = await axios.get("/api/city");
+      setCities(res.data);
+    };
+
+    getCities();
   }, [callback]);
 
   useEffect(() => {
@@ -285,21 +297,6 @@ const Medical_profile = () => {
                   <hr></hr>
                 </div>
                 <div className="row">
-                  {/* <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="speciality_name">Speciality Name</label>
-                        <input
-                          className="speciality_name"
-                          id="exampleInputspeciality_name1"
-                          placeholder="speciality_name"
-                          onChange={handleChangeInput}
-                          value={profile.speciality_name}
-                          name="speciality_name"
-                        />
-                      </div>
-                    </div>
-                  </div> */}
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                     <label htmlFor="speciality_name">Speciality Name</label>
@@ -321,7 +318,7 @@ const Medical_profile = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="experience_year">Experience year</label>
+                        <label htmlFor="experience_year">Experience Year</label>
                         <input
                           className="experience_year"
                           id="exampleInputexperience_year1"
@@ -334,6 +331,47 @@ const Medical_profile = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* address block */}
+                <div className="line-2">
+                  <hr></hr>
+                </div>
+                <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                    <label htmlFor="city_name">City Name</label>
+                      <select
+                        className="form-control text-capitalize speciality_name"
+                        value={profile.city_name}
+                        name="city_name"
+                        onChange={handleChangeInput}
+                      >
+                        <option value="">Select City</option>
+                        {cities.map((city) => (
+                          <option key={city._id} value={city._id}>
+                            {city.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="clinic_address">Clinic Address</label>
+                        <input
+                          className="clinic_address"
+                          id="exampleInputclinic_address1"
+                          placeholder="clinic_address"
+                          onChange={handleChangeInput}
+                          value={profile.clinic_address}
+                          name="clinic_address"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </form>

@@ -201,10 +201,10 @@ const profilesCtrl = {
     },
     updateMedicalProfile: async (req, res) => {
         try {
-            const {bloodGroup, age, speciality_name, experience_year} = req.body.profile;
+            const {bloodGroup, age, speciality_name, city_name, clinic_address, experience_year} = req.body.profile;
             await MedicalProfile.findOneAndUpdate(
                 { userId: req.user.id },
-                {bloodGroup, age, speciality_name, experience_year}
+                {bloodGroup, age, speciality_name, city_name, clinic_address, experience_year}
             );
             res.json({ msg: "Profile updated!" });
         } catch (err) {
