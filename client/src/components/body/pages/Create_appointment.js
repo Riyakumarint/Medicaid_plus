@@ -10,15 +10,13 @@ import SideNav from "../profile/sidenav/SideNav";
 
 const initialState = {
     patienttId: "",
-    doctortId: "",
+  doctortId: "",
+  patient_name: "",
+  doctor_name: "",
     status: "",
-    date: "",
-
     title: "",
     description: "",
-
     meetingDetail: "",
-
     err: "",
     success: "",
 };
@@ -58,7 +56,7 @@ const Create_appointment = () => {
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
     setSpeciality({ ...speciality, [name]: value});
-    setAppointmentDetails({...appointmentDetails, doctortId: ""});
+    setAppointmentDetails({...appointmentDetails, doctortId: "",doctor_name: ""});
     try {
       console.log(speciality.speciality_name);
       const res = await axios.get(
@@ -103,9 +101,10 @@ const Create_appointment = () => {
         return setAppointmentDetails({ ...appointmentDetails, err: "Please fill in all fields.", success: ""});
 
       const appointmentDetail = {...appointmentDetails, 
-      patienttId: user._id,
+        patienttId: user._id,
+        patient_name: user.name,
       status: "active", 
-      date: Date(new Date),
+      
       symptoms:symptoms,
       previousMedicine:previousMedicine, 
       previousTestReports:previousTestReports,

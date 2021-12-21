@@ -1,4 +1,4 @@
-.conversation {
+  .conversation {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -7,7 +7,8 @@
   }
   
   .conversation:hover {
-    background-color: rgb(245, 243, 243);
+    background-color: #911F27;
+    color: white;
   }
   
   .conversationImg {
@@ -15,7 +16,8 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 20px;
+    border: 2px solid #911f27;
+    margin: auto 5px;
   }
   
   .conversationName {

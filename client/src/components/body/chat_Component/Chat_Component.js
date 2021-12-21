@@ -1,9 +1,9 @@
 import React from "react";
 import "./chat_component.css";
-import logo from "./video.png";
-import Chat from "./chat.png";
-import Close from "./close.png";
-import Send from "./send.png";
+import logo from "../../../images/video.svg";
+import Chat from "../../../images/chat.png";
+import Close from "../../../images/close.png";
+import Send from "../../../images/send.png";
 import Message from "../messenger/intComp/Message.js";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";

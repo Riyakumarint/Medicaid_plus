@@ -62,7 +62,7 @@ const Appointments = () => {
             <tbody>
               {appointments.map((appointment) => (
                 <tr key={appointment._id}>
-                  <td>{(appointment.meetingDetail).substring(0, 21)}</td>
+                  <td>{new Date(appointment.createdAt).toDateString()} at {new Date(appointment.createdAt).toLocaleTimeString()}</td>
                   <td>{appointment.title}</td>
                   <td>{appointment.doctortId}</td>
                   <td>
