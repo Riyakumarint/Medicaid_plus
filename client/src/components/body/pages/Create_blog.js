@@ -102,7 +102,7 @@ const Create_blog = () => {
       if (file.size > 2048 * 2048)
         return setBlog({ ...blog, err: "Size too large.", success: "" });
 
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
+      if (file.type !== "image/jpeg" && file.type !== "image/png" && file.type !== "application/pdf")
         return setBlog({
           ...blog,
           err: "File format is incorrect.",
@@ -116,6 +116,8 @@ const Create_blog = () => {
       const res = await axios.post("/api/upload_coverImage", formData, {
         headers: {
           "content-type": "multipart/form-data",
+          // "content-type": "text/plain",
+
           Authorization: token,
         },
       });

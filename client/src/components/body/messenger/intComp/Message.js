@@ -7,12 +7,12 @@ export default function Message(props) {
       <div className="messageTop-new">
         <img
           className="messageImg"
-          src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          src={props.message.avatar}
           alt=""
         />
         <p className="messageText-new">{props.message.text}</p>
       </div>
-      <div className="messageBottom">{format(props.message.createdAt)}</div>
+      <div className="messageTime">{format(props.message.createdAt)}</div>
     </div>
   );
 }
