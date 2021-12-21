@@ -95,14 +95,22 @@ const specialityCtrl = {
         }
     },
 
-    fetchDoctorBySpeciality: async(req, res) =>{
+    fetchDoctors: async(req, res) =>{
         try {
-            const medical_profiles = await MedicalProfile.find({speciality_name: req.params.speciality_name});
+            let Filter = {}
+            if(req.body.speciality_name!==""){
+                Filter = {...Filter, speciality_name:req.body.speciality_name}
+            }
+            if(req.body.city_name!==""){
+                Filter = {...Filter, city_name:req.body.city_name}
+            }
+
+            const medical_profiles = await MedicalProfile.find(Filter);
             // console.log(medical_profiles);
             const promises = medical_profiles.map(async (medical_profile) => {
-                const doctor = await Users.find({_id: medical_profile.userId});
+                // const doctor = await Users.find({_id: medical_profile.userId});
                 // console.log(doctor);
-                return {name: doctor[0].name, doctortId: doctor[0]._id};
+                return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
             })
             const doctorsNameId = await Promise.all(promises);
             // confused what's going on? visit-> https://youtu.be/qfNtVh2RALc

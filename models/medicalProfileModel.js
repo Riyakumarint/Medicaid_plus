@@ -9,6 +9,11 @@ const medicalProfileSchema = new mongoose.Schema({
         // unique: true,
         default: '' 
     },
+    name: {
+        type: String,
+        default: "Doctor's name"
+        // required: true
+    },
 
     bloodGroup: {
         type: String,

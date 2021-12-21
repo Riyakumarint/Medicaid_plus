@@ -9,6 +9,7 @@ import {
 import SideNav from "./sidenav/SideNav";
 
 const initialState = {
+  name:"",
   bloodGroup: "",
   age: "",
   major: "",
@@ -194,16 +195,14 @@ const Medical_profile = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="bloodGroup">Blood Group</label>
+                        <label htmlFor="name">Doctor's Name</label>
                         <input
-                          type="bloodGroup"
-                          className="bloodGroup"
-                          id="exampleInputtest"
-                          aria-describedby="bloodGroup"
-                          placeholder="bloodGroup"
+                          className="Doctor's name"
+                          id="exampleInputname1"
+                          placeholder="name"
                           onChange={handleChangeInput}
-                          name="bloodGroup"
-                          value={profile.bloodGroup}
+                          value={profile.name}
+                          name="name"
                         />
                       </div>
                     </div>
@@ -219,6 +218,23 @@ const Medical_profile = () => {
                           onChange={handleChangeInput}
                           value={profile.age}
                           name="age"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="bloodGroup">Blood Group</label>
+                        <input
+                          type="bloodGroup"
+                          className="bloodGroup"
+                          id="exampleInputtest"
+                          aria-describedby="bloodGroup"
+                          placeholder="bloodGroup"
+                          onChange={handleChangeInput}
+                          name="bloodGroup"
+                          value={profile.bloodGroup}
                         />
                       </div>
                     </div>
