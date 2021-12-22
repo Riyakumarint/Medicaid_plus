@@ -23,6 +23,8 @@ const initialState = {
   success: "",
 };
 
+const initialState2 = {doctortId:"", doctor_name:"", clinic_address:""};
+
 const Create_appointment = () => {
   const [appointmentDetails, setAppointmentDetails] = useState(initialState);
   const [symptom, setSymptom] = useState({name: "", fromWhen: ""});
@@ -36,7 +38,7 @@ const Create_appointment = () => {
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState({city_name: ""});
   const [doctors, setDoctors] = useState([]);
-  const [doctor, setDoctor] = useState({doctortId:"", doctor_name:"", clinic_address:""});
+  const [doctor, setDoctor] = useState(initialState2);
   const [callback, setCallback] = useState(false);
   const history = useHistory();
 
@@ -87,7 +89,7 @@ const Create_appointment = () => {
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
     setSpeciality({ ...speciality, [name]: value});
-    setDoctor({...doctor, doctortId:"", doctor_name:"", clinic_address:""})
+    setDoctor(initialState2)
     try {
       const res = await axios.post(
         "/api/fetchDoctors/",
@@ -102,7 +104,7 @@ const Create_appointment = () => {
   const handleChangeCity = async (e) => {
     const { name, value } = e.target;
     setCity({ ...city, [name]: value});
-    setDoctor({...doctor, doctortId:"", doctor_name:"", clinic_address:""})
+    setDoctor(initialState2)
     try {
       const res = await axios.post(
         "/api/fetchDoctors/",
@@ -117,9 +119,9 @@ const Create_appointment = () => {
 
   const handleChangeDoctor = (e) => {
     const { name1, value } = e.target;
-    const temp = doctors.filter(doctor => { return doctor.doctortId===value; });
-    const {doctortId, name, clinic_address} = temp[0];
-    setDoctor({...doctor, doctortId:doctortId, doctor_name:name, clinic_address:clinic_address})
+    const temp = doctors.filter(doctor => { return doctor.userId===value; });
+    const {userId, name, clinic_address} = temp[0];
+    setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address})
   }
 
   const handleChangeSymptom = (e) => {
@@ -164,7 +166,7 @@ const Create_appointment = () => {
       
     const conversation={
       senderId:user._id,
-      receiverId:appointmentDetails.doctortId,
+      receiverId:doctor.doctortId,
     };
     try{
       const Conversation = await axios.post("/conversations",conversation);
@@ -489,7 +491,7 @@ const Create_appointment = () => {
                       >
                         <option value="">Choose a doctor</option>
                         {doctors.map((doctor) => (
-                          <option key={doctor.doctortId} value={doctor.doctortId}>
+                          <option key={doctor.userId} value={doctor.userId}>
                             {doctor.name}
                           </option>
                         ))}

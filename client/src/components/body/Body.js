@@ -22,7 +22,7 @@ import Appointment_patient from "./pages/Appointment_patient";
 import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
 import ArticlePage from "../body/articles/ArticlePage"
-import VideoConsult from "../body/pages/VideoConsult";
+import Find_doctor from "../body/pages/Find_doctor";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
 import Messenger from "./messenger/Messenger.js"
@@ -141,7 +141,11 @@ function Body() {
           component={isLogged ? Messenger : Login}
           exact
         />
-        <Route path="/find_video_consult" component={VideoConsult} />
+        <Route 
+          path="/find_doctor" 
+          component={Find_doctor} 
+          exact
+        />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
         <Route path="/articles" component={Articles} />

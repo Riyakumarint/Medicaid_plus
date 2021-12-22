@@ -110,7 +110,8 @@ const specialityCtrl = {
             const promises = medical_profiles.map(async (medical_profile) => {
                 // const doctor = await Users.find({_id: medical_profile.userId});
                 // console.log(doctor);
-                return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
+                // return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
+                return medical_profile
             })
             const doctorsNameId = await Promise.all(promises);
             // confused what's going on? visit-> https://youtu.be/qfNtVh2RALc
