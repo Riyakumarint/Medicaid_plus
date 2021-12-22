@@ -21,6 +21,7 @@ router.post('/deleteAllergies',auth, profilesCtrl.deleteAllergies)
 router.post('/createMedicalProfile',auth, profilesCtrl.createMedicalProfile)
 router.patch('/updateMedicalProfile',auth, profilesCtrl.updateMedicalProfile)
 router.get('/getMedicalProfile',auth, profilesCtrl.getMedicalProfile)
+router.get('/fetchDoctor/:doctorId', profilesCtrl.fetchDoctor)
 router.post('/addQualification',auth, profilesCtrl.addQualification)
 router.post('/deleteQualification',auth, profilesCtrl.deleteQualification)
 

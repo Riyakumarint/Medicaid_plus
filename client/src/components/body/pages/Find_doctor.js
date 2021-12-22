@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ReactStars from 'react-stars'
 import axios from "axios";
 import {
   showErrMsg,
@@ -111,7 +112,13 @@ const Find_doctor = () => {
                 <tr key={doctor._id}>
                   <td>{doctor.name}</td>
                   <td>{getSpecialityName(doctor.speciality_name, specialities)}</td>
-                  <td>{doctor.reviews.rating}</td>
+                  <td><ReactStars
+                        count={5}
+                        value={Number(doctor.reviews.rating)}
+                        size={24}
+                        color2={'#ffd700'} 
+                        edit={false}
+                    /></td>
                   <td>{doctor.clinic_address}</td>
                   <td>{getSpecialityFee(doctor.speciality_name, specialities)}</td>
                   <td>

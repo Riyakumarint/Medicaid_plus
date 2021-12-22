@@ -225,6 +225,16 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Get some public details of doctor's user profile
+  fetchDoctorUser: async (req, res) => {
+    try {
+        const user = await Users.find({_id: req.params.doctorId});
+        const {avatar, email, mobile, gender} = user[0];
+        res.json({avatar, email, mobile, gender});
+    } catch (err) {
+        return res.status(500).json({ msg: err.message });
+    }
+  },
   // Get all users(admin)
   getUsersAllInfor: async (req, res) => {
     try {
@@ -248,14 +258,15 @@ const userCtrl = {
   // update User Profile
   updateUser: async (req, res) => {
     try {
-      const { name, avatar, mobile, address } = req.body;
+      const { name, avatar, mobile, address, gender } = req.body;
       await Users.findOneAndUpdate(
         { _id: req.user.id },
         {
           name,
           avatar,
           mobile, 
-          address
+          address,
+          gender
         }
       );
 

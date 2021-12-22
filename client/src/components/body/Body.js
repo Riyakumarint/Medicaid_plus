@@ -23,6 +23,7 @@ import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
 import ArticlePage from "../body/articles/ArticlePage"
 import Find_doctor from "../body/pages/Find_doctor";
+import Doctor from "../body/pages/Doctor";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
 import Messenger from "./messenger/Messenger.js"
@@ -144,6 +145,11 @@ function Body() {
         <Route 
           path="/find_doctor" 
           component={Find_doctor} 
+          exact
+        />
+        <Route
+          path="/doctor/:doctorId"
+          component={Doctor}
           exact
         />
         <Route path="/find_lab_test" component={LabTest} />
