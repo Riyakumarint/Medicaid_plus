@@ -1,4 +1,5 @@
 const Speciality = require('../models/specialityModel').specialityModel
+const City = require('../models/cityModel').cityModel
 const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
 const Users = require("../models/userModel").userModel;
 
@@ -50,14 +51,66 @@ const specialityCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    fetchDoctorBySpeciality: async(req, res) =>{
+
+    getCities: async(req, res) =>{
         try {
-            const medical_profiles = await MedicalProfile.find({speciality_name: req.params.speciality_name});
+           const cities = await City.find()
+            res.json(cities)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    createCity: async (req, res) =>{
+        try {
+            // if user have role = 1 ---> admin
+            // only admin can create , delete and update speciality
+            const {name} = req.body;
+            const city = await City.findOne({name})
+            if(city) return res.status(400).json({msg: "This city already exists."})
+
+            const newCity = new City({name})
+
+            await newCity.save()
+            res.json({msg: "Created a city"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    deletesCity: async(req, res) =>{
+        try {
+            await City.findByIdAndDelete(req.params.id)
+            res.json({msg: "Deleted a City"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    updateCity: async(req, res) =>{
+        try {
+            const {name} = req.body;
+            await City.findOneAndUpdate({_id: req.params.id}, {name})
+
+            res.json({msg: "Updated a city"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+
+    fetchDoctors: async(req, res) =>{
+        try {
+            let Filter = {}
+            if(req.body.speciality_name!==""){
+                Filter = {...Filter, speciality_name:req.body.speciality_name}
+            }
+            if(req.body.city_name!==""){
+                Filter = {...Filter, city_name:req.body.city_name}
+            }
+
+            const medical_profiles = await MedicalProfile.find(Filter);
             // console.log(medical_profiles);
             const promises = medical_profiles.map(async (medical_profile) => {
-                const doctor = await Users.find({_id: medical_profile.userId});
+                // const doctor = await Users.find({_id: medical_profile.userId});
                 // console.log(doctor);
-                return {name: doctor[0].name, doctortId: doctor[0]._id};
+                return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
             })
             const doctorsNameId = await Promise.all(promises);
             // confused what's going on? visit-> https://youtu.be/qfNtVh2RALc

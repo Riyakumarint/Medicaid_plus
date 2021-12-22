@@ -283,12 +283,15 @@ const userCtrl = {
       if(role===2){
         const newMedicalProfileData = new MedicalProfile({
           userId: req.params.id,
+          name:"Doctor's name",
             
           bloodGroup: "O+",
           age: "35",
           qualification: [],
           
           speciality_name: "Speciality",
+          city_name: "Speciality",
+          clinic_address: "Clinic address",
           experience_year: "Experience",
           caseRecord: [],
           blogRecord:[]

@@ -1,7 +1,8 @@
 .message {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 6px;
+    /* margin-bottom: 0; */
   }
   
   .messageTop-new{
@@ -17,16 +18,17 @@
   }
   
   .messageText-new{
-      padding: 10px;
-      border-radius: 20px;
-      background-color: #1877f2;
+      padding: 4px 10px;
+      border-radius: 15px;
+      background-color: #8b1319;
       color: white;
       max-width: 300px;
+      border: 1px solid white;
   }
   
-  .messageBottom{
-      font-size: 12px;
-      margin-top: 10px;
+  .messageTime{
+    font-size: 12px;
+    margin: 0px 10px 15px 2px;
   }
   
   .message.own{
@@ -34,6 +36,7 @@
   }
   
   .message.own .messageText-new{
-      background-color: rgb(245, 241, 241);
-      color: black;
+      background-color: white;
+      color: #500c0f;
+      border: 1px solid #350b0d;
   }

@@ -22,6 +22,15 @@ router.route('/speciality/:id')
     .delete(auth, authAdmin, specialityCtrl.deletesSpeciality)
     .put(auth, authAdmin, specialityCtrl.updateSpeciality)
 
-router.get('/fetchDoctorBySpeciality/:speciality_name',auth, specialityCtrl.fetchDoctorBySpeciality)
+
+router.route('/city')
+    .get(specialityCtrl.getCities)
+    .post(auth, authAdmin, specialityCtrl.createCity)
+
+router.route('/city/:id')
+    .delete(auth, authAdmin, specialityCtrl.deletesCity)
+    .put(auth, authAdmin, specialityCtrl.updateCity)
+
+router.post('/fetchDoctors',auth, specialityCtrl.fetchDoctors)
 
 module.exports = router

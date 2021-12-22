@@ -21,17 +21,17 @@ const appointmentsCtrl = {
 
                 patienttId: req.body.appointmentDetail.patienttId,
                 doctortId: req.body.appointmentDetail.doctortId,
+                patient_name:req.body.appointmentDetail.patient_name,   
+                doctor_name:req.body.appointmentDetail.doctor_name,
                 status: req.body.appointmentDetail.status,
-                date: req.body.appointmentDetail.date,
-            
+                mode:req.body.appointmentDetail.mode,   
+                clinic_address:req.body.appointmentDetail.clinic_address, 
                 title: req.body.appointmentDetail.title,
                 description: req.body.appointmentDetail.description,
                 symptoms: req.body.appointmentDetail.symptoms,
                 previousMedicine: req.body.appointmentDetail.previousMedicine,
                 previousTestReports: req.body.appointmentDetail.previousTestReports,
-            
-                meetingDetail: req.body.appointmentDetail.meetingDetail,
-                
+                meetingDetail: req.body.appointmentDetail.meetingDetail,  
             });
 
             newAppointmentData.save( async (error, result) => {

@@ -89,11 +89,23 @@ function SideNav() {
         </li>
         <li>
           {isAdmin ? (
+            <a href="/city" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fas fa-city" aria-hidden="true"></i>
+              </span>
+              <span class="title">City</span>
+            </a>
+          ) : (
+            ""
+          )}
+        </li>
+        <li>
+          {isAdmin ? (
             <a href="/category" onClick={() => window.scrollTo({ top: 0 })}>
               <span class="icon">
                 <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
               </span>
-              <span class="title">Create C</span>
+              <span class="title">Category</span>
             </a>
           ) : (
             <a href="#" onClick={() => window.scrollTo({ top: 0 })}>

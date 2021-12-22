@@ -9,18 +9,18 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 
 const initialState = {
-    patienttId: "",
-    doctortId: "",
-    status: "",
-    date: "",
-
-    title: "",
-    description: "",
-
-    meetingDetail: "",
-
-    err: "",
-    success: "",
+  patienttId: "",
+  doctortId: "",
+  patient_name: "",
+  doctor_name: "",
+  status: "",
+  mode: "online",
+  clinic_address: "",
+  title: "",
+  description: "",
+  meetingDetail: "",
+  err: "",
+  success: "",
 };
 
 const Create_appointment = () => {
@@ -33,7 +33,10 @@ const Create_appointment = () => {
   const [previousTestReports, setPreviousTestReports] = useState([]);
   const [specialities, setSpecialities] = useState([]);
   const [speciality, setSpeciality] = useState({speciality_name: ""});
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState({city_name: ""});
   const [doctors, setDoctors] = useState([]);
+  const [doctor, setDoctor] = useState({doctortId:"", doctor_name:"", clinic_address:""});
   const [callback, setCallback] = useState(false);
   const history = useHistory();
 
@@ -48,21 +51,62 @@ const Create_appointment = () => {
     };
     getSpecialities();
   }, [callback]);
+  useEffect(() => {
+    const getCities = async () => {
+      const res = await axios.get("/api/city");
+      setCities(res.data);
+    };
+    getCities();
+  }, [callback]);
+
+  useEffect(() => {
+    const getDoctors = async () => {
+      try {
+        const res = await axios.post(
+          "/api/fetchDoctors/",
+          {speciality_name: "", city_name: ""},
+          { headers: { Authorization: token } }
+        );
+        setDoctors(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getDoctors();
+  }, [callback]);
 
   // handle changes
-  const handleChangeInput = (e) => {
+  const handleChangeInput = async (e) => {
     const { name, value } = e.target;
     setAppointmentDetails({ ...appointmentDetails, [name]: value, err: "", success: "" });
+    if(name === "mode" && value === "online"){
+      handleChangeCity({target:{name:"city_name", value:""}});
+    }
   };
 
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
     setSpeciality({ ...speciality, [name]: value});
-    setAppointmentDetails({...appointmentDetails, doctortId: ""});
+    setDoctor({...doctor, doctortId:"", doctor_name:"", clinic_address:""})
     try {
-      console.log(speciality.speciality_name);
-      const res = await axios.get(
-        "/api/fetchDoctorBySpeciality/"+e.target.value,
+      const res = await axios.post(
+        "/api/fetchDoctors/",
+        {speciality_name: e.target.value, city_name: city.city_name},
+        { headers: { Authorization: token } }
+      );
+      setDoctors(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleChangeCity = async (e) => {
+    const { name, value } = e.target;
+    setCity({ ...city, [name]: value});
+    setDoctor({...doctor, doctortId:"", doctor_name:"", clinic_address:""})
+    try {
+      const res = await axios.post(
+        "/api/fetchDoctors/",
+        {speciality_name: speciality.speciality_name, city_name: e.target.value},
         { headers: { Authorization: token } }
       );
       setDoctors(res.data);
@@ -71,9 +115,11 @@ const Create_appointment = () => {
     }
   };
 
-  const handleChangeDoctor = async (e) => {
-    const { name, value } = e.target;
-    setAppointmentDetails({...appointmentDetails, [name]: value});
+  const handleChangeDoctor = (e) => {
+    const { name1, value } = e.target;
+    const temp = doctors.filter(doctor => { return doctor.doctortId===value; });
+    const {doctortId, name, clinic_address} = temp[0];
+    setDoctor({...doctor, doctortId:doctortId, doctor_name:name, clinic_address:clinic_address})
   }
 
   const handleChangeSymptom = (e) => {
@@ -95,35 +141,39 @@ const Create_appointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(
-        !appointmentDetails.doctortId ||
+        !doctor.doctortId ||
         !appointmentDetails.title ||
         !appointmentDetails.description ||
         Lenght(symptoms)===0
-      )
-        return setAppointmentDetails({ ...appointmentDetails, err: "Please fill in all fields.", success: ""});
+    )
+      return setAppointmentDetails({ ...appointmentDetails, err: "Please fill in all fields.", success: ""});
 
-      const appointmentDetail = {...appointmentDetails, 
+    const appointmentDetail = {...appointmentDetails, 
       patienttId: user._id,
+      patient_name: user.name,
       status: "active", 
-      date: Date(new Date),
+      doctortId: doctor.doctortId, 
+      doctor_name: doctor.doctor_name, 
+      clinic_address: doctor.clinic_address,
       symptoms:symptoms,
       previousMedicine:previousMedicine, 
       previousTestReports:previousTestReports,
       meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
-      err: "", success: "",}
-      const c={
-        senderId:user._id,
-        receiverId:appointmentDetails.doctortId,
-      };
-      try{
-      const conversation = await axios.post("/conversations",c);
-      console.log(conversation);
+      err: "", success: "",
+    }
+      
+    const conversation={
+      senderId:user._id,
+      receiverId:appointmentDetails.doctortId,
+    };
+    try{
+      const Conversation = await axios.post("/conversations",conversation);
+      // console.log(Conversation);
       }
       catch(err){
         console.log(err);
       }
     try {
-      // await updateAppointmentDetails();
       const res = await axios.post(
         "/appointments/createAppointment",
         { appointmentDetail},
@@ -318,8 +368,9 @@ const Create_appointment = () => {
                 </button>
               </div>
 
-              {/* title and description block */}
               <div className="profile-container">
+              
+                {/* title and description block */}
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
@@ -338,8 +389,6 @@ const Create_appointment = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
@@ -361,7 +410,34 @@ const Create_appointment = () => {
                   </div>
                 </div>
 
-                {/* Selectdoctor and catagory block */}
+                {/* Mode of appointment */}
+                <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="mode">Mode of Appointment</label>
+                        <input 
+                          type="radio"
+                          id="online"
+                          onChange={handleChangeInput}
+                          name="mode"
+                          value="online"
+                        />
+                        <label for="online">Online</label>
+                        <input 
+                          type="radio"
+                          id="offline"
+                          onChange={handleChangeInput}
+                          name="mode"
+                          value="offline"
+                        />
+                        <label for="offline">Offline</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Selectdoctor block */}
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
@@ -381,12 +457,33 @@ const Create_appointment = () => {
                       </select>
                     </div>
                   </div>
+                  {appointmentDetails.mode==="offline"?<div class="col s12 m6 l4">
+                    <div className="form-group">
+                    <label htmlFor="city_name">City</label>
+                      <select
+                        className="form-control text-capitalize speciality_name"
+                        value={city.city_name}
+                        name="city_name"
+                        onChange={handleChangeCity}
+                      >
+                        <option value="">Choose a city</option>
+                        {cities.map((city) => (
+                          <option key={city._id} value={city._id}>
+                            {city.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  :""
+                  }
+                  
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                     <label htmlFor="doctortId">Doctor</label>
                       <select
                         className="form-control text-capitalize speciality_name"
-                        value={appointmentDetails.doctortId}
+                        value={doctor.doctortId}
                         name="doctortId"
                         onChange={handleChangeDoctor}
                       >
