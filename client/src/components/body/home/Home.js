@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import Card from './Cards'
 import "./home.css";
 import Carousel from "react-elastic-carousel";
@@ -7,25 +7,6 @@ import Sdata from './Sdata'
 import Carousel1 from "../../../images/doc1.jpg";
 import Carousel2 from "../../../images/doc2.jpg";
 import Carousel3 from "../../../images/doc3.jpg";
-import s1 from "../../../images/ayurvedic.jpeg";
-import s2 from "../../../images/cardiology-icon.jpeg";
-import s3 from "../../../images/dermatology.png";
-import s4 from "../../../images/gynecology-icon.jpeg";
-import s5 from "../../../images/ophthalmology.jpeg";
-import s6 from "../../../images/orthopedic-icon.jpeg";
-import s7 from "../../../images/padiatrics.png";
-import s8 from "../../../images/psychiatry.png";
-import s9 from "../../../images/sexology.png";
-import s10 from "../../../images/stethoscope-icon.png";
-import s11 from "../../../images/stomach-icon.png";
-import s12 from "../../../images/surgeon.png";
-import s13 from "../../../images/teeth-icon.png";
-import s14 from "../../../images/uro-icon.png";
-// import d1 from "../../../images/d1.jpeg";
-// import d2 from "../../../images/d2.jpeg";
-// import d3 from "../../../images/d3.jpeg";
-// import d4 from "../../../images/d4.jpeg";
-// import d5 from "../../../images/d5.jpeg";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -35,6 +16,9 @@ const breakPoints = [
 ];
 
 function Home() {
+  const [specialities, setSpecialities] = useState([]);
+  const [callback, setCallback] = useState(false);
+  const [speciality, setSpeciality] = useState("");
   return (
     <div className="home_page">
       <div className="cor c1">
@@ -60,7 +44,7 @@ function Home() {
                       Nulla vitae elit libero, a pharetra augue mollis interdum.
                     </p>
                     <div className="slider-btn">
-                      <a href="/video_consult">
+                      <a href="/find_video_consult">
                         Video Consult
                       </a>
                     </div>
@@ -79,7 +63,7 @@ function Home() {
                     Search & Book Online Doctor Appointment Here
                     </p>
                     <div className="slider-btn">
-                      <a href="/appoinment_booking">
+                      <a href="/create_appointments">
                         BOOK Appoinment
                       </a>
                     </div>

@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "../editor/ReactQuill";
 import Loading from "../../utils/notification/Loading";
+import SideNav from "../profile/sidenav/SideNav";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -261,6 +262,8 @@ const Create_blog = () => {
   // };
 
   return (
+    <>
+      <SideNav/>
     <div className="create_blog">
       <div className="blog_pro">
         {err && showErrMsg(err)}
@@ -382,7 +385,7 @@ const Create_blog = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

@@ -96,9 +96,9 @@ function SideNav() {
               <span class="title">Create C</span>
             </a>
           ) : (
-            <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
+            <a href="/contact_us" onClick={() => window.scrollTo({ top: 0 })}>
               <span class="icon">
-                <i class="fa fa-list-alt" aria-hidden="true"></i>
+              <i class="fas fa-envelope"></i>
               </span>
               <span class="title">Contact</span>
             </a>

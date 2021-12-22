@@ -242,7 +242,7 @@ function Profile() {
                     <textarea
                       rows="3"
                       cols="30"
-                      type="description"
+                      type="text"
                       className="appointment_description"
                       id="exampleAddress"
                       aria-describedby="address"
