@@ -24,7 +24,9 @@ import ArticlePage from "../body/articles/ArticlePage"
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
 import specialist from "../body/pages/specialist";
-import Messenger from "./messenger/Messenger.js"
+import Messenger from "./messenger/Messenger.js";
+import Create_Slots from "./create_Slot/Create_Slot";
+import Book_Slots from "./book_Slots/Book_Slots";
 import { useSelector } from "react-redux";
 
 function Body() {
@@ -135,6 +137,9 @@ function Body() {
           component={isLogged ? Messenger : Login}
           exact
         />
+        
+        <Route  Path="/BookSlot" component={isLogged?Book_Slots:NotFound} exact/>
+        <Route  Path="/CreateSlot" component={isLogged&&isDoctor?Create_Slots:NotFound} exact/>
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />

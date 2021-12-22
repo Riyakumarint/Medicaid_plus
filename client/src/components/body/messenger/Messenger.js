@@ -116,6 +116,7 @@ export default function Messenger() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(newMessages!==""){
         const message = {
             sender: user._id,
             text: newMessages,
@@ -135,6 +136,7 @@ export default function Messenger() {
         }
         catch (err) {
             console.log(err);
+        }
         }
     }
     const handleSubmit_video = async (e) => {
