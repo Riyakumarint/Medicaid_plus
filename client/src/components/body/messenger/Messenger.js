@@ -110,10 +110,11 @@ export default function Messenger() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
+
   const handleSubmit_video = async (e) => {
     e.preventDefault();
-    const text = "http://localhost:300/" + user._id;
+    const text = "http://localhost:3001/" + user._id;
     setNewMessage(text);
     const message = {
       sender: user._id,

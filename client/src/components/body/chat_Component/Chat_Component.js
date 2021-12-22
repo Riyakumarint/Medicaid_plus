@@ -125,35 +125,34 @@ export default function Chat_Component(props) {
     } catch (err) {
       console.log(err);
     }
-  };
-  const handleSubmit_video = async (e) => {
-    e.preventDefault();
-    const text = "http://localhost:300/" + user._id;
-    setNewMessage(text);
-    const message = {
-      sender: user._id,
-      text: text,
-      avatar: user.avatar,
-      conversationId: currentChat._id,
+  }
+
+    const handleSubmit_video = async (e) => {
+        e.preventDefault();
+        const text = "http://localhost:3001/"+user._id;
+        setNewMessage(text);
+        const message = {
+            sender: user._id,
+            text: text,
+            conversationId: currentChat._id,
+        };
+        const receiverId = currentChat.members.find((member) => member !== user._id);
+        socket.current.emit("sendMessage", {
+            senderId: user._id,
+            receiverId: receiverId,
+            text: text,
+        });
+        const tab = window.open(text, '_blank');
+        try {
+            const res = await axios.post("/messages", message);
+            setMessages([...messages, res.data]);
+            setNewMessage("");
+        }
+        catch (err) {
+            console.log(err);
+        }
     };
-    const receiverId = currentChat.members.find(
-      (member) => member !== user._id
-    );
-    socket.current.emit("sendMessage", {
-      senderId: user._id,
-      avatar: user.avatar,
-      receiverId: receiverId,
-      text: text,
-    });
-    const tab = window.open(text, "_blank");
-    try {
-      const res = await axios.post("/messages", message);
-      setMessages([...messages, res.data]);
-      setNewMessage("");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   return (
     <>
       <div className="container px-4 px-lg-5">

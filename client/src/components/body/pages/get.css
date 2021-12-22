@@ -286,6 +286,18 @@
   height: 55vh;
 }
 
+.Mode_of_Appointment{
+  display: block;
+}
+
+.Mode_of_Appointment label{
+  margin:0 0 -20px 10px;
+}
+
+.Mode_of_Appointment input{
+  transform: translate(2%,-30%);
+  height: 20px;
+}
 
 @media only screen and (max-width: 900px) {
   .contact-img {

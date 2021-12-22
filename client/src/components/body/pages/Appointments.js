@@ -54,8 +54,9 @@ const Appointments = () => {
             <thead>
               <tr>
                 <th>Meeting Detail</th>
-                <th>Title</th>
-                <th>Doctor</th>
+                <th>Case</th>
+                <th>{isDoctor?"Patient's name":"Doctor's name"}</th>
+                <th>Mode</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -64,7 +65,8 @@ const Appointments = () => {
                 <tr key={appointment._id}>
                   <td>{new Date(appointment.createdAt).toDateString()} at {new Date(appointment.createdAt).toLocaleTimeString()}</td>
                   <td>{appointment.title}</td>
-                  <td>{appointment.doctortId}</td>
+                  <td>{isDoctor?appointment.patient_name:appointment.doctor_name}{}</td>
+                  <td>{appointment.mode}</td>
                   <td>
                     <Link to={`/appointment/${appointment._id}`}>
                       <i className="fas fa-stethoscope" title="Open"> Open</i>

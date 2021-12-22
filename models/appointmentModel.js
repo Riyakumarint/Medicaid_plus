@@ -7,23 +7,32 @@ const appointmentSchema = new mongoose.Schema({
         type: String, // patient's user id
         required: true
     },
-
-    doctortId:{  
-        type: String, // doctor's user id
-        required: true
-    },
     patient_name:{
         type: String, // patient's user id
         required: true
     },
     
+    doctortId:{  
+        type: String, // doctor's user id
+        required: true
+    },
     doctor_name:{  
         type: String, // doctor's user id
     },
+
     status:{
         type: String,   // active or closed
         required: true
     },
+    mode:{
+        type: String,
+        default: "online"
+    },
+    clinic_address: {
+        type: String,
+        default: '' 
+    },
+
     title:{
         type: String,   // one line description
         required: true

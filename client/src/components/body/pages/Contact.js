@@ -1,12 +1,29 @@
 import React from "react";
 import emailjs from 'emailjs-com'
+import { useHistory } from "react-router-dom";
 import SideNav from '../profile/sidenav/SideNav'
 import ContactImg from "../../../images/contact.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Contact() {
+  const history = useHistory();
+
   function sendEmail(e) {
     e.preventDefault();
     emailjs.sendForm('service_wga88ue', 'template_csno9rb', e.target, "user_IGOQrTAhz43jpuzRTHuyc").then(res => {
       console.log(res)
+      toast("Message Send", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+        setTimeout(() => {
+          history.push("/");
+        }, 3000);
     }).catch(err=>console.log(err))
   }
   return (
@@ -62,6 +79,7 @@ function Contact() {
           {/* </div> */}
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }
