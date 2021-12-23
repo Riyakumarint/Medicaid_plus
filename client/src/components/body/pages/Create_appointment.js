@@ -447,7 +447,7 @@ const Create_appointment = () => {
           <form onSubmit={handleSubmit}>
             <div className="profile_page">
               <div className="profile_header">
-                <h4>Create Appointment</h4>
+                <h4>Book Appointment</h4>
                 <button
                   type="submit"
                   className="button"
