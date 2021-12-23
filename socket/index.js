@@ -22,25 +22,37 @@ io.on("connection", (socket) => {
     //when connect
     console.log("a user connected.");
     socket.on("addUser",userId=>{
-        addUser(userId,socket.id);
-        console.log("user");
-        io.emit("getUsers",users);
+        try{
+            addUser(userId,socket.id);
+            console.log("user");
+            io.emit("getUsers",users);
+        } catch (err){
+            console.log(err);
+        }
     });
 
     //send and get message
     socket.on("sendMessage",({senderId,receiverId,text})=>{
-        const user = getUser(receiverId);
-        console.log(user);
-        io.to(user.socketId).emit("getMessage",{
-            senderId,
-            text,
-        });
+        try{
+            const user = getUser(receiverId);
+            console.log(user);
+            io.to(user.socketId).emit("getMessage",{
+                senderId,
+                text,
+            });
+        } catch (err){
+            console.log(err);
+        }
     });
 
     //when disconnect
     socket.on("disconnect",()=>{
-        console.log("Disconnected");
-        removeuser(socket.id);
-        io.emit("getUsers",users);
+        try{
+            console.log("Disconnected");
+            removeuser(socket.id);
+            io.emit("getUsers",users);
+        } catch (err){
+            console.log(err);
+        }
     });
 });

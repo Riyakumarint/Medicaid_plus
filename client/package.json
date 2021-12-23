@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5013",
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@react-pdf-viewer/core": "^3.0.0",
     "@react-pdf-viewer/default-layout": "^3.0.0",
     "@testing-library/jest-dom": "^5.14.1",
