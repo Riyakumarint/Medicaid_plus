@@ -12,6 +12,11 @@ function Specialist() {
     getSpecialities();
   }, [callback]);
 
+
+
+
+
+  
   return (
     <>
       <div className="articles">

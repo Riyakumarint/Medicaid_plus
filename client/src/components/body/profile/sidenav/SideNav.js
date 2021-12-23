@@ -81,7 +81,7 @@ function SideNav() {
               <span class="icon">
                 <i class="fa fa-user-md" aria-hidden="true"></i>
               </span>
-              <span class="title">Create S</span>
+              <span class="title">Speciality</span>
             </a>
           ) : (
             ""
