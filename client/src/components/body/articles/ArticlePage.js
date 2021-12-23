@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Loading from "../../utils/notification/Loading";
+import { Grid } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -68,10 +69,13 @@ function PostPage({ match }) {
       </div>
     );
 
-  return (<><img src={blog.coverImage} alt="blog" className="blog_cover_image" />
+  return (<>
+    
+    <img src={blog.coverImage} alt="blog" className="blog_cover_image" />
     
     <div className="BlogPage">
-      
+    <Grid container>
+    <Grid item  lg={8} md={8} sm={12}>
      
       <div className="blog_component">
         <h2 className="blog_heading">{blog.title}</h2>
@@ -99,9 +103,16 @@ function PostPage({ match }) {
         <div className="line-2">
             <hr></hr>
         </div>
-
-        {/* comment and rating block */}
-        {isLogged?<div>
+      </div>
+      
+    </Grid>
+    
+      {/* comment and rating block */}
+    {isLogged?
+      <Grid item lg={4} md={4}  sm={12}>
+        
+        <div className="blog_comment_component">
+        <div>
           <h5> Rate Blog</h5>
           <ReactStars
             count={5}
@@ -110,14 +121,14 @@ function PostPage({ match }) {
             size={30}
             color2={'#ffd700'} 
           />
-        <hr></hr>
         <br></br>
-        </div>:""}
-        {isLogged?<Comments blog={blog} />:""}
-        
         </div>
-      </div>
-      
+        <Comments blog={blog} />
+        </div>
+      </Grid>
+    :""}
+    </Grid>
+    </div>
     </>
   );
 }
