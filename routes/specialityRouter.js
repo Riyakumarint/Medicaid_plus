@@ -31,6 +31,6 @@ router.route('/city/:id')
     .delete(auth, authAdmin, specialityCtrl.deletesCity)
     .put(auth, authAdmin, specialityCtrl.updateCity)
 
-router.post('/fetchDoctors',auth, specialityCtrl.fetchDoctors)
+router.post('/fetchDoctors', specialityCtrl.fetchDoctors)
 
 module.exports = router

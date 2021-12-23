@@ -16,7 +16,7 @@ const specialityCtrl = {
         try {
             // if user have role = 1 ---> admin
             // only admin can create , delete and update speciality
-            const {name,fee} = req.body;
+            const {name,fee,image} = req.body;
             const speciality = await Speciality.findOne({name})
             if(speciality) return res.status(400).json({msg: "This speciality already exists."})
 
@@ -110,7 +110,8 @@ const specialityCtrl = {
             const promises = medical_profiles.map(async (medical_profile) => {
                 // const doctor = await Users.find({_id: medical_profile.userId});
                 // console.log(doctor);
-                return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
+                // return {name: medical_profile.name, doctortId: medical_profile.userId, clinic_address: medical_profile.clinic_address};
+                return medical_profile
             })
             const doctorsNameId = await Promise.all(promises);
             // confused what's going on? visit-> https://youtu.be/qfNtVh2RALc

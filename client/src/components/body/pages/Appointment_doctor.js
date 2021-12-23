@@ -11,20 +11,21 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 
 const initialState = {
-  _id:"",
+  _id: "",
   patienttId: "",
   doctortId: "",
+  patient_name: "",
+  doctor_name: "",
   status: "",
-  date: "",
-
+  mode: "online",
+  clinic_address: "",
   title: "",
   description: "",
+  meetingDetail: "",
+
   symptoms: [],
   previousMedicine: [],
   previousTestReports: [],
-
-  meetingDetail: "",
-
   medicines: [],
   testReports: [],
   doctorsNote: "",
@@ -342,6 +343,12 @@ const Appointment_doctor = () => {
             <div >
               <h5> Meeting Detail - {appointment.meetingDetail.substring(0, 21)}</h5>
             </div>
+            <div >
+              <h5> Patient's Name - {appointment.patient_name}</h5>
+            </div>
+            <div >
+              <h5> {"Clinic Address - "+appointment.clinic_address+" ("+appointment.mode+")"}</h5>
+            </div>
             <hr></hr>
             <br></br>
             {/* symptoms */}
@@ -363,6 +370,13 @@ const Appointment_doctor = () => {
               <h5>Previous Test Report</h5>
               {renderPreviousTestReport()}
             </div>
+
+            <a
+  href={appointment.pdfFile}
+  download
+ >
+   <i className="fa fa-download" />
+ </a>
             <hr></hr>
 
             {/* view medical history of patient */}
@@ -535,6 +549,18 @@ const Appointment_doctor = () => {
                   >
                   Create prescription
                 </button>
+            </div>
+
+            {/* download prescription */}
+            <div>
+              {appointment.mode==="offline"?<button
+                  type="button"
+                  className="button"
+                  // onClick={() => window.scrollTo({ top: 0 })}
+                  >
+                  Download prescription
+                </button>:""
+              }
             </div>
 
             {/* Change meeting detail */}

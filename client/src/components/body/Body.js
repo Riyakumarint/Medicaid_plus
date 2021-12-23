@@ -15,6 +15,7 @@ import Medical_profile from './profile/Medical_Profile'
 import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
+import Contact from "./pages/Contact";
 import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
 import Appointment_doctor from "./pages/Appointment_doctor";
@@ -22,12 +23,13 @@ import Appointment_patient from "./pages/Appointment_patient";
 import Create_appointment from "../body/pages/Create_appointment";
 import Articles from "../body/articles/Articles"
 import ArticlePage from "../body/articles/ArticlePage"
-import VideoConsult from "../body/pages/VideoConsult";
+import Find_doctor from "../body/pages/Find_doctor";
+import Doctor from "../body/pages/Doctor";
 import LabTest from "../body/pages/LabTest";
-import specialist from "../body/pages/specialist";
-import Messenger from "./messenger/Messenger.js";
 import Create_Slots from "./create_Slot/Create_Slot";
 import Book_Slots from "./book_Slots/Book_Slots";
+import Specialist from "../body/pages/Specialist";
+import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
 
 function Body() {
@@ -153,13 +155,26 @@ function Body() {
           component={isLogged&&isDoctor?Create_Slots:NotFound} 
           exact
         />
-        
-        
-        <Route path="/find_video_consult" component={VideoConsult} />
+        <Route 
+          path="/find_doctor" 
+          component={Find_doctor} 
+          exact
+        />
+        <Route
+          path="/doctor/:doctorId"
+          component={Doctor}
+          exact
+        />
         <Route path="/find_lab_test" component={LabTest} />
-        <Route path="/specialist" component={specialist} />
+        <Route path="/specialist" component={Specialist} />
         <Route path="/articles" component={Articles} />
         <Route path="/detail/:id" component={ArticlePage} />
+        <Route
+          path="/contact_us"
+          component={isLogged ? Contact : Login}
+          exact
+        />
+       
         <Route path="*" exact component={NotFound} />
       </Switch>
     </section>

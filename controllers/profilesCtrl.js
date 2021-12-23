@@ -219,6 +219,15 @@ const profilesCtrl = {
             return res.status(500).json({ msg: err.message });
         }
     },
+    fetchDoctor: async (req, res) => {
+        try {
+            const medical_profile = await MedicalProfile.find({userId: req.params.doctorId});
+            const {name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews} = medical_profile[0];
+            res.json({name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews});
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
     addQualification: async (req, res) => {
         try {
             const newQualification = {
@@ -251,15 +260,34 @@ const profilesCtrl = {
     rateDoctor: async (req, res) => {
         try {
             const doctor = await MedicalProfile.findOne( {userId: req.body.doctorId} );
+
+            let previousRating = 0;
+            let newRating = 0;
+            const promises = doctor.reviews.rater.map(async (rater) => {
+                if(rater.userId===req.user.id){
+                    previousRating = rater.rating;
+                    await MedicalProfile.findOneAndUpdate(
+                        { userId: req.body.doctorId },
+                        { "$pull" : {'reviews.rater' : {userId: req.user.id, rating: Number(rater.rating)}} }
+                    );
+                }
+                return rater
+            })
+            const temp = await Promise.all(promises);
+
             const numberOfRatings = doctor.reviews.rater.length;
             const currentRating = Number(doctor.reviews.rating);
             const rating = Number(req.body.rating);
-            const newRating = (numberOfRatings*currentRating + rating)/(numberOfRatings+1);
+            if(previousRating!==0){
+                newRating = (numberOfRatings*currentRating + rating - previousRating)/(numberOfRatings);
+            } else {
+                newRating = (numberOfRatings*currentRating + rating)/(numberOfRatings+1);
+            }
             
             await MedicalProfile.findOneAndUpdate(
                 { userId: req.body.doctorId },
                 { 
-                    "$push" : {'reviews.rater' : {userId: req.user.id}},
+                    "$push" : {'reviews.rater' : {userId: req.user.id, rating: Number(req.body.rating)}},
                     'reviews.rating' : Number(newRating)  
                 }
             );

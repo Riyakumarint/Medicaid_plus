@@ -97,7 +97,7 @@ function Header() {
               </NavLink>
               <NavLink
                 exact
-                to="/find_video_consult"
+                to="/find_doctor"
                 class="main-nav"
                 activeStyle={{
                   fontWeight: "bold",
@@ -105,7 +105,7 @@ function Header() {
                 }}
                 onClick={() => window.scrollTo({ top: 0 })}
               >
-                Video Consult
+                Find Doctor
               </NavLink>
               <NavLink
                 exact

@@ -14,17 +14,18 @@ const initialState = {
   _id: "",
   patienttId: "",
   doctortId: "",
+  patient_name: "",
+  doctor_name: "",
   status: "",
-  date: "",
-
+  mode: "online",
+  clinic_address: "",
   title: "",
   description: "",
+  meetingDetail: "",
+
   symptoms: [],
   previousMedicine: [],
   previousTestReports: [],
-
-  meetingDetail: "",
-
   medicines: [],
   testReports: [],
   doctorsNote: "",
@@ -202,6 +203,12 @@ const Appointment_patient = () => {
             <div >
               <h5> Meeting Detail - {appointment.meetingDetail.substring(0, 21)}</h5>
             </div>
+            <div >
+              <h5> Doctor's Name - {appointment.doctor_name}</h5>
+            </div>
+            <div >
+              <h5> {"Clinic Address - "+appointment.clinic_address+" ("+appointment.mode+")"}</h5>
+            </div>
             <hr></hr>
             <br></br>
 
@@ -228,12 +235,15 @@ const Appointment_patient = () => {
             <br></br>
 
             {/* Test Report */}
-            <div>
-              <h5>Test Report</h5>
-              {renderTestReport()}
-            </div>
-            <hr></hr>
-            <br></br>
+            {appointment.mode==="online"?<div>
+              <div>
+                <h5>Test Report</h5>
+                {renderTestReport()}
+              </div>
+              <hr></hr>
+              <br></br>
+              </div>:""
+            }
 
             {/* Doctors remark */}
             <div >
@@ -243,13 +253,21 @@ const Appointment_patient = () => {
 
             {/* download prescription */}
             <div>
-              <button
+              {appointment.mode==="online"?<button
                   type="button"
                   className="button"
                   // onClick={() => window.scrollTo({ top: 0 })}
                   >
                   Download prescription
+                </button>:
+                <button
+                  type="button"
+                  className="button"
+                  // onClick={() => window.scrollTo({ top: 0 })}
+                  >
+                  Appointment slip
                 </button>
+              }
             </div>
 
 

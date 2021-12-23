@@ -10,6 +10,11 @@ const specialitySchema = new mongoose.Schema({
     fee: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+        default: 'https://res.cloudinary.com/dgejdmzwv/image/upload/v1634523773/myimage/user_1_gxw4jy.png'
     }
 }, {
     timestamps: true

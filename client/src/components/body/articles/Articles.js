@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Icon, Avatar, Col, Typography, Row } from "antd";
-import Loading from '../../utils/notification/Loading'
-import { useSelector } from "react-redux";
-import CardVert from './CardVert'
-const { Title } = Typography;
-const { Meta } = Card;
+import Loading from "../../utils/notification/Loading";
+import CardVert from "./CardVert";
 function Articles() {
-    // const { id } = useParams();
   const [blogs, setBlogs] = useState([]);
-    const [callback, setCallback] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const auth = useSelector((state) => state.auth);
-    const token = useSelector((state) => state.token);
-    const [isCheck, setIsCheck] = useState(false)
+  const [callback, setCallback] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    const { isAdmin } = auth;
   useEffect(() => {
     const getAllBlogs = async () => {
       const res = await axios.get("/blogs/getAllBlogs");
@@ -24,27 +15,24 @@ function Articles() {
 
     getAllBlogs();
   }, [callback]);
-    
-  
-  
-    
-  if(loading) return <div><Loading /></div>
+
+  if (loading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   return (
-      <>
-          
-          <div className="articles">
-          <h1>Articles</h1>
-     
+    <>
+      <div className="articles">
+        <h1>Articles</h1>
+
         <div className="show_blogs">
-        {
-          blogs.map(blog => (
-            <CardVert key={blog._id} blog={blog}  />
-          ))
-        }
-              </div>
-             
+          {blogs.map((blog) => (
+            <CardVert key={blog._id} blog={blog} />
+          ))}
         </div>
-      
+      </div>
     </>
   );
 }
