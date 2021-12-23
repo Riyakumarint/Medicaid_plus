@@ -110,20 +110,42 @@ const blogsCtrl = {
         }
     },
 
-    voteBlog: async (req, res) => {
+    rateBlog: async (req, res) => {
         try {
-            if(req.body.vote === "up"){
-                await Blog.findOneAndUpdate(
-                    { _id: req.body.blogId },
-                    { "$inc" : {'upvote' : 1} }
-                );
-            } else if(req.body.vote === "down"){
-                await Blog.findOneAndUpdate(
-                    { _id: req.body.blogId },
-                    { "$inc" : {'downvote' : 1} }
-                );
+            const blog = await Blog.findOne( {_id: req.body.blogId} );
+
+            let previousRating = 0;
+            let newRating = 0;
+            const promises = blog.reviews.rater.map(async (rater) => {
+                if(rater.userId===req.user.id){
+                    previousRating = rater.rating;
+                    await Blog.findOneAndUpdate(
+                        { _id: req.body.blogId },
+                        { "$pull" : {'reviews.rater' : {userId: req.user.id, rating: Number(rater.rating)}} }
+                    );
+                }
+                return rater
+            })
+            const temp = await Promise.all(promises);
+
+            const numberOfRatings = blog.reviews.rater.length;
+            const currentRating = Number(blog.reviews.rating);
+            const rating = Number(req.body.rating);
+            if(previousRating!==0){
+                newRating = (numberOfRatings*currentRating + rating - previousRating)/(numberOfRatings);
+            } else {
+                newRating = (numberOfRatings*currentRating + rating)/(numberOfRatings+1);
             }
-            res.json({ msg: "vote register Success!" });
+            
+            await Blog.findOneAndUpdate(
+                { _id: req.body.blogId },
+                { 
+                    "$push" : {'reviews.rater' : {userId: req.user.id, rating: Number(req.body.rating)}},
+                    'reviews.rating' : Number(newRating)  
+                }
+            );
+            
+            res.json({ msg: "Rating Success!" });
 
         } catch (err) {
         return res.status(500).json({ msg: err.message });
