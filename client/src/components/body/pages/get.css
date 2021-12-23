@@ -84,10 +84,10 @@
 .categories .category_screen input,
 .specialities .speciality_screen input {
   max-width: 400px;
-  min-width: 250px;
+  width: 250px;
   height: 40px;
   margin: 5px 0;
-  border-color: #c0454d;
+  border: 2px solid  #911F27;
   outline: none;
   background: #f8e2e3;
   border-radius: 5px;

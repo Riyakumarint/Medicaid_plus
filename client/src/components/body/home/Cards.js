@@ -1,17 +1,18 @@
 import React from "react";
 
-function Cards(props) {
+function Cards({speciality}) {
   return (
     <div className="cards">
           <div className="card_speciality center-align ">
              
-        <img src={props.imgsrc} alt="s1" className="card_img" />
+        <img src={speciality.image} alt="s1" className="card_img" />
         <div className="card_body">
-          <h5 className="card_title">{props.title}</h5>
-          <p className="card_text">₹{props.price}</p>
-          <a href={props.link}>
+          <h5 className="card_title" title={speciality.name}>{speciality.name}</h5>
+          <p className="card_text" title={speciality.fee}>₹{speciality.fee}</p>
+          <a href="#">
             Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          </a></div> 
+          </a>
+        </div> 
         </div>
       
      </div>

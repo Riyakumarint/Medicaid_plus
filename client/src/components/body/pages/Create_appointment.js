@@ -7,6 +7,7 @@ import {
   showSuccessMsg,
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
+import Loading from "../../utils/notification/Loading";
 
 const initialState = {
   patienttId: "",
@@ -25,6 +26,7 @@ const initialState = {
 
 const Create_appointment = () => {
   const [appointmentDetails, setAppointmentDetails] = useState(initialState);
+  const [pdfFile, setPdfFile] = useState(false);
   const [symptom, setSymptom] = useState({ name: "", fromWhen: "" });
   const [symptoms, setSymptoms] = useState([]);
   const [previousMed, setPreviousMed] = useState({ name: "", dose: "" });
@@ -44,7 +46,7 @@ const Create_appointment = () => {
   // const { mode } = appointmentDetails;
   const [callback, setCallback] = useState(false);
   const history = useHistory();
-
+  const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
@@ -79,6 +81,56 @@ const Create_appointment = () => {
     };
     getDoctors();
   }, [callback]);
+
+  const handleChangePdf = async (e) => {
+    e.preventDefault();
+    try {
+      const file = e.target.files[0];
+
+      if (!file)
+        return setAppointmentDetails({
+          ...appointmentDetails,
+          err: "No files were uploaded.",
+          success: "",
+        });
+
+      if (file.size > 2048 * 2048)
+        return setAppointmentDetails({
+          ...appointmentDetails,
+          err: "Size too large.",
+          success: "",
+        });
+
+      if (file.type !== "application/pdf")
+        return setAppointmentDetails({
+          ...appointmentDetails,
+          err: "File format is incorrect.",
+          success: "",
+        });
+
+      let formData = new FormData();
+      formData.append("file", file);
+
+      setLoading(true);
+      const res = await axios.post("/api/upload_pdf", formData, {
+        headers: {
+          // "content-type": "multipart/form-data",
+          "content-type": "text/plain",
+
+          Authorization: token,
+        },
+      });
+
+      setLoading(false);
+      setPdfFile(res.data.url);
+    } catch (err) {
+      setAppointmentDetails({
+        ...appointmentDetails,
+        err: err.response.data.msg,
+        success: "",
+      });
+    }
+  };
 
   // handle changes
   const handleChangeInput = async (e) => {
@@ -194,6 +246,7 @@ const Create_appointment = () => {
       previousMedicine: previousMedicine,
       previousTestReports: previousTestReports,
       meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
+      pdfFile:pdfFile,
       err: "",
       success: "",
     };
@@ -211,12 +264,13 @@ const Create_appointment = () => {
     try {
       const res = await axios.post(
         "/appointments/createAppointment",
-        { appointmentDetail },
+        { appointmentDetail},
         { headers: { Authorization: token } }
       );
 
       setAppointmentDetails({
         ...appointmentDetails,
+
         err: "",
         success: "Appointment Created Success!",
       });
@@ -407,6 +461,7 @@ const Create_appointment = () => {
           {appointmentDetails.err && showErrMsg(appointmentDetails.err)}
           {appointmentDetails.success &&
             showSuccessMsg(appointmentDetails.success)}
+           {loading && <Loading />}
           <form onSubmit={handleSubmit}>
             <div className="profile_page">
               <div className="profile_header">
@@ -466,7 +521,6 @@ const Create_appointment = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        
                         <label htmlFor="mode">Mode of Appointment</label>
                         <div className="Mode_of_Appointment">
                           <label for="online">Online</label>
@@ -479,7 +533,7 @@ const Create_appointment = () => {
                             value="online"
                             className="mode_o"
                           />
-                         <label for="offline">Offline</label>
+                          <label for="offline">Offline</label>
                           <input
                             type="radio"
                             id="offline"
@@ -488,7 +542,6 @@ const Create_appointment = () => {
                             value="offline"
                             className="mode_o"
                           />
-                          
                         </div>
                       </div>
                     </div>
@@ -700,6 +753,16 @@ const Create_appointment = () => {
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div className="form-group my-3">
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="application/pdf"
+                    onChange={handleChangePdf}
+                    name="pdfFile"
+                  />
                 </div>
               </div>
             </div>

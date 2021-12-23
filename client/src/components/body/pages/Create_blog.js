@@ -117,7 +117,7 @@ const Create_blog = () => {
       const res = await axios.post("/api/upload_coverImage", formData, {
         headers: {
           "content-type": "multipart/form-data",
-          // "content-type": "text/plain",
+          "content-type": "text/plain",
 
           Authorization: token,
         },
@@ -129,34 +129,6 @@ const Create_blog = () => {
       setBlog({ ...blog, err: err.response.data.msg, success: "" });
     }
   };
-
-  // const handleAddHastag = async () => {
-  //   try {
-  //     const res = await axios.post(
-  //       "/blogs/addHastags",
-  //       { hastag },
-  //       { headers: { Authorization: token } }
-  //     );
-
-      
-
-  //     setHastag({ name: "", err: "", success: "Updated Success!" });
-  //   } catch (err) {
-  //     setHastag({ ...hastag, err: err.response.data.msg, success: "" });
-  //   }
-  // };
-  // const handleDeleteHastag = async (hastagId) => {
-  //   try {
-  //     const res = await axios.post(
-  //       "/blogs/deleteHastags",
-  //       { hastagId },
-  //       { headers: { Authorization: token } }
-  //     );
-  //     setHastag({ name: "", err: "", success: "Updated Success!" });
-  //   } catch (err) {
-  //     setHastag({ ...hastag, err: err.response.data.msg, success: "" });
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -294,7 +266,7 @@ const Create_blog = () => {
               <input
                 type="file"
                 className="form-control"
-                accept="image/*"
+                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
                 onChange={handleChangeThumbnail}
                 name="coverImage"
               />

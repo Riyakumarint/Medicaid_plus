@@ -79,6 +79,10 @@ const appointmentSchema = new mongoose.Schema({
     meetingDetail:{
         type: String
     },
+    pdfFile:{
+        type: String,
+        default: ''
+    },
     
 }, 
 {

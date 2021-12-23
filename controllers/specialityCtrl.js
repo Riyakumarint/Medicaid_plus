@@ -16,7 +16,7 @@ const specialityCtrl = {
         try {
             // if user have role = 1 ---> admin
             // only admin can create , delete and update speciality
-            const {name,fee} = req.body;
+            const {name,fee,image} = req.body;
             const speciality = await Speciality.findOne({name})
             if(speciality) return res.status(400).json({msg: "This speciality already exists."})
 

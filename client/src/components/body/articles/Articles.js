@@ -7,15 +7,14 @@ import CardVert from './CardVert'
 const { Title } = Typography;
 const { Meta } = Card;
 function Articles() {
-    // const { id } = useParams();
+   
   const [blogs, setBlogs] = useState([]);
     const [callback, setCallback] = useState(false);
     const [loading, setLoading] = useState(false);
-    const auth = useSelector((state) => state.auth);
+    
     const token = useSelector((state) => state.token);
-    const [isCheck, setIsCheck] = useState(false)
-
-    const { isAdmin } = auth;
+    
+    
   useEffect(() => {
     const getAllBlogs = async () => {
       const res = await axios.get("/blogs/getAllBlogs");

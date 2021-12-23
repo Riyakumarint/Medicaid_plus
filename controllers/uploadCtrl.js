@@ -44,6 +44,24 @@ const uploadCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    uploadpdf: (req, res) => {
+        try {
+            const file = req.files.file;
+            
+            cloudinary.v2.uploader.upload(file.tempFilePath, {
+                folder: 'pdfFile'
+            }, async(err, result) => {
+                if(err) throw err;
+
+                removeTmp(file.tempFilePath)
+
+                res.json({url: result.secure_url})
+            })
+        
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
     deleteImage: (req, res) => {
         try {
             const {secure_url} = req.body;

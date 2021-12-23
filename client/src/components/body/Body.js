@@ -25,7 +25,7 @@ import Articles from "../body/articles/Articles"
 import ArticlePage from "../body/articles/ArticlePage"
 import VideoConsult from "../body/pages/VideoConsult";
 import LabTest from "../body/pages/LabTest";
-import specialist from "../body/pages/specialist";
+import Specialist from "../body/pages/Specialist";
 import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
 
@@ -144,7 +144,7 @@ function Body() {
         />
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
-        <Route path="/specialist" component={specialist} />
+        <Route path="/specialist" component={Specialist} />
         <Route path="/articles" component={Articles} />
         <Route path="/detail/:id" component={ArticlePage} />
         <Route
