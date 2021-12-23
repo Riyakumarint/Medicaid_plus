@@ -8,8 +8,10 @@ import {
   showSuccessMsg,
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
+import Comments from '../articles/Comment/Comments';
 
 const initialState = {
+    _id:"",
     name:"",
     userId:"",
     bloodGroup: "",
@@ -189,31 +191,23 @@ const Doctor = () => {
                     <hr></hr>
                     <br></br>
 
-                    {/* give rating only when logged in*/}
-                    <div >
-                        {isLogged?<div>
-                            <h5> Rate Doctor</h5>
-                            <ReactStars
-                                count={5}
-                                value={rating}
-                                onChange={handleRatingChange}
-                                size={30}
-                                color2={'#ffd700'} 
-                            />
-                            <hr></hr>
-                            <br></br>
-                        </div>:""}
-                    </div>
-                    
-
-                    {/* Comments only when logged in */}
-                    <div >
-                        {isLogged?<div>
-                            <h5> Comments of this doctor goes here</h5>
-                            <hr></hr>
-                            <br></br>
-                        </div>:""}
-                    </div>
+                    {/* comment and rating block */}
+                    {isLogged?
+                        <div >
+                        <div>
+                          <h5> Rate Doctor</h5>
+                          <ReactStars
+                            count={5}
+                            value={rating}
+                            onChange={handleRatingChange}
+                            size={30}
+                            color2={'#ffd700'} 
+                          />
+                        <br></br>
+                        </div>
+                        <Comments blog={doctor} />
+                        </div>
+                    :""}
 
                 </div>
             </div>

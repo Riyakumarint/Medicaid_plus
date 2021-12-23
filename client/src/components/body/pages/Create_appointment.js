@@ -44,15 +44,12 @@ const Create_appointment = () => {
   const [doctor, setDoctor] = useState(initialState2);
   const [callback, setCallback] = useState(false);
   const history = useHistory();
-  const [date,setDate]=useState(null);
+  const [date,setDate]=useState({date:"", slotId:""});
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
 
-  useEffect(() => {
-    console.log(date);
-  }, [])
   // data fetching
   useEffect(() => {
     const getSpecialities = async () => {
@@ -85,6 +82,7 @@ const Create_appointment = () => {
     getDoctors();
   }, [callback]);
 
+  // handle changes
   const handleChangePdf = async (e) => {
     e.preventDefault();
     try {
@@ -135,7 +133,6 @@ const Create_appointment = () => {
     }
   };
 
-  // handle changes
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
     setAppointmentDetails({
@@ -218,7 +215,8 @@ const Create_appointment = () => {
       !doctor.doctortId ||
       !appointmentDetails.title ||
       !appointmentDetails.description ||
-      Lenght(symptoms) === 0
+      Lenght(symptoms) === 0 ||
+      date.slotId===""
     )
       return setAppointmentDetails({
         ...appointmentDetails,
@@ -237,7 +235,7 @@ const Create_appointment = () => {
       symptoms: symptoms,
       previousMedicine: previousMedicine,
       previousTestReports: previousTestReports,
-      meetingDetail: date,
+      meetingDetail: date.date,
       pdfFile: pdfFile,
       err: "",
       success: "",
@@ -253,6 +251,11 @@ const Create_appointment = () => {
       // console.log(Conversation);
     } catch (err) {
       console.log(err);
+    }
+    try {
+      const res = await axios.post("/slots/book/" + date.slotId + "/" + user._id);
+    } catch (err) {
+      console.log("heloo:   " + err);
     }
     try {
       const res = await axios.post(
@@ -608,7 +611,7 @@ const Create_appointment = () => {
                       {console.log("jijiji :: "+date)}
                       {doctor!==initialState2?
                       (
-                      <><Book_Slots doctor={doctor} appointmentDetail={appointmentDetails} setDate={setDate}/>
+                      <><Book_Slots doctor={doctor} setDate={setDate}/>
                       </>):("")}
                     </div>
                   </div>

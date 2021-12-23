@@ -201,7 +201,7 @@ const Appointment_patient = () => {
             </div>
             <p><h6>{appointment.description}</h6></p>
             <div >
-              <h5> Meeting Detail - {appointment.meetingDetail.substring(0, 21)}</h5>
+              <h5> Meeting Detail - {new Date(appointment.meetingDetail).toDateString()} at {new Date(appointment.meetingDetail).toLocaleTimeString()}</h5>
             </div>
             <div >
               <h5> Doctor's Name - {appointment.doctor_name}</h5>
