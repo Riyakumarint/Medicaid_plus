@@ -24,6 +24,7 @@ function Articles() {
     );
   return (
     <>
+      {/* Get All articles*/}
       <div className="articles">
         <h1>Articles</h1>
 

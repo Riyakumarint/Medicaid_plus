@@ -128,7 +128,7 @@ const Doctor = () => {
         <div className="pro">
             <div className="profile_page">
                 <div className="profile_header">
-                    <div className="avatar">
+                    <div className="doc_avatar">
                         <img src={doctorUser.avatar} alt="" />
                     </div>
                     <h3> {doctor.name}</h3>
@@ -165,7 +165,7 @@ const Doctor = () => {
                         <h5> Clinic Address - {doctor.clinic_address}</h5>
                     </div>
                     <div >
-                        <h5> Contact - {doctorUser.mobile}, {doctorUser.email}</h5>
+                        <h5> Contact - {doctorUser.mobile} {doctorUser.email}</h5>
                     </div>
                     <hr></hr>
                     <br></br>

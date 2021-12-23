@@ -24,7 +24,7 @@ const initialState = {
   success: "",
 };
 
-const initialState2 = {doctortId:"", doctor_name:"", clinic_address:""};
+const initialState2 = { doctortId: "", doctor_name: "", clinic_address: "" };
 
 const Create_appointment = () => {
   const [appointmentDetails, setAppointmentDetails] = useState(initialState);
@@ -145,8 +145,8 @@ const Create_appointment = () => {
 
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
-    setSpeciality({ ...speciality, [name]: value});
-    setDoctor(initialState2)
+    setSpeciality({ ...speciality, [name]: value });
+    setDoctor(initialState2);
 
     try {
       const res = await axios.post(
@@ -161,8 +161,8 @@ const Create_appointment = () => {
   };
   const handleChangeCity = async (e) => {
     const { name, value } = e.target;
-    setCity({ ...city, [name]: value});
-    setDoctor(initialState2)
+    setCity({ ...city, [name]: value });
+    setDoctor(initialState2);
 
     try {
       const res = await axios.post(
@@ -181,10 +181,17 @@ const Create_appointment = () => {
 
   const handleChangeDoctor = (e) => {
     const { name1, value } = e.target;
-    const temp = doctors.filter(doctor => { return doctor.userId===value; });
-    const {userId, name, clinic_address} = temp[0];
-    setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address})
-  }
+    const temp = doctors.filter((doctor) => {
+      return doctor.userId === value;
+    });
+    const { userId, name, clinic_address } = temp[0];
+    setDoctor({
+      ...doctor,
+      doctortId: userId,
+      doctor_name: name,
+      clinic_address: clinic_address,
+    });
+  };
   const handleChangeSymptom = (e) => {
     const { name, value } = e.target;
     setSymptom({ ...symptom, [name]: value });
@@ -230,11 +237,11 @@ const Create_appointment = () => {
       pdfFile: pdfFile,
       err: "",
       success: "",
-    }
-      
-    const convo={
-      senderId:user._id,
-      receiverId:doctor.doctortId,
+    };
+
+    const convo = {
+      senderId: user._id,
+      receiverId: doctor.doctortId,
     };
 
     try {

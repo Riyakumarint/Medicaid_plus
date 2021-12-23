@@ -12,8 +12,7 @@ import Call from "../../../images/video.svg";
 import Conver from "../../../images/chat_doc.png";
 export default function Messenger() {
   const auth = useSelector((state) => state.auth);
-  const users = useSelector((state) => state.users);
-
+  
   const { user } = auth;
 
   console.log(user);
@@ -110,7 +109,7 @@ export default function Messenger() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleSubmit_video = async (e) => {
     e.preventDefault();
@@ -165,8 +164,7 @@ export default function Messenger() {
         <div className="chatBox">
           <div className="chatBoxWrapper">
             {currentChat ? (
-                          <>
-                              
+              <>
                 <div className="chatBoxTop">
                   {messages?.map((m) => (
                     <div ref={scrollRef}>
@@ -199,10 +197,10 @@ export default function Messenger() {
                 </div>
               </>
             ) : (
-                              <span className="noConversationText">
-                                  {/* Open A Conversation */}
-                                  <img src={Conver} alt=""/>
-                              </span>
+              <span className="noConversationText">
+                {/* Open A Conversation */}
+                <img src={Conver} alt="" />
+              </span>
             )}
           </div>
         </div>

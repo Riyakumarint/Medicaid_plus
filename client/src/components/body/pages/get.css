@@ -82,12 +82,13 @@
 }
 
 .categories .category_screen input,
-.specialities .speciality_screen input ,.pdf_of_test{
+.specialities .speciality_screen input,
+.pdf_of_test {
   max-width: 400px;
   width: 250px;
   height: 40px;
   margin: 5px 0;
-  border: 2px solid  #911F27;
+  border: 2px solid #911f27;
   outline: none;
   background: #f8e2e3;
   border-radius: 5px;
@@ -243,7 +244,7 @@
 .contact-page .group {
   width: 250px;
   height: 40px;
-  
+
   border: 2px solid #911f27;
   outline: none;
   background: #f8e2e3;
@@ -286,20 +287,20 @@
   height: 55vh;
 }
 
-.Mode_of_Appointment{
+.Mode_of_Appointment {
   display: block;
 }
 
-.Mode_of_Appointment label{
-  margin:0 0 -20px 10px;
+.Mode_of_Appointment label {
+  margin: 0 0 -20px 10px;
 }
 
-.Mode_of_Appointment input{
-  transform: translate(2%,-30%);
+.Mode_of_Appointment input {
+  transform: translate(2%, -30%);
   height: 20px;
 }
 
-.fa-download{
+.fa-download {
   color: black;
   font-size: 30px;
 }
@@ -331,16 +332,14 @@
 }
 
 @media only screen and (max-width: 660px) {
-  
   .contact_container .container {
     max-width: 350px;
     min-width: 280px;
   }
-  .contact-page textarea{
-  height: 70px;
+  .contact-page textarea {
+    height: 70px;
   }
 
-  
   .img-container {
     display: none;
     width: 0;
@@ -348,6 +347,4 @@
   .contact-img {
     display: none;
   }
-  
 }
-

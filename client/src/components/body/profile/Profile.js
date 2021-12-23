@@ -3,7 +3,6 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { isLength, isMatch } from "../../utils/validation/Validation";
 import Loading from "../../utils/notification/Loading";
-import AdminProfile from "./Admin_profile";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -20,7 +19,7 @@ const initialState = {
   cf_password: "",
   mobile: "",
   address: "",
-  gender:"",
+  gender: "",
   err: "",
   success: "",
 };
@@ -28,12 +27,10 @@ const initialState = {
 function Profile() {
   const auth = useSelector((state) => state.auth);
   const token = useSelector((state) => state.token);
-
-  const users = useSelector((state) => state.users);
-
   const { user, isAdmin, isDoctor } = auth;
   const [data, setData] = useState(initialState);
-  const { name, password, cf_password, mobile, address, gender, err, success } = data;
+  const { name, password, cf_password, mobile, address, gender, err, success } =
+    data;
 
   const [avatar, setAvatar] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -160,7 +157,6 @@ function Profile() {
             <div className="profile_header">
               <h4>{isAdmin ? "Admin" : isDoctor ? "Doctor" : "User"}</h4>
 
-              {/* <div className="updatebtn" onClick={() => window.scrollTo({ top: 0 })}> */}
               <button disabled={loading} onClick={handleUpdate}>
                 Update
               </button>
@@ -217,7 +213,6 @@ function Profile() {
                       defaultValue={user.gender}
                       placeholder="Gender"
                       onChange={handleChange}
-
                     />
                   </div>
                 </div>

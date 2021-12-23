@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "../editor/ReactQuill";
 import Loading from "../../utils/notification/Loading";
@@ -38,8 +38,6 @@ const Create_blog = () => {
   const { user } = auth;
   const [callback, setCallback] = useState(false);
   const [coverImage, setCoverImage] = useState(false);
-  // const [hastags, setHastags] = useState([]);
-  // const [hastag, setHastag] = useState({ name: "" });
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
 
@@ -85,9 +83,6 @@ const Create_blog = () => {
     setFiles(files);
   };
 
-  
-  
-
   const handleChangeThumbnail = async (e) => {
     e.preventDefault();
     try {
@@ -103,7 +98,11 @@ const Create_blog = () => {
       if (file.size > 2048 * 2048)
         return setBlog({ ...blog, err: "Size too large.", success: "" });
 
-      if (file.type !== "image/jpeg" && file.type !== "image/png" && file.type !== "application/pdf")
+      if (
+        file.type !== "image/jpeg" &&
+        file.type !== "image/png" &&
+        file.type !== "application/pdf"
+      )
         return setBlog({
           ...blog,
           err: "File format is incorrect.",
@@ -146,7 +145,7 @@ const Create_blog = () => {
         err: "Title must be at least 10 characters.",
         success: "",
       });
-      if (isCoverImage(coverImage))
+    if (isCoverImage(coverImage))
       return setBlog({
         ...blog,
         err: "Cover Image cannot be left blank.",
@@ -182,7 +181,6 @@ const Create_blog = () => {
           links,
           auther: user.name,
           createdDate,
-          // hastags,
           coverImage,
           reletedTo,
         },
@@ -201,163 +199,98 @@ const Create_blog = () => {
     }
   };
 
-  // const renderHastags = () => {
-  //   if (hastags.length === 0) return "";
-  //   return (
-  //     <div className="col-right">
-  //       <div style={{ overflowX: "auto" }}>
-  //         <table className="medical">
-  //           <thead>
-  //             <tr>
-  //               <th>Name</th>
-  //               <th>Action</th>
-  //             </tr>
-  //           </thead>
-  //           <tbody>
-  //             {hastags.map((hastag) => (
-  //               <tr key={hastag._id}>
-  //                 <td>{hastag.name}</td>
-  //                 <td>
-  //                   <i
-  //                     className="fas fa-trash-alt"
-  //                     title="Remove"
-  //                     onClick={() => handleDeleteHastag(hastag._id)}
-  //                   ></i>
-  //                 </td>
-  //               </tr>
-  //             ))}
-  //           </tbody>
-  //         </table>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   return (
     <>
-      <SideNav/>
-    <div className="create_blog">
-      <div className="blog_pro">
-        {err && showErrMsg(err)}
-        {success && showSuccessMsg(success)}
-        {loading && <Loading />}
-        <h1>Create blog</h1>
-        <div className="row">
-          <div className="col">
-            <div className="form-group position-relative">
-              <input
-                type="text"
-                className="form-control"
-                value={title}
-                placeholder="Title"
-                name="title"
-                onChange={handleChangeInput}
-              />
-
-              <small
-                className="text-muted position-absolute"
-                style={{ bottom: 0, right: "3px", opacity: "0.3" }}
-              >
-                {title.length}/50
-              </small>
-            </div>
-
-            <div className="form-group my-3">
-              <input
-                type="file"
-                className="form-control"
-                accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
-                onChange={handleChangeThumbnail}
-                name="coverImage"
-              />
-            </div>
-
-            <div className="form-group position-relative">
-              <textarea
-                className="form-control"
-                rows={4}
-                value={description}
-                style={{ resize: "none" }}
-                name="description"
-                placeholder="Description"
-                onChange={handleChangeInput}
-              />
-
-              <small
-                className="text-muted position-absolute"
-                style={{ bottom: 0, right: "3px", opacity: "0.3" }}
-              >
-                {description.length}/200
-              </small>
-            </div>
-
-            <div className="form-group my-3">
-              <select
-                className="form-control text-capitalize"
-                value={reletedTo}
-                name="reletedTo"
-                onChange={handleChangeInput}
-              >
-                <option value="">Choose a category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <ReactQuill
-          placeholder={"Start Posting Something"}
-          onEditorChange={onEditorChange}
-          onFilesChange={onFilesChange}
-        />
-
-        {/* <div>
-          <h5>Hastags</h5>
-          {renderHastags()}
+      <SideNav />
+      <div className="create_blog">
+        <div className="blog_pro">
+          {err && showErrMsg(err)}
+          {success && showSuccessMsg(success)}
+          {loading && <Loading />}
+          <h1>Create blog</h1>
           <div className="row">
-            <div class="col s12 m6 l4">
-              <div className="form-group">
-                <div className="input-field">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    className="name"
-                    id="exampleInputname1"
-                    placeholder="Hastag"
-                    onChange={handleHastagChangeInput}
-                    value={hastag.name}
-                    name="name"
-                  />
-                </div>
+            <div className="col">
+              <div className="form-group position-relative">
+                <input
+                  type="text"
+                  className="form-control"
+                  value={title}
+                  placeholder="Title"
+                  name="title"
+                  onChange={handleChangeInput}
+                />
+
+                <small
+                  className="text-muted position-absolute"
+                  style={{ bottom: 0, right: "3px", opacity: "0.3" }}
+                >
+                  {title.length}/50
+                </small>
               </div>
-            </div>
-            <div class="col s12 m6 l4">
-              <div className="form-group">
-                <div className="input-field">
-                  <i
-                    className="fas fa-plus-circle"
-                    title="Add"
-                    onClick={() => handleAddHastag()}
-                  ></i>
-                </div>
+
+              <div className="form-group my-3">
+                <input
+                  type="file"
+                  className="form-control"
+                  accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+                  onChange={handleChangeThumbnail}
+                  name="coverImage"
+                />
+              </div>
+
+              <div className="form-group position-relative">
+                <textarea
+                  className="form-control"
+                  rows={4}
+                  value={description}
+                  style={{ resize: "none" }}
+                  name="description"
+                  placeholder="Description"
+                  onChange={handleChangeInput}
+                />
+
+                <small
+                  className="text-muted position-absolute"
+                  style={{ bottom: 0, right: "3px", opacity: "0.3" }}
+                >
+                  {description.length}/200
+                </small>
+              </div>
+
+              <div className="form-group my-3">
+                <select
+                  className="form-control text-capitalize"
+                  value={reletedTo}
+                  name="reletedTo"
+                  onChange={handleChangeInput}
+                >
+                  <option value="">Choose a category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
-        </div> */}
 
-        <div>
-          <button
-            className="blog_post_btn mt-3 d-block mx-auto"
-            onClick={handleSubmit}
-          >
-            Create Post
-          </button>
+          <ReactQuill
+            placeholder={"Start Posting Something"}
+            onEditorChange={onEditorChange}
+            onFilesChange={onFilesChange}
+          />
+          <div>
+            <button
+              className="blog_post_btn mt-3 d-block mx-auto"
+              onClick={handleSubmit}
+            >
+              Create Post
+            </button>
+          </div>
         </div>
       </div>
-    </div></>
+    </>
   );
 };
 
