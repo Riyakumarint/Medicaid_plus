@@ -9,6 +9,8 @@ import {
   showSuccessMsg,
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 const initialState = {
   _id: "",
@@ -44,7 +46,8 @@ const Appointment_doctor = () => {
   const [testReport, setTestReport] = useState({name: "", link: ""});
   const [testReports, setTestReports] = useState([]);
   const [callback, setCallback] = useState(false);
-
+  const [newdate,setNewDate]=useState(null);
+  const [date, setDate] = useState(null);
   const token = useSelector((state) => state.token);
   const {user} = useSelector((state) => state.auth);
   const auth = useSelector((state) => state.auth);
@@ -325,7 +328,16 @@ const Appointment_doctor = () => {
       </div>
     )
   };
-
+  const handleReshedule = async()=>{
+    console.log("HI|||+ "+newdate);
+    try{
+      const temp = await axios.post("/appointments/resheduleAppointment/"+appointment._id+"/"+newdate);
+      console.log(temp);
+    }
+    catch(err){
+      console.log(err);
+    }
+  };
   return (
     <>
       <SideNav />
@@ -341,7 +353,7 @@ const Appointment_doctor = () => {
             </div>
             <p><h6>{appointment.description}</h6></p>
             <div >
-              <h5> Meeting Detail - {appointment.meetingDetail.substring(0, 21)}</h5>
+              <h5> Meeting Detail - {new Date(appointment.meetingDetail).toDateString()} at {new Date(appointment.meetingDetail).toLocaleTimeString()}</h5>
             </div>
             <div >
               <h5> Patient's Name - {appointment.patient_name}</h5>
@@ -565,13 +577,8 @@ const Appointment_doctor = () => {
 
             {/* Change meeting detail */}
             <div>
-              <button
-                  type="button"
-                  className="button"
-                  // onClick={() => handleChangeStatus()}
-                  >
-                  reschedule meeting
-                </button>
+            <DatePicker selected={newdate} minDate={new Date()} onChange={(date)=>setNewDate(date)} showTimeSelect dateFormat="Pp" />
+            <button className="button" onClick={handleReshedule}>Reshedule</button>
             </div>
 
             {/* Change status */}

@@ -63,7 +63,7 @@ const Appointments = () => {
             <tbody>
               {appointments.map((appointment) => (
                 <tr key={appointment._id}>
-                  <td>{new Date(appointment.createdAt).toDateString()} at {new Date(appointment.createdAt).toLocaleTimeString()}</td>
+                  <td>{new Date(appointment.meetingDetail).toDateString()} at {new Date(appointment.meetingDetail).toLocaleTimeString()}</td>
                   <td>{appointment.title}</td>
                   <td>{isDoctor?appointment.patient_name:appointment.doctor_name}{}</td>
                   <td>{appointment.mode}</td>

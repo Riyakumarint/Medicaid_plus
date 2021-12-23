@@ -146,11 +146,6 @@ function Body() {
           exact
         />
         <Route  
-          path="/bookSlot" 
-          component={isLogged?Book_Slots:NotFound} 
-          exact
-        />
-        <Route  
           path="/createSlot" 
           component={isLogged&&isDoctor?Create_Slots:NotFound} 
           exact

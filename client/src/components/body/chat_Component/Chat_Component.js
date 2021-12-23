@@ -200,15 +200,18 @@ export default function Chat_Component(props) {
           <div className="send">
             <form action="#" id="send-container">
               <div className="chat_btns">
-                <input
+                <textarea
                   type="text"
                   name="messageInp"
                   id="messageInp"
                   onChange={(e) => setNewMessage(e.target.value)}
-                />
+                    name="Chatmessage"
+                    value={newMessages}
+                  ></textarea>
+                
                 {/* <button className="btnM" onClick={handleSubmit}>Send</button> */}
 
-                <img src={Send} alt=" " className="btnM" onClick={handleSubmit} />
+                <img src={Send} alt=" " className="btnM" onClick={handleSubmit} onClick={() => window.scrollTo({ top: 0 })}/>
 
                 {/* <button type="button" className="btnM cancel" onClick={() => { document.getElementById("myForm").style.display = "none"; }}>Close</button> */}
               </div>

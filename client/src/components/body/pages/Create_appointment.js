@@ -8,6 +8,7 @@ import {
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
 import Loading from "../../utils/notification/Loading";
+import Book_Slots from "../book_Slots/Book_Slots";
 
 const initialState = {
   patienttId: "",
@@ -43,10 +44,15 @@ const Create_appointment = () => {
   const [doctor, setDoctor] = useState(initialState2);
   const [callback, setCallback] = useState(false);
   const history = useHistory();
+  const [date,setDate]=useState(null);
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
+
+  useEffect(() => {
+    console.log(date);
+  }, [])
   // data fetching
   useEffect(() => {
     const getSpecialities = async () => {
@@ -226,12 +232,12 @@ const Create_appointment = () => {
       symptoms: symptoms,
       previousMedicine: previousMedicine,
       previousTestReports: previousTestReports,
-      meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
+      meetingDetail: date,
       pdfFile: pdfFile,
       err: "",
       success: "",
     }
-      
+    console.log(appointmentDetail);
     const convo={
       senderId:user._id,
       receiverId:doctor.doctortId,
@@ -591,6 +597,19 @@ const Create_appointment = () => {
                       </select>
                     </div>
                   </div>
+                  {appointmentDetails.mode === "offline" ? (
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      {console.log("jijiji :: "+date)}
+                      {doctor!==initialState2?
+                      (
+                      <><Book_Slots doctor={doctor} appointmentDetail={appointmentDetails} setDate={setDate}/>
+                      </>):("")}
+                    </div>
+                  </div>) : (
+                    ""
+                  )}
+
                 </div>
 
                 {/* symptom block */}

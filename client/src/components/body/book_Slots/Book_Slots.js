@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 //import "./create_Slot.css";
-import Sidenav from "../profile/sidenav/SideNav" 
+import Sidenav from "../profile/sidenav/SideNav"
 import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
-export default function Book_Slots(porps) {
+const initialState = {doctortId:"", doctor_name:"", clinic_address:""};
+export default function Book_Slots(props) {
   const [date, setDate] = useState(null);
   const auth = useSelector((state) => state.auth);
   const token = useSelector((state) => state.token);
@@ -15,19 +16,37 @@ export default function Book_Slots(porps) {
 
   const { user, isAdmin } = auth;
   const [slots, setSlots] = useState([]);
-
-  const handleBook= async(e)=>{
-    if(e.doctID!==user._id){
-    try{
-        const res = await axios.post("/slots/book/"+e._id+"/"+user._id);
-        slots.filter((slot)=> slot._id===e._id);
-        console.log(res.data);
-      }catch(err){
-        console.log("heloo:   "+err);
-      }
+  const [doctor, setDoctor] = useState(initialState);
+  useEffect(() => {
+    if(props.doctor!==initialState){
+      setDoctor(props.doctor);
+      console.log("uyuy: "+props.doctor.doctortId);
     }
-    else{
-      alert("You cannot book your Own slot");
+  }, [props.doctor])
+  const handleBook = async (e) => {
+    if (
+      !props.doctor.doctortId ||
+      !props.appointmentDetail.title ||
+      !props.appointmentDetail.description
+    ) {
+      alert("Fill All Field");
+    }
+    else {
+      if (e.doctID !== user._id) {
+        try {
+          const res = await axios.post("/slots/book/" + e._id + "/" + user._id);
+          const temp = slots.filter((slot) => slot._id === e._id);
+          setSlots(temp);
+          props.setDate(e.date);
+          console.log("date::::::: "+e.date);
+          console.log(res.data);
+        } catch (err) {
+          console.log("heloo:   " + err);
+        }
+      }
+      else {
+        alert("You cannot book your Own slot");
+      }
     }
   }
 
@@ -50,7 +69,7 @@ export default function Book_Slots(porps) {
                   <td>{(new Date(slot.date)).getDate() + "/" + ((new Date(slot.date)).getMonth() + 1) + "/" + (new Date(slot.date)).getFullYear()}</td>
                   <td>{(new Date(slot.date)).getHours() + " : " + (new Date(slot.date)).getMinutes()}</td>
                   <td>
-                    <i className="fas fa-times-circle" title="Open" onClick={()=>handleBook(slot)}> Book</i>
+                    <i className="fas fa-times-circle" title="Open" onClick={() => handleBook(slot)}> Book</i>
                   </td>
                 </tr>) : ""
               )}
@@ -60,15 +79,21 @@ export default function Book_Slots(porps) {
       </div>
     )
   };
-  const handleOnClick = async() => {
-    const m = date.getMonth() + 1;
-    console.log("Day: " + date.getDate() + " Month: " + m + " Year: " + date.getFullYear() + " Time: " + date.getHours()+" ::: "+date);
-    try{
-      const docSlots = await axios.get("/slots/patient/"+"619562ceddb4361637dfafb4/"+date);
-      setSlots(docSlots.data);
-      console.log(docSlots.data);
-    }catch(err){
-      console.log(err);
+  const handleOnClick = async (doctor) => {
+
+    if (doctor !== undefined) {
+      const m = date.getMonth() + 1;
+      console.log("Day: " + date.getDate() + " Month: " + m + " Year: " + date.getFullYear() + " Time: " + date.getHours() + " ::: " + date+" :: "+doctor._id);
+      try {
+        const docSlots = await axios.get("/slots/patient/" + doctor.doctortId + "/" + date);
+        setSlots(docSlots.data);
+        console.log(docSlots.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    else {
+      alert("Please Select Doctor");
     }
   }
   return (
@@ -78,10 +103,9 @@ export default function Book_Slots(porps) {
       <br />
       <br />
       <div>
-        
-        <h5>Get Slots</h5>
+      <label htmlFor="doctortId">Get Slots</label>
         <DatePicker selected={date} minDate={new Date()} onChange={(date) => setDate(date)} format='dd-mm-yyyy' /><br /><br />
-        <button onClick={handleOnClick}>Submit</button>
+        <button onClick={() => handleOnClick(doctor)}>Submit</button>
       </div>
       <div>
         <div>

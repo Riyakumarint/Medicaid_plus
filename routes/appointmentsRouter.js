@@ -26,6 +26,8 @@ router.post('/updateStatus', appointmentsCtrl.updateStatus)
 
 router.get('/fetchAppointments', auth, appointmentsCtrl.fetchAppointments)
 
-router.get('/fetchAppointment/:caseId', auth, appointmentsCtrl.fetchAppointment)
+router.get('/fetchAppointment/:caseId', auth, appointmentsCtrl.fetchAppointment);
+
+router.post('/resheduleAppointment/:apppointmentID/:date',appointmentsCtrl.reshedule)
 
 module.exports = router

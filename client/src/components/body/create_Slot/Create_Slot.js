@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
+import SideNav from '../profile/sidenav/SideNav';
 export default function Create_Slots(){
     const auth = useSelector((state) => state.auth);
     const token = useSelector((state) => state.token);
@@ -39,6 +40,7 @@ export default function Create_Slots(){
     const BookedrenderSlots = (slots) =>{
         if(slots.length===0) return ('No current Book Slots');
         return (
+          
           <div className="col-right">
           <div style={{ overflowX: "auto" }}>
               <table className="medical">
@@ -57,9 +59,6 @@ export default function Create_Slots(){
                             <td>{(new Date(slot.date)).getHours()+" : "+(new Date(slot.date)).getMinutes()}</td>
                             <td>{slot.patientID}</td>
                             <td>
-                                <DatePicker selected={newdate} minDate={new Date()} onChange={(date)=>setNewDate(date)} showTimeSelect dateFormat="Pp" />
-                                <button onClick={()=> handleReshedule(slot)}>Reshedule</button>
-                                <p>  </p>
                                 <button onClick={()=> handleDelete(slot)}>Finished</button>
                             </td>
                           </tr>):""
@@ -130,7 +129,11 @@ export default function Create_Slots(){
         <br/>
         <br/>
         <br/>
+        <SideNav/>
+        <div className="continer-profile">
+        <div className="pro">
         <div className="Body-Create-slots">
+        
         <div>
             <div>
             <h5>Booked Slots</h5>
@@ -145,6 +148,8 @@ export default function Create_Slots(){
             <h5>Create Slots</h5>
             <DatePicker selected={date} minDate={new Date()} onChange={(date)=>setDate(date)} showTimeSelect dateFormat="Pp"  /><br/><br/>
             <button onClick={handleOnClick}>Submit</button>
+        </div>
+        </div>
         </div>
         </div>
         </>

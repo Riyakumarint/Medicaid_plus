@@ -203,6 +203,8 @@ export default function Messenger() {
                     className="chatMessageInput"
                     placeholder="Write Something..."
                     onChange={(e) => setNewMessage(e.target.value)}
+                    name="Chatmessage"
+                    value={newMessages}
                   ></textarea>
 
                   <img
