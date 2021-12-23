@@ -9,7 +9,7 @@ router.post("/",async(req,res)=>{
         res.status(200).json(savedMessage);
     }
     catch(err){
-        res.status(500).jason(err);
+        res.status(500).json(err);
     }
 });
 

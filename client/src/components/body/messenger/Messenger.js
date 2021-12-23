@@ -10,6 +10,13 @@ import SideNav from "../../body/profile/sidenav/SideNav";
 import Send from "../../../images/send.png";
 import Call from "../../../images/video.svg";
 import Conver from "../../../images/chat_doc.png";
+const initialState = {
+    name: "",
+    password: "",
+    cf_password: "",
+    err: "",
+    success: "",
+  };
 export default function Messenger() {
     const auth = useSelector((state) => state.auth);
     const token = useSelector((state) => state.token);

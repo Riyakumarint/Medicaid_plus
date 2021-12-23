@@ -12,11 +12,13 @@ export default function Create_Slots(){
 
     const { user, isAdmin } = auth;
     const [date, setDate] = useState(null);
+    const [newdate, setNewDate] = useState(null);
     const [slots, setSlots] = useState([]);
+    const [callback,setCallBack]=useState(false);
     useEffect(() => {
         const getSlots= async()=>{
             try{
-                const res = await axios.get("/slots/"+user._id);
+                const res = await axios.get("/slots/doctor/"+user._id);
                 setSlots(res.data);
                 console.log(res.data);
             }catch(err){
@@ -24,7 +26,16 @@ export default function Create_Slots(){
             }
         };
         getSlots();
-    }, [user._id]);
+    }, [user._id,callback]);
+    const handleReshedule = async(e)=>{
+      console.log("try"+e);
+      try{
+        const res = await axios.post("/slots/reshedule/"+e._id+"/"+newdate);
+        console.log(res.data);
+      }catch(err){
+        console.log("heloo:   "+err);
+      }
+    };
     const BookedrenderSlots = (slots) =>{
         if(slots.length===0) return ('No current Book Slots');
         return (
@@ -46,10 +57,13 @@ export default function Create_Slots(){
                             <td>{(new Date(slot.date)).getHours()+" : "+(new Date(slot.date)).getMinutes()}</td>
                             <td>{slot.patientID}</td>
                             <td>
-                                <i className="fas fa-stethoscope" title="Open"> Open</i>
+                                <DatePicker selected={newdate} minDate={new Date()} onChange={(date)=>setNewDate(date)} showTimeSelect dateFormat="Pp" />
+                                <button onClick={()=> handleReshedule(slot)}>Reshedule</button>
+                                <p>  </p>
+                                <button onClick={()=> handleDelete(slot)}>Finished</button>
                             </td>
                           </tr>):""
-                )}
+                )};
                 </tbody>
               </table>
           </div>
@@ -57,10 +71,9 @@ export default function Create_Slots(){
         )
       };
       const handleDelete= async(e)=>{
-        console.log(e); 
         try{
             const res = await axios.post("/slots/delete/"+e._id);
-            slots.filter((slot)=> slot._id===e._id);
+            setCallBack(!callback);
             console.log(res.data);
           }catch(err){
             console.log("heloo:   "+err);
@@ -85,7 +98,7 @@ export default function Create_Slots(){
                             <td>{(new Date(slot.date)).getDate()+"/"+((new Date(slot.date)).getMonth()+1)+"/"+(new Date(slot.date)).getFullYear()}</td>
                             <td>{(new Date(slot.date)).getHours()+" : "+(new Date(slot.date)).getMinutes()}</td>
                             <td>
-                                <i className="fas fa-times-circle" title="Open" onClick={handleDelete(slot)}> Delete</i>
+                                <i className="fas fa-times-circle" title="Open" onClick={()=>handleDelete(slot)}> Delete</i>
                             </td>
                           </tr>):""
                 )}
@@ -96,7 +109,7 @@ export default function Create_Slots(){
         )
       };
       const handleOnClick= async(e)=>{
-          console.log("Day: "+date.getDate()+" Month: "+date.getMonth()+1+" Year: "+date.getFullYear()+" Time: "+date.getHours());
+          console.log("Day: "+date.getDate()+" Month: "+date.getMonth()+1+" Year: "+date.getFullYear()+" Time: "+date.getHours()+" ::: "+date);
           const slot={
             doctID: user._id,
             patientID:"",

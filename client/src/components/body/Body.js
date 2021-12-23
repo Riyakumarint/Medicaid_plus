@@ -143,9 +143,18 @@ function Body() {
           component={isLogged ? Messenger : Login}
           exact
         />
+        <Route  
+          path="/bookSlot" 
+          component={isLogged?Book_Slots:NotFound} 
+          exact
+        />
+        <Route  
+          path="/createSlot" 
+          component={isLogged&&isDoctor?Create_Slots:NotFound} 
+          exact
+        />
         
-        <Route  Path="/BookSlot" component={isLogged?Book_Slots:NotFound} exact/>
-        <Route  Path="/CreateSlot" component={isLogged&&isDoctor?Create_Slots:NotFound} exact/>
+        
         <Route path="/find_video_consult" component={VideoConsult} />
         <Route path="/find_lab_test" component={LabTest} />
         <Route path="/specialist" component={specialist} />
