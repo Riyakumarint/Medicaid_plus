@@ -175,7 +175,17 @@ const appointmentsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
+    reshedule: async (req, res) => {
+        console.log("whhyyyy");
+        try {
+            console.log(req.params)
+            await Appointment.findOneAndUpdate({_id: req.params.apppointmentID},{meetingDetail: req.params.date,});
 
+            res.json({ msg: "Update Success!" });
+        } catch (err) {
+        return res.status(500).json({ msg: err.message });
+        }
+    },
 };
 
 

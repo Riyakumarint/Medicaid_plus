@@ -1,0 +1,23 @@
+.category_table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .category_table td,
+  .category_table th {
+    border: 2px solid #ad5157;
+    padding: 8px;
+    min-width: 100px;
+  }
+  .category_table tr:nth-child(even) {
+    background: #fce8e9;
+  }
+  .category_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: #911f27;
+    color: white;
+  }
+  .category_table i {
+    cursor: pointer;
+  }

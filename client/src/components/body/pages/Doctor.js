@@ -120,7 +120,19 @@ const Doctor = () => {
         </div>
     )
   }
+  const handleClick = async ()=>{
+    const convo={
+      senderId:user._id,
+      receiverId:doctorId,
+    };
 
+    try {
+      const Conversation = await axios.post("/conversations", convo);
+      // console.log(Conversation);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <SideNav />
@@ -142,7 +154,7 @@ const Doctor = () => {
                     <button
                         type="button"
                         className="button"
-                        onClick={() => window.scrollTo({ top: 0 })}
+                        onClick={handleClick}
                         >
                         Chat with the Doctor
                     </button>

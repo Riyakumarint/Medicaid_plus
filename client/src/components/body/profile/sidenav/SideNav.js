@@ -116,6 +116,16 @@ function SideNav() {
             </a>
           )}
         </li>
+        <li>
+          {isDoctor ? (
+            <a href="/createSlot" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+              </span>
+              <span class="title">Create Slots</span>
+            </a>
+          ) : ("")}
+        </li>
 
       </ul>
     </div>

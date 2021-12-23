@@ -4,17 +4,32 @@ const Conversation = require("../models/Conversations");
 //new Conversation
 
 router.post("/", async (req, res) => {
-  const newConversation = new Conversation({
-    members: [req.body.senderId, req.body.receiverId],
-  });
-
-  try {
-    const savedConversation = await newConversation.save();
-    res.status(200).json(savedConversation);
-    console.log(savedConversation);
-  } catch (err) {
-    res.status(500).json(err);
+  try{
+    const conversation = await Conversation.findOne({
+      members: { $all: [req.body.senderId,req.body.receiverId] },
+    });
+    console.log("hello: "+conversation);
+    if(conversation===null){
+      const newConversation = new Conversation({
+        members: [req.body.senderId, req.body.receiverId],
+      });
+    
+      try {
+        const savedConversation = await newConversation.save();
+        console.log("buy: "+savedConversation);
+        res.status(200).json(savedConversation);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    }
+    else{
+    res.status(200).json(conversation);
+    }
   }
+  catch(err){
+    res.status(200).json(err);
+  }
+  
 });
 
 //get Conversation of a user

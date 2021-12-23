@@ -100,32 +100,36 @@ export default function Chat_Component(props) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const message = {
-      sender: user._id,
-      text: newMessages,
-      avatar: user.avatar,
-      conversationId: currentChat._id,
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if(newMessages!==""){
+        const message = {
+            sender: user._id,
+            text: newMessages,
+            conversationId: currentChat._id,
+        };
+        const receiverId = currentChat.members.find((member) => member !== user._id);
+        socket.current.emit("sendMessage", {
+            senderId: user._id,
+            receiverId: receiverId,
+            text: newMessages,
+        })
+        try {
+            const res = await axios.post("/messages", message);
+            setMessages([...messages, res.data]);
+            console.log(res.data);
+            setNewMessage("");
+        }
+        catch (err) {
+            console.log(err);
+        }
+        }
     };
-    const receiverId = currentChat.members.find(
-      (member) => member !== user._id
-    );
-    socket.current.emit("sendMessage", {
-      senderId: user._id,
-      receiverId: receiverId,
-      avatar: user.avatar,
-      text: newMessages,
-    });
-    try {
-      const res = await axios.post("/messages", message);
-      setMessages([...messages, res.data]);
-      console.log(res.data);
-      setNewMessage("");
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
     const handleSubmit_video = async (e) => {
         e.preventDefault();
@@ -196,15 +200,18 @@ export default function Chat_Component(props) {
           <div className="send">
             <form action="#" id="send-container">
               <div className="chat_btns">
-                <input
+                <textarea
                   type="text"
                   name="messageInp"
                   id="messageInp"
                   onChange={(e) => setNewMessage(e.target.value)}
-                />
+                    name="Chatmessage"
+                    value={newMessages}
+                  ></textarea>
+                
                 {/* <button className="btnM" onClick={handleSubmit}>Send</button> */}
 
-                <img src={Send} alt=" " className="btnM" onClick={handleSubmit} />
+                <img src={Send} alt=" " className="btnM" onClick={handleSubmit} onClick={() => window.scrollTo({ top: 0 })}/>
 
                 {/* <button type="button" className="btnM cancel" onClick={() => { document.getElementById("myForm").style.display = "none"; }}>Close</button> */}
               </div>
