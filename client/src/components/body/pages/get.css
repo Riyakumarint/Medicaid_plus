@@ -82,7 +82,7 @@
 }
 
 .categories .category_screen input,
-.specialities .speciality_screen input {
+.specialities .speciality_screen input ,.pdf_of_test{
   max-width: 400px;
   width: 250px;
   height: 40px;
@@ -299,6 +299,11 @@
   height: 20px;
 }
 
+.fa-download{
+  color: black;
+  font-size: 30px;
+}
+
 @media only screen and (max-width: 900px) {
   .contact-img {
     height: 50vh;
@@ -345,3 +350,4 @@
   }
   
 }
+

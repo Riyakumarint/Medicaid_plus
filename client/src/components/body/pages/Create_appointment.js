@@ -246,7 +246,7 @@ const Create_appointment = () => {
       previousMedicine: previousMedicine,
       previousTestReports: previousTestReports,
       meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
-      pdfFile:pdfFile,
+      pdfFile: pdfFile,
       err: "",
       success: "",
     };
@@ -264,7 +264,7 @@ const Create_appointment = () => {
     try {
       const res = await axios.post(
         "/appointments/createAppointment",
-        { appointmentDetail},
+        { appointmentDetail },
         { headers: { Authorization: token } }
       );
 
@@ -461,7 +461,7 @@ const Create_appointment = () => {
           {appointmentDetails.err && showErrMsg(appointmentDetails.err)}
           {appointmentDetails.success &&
             showSuccessMsg(appointmentDetails.success)}
-           {loading && <Loading />}
+          {loading && <Loading />}
           <form onSubmit={handleSubmit}>
             <div className="profile_page">
               <div className="profile_header">
@@ -754,15 +754,20 @@ const Create_appointment = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="form-group my-3">
-                  <input
-                    type="file"
-                    className="form-control"
-                    accept="application/pdf"
-                    onChange={handleChangePdf}
-                    name="pdfFile"
-                  />
+                <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="input-field">
+                      <div className="form-group my-3">
+                        <input
+                          type="file"
+                          className="pdf_of_test form-control"
+                          accept="application/pdf"
+                          onChange={handleChangePdf}
+                          name="pdfFile"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

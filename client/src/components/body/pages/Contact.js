@@ -51,7 +51,13 @@ function Contact() {
                     <label>Phone no.</label>
                     <input  className="group" type="text" placeholder="Email" name="phone" />
                   </div>
-                </div>
+              </div>
+              {/* <a
+  href="https://timesofindia.indiatimes.com/thumb/msid-70238371,imgsize-89579,width-400,resizemode-4/70238371.jpg"
+  download
+ >
+   <i className="fa fa-download" />
+ </a> */}
                 <div class="col s12 m6 l4">
                   <div className="form-group">
                     <label>Message</label>
@@ -75,7 +81,8 @@ function Contact() {
             <div className="img-container">
                       <img className="contact-img" src={ContactImg} />
                       
-            </div>
+          </div>
+         
           {/* </div> */}
         </div>
       </div>

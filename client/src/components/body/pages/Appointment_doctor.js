@@ -363,6 +363,13 @@ const Appointment_doctor = () => {
               <h5>Previous Test Report</h5>
               {renderPreviousTestReport()}
             </div>
+
+            <a
+  href={appointment.pdfFile}
+  download
+ >
+   <i className="fa fa-download" />
+ </a>
             <hr></hr>
 
             {/* view medical history of patient */}
