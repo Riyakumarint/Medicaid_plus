@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Loading from "../../utils/notification/Loading";
+import { Grid } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Comments from './Comment/Comments';
@@ -31,10 +32,13 @@ function PostPage({ match }) {
         <Loading />
       </div>
     );
-  return (<><img src={blog.coverImage} alt="blog" className="blog_cover_image" />
+  return (<>
+    
+    <img src={blog.coverImage} alt="blog" className="blog_cover_image" />
     
     <div className="BlogPage">
-      
+    <Grid container>
+    <Grid item  lg={8} md={8} sm={12}>
      
       <div className="blog_component">
         <h2 className="blog_heading">{blog.title}</h2>
@@ -53,10 +57,19 @@ function PostPage({ match }) {
         <div className="line-2">
             <hr></hr>
         </div>
-        <Comments blog={blog} />
-        </div>
+        
       </div>
       
+      </Grid>
+   
+      
+     
+    <Grid item lg={4} md={4}  sm={12}>
+      <div className="blog_comment_component">
+      <Comments blog={blog} />
+      </div></Grid>
+            </Grid>
+            </div>
     </>
   );
 }
