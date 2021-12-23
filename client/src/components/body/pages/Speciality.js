@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import SideNav from "../profile/sidenav/SideNav";
+import Loading from "../../utils/notification/Loading";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -13,7 +14,8 @@ function Speciality() {
   const [speciality, setSpeciality] = useState("");
   const [fee, setFee] = useState("");
   const token = useSelector((state) => state.token);
-
+  const [image, setImage] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
   const [id, setID] = useState("");
   const [err, setErr] = useState(false);
@@ -26,6 +28,48 @@ function Speciality() {
     };
     getSpecialities();
   }, [callback]);
+
+  const handleChangeImage = async (e) => {
+    e.preventDefault();
+    try {
+      const file = e.target.files[0];
+
+      if (!file)
+        return setSuccess({
+          err: "No files were uploaded.",
+          success: "",
+        });
+
+      if (file.size > 1024 * 1024)
+        return setSuccess({ err: "Size too large.", success: "" });
+
+      if (
+        file.type !== "image/jpeg" &&
+        file.type !== "image/png" &&
+        file.type !== "application/pdf"
+      )
+        return setSuccess({
+          err: "File format is incorrect.",
+          success: "",
+        });
+
+      let formData = new FormData();
+      formData.append("file", file);
+
+      setLoading(true);
+      const res = await axios.post("/api/upload_coverImage", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: token,
+        },
+      });
+
+      setLoading(false);
+      setImage(res.data.url);
+    } catch (err) {
+      setSuccess({ err: err.response.data.msg, success: "" });
+    }
+  };
 
   const createSpeciality = async (e) => {
     e.preventDefault();
@@ -48,6 +92,7 @@ function Speciality() {
           {
             name: speciality,
             fee,
+            image,
           },
           {
             headers: { Authorization: token },
@@ -58,6 +103,7 @@ function Speciality() {
       setOnEdit(false);
       setSpeciality("");
       setFee("");
+      setImage("");
       setCallback(!callback);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
@@ -108,6 +154,16 @@ function Speciality() {
               required
               onChange={(e) => setFee(e.target.value)}
             />
+
+            <div className="form-group my-3">
+              <input
+                type="file"
+                className="form-control"
+                accept="image/jpeg,image/gif,image/png"
+                onChange={handleChangeImage}
+                name="image"
+              />
+            </div>
 
             <button className="category_button" type="submit">
               {onEdit ? "Update" : "Create"}

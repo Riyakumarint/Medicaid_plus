@@ -3,6 +3,7 @@
     min-height: 100vh;
     overflow: hidden;
     /* position: relative; */
+    margin-left: 20px;
     background-color: #f8bec1;
     justify-content: center;
     align-items: center;

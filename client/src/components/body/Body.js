@@ -15,6 +15,7 @@ import Medical_profile from './profile/Medical_Profile'
 import Medical_history from './profile/Medical_History'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
+import Contact from "./pages/Contact";
 import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
 import Appointment_doctor from "./pages/Appointment_doctor";
@@ -25,7 +26,7 @@ import ArticlePage from "../body/articles/ArticlePage"
 import Find_doctor from "../body/pages/Find_doctor";
 import Doctor from "../body/pages/Doctor";
 import LabTest from "../body/pages/LabTest";
-import specialist from "../body/pages/specialist";
+import Specialist from "../body/pages/Specialist";
 import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
 
@@ -153,9 +154,15 @@ function Body() {
           exact
         />
         <Route path="/find_lab_test" component={LabTest} />
-        <Route path="/specialist" component={specialist} />
+        <Route path="/specialist" component={Specialist} />
         <Route path="/articles" component={Articles} />
         <Route path="/detail/:id" component={ArticlePage} />
+        <Route
+          path="/contact_us"
+          component={isLogged ? Contact : Login}
+          exact
+        />
+       
         <Route path="*" exact component={NotFound} />
       </Switch>
     </section>

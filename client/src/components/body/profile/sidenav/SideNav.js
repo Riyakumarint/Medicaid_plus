@@ -81,7 +81,7 @@ function SideNav() {
               <span class="icon">
                 <i class="fa fa-user-md" aria-hidden="true"></i>
               </span>
-              <span class="title">Create S</span>
+              <span class="title">Speciality</span>
             </a>
           ) : (
             ""
@@ -108,9 +108,9 @@ function SideNav() {
               <span class="title">Category</span>
             </a>
           ) : (
-            <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
+            <a href="/contact_us" onClick={() => window.scrollTo({ top: 0 })}>
               <span class="icon">
-                <i class="fa fa-list-alt" aria-hidden="true"></i>
+              <i class="fas fa-envelope"></i>
               </span>
               <span class="title">Contact</span>
             </a>

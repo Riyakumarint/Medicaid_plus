@@ -14,7 +14,7 @@
 .forms-container{
     max-width: 400px;
     width: 100%;
-    margin: 100px auto;
+    margin: 80px auto;
     padding: 25px;
     box-shadow: 0 0 19px 0 rgba(134, 160, 212, 0.5);
     border-radius: 10px;
@@ -282,15 +282,15 @@ form {
     color: #681d55;
 }
 
-.login_page .social button{
-    width: 100%;
-    margin: 10px 0;
-    height: 50px;
-    font-size: 14px;
+.social button{
+    width: 300px;
+    margin: 10px 60px;
+    height: 45px;
+    font-size: 16px;
     font-weight: 200;
     text-transform: capitalize;
     letter-spacing: 1.3px;
-    box-shadow: 0 2px 4px #777;
+    box-shadow: 0 2px 4px rgb(107, 105, 105);
 } 
 
 .login_page .forgot_password{

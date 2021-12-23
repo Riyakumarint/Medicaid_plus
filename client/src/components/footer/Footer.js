@@ -9,7 +9,8 @@ const Footer = () => {
       className="mb-2 d-block">
         
       </a> */}
-      <p> Copyright &copy; 2021 , Medicaid. All rights reserved.</p>
+      <p> Copyright &copy; 2021 , Medicaid+. All rights reserved.</p>
+      <a href='/contact_us'>Contact Us</a>
     </div>
   )
 }
