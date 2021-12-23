@@ -188,8 +188,13 @@ const Create_appointment = () => {
   const handleChangeDoctor = (e) => {
     const { name1, value } = e.target;
     const temp = doctors.filter(doctor => { return doctor.userId===value; });
-    const {userId, name, clinic_address} = temp[0];
-    setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address})
+    if(Lenght(temp)===0){
+      setDoctor(initialState2)
+    } else{
+      const {userId, name, clinic_address} = temp[0];
+      setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address})
+    }
+    
   }
   const handleChangeSymptom = (e) => {
     const { name, value } = e.target;
@@ -597,7 +602,7 @@ const Create_appointment = () => {
                       </select>
                     </div>
                   </div>
-                  {appointmentDetails.mode === "offline" ? (
+
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       {console.log("jijiji :: "+date)}
@@ -606,9 +611,7 @@ const Create_appointment = () => {
                       <><Book_Slots doctor={doctor} appointmentDetail={appointmentDetails} setDate={setDate}/>
                       </>):("")}
                     </div>
-                  </div>) : (
-                    ""
-                  )}
+                  </div>
 
                 </div>
 
