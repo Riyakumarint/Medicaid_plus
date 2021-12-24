@@ -33,10 +33,19 @@
   display: flex;
 }
 
+.profile_page .dash_data{
+ margin: 0 10px;
+}
+
+.profile_page .dash_data .doc_avatar{
+width: fit-content;
+margin-left: 0;
+}
+
 .profile_page .row {
   padding: 0 10px;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .profile_page h4 {
@@ -323,4 +332,17 @@
         font-size: 1.2rem;
         height: 24vh;
     } */
+}
+
+
+/*------ Chart --------*/
+
+.chart .pie_chart{
+  width: 400px;
+  margin: 10px auto;
+}
+
+.chart .bar_chart{
+  max-width: 1000px;
+  min-width: 700px;
 }
