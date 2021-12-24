@@ -93,7 +93,7 @@ function Header() {
                 }}
                 onClick={() => window.scrollTo({ top: 0 })}
               >
-                Book Appointment
+                Appointment
               </NavLink>
               <NavLink
                 exact
@@ -143,30 +143,7 @@ function Header() {
               >
                 Articles
               </NavLink>
-              <NavLink
-                exact
-                to="/contact_us"
-                class="main-nav"
-                activeStyle={{
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-                onClick={() => window.scrollTo({ top: 0 })}
-              >
-                Contact us
-              </NavLink>
-              <NavLink
-                exact
-                to="/contact_us"
-                class="main-nav"
-                activeStyle={{
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-                onClick={() => window.scrollTo({ top: 0 })}
-              >
-                About us
-              </NavLink>
+             
 
               <li className="nav-item dropdown" style={{ opacity: 1 }}>
                 <div

@@ -238,12 +238,12 @@
   transition: 0.5s;
 } */
 .comment_box {
-  display: flex;
+  display: flex;  
 }
 
 .comment_img {
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   border-radius: 50%;
   border: 2px solid #911f27;
   margin: auto 5px;
@@ -252,7 +252,7 @@
 .comment_area {
   width: 80%;
   /* min-width: 250px; */
-  /* min-height: 70px; */
+  max-height: 70px;
   margin: 5px 0;
   border: 2px solid #911f27;
   outline: none;
@@ -308,7 +308,8 @@
 }
 
 .btnS {
-  height: 40px;
+  max-height: 40px;
+  max-width: 40px;
   margin: 10px 5px;
 }
 

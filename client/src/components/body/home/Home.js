@@ -44,12 +44,14 @@ function Home() {
                     alt="C1"
                   />
                   <div class="carousel-caption">
-                    <h5 class="animated fadeInDown">First slide label</h5>
+                    <h5 class="animated fadeInDown">
+                      You are now in safe hands
+                    </h5>
                     <p class="animated fadeInUp d-none d-md-block">
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                      Choose the experts in end to end surgical care.
                     </p>
                     <div className="slider-btn">
-                      <a href="/find_video_consult">Video Consult</a>
+                      <a href="/find_video_consult">Find Doctor</a>
                     </div>
                   </div>
                 </div>
@@ -61,12 +63,14 @@ function Home() {
                     alt="..."
                   />
                   <div class="carousel-caption ">
-                    <h5 class="animated fadeInDown">second slide label</h5>
+                    <h5 class="animated fadeInDown">
+                      Instant appointment with doctors Guaranteed!
+                    </h5>
                     <p class="animated fadeInUp d-none d-md-block">
-                      Search & Book Online Doctor Appointment Here
+                      Skip the waiting room. Consult with a doctor
                     </p>
                     <div className="slider-btn">
-                      <a href="/create_appointments">BOOK Appoinment</a>
+                      <a href="/create_appointments">Book Appoinment</a>
                     </div>
                   </div>
                 </div>
@@ -78,9 +82,12 @@ function Home() {
                     alt="..."
                   />
                   <div class="carousel-caption ">
-                    <h5 class="animated fadeInDown">third slide label</h5>
+                    <h5 class="animated fadeInDown">
+                      Read top articles from health experts
+                    </h5>
                     <p class="animated fadeInUp d-none d-md-block">
-                      Search & Book Online Doctor Appointment Here
+                      Health articles that keep you informed about good health
+                      practices and achieve your goals.
                     </p>
                     <div className="slider-btn">
                       <a href="/articles">Read Articles</a>

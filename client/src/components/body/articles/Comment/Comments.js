@@ -53,7 +53,7 @@ const Comments = ({ blog }) => {
       {(isDoctor || isAdmin) && (
         <>
           <div className="comment_box">
-            <img src={user.avatar || url} className="comment_img" alt="dp" />
+            <img src={user.avatar} className="comment_img" alt="dp" />
             <textarea
               rows="2"
               max-rows="20"

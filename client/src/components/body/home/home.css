@@ -92,8 +92,9 @@
   width: 100%;
   justify-content: center;
   background: #f8bec1;
+  margin-top: -12px;
   /* background: linear-gradient(180deg, rgba(145,31,39,1) 0%, rgb(245, 198, 165) 20%, rgba(252,250,248,1) 100%); */
-  translate: translateY(-1000px);
+  /* translate: translateY(-900px); */
   align-items: center;
   font-weight: bold;
 }
