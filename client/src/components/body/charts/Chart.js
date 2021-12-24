@@ -22,7 +22,51 @@ export default function Chart(props){
         />):("Waiting For Fetching")}
         
 
-      
+        {props.chartData3?(<Bar
+          data={props.chartData3}
+          options={{
+            indexAxis: 'y',
+            title:{
+              display:props.displayTitle,
+              text:'Largest Cities In '+props.location,
+              fontSize:25
+            },
+            legend:{
+              display:props.displayLegend,
+              position:props.legendPosition
+            }
+          }}
+        />):("")}
+        {props.chartData4?(<Bar
+          data={props.chartData4}
+          options={{
+            indexAxis: 'y',
+            title:{
+              display:props.displayTitle,
+              text:'Largest Cities In '+props.location,
+              fontSize:25
+            },
+            legend:{
+              display:props.displayLegend,
+              position:props.legendPosition
+            }
+          }}
+        />):("")}
+        {props.chartData5?(<Bar
+          data={props.chartData5}
+          options={{
+            indexAxis: 'y',
+            title:{
+              display:props.displayTitle,
+              text:'Largest Cities In '+props.location,
+              fontSize:25
+            },
+            legend:{
+              display:props.displayLegend,
+              position:props.legendPosition
+            }
+          }}
+        />):("")}
         <Pie
           data={props.chartData}
           options={{

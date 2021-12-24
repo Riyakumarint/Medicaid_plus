@@ -44,37 +44,48 @@ const initData3={
           ]
     }]
 };
+const initData4={
+    labels:['Blood Sugar Upper','Blood Sugar Lower','User Blood sugar'],
+    datasets:[{
+        label:'Blood Sugar',
+        data:[],
+        backgroundColor:[
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ]
+    }]
+};
+const initData5={
+    labels:['Low Blood Oxygen Level','User Blood Oxygen Level'],
+    datasets:[{
+        label:'Blood Sugar',
+        data:[],
+        backgroundColor:[
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ]
+    }]
+};
+const initData6={
+    labels:['Low Pulse Rate','High Pulse Rate','User Pulse Rate'],
+    datasets:[{
+        label:'Pulse Rate',
+        data:[],
+        backgroundColor:[
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ]
+    }]
+};
 export default function Patient_dah() {
     const auth = useSelector((state) => state.auth);
     const { user, isAdmin,isDoctor } = auth;
-      const chartData={
-        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-        datasets: [
-          {
-            label:'Population',
-            data:[
-              617594,
-              181045,
-              153060,
-              106519,
-              105162,
-              95072
-            ],
-            backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)'
-            ]
-          }
-        ]
-      };
       const [barData,setBarData] = useState(initData1);
       const [pieData,setPieData] = useState(initData2);
       const [pieData2,setPieData2] = useState(initData3);
+      const [barblood,setBarblood] = useState(initData4);
+      const [baroxygen,setBarOxygen] = useState(initData5);
+      const [barpulse,setBarPulse] = useState(initData6);
       const [appointments,setAppointments] = useState([]);
       const [callBack,setcallBack]=useState(false);
       const [current,setCurrent]=useState("");
@@ -171,7 +182,7 @@ export default function Patient_dah() {
                     a7++;
                 }
             }
-            setBarData({labels:[l1,l2,l3,l4,l5,l6,l7],
+            setBarData({labels:[l1.toDateString(),l2.toDateString(),l3.toDateString(),l4.toDateString(),l5.toDateString(),l6.toDateString(),l7.toDateString()],
                 datasets:[{
                     label:'Number Of Appointments',
                     data:[a1,a2,a3,a4,a5,a6,a7],
@@ -185,7 +196,7 @@ export default function Patient_dah() {
                         'rgba(255, 99, 132, 0.6)'
                       ]
                 }]})
-            setPieData({labels:['Onlie','OfLine'],
+            setPieData({labels:['Onlnie','Ofline'],
             datasets:[{
                 label:'Online vs Ofline',
                 data:[a,b],
@@ -207,12 +218,17 @@ export default function Patient_dah() {
           };
           getpiedata();
           const getmedical=async()=>{
-            try{
-                const ref = axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}});
-                console.log(ref.data);
-                /*const a = ref.data.bloodSugar;
-                const b= ref.data.oxygenLevel;
-                const c= ref.data.pulse;
+            axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+    .then( res => {setMedicalHist(res.data);
+    console.log(medicalhist)})
+    .catch( err => {
+        console.log(err);
+    })
+    console.log(medicalhist)
+
+                const a = medicalhist?.bloodSugar;
+                const b= medicalhist?.oxygenLevel;
+                const c= medicalhist?.pulse;
                 var k=0;
                 if(parseInt(a)>140){
                     k++;
@@ -231,21 +247,44 @@ export default function Patient_dah() {
                 }
                 else{
                     setCurrent("Book an urgent apointment or your health might Digrade Considerably");
-                }*/
-                console.log("sefcwe:::::   "+ref.data);
-                setMedicalHist(ref.data);
-                console.log(ref.data);
-              }
-              catch(err){
-                  console.log("freg: "+err);
-              }
+                }
+                console.log(a+" "+b+" "+c)
+                setBarblood({labels:['Blood Sugar Heigh','Blood Sugar Low','User Blood sugar'],
+                datasets:[{
+                    label:'Blood Sugar',
+                    data:[141,70,parseInt(a)],
+                    backgroundColor:[
+                        'rgba(235, 52, 67)',
+                        'rgba(235, 52, 67)',
+                        'rgba(255, 99, 132, 0.6)'
+                      ]
+                }]});
+                setBarOxygen({labels:['Low Blood Oxygen Level','User Blood Oxygen Level'],
+                datasets:[{
+                    label:'Blood Oxygen',
+                    data:[80,parseInt(b)],
+                    backgroundColor:[
+                        'rgba(235, 52, 67)',
+                        'rgba(255, 99, 132, 0.6)'
+                      ]
+                }]});
+                setBarPulse({labels:['Low Pulse Rate','High Pulse Rate','User Pulse Rate'],
+                datasets:[{
+                    label:'Pulse Rate',
+                    data:[50,140,parseInt(c)],
+                    backgroundColor:[
+                        'rgba(235, 52, 67)',
+                        'rgba(235, 52, 67)',
+                        'rgba(255, 99, 132, 0.6)'
+                      ]
+                }]});
           };
           getmedical();
       }, [appointments])
     return (
         <>
         <h1>Current Health Status: {current}</h1>
-        <Charts barData={barData} chartData={pieData} chartData2={pieData2} location="Massachusetts" legendPosition="bottom"/>
+        <Charts barData={barData} chartData={pieData} chartData2={pieData2} chartData3={barblood} chartData4={baroxygen} chartData5={barpulse} location="Massachusetts" legendPosition="bottom"/>
         </>
     );
 }
