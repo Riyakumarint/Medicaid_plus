@@ -186,6 +186,57 @@ const appointmentsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
+    getdata1:async(req,res)=>{
+        console.log("hi");
+        try{
+            var company_id= req.params.ID; 
+            var start = new Date();
+            start.setHours(0,0,0,0);
+            var end = new Date();
+            end.setDate(end.getDate() + 7);
+            end.setHours(23,59,59,999);
+            const data1= await Appointment.aggregate(
+                [   
+                    {
+                      $match: {
+                        $and:[
+                          { entry_date: { $gt: start, $lt: end } },{company_id:""+company_id+""}
+                        ]
+                      }
+                    },
+                    { $sort : { entry_date : -1 } },
+                      {
+                          $group:
+                          {
+                              _id:
+                              {
+                                  day: { $dayOfMonth: "$meetingDetail" },
+                                  month: { $month: "$meetingDetail" }, 
+                                  year: { $year: "$meetingDetail" }
+                              }, 
+                              count: { $sum:1 },
+                              entry_date: { $first: "$meetingDetail" }
+                          }
+                      },
+                      {
+                          $project:
+                          {
+                              entry_date:
+                              {
+                                  $dateToString: { format: "%Y-%m-%d", date: "$entry_date" }
+                              },
+                              count: 1,
+                              _id: 0
+                          }
+                      }
+                  ]);
+                  console.log(data1);
+                  return res.status(200).json(data1);
+        }
+        catch(err){
+            return res.status(500).json({msg: err.message});
+        }
+    }
 };
 
 

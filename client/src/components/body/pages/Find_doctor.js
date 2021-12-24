@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ReactStars from 'react-stars'
+import ReactStars from 'react-stars';
+import Doctor_card from '../doctor_card/Doctor_card'
 import axios from "axios";
 import {
   showErrMsg,
@@ -95,42 +96,11 @@ const Find_doctor = () => {
     if(doctors.length===0) return ('No Doctor Avilable');
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
-          <table className="medical">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Speciality</th>
-                <th>Rating</th>
-                <th>Clinic address</th>
-                <th>Fee</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div className="show_blogs">
               {doctors.map((doctor) => (
-                <tr key={doctor._id}>
-                  <td>{doctor.name}</td>
-                  <td>{getSpecialityName(doctor.speciality_name, specialities)}</td>
-                  <td><ReactStars
-                        count={5}
-                        value={Number(doctor.reviews.rating)}
-                        size={24}
-                        color2={'#ffd700'} 
-                        edit={false}
-                    /></td>
-                  <td>{doctor.clinic_address}</td>
-                  <td>{getSpecialityFee(doctor.speciality_name, specialities)}</td>
-                  <td>
-                    <Link to={`/doctor/${doctor.userId}`}>
-                      <i className="fas fa-stethoscope" title="View"> Open</i>
-                    </Link>
-                  </td>
-                </tr>
+                <Doctor_card doctor={doctor}/>
               ))}
-            </tbody>
-          </table>
-      </div>
+              </div>
       </div>
     )
   };

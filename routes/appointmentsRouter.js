@@ -28,6 +28,8 @@ router.get('/fetchAppointments', auth, appointmentsCtrl.fetchAppointments)
 
 router.get('/fetchAppointment/:caseId', auth, appointmentsCtrl.fetchAppointment);
 
-router.post('/resheduleAppointment/:apppointmentID/:date',appointmentsCtrl.reshedule)
+router.post('/resheduleAppointment/:apppointmentID/:date',appointmentsCtrl.reshedule);
+
+router.get('/getdata1/:ID',appointmentsCtrl.getdata1);
 
 module.exports = router

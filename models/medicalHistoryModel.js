@@ -50,7 +50,18 @@ const medicalHistorySchema = new mongoose.Schema({
         type:String,
         default:''
     },
-
+    pulse:{
+        type:String,
+        default:''
+    },
+    bloodSugar:{
+        type:String,
+        default:''
+    },
+    oxygenLevel:{
+        type:String,
+        default:''
+    },
     currentMedication: [{
         name: String,
         dose: String

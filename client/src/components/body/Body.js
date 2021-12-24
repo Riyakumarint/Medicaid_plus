@@ -13,6 +13,7 @@ import City from "./pages/City";
 import EditUser from "../body/profile/EditUser";
 import Medical_profile from './profile/Medical_Profile'
 import Medical_history from './profile/Medical_History'
+import Megical_history_doc from './meddical_history_doc/Medical_histor_doc'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Contact from "./pages/Contact";
@@ -93,6 +94,11 @@ function Body() {
         <Route
           path="/medical_history"
           component={isLogged ? Medical_history : Login}
+          exact
+        />
+        <Route
+          path="/medicalhistory/:user"
+          component={isLogged ? Megical_history_doc : Login}
           exact
         />
         <Route

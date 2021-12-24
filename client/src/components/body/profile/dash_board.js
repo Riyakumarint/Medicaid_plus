@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { isLength, isMatch } from "../../utils/validation/Validation";
 import Loading from "../../utils/notification/Loading";
 import AdminProfile from "./Admin_profile";
+import Doctor_dash from "./Doctor_dash";
+import Patient_dash from "./Patient_dah";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -30,7 +32,7 @@ function Dash_board() {
 
   const users = useSelector((state) => state.users);
 
-  const { user, isAdmin } = auth;
+  const { user, isAdmin,isDoctor } = auth;
   const [data, setData] = useState(initialState);
   const { name, password, cf_password, err, success } = data;
 
@@ -77,7 +79,10 @@ function Dash_board() {
             <hr></hr>
           </div>
           <div className="col-right">
-            <div>{isAdmin ? <AdminProfile /> : "My Orders"}</div>
+            <div>{isAdmin ? <AdminProfile /> : (
+              <>{isDoctor?<Doctor_dash/>:<Patient_dash/>}</>
+              )
+            }</div>
           </div>
         </div>
       </div>

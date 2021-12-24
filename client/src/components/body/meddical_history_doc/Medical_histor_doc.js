@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {  useHistory } from "react-router-dom";
+import {  useHistory,useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import {
   showErrMsg,
   showSuccessMsg,
 } from "../../utils/notification/Notification";
-import SideNav from "./sidenav/SideNav";
+import SideNav from "../profile/sidenav/SideNav";
 
 const initialState = {
   bloodGroup: "",
@@ -29,7 +29,7 @@ const initialStateEmergency = {
   success: "",
 };
 
-const Medical_history = () => {
+const Medical_histor_doc = () => {
   const [profile, setProfile] = useState(initialState);
   const [emergencyContact, setEmergencyContact] = useState(initialStateEmergency);
   const [currentMedication, setCurrentMedication] = useState([]);
@@ -40,16 +40,18 @@ const Medical_history = () => {
   const [allergie, setAllergie] = useState({name:""});
 
   const token = useSelector((state) => state.token);
-
+  const {user} = useParams();
   // fetching data
   useEffect(()=> {
-    axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+    console.log("Done   " + user);
+    axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
     .then( res => {
       setProfile(res.data);
       setEmergencyContact(res.data.emergencyContact);
       setCurrentMedication(res.data.currentMedication);
       setMedicalCondition(res.data.medicalCondition);
       setAllergies(res.data.allergies);
+      console.log("Done");
     })
     .catch( err => {
       setProfile({ ...profile, err: err, success: "" });
@@ -83,7 +85,7 @@ const Medical_history = () => {
     e.preventDefault();
     try {
       const res = await axios.patch(
-        "/profiles/updateMedicalHistory",
+        "/profiles/updateMedicalHistory_doc/"+user,
         {
           profile,
           emergencyContact
@@ -100,12 +102,12 @@ const Medical_history = () => {
   const handleAddMed = async () => {
     try {
       const res = await axios.post(
-        "/profiles/addCurrMedicines",
+        "/profiles/addCurrMedicines_doc/"+user,
         { currMed },
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setCurrentMedication(res.data.currentMedication);
       })
@@ -121,12 +123,12 @@ const Medical_history = () => {
   const handleDeleteMed = async (medId) => {
     try {
       const res = await axios.post(
-        "/profiles/deleteCurrMedicines",
+        "/profiles/deleteCurrMedicines_doc/"+user,
         { medId },
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setCurrentMedication(res.data.currentMedication);
       })
@@ -143,12 +145,12 @@ const Medical_history = () => {
   const handleAddMedCond = async () => {
     try {
       const res = await axios.post(
-        "/profiles/addMedCondition",
+        "/profiles/addMedCondition_doc/"+user,
         { medCond },
         { headers: { Authorization: token } }
       );
       
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setMedicalCondition(res.data.medicalCondition);
       })
@@ -169,7 +171,7 @@ const Medical_history = () => {
         { headers: { Authorization: token } }
       );
       
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setMedicalCondition(res.data.medicalCondition);
       })
@@ -186,12 +188,12 @@ const Medical_history = () => {
   const handleAddAllergie = async () => {
     try {
       const res = await axios.post(
-        "/profiles/addAllergies",
+        "/profiles/addAllergies_doc/"+user,
         { allergie },
         { headers: { Authorization: token } }
       );
       
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setAllergies(res.data.allergies);
       })
@@ -207,12 +209,12 @@ const Medical_history = () => {
   const handleDeleteAllergie = async (allergieId) => {
     try {
       const res = await axios.post(
-        "/profiles/deleteAllergies",
+        "/profiles/deleteAllergies_doc/"+user,
         { allergieId },
         { headers: { Authorization: token } }
       );
       
-      axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
+      axios.get('/profiles/getMedicalProfile_doc/'+user, { headers: {Authorization: token}})
       .then( res => {
         setAllergies(res.data.allergies);
       })
@@ -756,4 +758,4 @@ const Medical_history = () => {
   );
 };
 
-export default Medical_history;
+export default Medical_histor_doc;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ReactStars from 'react-stars'
+import Chat from "../../../images/chat.png";
+import "./get.css"
 import axios from "axios";
 import {
   showErrMsg,
@@ -30,6 +32,7 @@ const initialState = {
 
 const Doctor = () => {
   const [doctor, setDoctor] = useState(initialState);
+  const history = useHistory();
   const [doctorUser, setDoctorUser] = useState({avatar:"", email:"", mobile:"", gender:""});
   const [specialities, setSpecialities] = useState([]);
   const [speciality, setSpeciality] = useState({speciality_name: ""});
@@ -129,6 +132,7 @@ const Doctor = () => {
     try {
       const Conversation = await axios.post("/conversations", convo);
       // console.log(Conversation);
+        history.push("/messenger");
     } catch (err) {
       console.log(err);
     }
@@ -152,12 +156,10 @@ const Doctor = () => {
                         edit={false}
                     />
                     <button
-                        type="button"
-                        className="button"
-                        onClick={handleClick}
-                        >
-                        Chat with the Doctor
-                    </button>
+          className="open-button"
+          onClick={handleClick}>
+          <img src={Chat} />
+        </button>
                 </div>
 
                 <div className="profile-container">

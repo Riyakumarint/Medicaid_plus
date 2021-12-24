@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams,Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Chat_Component from "../chat_Component/Chat_Component.js"
 import axios from "axios";
@@ -396,9 +396,11 @@ const Appointment_doctor = () => {
               <button
                   type="button"
                   className="button"
-                  // onClick={() => window.scrollTo({ top: 0 })}
+                  onClick={() => window.scrollTo({ top: 0 })}
+                  
                   >
-                  View patient medical history
+                    <Link to={`/medicalhistory/${appointment.patienttId}`}>View patient medical history</Link>
+                  
                 </button>
             </div>
 

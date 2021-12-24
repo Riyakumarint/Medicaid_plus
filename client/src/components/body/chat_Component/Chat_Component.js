@@ -123,7 +123,9 @@ export default function Chat_Component(props) {
             const res = await axios.post("/messages", message);
             setMessages([...messages, res.data]);
             console.log(res.data);
-            setNewMessage("");
+            setTimeout(() => {
+              setNewMessage("");
+            }, 2000);
         }
         catch (err) {
             console.log(err);
@@ -150,7 +152,9 @@ export default function Chat_Component(props) {
         try {
             const res = await axios.post("/messages", message);
             setMessages([...messages, res.data]);
-            setNewMessage("");
+            setTimeout(() => {
+              setNewMessage("");
+            }, 2000);
         }
         catch (err) {
             console.log(err);
@@ -200,14 +204,13 @@ export default function Chat_Component(props) {
           <div className="send">
             <form action="#" id="send-container">
               <div className="chat_btns">
-                <textarea
+                <input
                   type="text"
                   name="messageInp"
                   id="messageInp"
                   onChange={(e) => setNewMessage(e.target.value)}
                     name="Chatmessage"
-                    value={newMessages}
-                  ></textarea>
+                  ></input>
                 
                 {/* <button className="btnM" onClick={handleSubmit}>Send</button> */}
 
