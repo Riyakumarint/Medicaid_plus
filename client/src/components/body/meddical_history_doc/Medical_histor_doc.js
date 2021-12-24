@@ -419,6 +419,8 @@ const Medical_histor_doc = () => {
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
@@ -437,7 +439,7 @@ const Medical_histor_doc = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="weight">BloodSugar</label>
+                        <label htmlFor="weight">Blood Sugar</label>
                         <input
                           className="bloodSugar"
                           id="exampleInputage1"
@@ -452,7 +454,7 @@ const Medical_histor_doc = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="weight">OxygenLevel</label>
+                        <label htmlFor="weight">Oxygen Level</label>
                         <input
                           className="oxygenLevel"
                           id="exampleInputage1"

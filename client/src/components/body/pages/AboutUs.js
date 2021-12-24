@@ -23,7 +23,7 @@ function AboutUs() {
             </div>
           </div>
           <div class="img-text">
-            <h4>Purushotam K. Agrawal</h4>
+            <h4>Purushotam</h4>
             <h5>20192042  (EE)</h5>
             
           </div>

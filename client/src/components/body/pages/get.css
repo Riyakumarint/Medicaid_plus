@@ -452,3 +452,16 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
+
+.profile_header .open-button {
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 #b91d28;
+  opacity: 1;
+  position: fixed;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  padding: 0 0;
+}

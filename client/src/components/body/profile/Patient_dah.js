@@ -249,14 +249,14 @@ export default function Patient_dah() {
                     setCurrent("Book an urgent apointment or your health might Digrade Considerably");
                 }
                 console.log(a+" "+b+" "+c)
-                setBarblood({labels:['Blood Sugar Heigh','Blood Sugar Low','User Blood sugar'],
+                setBarblood({labels:['Blood Sugar Heigh','User Blood sugar','Blood Sugar Low'],
                 datasets:[{
                     label:'Blood Sugar',
-                    data:[141,70,parseInt(a)],
+                    data:[141,parseInt(a),70],
                     backgroundColor:[
                         'rgba(235, 52, 67)',
+                        'rgba(255, 99, 132, 0.6)',
                         'rgba(235, 52, 67)',
-                        'rgba(255, 99, 132, 0.6)'
                       ]
                 }]});
                 setBarOxygen({labels:['Low Blood Oxygen Level','User Blood Oxygen Level'],
@@ -268,14 +268,14 @@ export default function Patient_dah() {
                         'rgba(255, 99, 132, 0.6)'
                       ]
                 }]});
-                setBarPulse({labels:['Low Pulse Rate','High Pulse Rate','User Pulse Rate'],
+                setBarPulse({labels:['Low Pulse Rate','User Pulse Rate','High Pulse Rate'],
                 datasets:[{
                     label:'Pulse Rate',
-                    data:[50,140,parseInt(c)],
+                    data:[50,parseInt(c),140],
                     backgroundColor:[
                         'rgba(235, 52, 67)',
+                        'rgba(255, 99, 132, 0.6)',
                         'rgba(235, 52, 67)',
-                        'rgba(255, 99, 132, 0.6)'
                       ]
                 }]});
           };

@@ -40,6 +40,7 @@ const Appointment_patient = () => {
 
   const [appointment, setAppointment] = useState(initialState);
   const [testReports, setTestReports] = useState([]);
+  const [link, setLink] = useState("");
   const [callback, setCallback] = useState(false);
 
   const token = useSelector((state) => state.token);
@@ -52,6 +53,7 @@ const Appointment_patient = () => {
   // data fetching
   useEffect(async () => {
     try {
+        window.scrollTo({ top: 0 })
         const res = await axios.get(
           "/appointments/fetchAppointment/"+caseId,
           { headers: { Authorization: token } }
@@ -65,15 +67,33 @@ const Appointment_patient = () => {
   }, [callback]);
 
   // handle changes
-
+  const handleChangeLink = (e) => {
+    const { name, value } = e.target;
+    setLink(value);
+  }
 
   // handle submit
-  const handleUploadTestReport = async () => {
-    try {
-      console.log("uploading");
-    } catch (err) {
-        console.log(err);
-    }
+  const handleUploadTestReport = async (testReports) => {
+    if(link===""){
+      alert("Re-enter the report link");
+    } else{
+      try {
+        await axios.post(
+          "/appointments/addTestReports",
+          {
+            caseId: appointment._id,
+            testReports: testReports
+  
+          },
+          { headers: { Authorization: token } }
+        );
+        setLink("");
+        setCallback(!callback);
+        alert("Test report uploaded");
+      } catch (err) {
+          console.log(err);
+      }
+    }  
   };
 
   // renders
@@ -137,13 +157,18 @@ const Appointment_patient = () => {
           <table className="medical">
             <thead>
               <tr>
-                <th>link</th>
+                <th>Link</th>
+                <th>Download</th>
               </tr>
             </thead>
             <tbody>
               {appointment.previousTestReports.map((previousTestReport) => (
                 <tr key={previousTestReport.link}>
-                  <td>{previousTestReport.link}</td>
+                  <td>{"Report"}</td>
+                  <td><a href={previousTestReport.link} >
+                      <i className="fa fa-download" />
+                    </a>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -156,6 +181,8 @@ const Appointment_patient = () => {
   const renderTestReport = () =>{
     if(testReports.length===0) return ('');
     return (
+      <div>
+      <h5>Upload Test Report</h5>
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
           <table className="medical">
@@ -163,25 +190,40 @@ const Appointment_patient = () => {
               <tr>
                 <th>Name</th>
                 <th>Link</th>
-                <th>Action</th>
+                <th>Upload</th>
+                <th>Download</th>
               </tr>
             </thead>
             <tbody>
               {testReports.map((testReport) => (
                 <tr key={testReport._id}>
                   <td>{testReport.name}</td>
-                  <td> attach file </td>
+                  <td> <input
+                        className="link"
+                        id="exampleInputLink1"
+                        placeholder="link"
+                        onChange={handleChangeLink}
+                        name="link"
+                    /> 
+                  </td>
                   <td>
                     <i className="fas fa-angle-double-up"
                       title="upload"
-                      onClick={() => handleUploadTestReport()}
-                    > Upload</i>
+                      onClick={() => handleUploadTestReport({name:testReport.name, link:link})}
+                    > </i>
+                  </td>
+                  <td><a href={testReport.link} >
+                      <i className="fa fa-download" />
+                    </a>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
       </div>
+      </div>
+      <hr></hr>
+      <br></br>
       </div>
     )
   };
@@ -237,11 +279,8 @@ const Appointment_patient = () => {
             {/* Test Report */}
             {appointment.mode==="online"?<div>
               <div>
-                <h5>Test Report</h5>
                 {renderTestReport()}
               </div>
-              <hr></hr>
-              <br></br>
               </div>:""
             }
 

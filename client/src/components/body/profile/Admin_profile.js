@@ -31,6 +31,7 @@ function Admin_profile() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     if (isAdmin) {
       fetchAllUsers(token).then((res) => {
         dispatch(dispatchGetAllUsers(res));

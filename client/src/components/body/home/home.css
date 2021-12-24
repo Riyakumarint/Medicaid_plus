@@ -1,6 +1,4 @@
 .home_page {
-  /* min-height: calc(100vh - 100px); */
-  /* position: absolute; */
   background-image: white;
   color: rgb(252, 248, 248);
   font-family: "Poppins", sans-serif;
@@ -26,7 +24,6 @@
 .w-100 {
   height: 100vh;
 }
-
 
 .carousel-caption p {
   width: 60%;
@@ -93,8 +90,6 @@
   justify-content: center;
   background: #f8bec1;
   margin-top: -12px;
-  /* background: linear-gradient(180deg, rgba(145,31,39,1) 0%, rgb(245, 198, 165) 20%, rgba(252,250,248,1) 100%); */
-  /* translate: translateY(-900px); */
   align-items: center;
   font-weight: bold;
 }
@@ -158,13 +153,23 @@
   height: 140px;
 }
 
+.doc_card_body{
+  box-shadow: 0 0 5px 1px #911f27;
+  border-radius: 20px;
+  background-color: white;
+  height: 150px;
+}
+
+.doc_card_body .doc_rating{
+  padding: 0 0 0 15px;
+}
 .card_speciality {
   margin: 40px 0;
   border-radius: 20px;
-  width: 270px;
+  width: 290px;
 }
 
-.card_body a {
+.card_body a ,.doc_card_body a{
   color: #63a6b0;
   text-decoration: none;
   font-size: 20px;
@@ -172,19 +177,33 @@
   font-weight: 600;
 }
 
-.card_body a:hover {
+.card_body a:hover ,.doc_card_body a:hover{
   color: #63a6b0;
   text-decoration: none;
 }
 
+
+
 .card_img {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
   border: 5px solid #fab8bc;
   overflow: hidden;
   margin-top: 20px;
   margin-left: 160px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.doc_card_img{
+  position: absolute;
+  max-width: 110px;
+  max-height: 110px;
+  border: 2px solid #a0383f;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-left: 165px;
   border-radius: 50%;
   justify-content: center;
 }
@@ -202,6 +221,14 @@
   padding: 8px 0 0 15px;
 } 
 
+.card_doc_text{
+  font-size: 15px;
+  width: 200px;
+  height: 30px;
+  padding: 8px 0 0 15px;
+  text-overflow: ellipsis; 
+  overflow: hidden;
+}
 
 
 /*----------Service------------*/

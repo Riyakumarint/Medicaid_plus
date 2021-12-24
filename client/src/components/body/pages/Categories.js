@@ -19,6 +19,7 @@ function Categories() {
   const [success, setSuccess] = useState(false);
   
     useEffect(() =>{
+      window.scrollTo({ top: 0 })
         const getCategories = async () =>{
             const res = await axios.get('/api/category')
             setCategories(res.data)

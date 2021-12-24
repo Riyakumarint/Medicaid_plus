@@ -5,17 +5,20 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import SideNav from '../profile/sidenav/SideNav';
+
+
 export default function Create_Slots(){
-    const auth = useSelector((state) => state.auth);
-    const token = useSelector((state) => state.token);
 
-    const users = useSelector((state) => state.users);
-
-    const { user, isAdmin } = auth;
     const [date, setDate] = useState(null);
     const [newdate, setNewDate] = useState(null);
     const [slots, setSlots] = useState([]);
     const [callback,setCallBack]=useState(false);
+
+    const { user, isAdmin } = useSelector((state) => state.auth);
+    const token = useSelector((state) => state.token);
+    const users = useSelector((state) => state.users);
+
+    // fetch data
     useEffect(() => {
         const getSlots= async()=>{
             try{
@@ -28,15 +31,39 @@ export default function Create_Slots(){
         };
         getSlots();
     }, [user._id,callback]);
-    const handleReshedule = async(e)=>{
-      console.log("try"+e);
-      try{
-        const res = await axios.post("/slots/reshedule/"+e._id+"/"+newdate);
-        console.log(res.data);
-      }catch(err){
-        console.log("heloo:   "+err);
+
+    // handle submit
+    const handleOnClick= async(e)=>{
+      if(date===null) {
+        alert("Enter a slot time")
       }
-    };
+      else{
+        const slot={
+          doctID: user._id,
+          patientID:"",
+          date:date,
+          status: false,
+        };
+        setDate(null);
+        try{
+          const res = await axios.post("/slots", slot);
+          setSlots([...slots, res.data]);
+          console.log(res.data);
+        }catch(err){
+          console.log("heloo:   "+err);
+        }
+      }
+    }
+    const handleDelete= async(e)=>{
+      try{
+          const res = await axios.post("/slots/delete/"+e._id);
+          setCallBack(!callback);
+          console.log(res.data);
+        }catch(err){
+          console.log("heloo:   "+err);
+        }
+    }
+    // render
     const BookedrenderSlots = (slots) =>{
         if(slots.length===0) return ('No current Book Slots');
         return (
@@ -55,29 +82,21 @@ export default function Create_Slots(){
                 <tbody>
                 {slots.map((slot) => 
                          slot.status?(<tr key={slot._id}>
-                            <td>{(new Date(slot.date)).getDate()+"/"+((new Date(slot.date)).getMonth()+1)+"/"+(new Date(slot.date)).getFullYear()}</td>
-                            <td>{(new Date(slot.date)).getHours()+" : "+(new Date(slot.date)).getMinutes()}</td>
+                            <td>{new Date(slot.date).toDateString()}</td>
+                            <td>{new Date(slot.date).toLocaleTimeString()}</td>
                             <td>{slot.patientID}</td>
                             <td>
                                 <button onClick={()=> handleDelete(slot)}>Finished</button>
                             </td>
                           </tr>):""
-                )};
+                )}
                 </tbody>
               </table>
           </div>
           </div>
         )
       };
-      const handleDelete= async(e)=>{
-        try{
-            const res = await axios.post("/slots/delete/"+e._id);
-            setCallBack(!callback);
-            console.log(res.data);
-          }catch(err){
-            console.log("heloo:   "+err);
-          }
-      }
+      
       const UNBookedrenderSlots = (slots) =>{
         if(slots.length===0) return ('No current UnBook Slots');
         return (
@@ -94,8 +113,8 @@ export default function Create_Slots(){
                 <tbody>
                 {slots.map((slot) => 
                          !slot.status?(<tr key={slot._id}>
-                            <td>{(new Date(slot.date)).getDate()+"/"+((new Date(slot.date)).getMonth()+1)+"/"+(new Date(slot.date)).getFullYear()}</td>
-                            <td>{(new Date(slot.date)).getHours()+" : "+(new Date(slot.date)).getMinutes()}</td>
+                            <td>{new Date(slot.date).toDateString()}</td>
+                            <td>{new Date(slot.date).toLocaleTimeString()}</td>
                             <td>
                                 <i className="fas fa-times-circle" title="Open" onClick={()=>handleDelete(slot)}> Delete</i>
                             </td>
@@ -107,28 +126,9 @@ export default function Create_Slots(){
           </div>
         )
       };
-      const handleOnClick= async(e)=>{
-          console.log("Day: "+date.getDate()+" Month: "+date.getMonth()+1+" Year: "+date.getFullYear()+" Time: "+date.getHours()+" ::: "+date);
-          const slot={
-            doctID: user._id,
-            patientID:"",
-            date:date,
-            status: false,
-          };
-          try{
-            const res = await axios.post("/slots", slot);
-            setSlots([...slots, res.data]);
-            console.log(res.data);
-          }catch(err){
-            console.log("heloo:   "+err);
-          }
-      }
+      
     return (
         <>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
         <SideNav/>
         <div className="continer-profile">
         <div className="pro">
@@ -139,15 +139,24 @@ export default function Create_Slots(){
             <h5>Booked Slots</h5>
             {BookedrenderSlots(slots)}
             </div>
+            <br />
             <div>
             <h5>Unbooked Slots</h5>
             {UNBookedrenderSlots(slots)}
             </div>
         </div>
+        <br />
         <div>
             <h5>Create Slots</h5>
-            <DatePicker selected={date} minDate={new Date()} onChange={(date)=>setDate(date)} showTimeSelect dateFormat="Pp"  /><br/><br/>
-            <button onClick={handleOnClick}>Submit</button>
+            <DatePicker selected={date} minDate={new Date()} onChange={(date)=>setDate(date)} showTimeSelect dateFormat="Pp"  />
+            <button
+              type="button"
+              className="category_button"
+              onClick={() => handleOnClick()}
+            >
+            <i className="fas fa-plus-circle" title="Add" > Create</i>
+            </button>
+            
         </div>
         </div>
         </div>

@@ -24,6 +24,7 @@ const Appointments = () => {
   // data fetching
   useEffect(async () => {
     try {
+        window.scrollTo({ top: 0 })
         const res = await axios.get(
           "/appointments/fetchAppointments",
           { headers: { Authorization: token } }
