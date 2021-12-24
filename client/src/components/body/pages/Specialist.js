@@ -11,11 +11,6 @@ function Specialist() {
     };
     getSpecialities();
   }, [callback]);
-
-
-
-
-
   
   return (
     <>

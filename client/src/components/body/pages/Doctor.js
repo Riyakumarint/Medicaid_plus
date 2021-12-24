@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams,useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ReactStars from 'react-stars'
+import ReactStars from "react-stars";
 import Chat from "../../../images/chat.png";
-import "./get.css"
+import "./get.css";
 import axios from "axios";
 import CardVert from "../articles/CardVert";
 import SideNav from "../profile/sidenav/SideNav";
@@ -32,7 +32,12 @@ const initialState = {
 const Doctor = () => {
   const [doctor, setDoctor] = useState(initialState);
   const history = useHistory();
-  const [doctorUser, setDoctorUser] = useState({avatar:"", email:"", mobile:"", gender:""});
+  const [doctorUser, setDoctorUser] = useState({
+    avatar: "",
+    email: "",
+    mobile: "",
+    gender: "",
+  });
   const [specialities, setSpecialities] = useState([]);
   const [speciality, setSpeciality] = useState({ speciality_name: "" });
   const [cities, setCities] = useState([]);
@@ -154,7 +159,7 @@ const Doctor = () => {
     try {
       const Conversation = await axios.post("/conversations", convo);
       // console.log(Conversation);
-        history.push("/messenger");
+      history.push("/messenger");
     } catch (err) {
       console.log(err);
     }
@@ -181,25 +186,23 @@ const Doctor = () => {
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-            <div className="profile_page">
-                <div className="profile_header">
-                    <div className="avatar">
-                        <img src={doctorUser.avatar} alt="" />
-                    </div>
-                    <h3> {doctor.name}</h3>
-                    <ReactStars
-                        count={5}
-                        value={Number(doctor.reviews.rating)}
-                        size={24}
-                        color2={'#ffd700'} 
-                        edit={false}
-                    />
-                    <button
-          className="open-button"
-          onClick={handleClick}>
-          <img src={Chat} />
-        </button>
-                </div>
+          <div className="profile_page">
+            <div className="profile_header">
+              <div className="doc_avatar">
+                <img src={doctorUser.avatar} alt="" />
+              </div>
+              <h3> {doctor.name}</h3>
+              <ReactStars
+                count={5}
+                value={Number(doctor.reviews.rating)}
+                size={24}
+                color2={"#ffd700"}
+                edit={false}
+              />
+              <button className="open-button" onClick={handleClick}>
+                <img src={Chat} />
+              </button>
+            </div>
 
             <div className="profile-container">
               <div>
@@ -224,7 +227,6 @@ const Doctor = () => {
               </div>
               <div>
                 <h5>
-                 
                   Contact - {doctorUser.mobile}&nbsp; {doctorUser.email}
                 </h5>
               </div>
