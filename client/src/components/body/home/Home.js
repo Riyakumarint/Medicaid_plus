@@ -51,7 +51,7 @@ function Home() {
                       Choose the experts in end to end surgical care.
                     </p>
                     <div className="slider-btn">
-                      <a href="/find_video_consult">Find Doctor</a>
+                      <a href="/find_doctor">Find Doctor</a>
                     </div>
                   </div>
                 </div>

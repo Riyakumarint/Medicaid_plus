@@ -20,6 +20,7 @@ const Ambulance = () => {
 
   // data fetching
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     const getCities = async () => {
       const res = await axios.get("/api/city");
       setCities(res.data);

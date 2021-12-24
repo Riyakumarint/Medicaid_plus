@@ -52,6 +52,7 @@ const Create_appointment = () => {
 
   // data fetching
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
@@ -240,7 +241,7 @@ const Create_appointment = () => {
       err: "",
       success: "",
     }
-    console.log(appointmentDetail);
+    // console.log(appointmentDetail);
     const convo={
       senderId:user._id,
       receiverId:doctor.doctortId,
@@ -758,7 +759,7 @@ const Create_appointment = () => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="input-field">
                       <div className="form-group my-3">
@@ -772,7 +773,7 @@ const Create_appointment = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </form>

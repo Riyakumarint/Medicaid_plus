@@ -22,6 +22,7 @@ function Speciality() {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
