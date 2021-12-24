@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const conversationRoute = require("./routes/conversation");
 const messageRoute = require("./routes/messages");
+const slotRoute = require("./routes/slotRouter");
 const router = express.Router();
 const path = require('path')
 
@@ -29,8 +30,8 @@ app.use('/api', require('./routes/specialityRouter'))
 app.use('/uploads', express.static('uploads'));
 app.use("/conversations", conversationRoute);
 app.use("/messages", messageRoute);
-app.use('/comment', require('./routes/commentsRouter'))
-
+app.use("/slots", slotRoute);
+app.use('/comment',require('./routes/commentsRouter'))
 // Connect to mongodb
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {

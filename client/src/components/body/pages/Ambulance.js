@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ReactStars from 'react-stars'
 import axios from "axios";
+import {
+  showErrMsg,
+  showSuccessMsg,
+} from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
 
 
-const Find_doctor = () => {
-  const [specialities, setSpecialities] = useState([]);
-  const [speciality, setSpeciality] = useState({speciality_name: ""});
+const Ambulance = () => {
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState({city_name: ""});
   const [doctors, setDoctors] = useState([]);
@@ -16,13 +19,6 @@ const Find_doctor = () => {
  
 
   // data fetching
-  useEffect(() => {
-    const getSpecialities = async () => {
-      const res = await axios.get("/api/speciality");
-      setSpecialities(res.data);
-    };
-    getSpecialities();
-  }, [callback]);
   useEffect(() => {
     const getCities = async () => {
       const res = await axios.get("/api/city");
@@ -47,20 +43,6 @@ const Find_doctor = () => {
   }, [callback]);
 
   // handle changes
-  const handleChangeSpeciality = async (e) => {
-    const { name, value } = e.target;
-    setSpeciality({ ...speciality, [name]: value});
-    setDoctor({...doctor, doctortId:"", doctor_name:"", clinic_address:""})
-    try {
-      const res = await axios.post(
-        "/api/fetchDoctors/",
-        {speciality_name: e.target.value, city_name: city.city_name}
-      );
-      setDoctors(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   const handleChangeCity = async (e) => {
     const { name, value } = e.target;
     setCity({ ...city, [name]: value});
@@ -68,7 +50,7 @@ const Find_doctor = () => {
     try {
       const res = await axios.post(
         "/api/fetchDoctors/",
-        {speciality_name: speciality.speciality_name, city_name: e.target.value}
+        {speciality_name: "", city_name: e.target.value}
       );
       setDoctors(res.data);
     } catch (err) {
@@ -77,29 +59,28 @@ const Find_doctor = () => {
   };
 
   // handle submit
+  const handleBookTest = () => {
+    alert("Our abmulance is on the way to your home, we will get in touch with you for further assistence!!!")
+  };
 
   // renders
   const renderDoctors = (doctors) =>{
-    if(doctors.length===0) return ('No Doctor Avilable');
+    if(doctors.length===0) return ('No Ambulance Service Avilable');
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Speciality</th>
+                <th>Facility Name</th>
                 <th>Rating</th>
-                <th>Clinic address</th>
-                <th>Fee</th>
-                <th>Action</th>
+                <th>Call Ambulance</th>
               </tr>
             </thead>
             <tbody>
               {doctors.map((doctor) => (
                 <tr key={doctor._id}>
-                  <td>{doctor.name}</td>
-                  <td>{getSpecialityName(doctor.speciality_name, specialities)}</td>
+                  <td>{doctor.clinic_address}</td>
                   <td><ReactStars
                         count={5}
                         value={Number(doctor.reviews.rating)}
@@ -107,12 +88,12 @@ const Find_doctor = () => {
                         color2={'#ffd700'} 
                         edit={false}
                     /></td>
-                  <td>{doctor.clinic_address}</td>
-                  <td>{getSpecialityFee(doctor.speciality_name, specialities)}</td>
                   <td>
-                    <Link to={`/doctor/${doctor.userId}`}>
-                      <i className="fas fa-stethoscope" title="View"> Open</i>
-                    </Link>
+                    <i
+                        className="fas fa-ambulance"
+                        title="Add"
+                        onClick={() => handleBookTest()}
+                  > Call</i>
                   </td>
                 </tr>
               ))}
@@ -130,31 +111,13 @@ const Find_doctor = () => {
         <div className="pro">
             <div className="profile_page">
               <div className="profile_header">
-                <h4>Find Doctors</h4>
+                <h4>Book Ambulance</h4>
               </div>
 
               <div className="profile-container">
 
                 {/* Selectdoctor block */}
                 <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                    <label htmlFor="speciality_name">Speciality</label>
-                      <select
-                        className="form-control text-capitalize speciality_name"
-                        value={speciality.speciality_name}
-                        name="speciality_name"
-                        onChange={handleChangeSpeciality}
-                      >
-                        <option value="">Choose a speciality</option>
-                        {specialities.map((speciality) => (
-                          <option key={speciality._id} value={speciality._id}>
-                            {speciality.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                     <label htmlFor="city_name">City</label>
@@ -176,7 +139,7 @@ const Find_doctor = () => {
                 </div>
 
                 <div>
-                    <h5>Doctors</h5>
+                    <h5>Centers</h5>
                     {renderDoctors(doctors)}
                 </div>
 
@@ -201,4 +164,4 @@ const getSpecialityFee = (_id, specialities) => {
     return spec[0].fee;
 }
 
-export default Find_doctor;
+export default Ambulance

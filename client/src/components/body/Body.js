@@ -26,6 +26,9 @@ import ArticlePage from "../body/articles/ArticlePage"
 import Find_doctor from "../body/pages/Find_doctor";
 import Doctor from "../body/pages/Doctor";
 import LabTest from "../body/pages/LabTest";
+import Ambulance from "../body/pages/Ambulance";
+import Create_Slots from "./create_Slot/Create_Slot";
+import Book_Slots from "./book_Slots/Book_Slots";
 import Specialist from "../body/pages/Specialist";
 import Messenger from "./messenger/Messenger.js"
 import { useSelector } from "react-redux";
@@ -143,6 +146,11 @@ function Body() {
           component={isLogged ? Messenger : Login}
           exact
         />
+        <Route  
+          path="/createSlot" 
+          component={isLogged&&isDoctor?Create_Slots:NotFound} 
+          exact
+        />
         <Route 
           path="/find_doctor" 
           component={Find_doctor} 
@@ -154,6 +162,7 @@ function Body() {
           exact
         />
         <Route path="/find_lab_test" component={LabTest} />
+        <Route path="/find_ambulance" component={Ambulance} />
         <Route path="/specialist" component={Specialist} />
         <Route path="/articles" component={Articles} />
         <Route path="/detail/:id" component={ArticlePage} />

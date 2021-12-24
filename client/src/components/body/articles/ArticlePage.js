@@ -3,23 +3,59 @@ import Loading from "../../utils/notification/Loading";
 import { Grid } from '@material-ui/core';
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import ReactStars from 'react-stars'
 import Comments from './Comment/Comments';
 import { getBlog, deleteBlog } from "../../../api/ArticlesAPI";
+
+const initialState = {
+  title: "",
+  description: "",
+  auther: "",
+  reviews: {
+    rating :3,
+    rater: []
+  }
+}
+
 function PostPage({ match }) {
-  const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState(initialState);
+  const [rating, setRating] = useState();
+  const [callback, setCallback] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const history = useHistory();
-  const auth = useSelector((state) => state.auth);
-  const { isAdmin, isDoctor } = auth;
+
+  const token = useSelector((state) => state.token);
+  const {user, isLogged, isAdmin, isDoctor } = useSelector((state) => state.auth);
+
   useEffect(() => {
     const fetchData = async () => {
       let data = await getBlog(match.params.id);
+
+      data.reviews.rater.map( (rater) => {
+        if(rater.userId===user._id){
+            console.log("gotch")
+            setRating(rater.rating);
+        }
+        console.log(rater.userId, user._id);
+        return rater
+    })
 
       setBlog(data);
     };
 
     fetchData();
-  }, []);
+  }, [callback]);
+
+  const handleRatingChange = async (e) => {
+    const res = await axios.post(
+        "/blogs/rateBlog",
+        { blogId:blog._id, rating:e },
+        { headers: { Authorization: token } }
+    );
+    setCallback(!callback);
+  };
 
   const deletePost = async () => {
     await deleteBlog(blog._id);
@@ -32,6 +68,7 @@ function PostPage({ match }) {
         <Loading />
       </div>
     );
+
   return (<>
     
     <img src={blog.coverImage} alt="blog" className="blog_cover_image" />
@@ -42,6 +79,15 @@ function PostPage({ match }) {
      
       <div className="blog_component">
         <h2 className="blog_heading">{blog.title}</h2>
+        <p>
+        <ReactStars
+            count={5}
+            value={Number(blog.reviews.rating)}
+            size={24}
+            color2={'#ffd700'} 
+            edit={false}
+          />
+        </p>
         <p className="blog_auther">DR. {blog.auther}</p>
         <div className="blog_date">
           <p>{new Date(blog.createdDate).toDateString()}</p>
@@ -57,19 +103,32 @@ function PostPage({ match }) {
         <div className="line-2">
             <hr></hr>
         </div>
-        
       </div>
       
+    </Grid>
+    
+      {/* comment and rating block */}
+    {isLogged?
+      <Grid item lg={4} md={4}  sm={12}>
+        
+        <div className="blog_comment_component">
+        <div>
+          <h5> Rate Blog</h5>
+          <ReactStars
+            count={5}
+            value={rating}
+            onChange={handleRatingChange}
+            size={30}
+            color2={'#ffd700'} 
+          />
+        <br></br>
+        </div>
+        <Comments blog={blog} />
+        </div>
       </Grid>
-   
-      
-     
-    <Grid item lg={4} md={4}  sm={12}>
-      <div className="blog_comment_component">
-      <Comments blog={blog} />
-      </div></Grid>
-            </Grid>
-            </div>
+    :""}
+    </Grid>
+    </div>
     </>
   );
 }

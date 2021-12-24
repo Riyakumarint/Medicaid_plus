@@ -42,8 +42,26 @@ const blogSchema =  mongoose.Schema(
       type: String,
       required: true
     },
-    upvote: Number,
-    downvote: Number,
+    reviews: {
+      rating :{
+          type: Number,
+          default: 3,
+          min: 1,
+          max: 5
+      },
+      rater: [{
+          userId: {
+              type: String,
+              // unique: true
+          },
+          rating :{
+              type: Number,
+              default: 3,
+              min: 1,
+              max: 5
+          },
+      }],
+    }
     // comments: [
     //   {
     //     autherId: String,

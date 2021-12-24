@@ -222,8 +222,8 @@ const profilesCtrl = {
     fetchDoctor: async (req, res) => {
         try {
             const medical_profile = await MedicalProfile.find({userId: req.params.doctorId});
-            const {name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews} = medical_profile[0];
-            res.json({name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews});
+            const {_id, name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews} = medical_profile[0];
+            res.json({_id, name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews});
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }

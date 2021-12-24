@@ -8,6 +8,7 @@ import {
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
 import Loading from "../../utils/notification/Loading";
+import Book_Slots from "../book_Slots/Book_Slots";
 
 const initialState = {
   patienttId: "",
@@ -24,7 +25,7 @@ const initialState = {
   success: "",
 };
 
-const initialState2 = { doctortId: "", doctor_name: "", clinic_address: "" };
+const initialState2 = {doctortId:"", doctor_name:"", clinic_address:""};
 
 const Create_appointment = () => {
   const [appointmentDetails, setAppointmentDetails] = useState(initialState);
@@ -43,9 +44,11 @@ const Create_appointment = () => {
   const [doctor, setDoctor] = useState(initialState2);
   const [callback, setCallback] = useState(false);
   const history = useHistory();
+  const [date,setDate]=useState({date:"", slotId:""});
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
+
 
   // data fetching
   useEffect(() => {
@@ -79,6 +82,7 @@ const Create_appointment = () => {
     getDoctors();
   }, [callback]);
 
+  // handle changes
   const handleChangePdf = async (e) => {
     e.preventDefault();
     try {
@@ -129,7 +133,6 @@ const Create_appointment = () => {
     }
   };
 
-  // handle changes
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
     setAppointmentDetails({
@@ -145,8 +148,8 @@ const Create_appointment = () => {
 
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
-    setSpeciality({ ...speciality, [name]: value });
-    setDoctor(initialState2);
+    setSpeciality({ ...speciality, [name]: value});
+    setDoctor(initialState2)
 
     try {
       const res = await axios.post(
@@ -161,8 +164,8 @@ const Create_appointment = () => {
   };
   const handleChangeCity = async (e) => {
     const { name, value } = e.target;
-    setCity({ ...city, [name]: value });
-    setDoctor(initialState2);
+    setCity({ ...city, [name]: value});
+    setDoctor(initialState2)
 
     try {
       const res = await axios.post(
@@ -181,17 +184,15 @@ const Create_appointment = () => {
 
   const handleChangeDoctor = (e) => {
     const { name1, value } = e.target;
-    const temp = doctors.filter((doctor) => {
-      return doctor.userId === value;
-    });
-    const { userId, name, clinic_address } = temp[0];
-    setDoctor({
-      ...doctor,
-      doctortId: userId,
-      doctor_name: name,
-      clinic_address: clinic_address,
-    });
-  };
+    const temp = doctors.filter(doctor => { return doctor.userId===value; });
+    if(Lenght(temp)===0){
+      setDoctor(initialState2)
+    } else{
+      const {userId, name, clinic_address} = temp[0];
+      setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address})
+    }
+    
+  }
   const handleChangeSymptom = (e) => {
     const { name, value } = e.target;
     setSymptom({ ...symptom, [name]: value });
@@ -214,7 +215,8 @@ const Create_appointment = () => {
       !doctor.doctortId ||
       !appointmentDetails.title ||
       !appointmentDetails.description ||
-      Lenght(symptoms) === 0
+      Lenght(symptoms) === 0 ||
+      date.slotId===""
     )
       return setAppointmentDetails({
         ...appointmentDetails,
@@ -233,15 +235,15 @@ const Create_appointment = () => {
       symptoms: symptoms,
       previousMedicine: previousMedicine,
       previousTestReports: previousTestReports,
-      meetingDetail: "Fri Dec 17 2021 13:22:28 GMT+0530 (India Standard Time)",
+      meetingDetail: date.date,
       pdfFile: pdfFile,
       err: "",
       success: "",
-    };
-
-    const convo = {
-      senderId: user._id,
-      receiverId: doctor.doctortId,
+    }
+    console.log(appointmentDetail);
+    const convo={
+      senderId:user._id,
+      receiverId:doctor.doctortId,
     };
 
     try {
@@ -249,6 +251,11 @@ const Create_appointment = () => {
       // console.log(Conversation);
     } catch (err) {
       console.log(err);
+    }
+    try {
+      const res = await axios.post("/slots/book/" + date.slotId + "/" + user._id);
+    } catch (err) {
+      console.log("heloo:   " + err);
     }
     try {
       const res = await axios.post(
@@ -454,7 +461,7 @@ const Create_appointment = () => {
           <form onSubmit={handleSubmit}>
             <div className="profile_page">
               <div className="profile_header">
-                <h4>Create Appointment</h4>
+                <h4>Book Appointment</h4>
                 <button
                   type="submit"
                   className="button"
@@ -598,6 +605,17 @@ const Create_appointment = () => {
                       </select>
                     </div>
                   </div>
+
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      {console.log("jijiji :: "+date)}
+                      {doctor!==initialState2?
+                      (
+                      <><Book_Slots doctor={doctor} setDate={setDate}/>
+                      </>):("")}
+                    </div>
+                  </div>
+
                 </div>
 
                 {/* symptom block */}
