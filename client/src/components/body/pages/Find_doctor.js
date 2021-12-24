@@ -76,6 +76,13 @@ const Find_doctor = () => {
     }
   };
 
+  const handleChangeDoctor = (e) => {
+    const { name1, value } = e.target;
+    const temp = doctors.filter(doctor => { return doctor.doctortId===value; });
+    const {doctortId, name, clinic_address} = temp[0];
+    setDoctor({...doctor, doctortId:doctortId, doctor_name:name, clinic_address:clinic_address})
+  }
+
   // handle submit
 
   // renders

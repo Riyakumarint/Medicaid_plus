@@ -1,6 +1,7 @@
 const Users = require("../models/userModel").userModel;
 const MedicalHistory = require("../models/medicalHistoryModel").medicalHistoryModel;
 const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
+const BlogModel = require('../models/blogModel').blogModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("./sendMail")
@@ -326,6 +327,17 @@ const profilesCtrl = {
 
         } catch (err) {
         return res.status(500).json({ msg: err.message });
+        }
+    },
+    fetchBlogs: async(req, res) =>{
+        try {
+            
+            const blogs = await BlogModel.find({autherId : req.body.autherId});
+            console.log(req.body);
+           
+            res.json(blogs);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
         }
     },
 

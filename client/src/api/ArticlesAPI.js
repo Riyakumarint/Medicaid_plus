@@ -42,3 +42,12 @@ export const deleteComment = async (id) => {
         console.log('Error while calling deleteComments API ', err)
     } 
 }
+
+export const getDocBlogs = async (param) => {
+    try {
+        let response = await axios.get(`${url}/blogs/getDocBlogs${param}`);
+        return response.data;
+    } catch (error) {
+        console.log('Error while calling getPosts API ', error)
+    }
+}

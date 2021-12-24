@@ -12,7 +12,6 @@ function Articles() {
       const res = await axios.get("/blogs/getAllBlogs");
       setBlogs(res.data);
     };
-
     getAllBlogs();
   }, [callback]);
 

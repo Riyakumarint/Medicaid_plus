@@ -39,33 +39,6 @@ const blogsCtrl = {
         return res.status(500).json({ msg: err.message });
         }
     },
-    // addHastags: async (req, res) => {
-    //     try {
-    //         const newHastag = {
-    //             name: req.body.hastag.name,
-    //         };
-    //         await Blog.findOneAndUpdate(
-    //             { blogId: req.blog.id },
-    //             { "$push": { hastags: newHastag } }
-    //         );
-    //         res.json({ msg: "New Hastag. added!" });
-
-    //     } catch (err) {
-    //     return res.status(500).json({ msg: err.message });
-    //     }
-    // },
-    // deleteHashtags: async (req, res) => {
-    //     try {
-    //         await Blog.findOneAndUpdate(
-    //             { blogId: req.blog.id },
-    //             { "$pull": { hastags: {_id : req.body.hastagId} } }
-    //         );
-    //         res.json({ msg: "Hastag delete Success!" });
-
-    //     } catch (err) {
-    //     return res.status(500).json({ msg: err.message });
-    //     }
-    // },
     // Get all blogs
     getAllBlogs: async (req, res) => {
         /*let auther = req.query.auther;
