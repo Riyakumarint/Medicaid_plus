@@ -15,20 +15,20 @@ const sendEmail = (email, url, txt) => {
   const mailOptions = {
     from: "noreply@gmail.com",
     to: email,
-    subject: "Medicare: Account Activation Link",
+    subject: "Medicaid+: Account Activation Link",
     html: `
     <div style="margin:0;padding:0;font-family:sans-serif;background-color: #F7F7F7;text-align: center; ">
 
     <div style="max-width: 500px; margin: auto;border-top: 60px solid #F7F7F7; padding: 50px 40px; font-size: 110%; background-color:white;color: #5D5C5C;">
     
 
-    <h2 style="font-family: comic sans ms,sans-serif; font-size: 35px;color:crimson;"><strong>Welcome to Medicare</strong></h2>
+    <h2 style="font-family: comic sans ms,sans-serif; font-size: 35px;color:crimson;"><strong>Welcome to Medicaid+</strong></h2>
 
     <hr>
 
     <p style="font-size: 20px;"> Hi ,</p>
     
-    <p style="font-size: 20px;">You're almost set to start using medicare.
+    <p style="font-size: 20px;">You're almost set to start using Medicaid+.
     Just click the button below to validate your email address.
     </p>
     
@@ -56,7 +56,7 @@ const sendEmail = (email, url, txt) => {
     <p>MNNIT Allahabad Campus</p>
     <p>Teliarganj, Prayagraj, Uttar Pradesh 211004
     </p>
-    <p>© 2021 Medicare. All Rights Reserved.</p>
+    <p>© 2021 Medicaid+. All Rights Reserved.</p>
     </div>
     </div>
     `,

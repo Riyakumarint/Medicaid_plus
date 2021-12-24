@@ -17,6 +17,7 @@ import Megical_history_doc from './meddical_history_doc/Medical_histor_doc'
 import Dash_board from '../body/profile/dash_board'
 import Create_blog from "./pages/Create_blog";
 import Contact from "./pages/Contact";
+import About from "./pages/AboutUs";
 import Home from "../body/home/Home";
 import Appointments from "./pages/Appointments";
 import Appointment_doctor from "./pages/Appointment_doctor";
@@ -27,6 +28,7 @@ import ArticlePage from "../body/articles/ArticlePage"
 import Find_doctor from "../body/pages/Find_doctor";
 import Doctor from "../body/pages/Doctor";
 import LabTest from "../body/pages/LabTest";
+import Ambulance from "../body/pages/Ambulance";
 import Create_Slots from "./create_Slot/Create_Slot";
 import Book_Slots from "./book_Slots/Book_Slots";
 import Specialist from "../body/pages/Specialist";
@@ -167,9 +169,11 @@ function Body() {
           exact
         />
         <Route path="/find_lab_test" component={LabTest} />
+        <Route path="/find_ambulance" component={Ambulance} />
         <Route path="/specialist" component={Specialist} />
         <Route path="/articles" component={Articles} />
         <Route path="/detail/:id" component={ArticlePage} />
+        <Route path="/about_us" component={About} />
         <Route
           path="/contact_us"
           component={isLogged ? Contact : Login}

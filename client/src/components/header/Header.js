@@ -121,6 +121,18 @@ function Header() {
               </NavLink>
               <NavLink
                 exact
+                to="/find_ambulance"
+                class="main-nav"
+                activeStyle={{
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+                onClick={() => window.scrollTo({ top: 0 })}
+              >
+                Ambulance
+              </NavLink>
+              <NavLink
+                exact
                 to="/articles"
                 class="main-nav"
                 activeStyle={{
@@ -131,6 +143,7 @@ function Header() {
               >
                 Articles
               </NavLink>
+             
 
               <li className="nav-item dropdown" style={{ opacity: 1 }}>
                 <div

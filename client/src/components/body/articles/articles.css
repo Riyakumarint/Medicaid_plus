@@ -148,7 +148,8 @@
   height: 100%;
   width: 100%;
   min-height: 100vh;
-  margin-top: 0px;
+  margin-top: -10px;
+  padding-top: 15px;
   overflow: hidden;
   background-color: none;
   justify-content: center;
@@ -200,6 +201,13 @@
   text-align: left;
 }
 
+.blog_auther:hover{
+  text-transform: uppercase;
+  color: gray;
+  font-size: 13px;
+  text-align: left;
+}
+
 .blog_date {
   display: flex;
   justify-content: space-between;
@@ -238,12 +246,12 @@
   transition: 0.5s;
 } */
 .comment_box {
-  display: flex;
+  display: flex;  
 }
 
 .comment_img {
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   border-radius: 50%;
   border: 2px solid #911f27;
   margin: auto 5px;
@@ -252,7 +260,7 @@
 .comment_area {
   width: 80%;
   /* min-width: 250px; */
-  /* min-height: 70px; */
+  max-height: 70px;
   margin: 5px 0;
   border: 2px solid #911f27;
   outline: none;
@@ -307,22 +315,21 @@
   padding: 0 2px;
 }
 
-.btnS{
-  height: 40px;
+.btnS {
+  max-height: 40px;
+  max-width: 40px;
   margin: 10px 5px;
 }
 
 @media only screen and (max-width: 960px) {
-
   .BlogPage {
     background-color: rgb(252, 243, 243);
     margin-top: 70px;
   }
 
   .blog_component {
-    /* max-width: 700px; */
-    /* min-width: 700px; */
     margin: 0 0 0 0;
+    padding: 20px 40px;
     margin-bottom: 0;
     box-shadow: none;
     border-radius: 0;
@@ -340,5 +347,8 @@
 @media only screen and (max-width: 760px) {
   .BlogPage {
     margin-top: 90px;
+  }
+  .blog_component {
+    padding: 0px 40px;
   }
 }

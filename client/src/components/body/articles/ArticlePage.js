@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../utils/notification/Loading";
 import { Grid } from '@material-ui/core';
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +13,7 @@ const initialState = {
   title: "",
   description: "",
   auther: "",
+  autherId:"",
   reviews: {
     rating :3,
     rater: []
@@ -88,7 +90,10 @@ function PostPage({ match }) {
             edit={false}
           />
         </p>
-        <p className="blog_auther">DR. {blog.auther}</p>
+            {/* <p className="blog_auther">DR. {blog.auther}</p> */}
+            <Link className="blog_auther" to={`/doctor/${blog.autherId}`}>
+            DR. {blog.auther} <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </Link>
         <div className="blog_date">
           <p>{new Date(blog.createdDate).toDateString()}</p>
           {(isDoctor || isAdmin) && (

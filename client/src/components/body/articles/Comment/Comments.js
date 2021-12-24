@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { newComment, getComments } from "../../../../api/ArticlesAPI";
 import Send from "../../../../images/send.png";
-//components
 import Comment from "./Comment";
 
 const initialValue = {
@@ -19,8 +18,7 @@ const Comments = ({ blog }) => {
   const [data, setData] = useState();
   const [toggle, setToggle] = useState(false);
   const auth = useSelector((state) => state.auth);
-  // const [menu, setMenu] = useState(false);
-
+  
   const { user, isAdmin, isDoctor } = auth;
   useEffect(() => {
     const getData = async () => {
@@ -47,13 +45,15 @@ const Comments = ({ blog }) => {
     setToggle((prev) => !prev);
   };
 
-  // console.log(blog);
+  
   return (
-    <div>
+      <div>
+          <h4>Comments</h4>
+          {/* Post comments*/}
       {(isDoctor || isAdmin) && (
         <>
           <div className="comment_box">
-            <img src={user.avatar || url} className="comment_img" alt="dp" />
+            <img src={user.avatar} className="comment_img" alt="dp" />
             <textarea
               rows="2"
               max-rows="20"
@@ -72,7 +72,8 @@ const Comments = ({ blog }) => {
           </div>{" "}
         </>
       )}
-      <div>
+          <div>
+              {/* get all comments*/}
         {comments &&
           comments.map((comment) => (
             <Comment comment={comment} setToggle={setToggle} />

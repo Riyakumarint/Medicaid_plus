@@ -14,20 +14,8 @@ const commentSchema =  mongoose.Schema(
       type: String,
       required: true
     },
-    // upvote: Number,
-    // downvote: Number,
-    // comments: [
-    //   {
-    //     autherId: String,
-    //     comment: {
-    //       type: String,
-    //       required: true,
-    //       maxlength: 200,
-    //     },
-    //     upvote: Number,
-    //     downvote: Number,
-    //   },
-    // ],
+    upvote: Number,
+    downvote: Number,
   },
   {
     timestamps: true,

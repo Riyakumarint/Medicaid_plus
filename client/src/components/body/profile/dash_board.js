@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { isLength, isMatch } from "../../utils/validation/Validation";
-import Loading from "../../utils/notification/Loading";
 import AdminProfile from "./Admin_profile";
 import Doctor_dash from "./Doctor_dash";
 import Patient_dash from "./Patient_dah";
@@ -19,9 +14,6 @@ import {
 import SideNav from "./sidenav/SideNav";
 
 const initialState = {
-  name: "",
-  password: "",
-  cf_password: "",
   err: "",
   success: "",
 };
@@ -34,10 +26,9 @@ function Dash_board() {
 
   const { user, isAdmin,isDoctor } = auth;
   const [data, setData] = useState(initialState);
-  const { name, password, cf_password, err, success } = data;
+  const { err, success } = data;
 
-  const [avatar, setAvatar] = useState(false);
-  const [loading, setLoading] = useState(false);
+  
   const [callback, setCallback] = useState(false);
 
   const dispatch = useDispatch();
@@ -58,7 +49,6 @@ function Dash_board() {
         <div className="pro">
           {err && showErrMsg(err)}
           {success && showSuccessMsg(success)}
-          {loading && <Loading />}
 
           <div className="profile_page">
             <div className="profile_header">
@@ -68,7 +58,7 @@ function Dash_board() {
               <div className="row">
                 <div class="col s12 m6 l4">
                   <div className="avatar">
-                    <img src={avatar ? avatar : user.avatar} alt="" />
+                    <img src={user.avatar} alt="" />
                     
                   </div>
                 </div>

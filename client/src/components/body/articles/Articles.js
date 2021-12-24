@@ -12,7 +12,6 @@ function Articles() {
       const res = await axios.get("/blogs/getAllBlogs");
       setBlogs(res.data);
     };
-
     getAllBlogs();
   }, [callback]);
 
@@ -24,6 +23,7 @@ function Articles() {
     );
   return (
     <>
+      {/* Get All articles*/}
       <div className="articles">
         <h1>Articles</h1>
 

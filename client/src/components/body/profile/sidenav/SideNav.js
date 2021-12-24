@@ -1,16 +1,11 @@
 import React from "react";
-// import axios from "axios";
 import { useSelector } from "react-redux";
 
 function SideNav() {
   const auth = useSelector((state) => state.auth);
-  const { user, isAdmin, isDoctor } = auth;
+  const { isAdmin, isDoctor } = auth;
 
-  // const users = useSelector((state) => state.users);
-  // const [callback, setCallback] = useState(false);
-
-  // const dispatch = useDispatch();
-
+  
   return (
     <div id="mySidenav" className="sidebar fixed-left">
       <ul>
@@ -43,7 +38,10 @@ function SideNav() {
           </a>
         </li>
         <li>
-          <a href="/get_appointments" onClick={() => window.scrollTo({ top: 0 })}>
+          <a
+            href="/get_appointments"
+            onClick={() => window.scrollTo({ top: 0 })}
+          >
             <span class="icon">
               <i class="fa fa-address-card" aria-hidden="true"></i>
             </span>
@@ -58,22 +56,18 @@ function SideNav() {
             <span class="title">Chats</span>
           </a>
         </li>
-        {/* <li>
-          <a href="#" onClick={() => window.scrollTo({ top: 0 })}>
-            <span class="icon">
-              <i class="fa fa-commenting-o" aria-hidden="true"></i>
-            </span>
-            <span class="title">Clients</span>
-          </a>
-        </li> */}
+
         <li>
           {isDoctor ? (
-          <a href="/create_blog" onClick={() => window.scrollTo({ top: 0 })}>
-            <span class="icon">
-              <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-            </span>
-            <span class="title">Articles</span>
-          </a>):("")}
+            <a href="/create_blog" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+              </span>
+              <span class="title">Articles</span>
+            </a>
+          ) : (
+            ""
+          )}
         </li>
         <li>
           {isAdmin ? (
@@ -110,12 +104,13 @@ function SideNav() {
           ) : (
             <a href="/contact_us" onClick={() => window.scrollTo({ top: 0 })}>
               <span class="icon">
-              <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope"></i>
               </span>
               <span class="title">Contact</span>
             </a>
           )}
         </li>
+
         <li>
           {isDoctor ? (
             <a href="/createSlot" onClick={() => window.scrollTo({ top: 0 })}>
@@ -126,6 +121,7 @@ function SideNav() {
             </a>
           ) : ("")}
         </li>
+
 
       </ul>
     </div>

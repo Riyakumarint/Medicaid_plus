@@ -1,6 +1,7 @@
 const Users = require("../models/userModel").userModel;
 const MedicalHistory = require("../models/medicalHistoryModel").medicalHistoryModel;
 const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
+const BlogModel = require('../models/blogModel').blogModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("./sendMail")
@@ -329,8 +330,8 @@ const profilesCtrl = {
     fetchDoctor: async (req, res) => {
         try {
             const medical_profile = await MedicalProfile.find({userId: req.params.doctorId});
-            const {name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews} = medical_profile[0];
-            res.json({name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews});
+            const {_id, name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews} = medical_profile[0];
+            res.json({_id, name, userId, bloodGroup, age, speciality_name, city_name, clinic_address, experience_year, qualification, blogRecord, reviews});
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }
@@ -433,6 +434,17 @@ const profilesCtrl = {
 
         } catch (err) {
         return res.status(500).json({ msg: err.message });
+        }
+    },
+    fetchBlogs: async(req, res) =>{
+        try {
+            
+            const blogs = await BlogModel.find({autherId : req.body.autherId});
+            console.log(req.body);
+           
+            res.json(blogs);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
         }
     },
 
