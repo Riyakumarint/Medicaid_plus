@@ -1,4 +1,5 @@
 import React from "react";
+import DoctorList_speciality from "../pages/DoctorList_speciality";
 
 function Cards({speciality}) {
   return (
@@ -9,6 +10,9 @@ function Cards({speciality}) {
         <div className="card_body">
           <h5 className="card_title" title={speciality.name}>{speciality.name}</h5>
           <p className="card_text" title={speciality.fee}>₹{speciality.fee}</p>
+          {/* <a href="/doctorList_speciality">
+          <DoctorList_speciality key={speciality._id} speciality={speciality} /> <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a> */}
           <a href="#">
             Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
           </a>

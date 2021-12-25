@@ -21,6 +21,7 @@ const initialState = {
   title: "",
   description: "",
   meetingDetail: "",
+
   err: "",
   success: "",
 };
@@ -37,22 +38,24 @@ const Create_appointment = () => {
   const [previousTestReport, setPreviousTestReport] = useState({ link: "" });
   const [previousTestReports, setPreviousTestReports] = useState([]);
   const [specialities, setSpecialities] = useState([]);
-  const [speciality, setSpeciality] = useState({ speciality_name: "" });
+  const [speciality, setSpeciality] = useState({
+    speciality_name: "",
+    fee: "",
+  });
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState({ city_name: "" });
   const [doctors, setDoctors] = useState([]);
   const [doctor, setDoctor] = useState(initialState2);
   const [callback, setCallback] = useState(false);
   const history = useHistory();
-  const [date,setDate]=useState({date:"", slotId:""});
+  const [date, setDate] = useState({ date: "", slotId: "" });
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
-
   // data fetching
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 });
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
@@ -149,8 +152,8 @@ const Create_appointment = () => {
 
   const handleChangeSpeciality = async (e) => {
     const { name, value } = e.target;
-    setSpeciality({ ...speciality, [name]: value});
-    setDoctor(initialState2)
+    setSpeciality({ ...speciality, [name]: value });
+    setDoctor(initialState2);
 
     try {
       const res = await axios.post(
@@ -165,8 +168,8 @@ const Create_appointment = () => {
   };
   const handleChangeCity = async (e) => {
     const { name, value } = e.target;
-    setCity({ ...city, [name]: value});
-    setDoctor(initialState2)
+    setCity({ ...city, [name]: value });
+    setDoctor(initialState2);
 
     try {
       const res = await axios.post(
@@ -177,6 +180,7 @@ const Create_appointment = () => {
         },
         { headers: { Authorization: token } }
       );
+
       setDoctors(res.data);
     } catch (err) {
       console.log(err);
@@ -192,8 +196,7 @@ const Create_appointment = () => {
       const {userId, name, clinic_address, speciality_name} = temp[0];
       setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address, speciality_name, speciality_name})
     }
-    
-  }
+  };
   const handleChangeSymptom = (e) => {
     const { name, value } = e.target;
     setSymptom({ ...symptom, [name]: value });
@@ -217,7 +220,7 @@ const Create_appointment = () => {
       !appointmentDetails.title ||
       !appointmentDetails.description ||
       Lenght(symptoms) === 0 ||
-      date.slotId===""
+      date.slotId === ""
     )
       return setAppointmentDetails({
         ...appointmentDetails,
@@ -238,13 +241,14 @@ const Create_appointment = () => {
       previousTestReports: previousTestReports,
       meetingDetail: date.date,
       pdfFile: pdfFile,
+      fee: speciality.fee,
       err: "",
       success: "",
-    }
+    };
     // console.log(appointmentDetail);
-    const convo={
-      senderId:user._id,
-      receiverId:doctor.doctortId,
+    const convo = {
+      senderId: user._id,
+      receiverId: doctor.doctortId,
     };
 
     try {
@@ -254,7 +258,9 @@ const Create_appointment = () => {
       console.log(err);
     }
     try {
-      const res = await axios.post("/slots/book/" + date.slotId + "/" + user._id);
+      const res = await axios.post(
+        "/slots/book/" + date.slotId + "/" + user._id
+      );
     } catch (err) {
       console.log("heloo:   " + err);
     }
@@ -617,14 +623,16 @@ const Create_appointment = () => {
 
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                      {console.log("jijiji :: "+date)}
-                      {doctor!==initialState2?
-                      (
-                      <><Book_Slots doctor={doctor} setDate={setDate}/>
-                      </>):("")}
+                      {console.log("jijiji :: " + date)}
+                      {doctor !== initialState2 ? (
+                        <>
+                          <Book_Slots doctor={doctor} setDate={setDate} />
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
-
                 </div>
 
                 {/* symptom block */}

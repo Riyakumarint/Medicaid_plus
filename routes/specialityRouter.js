@@ -7,13 +7,6 @@ const authAdmin = require('../middleware/authAdmin')
 const router = express();
 router.use(bodyParser.urlencoded({extended: true}));
 
-
-
-// const router = require('express').Router()
-// const specialityCtrl = require('../controllers/specialityCtrl')
-// const auth = require('../middleware/auth')
-// const authAdmin = require('../middleware/authAdmin')
-
 router.route('/speciality')
     .get(specialityCtrl.getSpecialities)
     .post(auth, authAdmin, specialityCtrl.createSpeciality)
@@ -21,7 +14,6 @@ router.route('/speciality')
 router.route('/speciality/:id')
     .delete(auth, authAdmin, specialityCtrl.deletesSpeciality)
     .put(auth, authAdmin, specialityCtrl.updateSpeciality)
-
 
 router.route('/city')
     .get(specialityCtrl.getCities)
@@ -32,5 +24,6 @@ router.route('/city/:id')
     .put(auth, authAdmin, specialityCtrl.updateCity)
 
 router.post('/fetchDoctors', specialityCtrl.fetchDoctors)
+router.post('/fetchSpecialists', specialityCtrl.fetchSpecialists)
 
 module.exports = router

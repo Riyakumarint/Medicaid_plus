@@ -156,6 +156,7 @@ function Body() {
           component={isLogged ? Messenger : Login}
           exact
         />
+        
         <Route  
           path="/createSlot" 
           component={isLogged&&isDoctor?Create_Slots:NotFound} 

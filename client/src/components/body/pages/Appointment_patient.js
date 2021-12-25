@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Chat_Component from "../chat_Component/Chat_Component.js"
+import Chat_Component from "../chat_Component/Chat_Component.js";
 import axios from "axios";
-import './get.css'
+import "./get.css";
 import {
   showErrMsg,
   showSuccessMsg,
 } from "../../utils/notification/Notification";
 import SideNav from "../profile/sidenav/SideNav";
+import Pdf from "react-to-pdf";
+import "./prescription.css";
 
+const ref = React.createRef();
 const initialState = {
   _id: "",
   patienttId: "",
@@ -37,53 +40,50 @@ const initialState = {
 };
 
 const Appointment_patient = () => {
-
   const [appointment, setAppointment] = useState(initialState);
   const [testReports, setTestReports] = useState([]);
   const [link, setLink] = useState("");
   const [callback, setCallback] = useState(false);
-
+  const [medicines, setMedicines] = useState([]);
   const token = useSelector((state) => state.token);
-  const {user} = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const auth = useSelector((state) => state.auth);
-  const { isLogged, isAdmin, isDoctor} = auth;
+  const { isLogged, isAdmin, isDoctor } = auth;
 
-  const {caseId} = useParams();
+  const { caseId } = useParams();
 
   // data fetching
   useEffect(async () => {
     try {
-        window.scrollTo({ top: 0 })
-        const res = await axios.get(
-          "/appointments/fetchAppointment/"+caseId,
-          { headers: { Authorization: token } }
-        );
-        setAppointment(res.data);
-        setTestReports(res.data.testReports);
-
-      } catch (err) {
-        console.log(err);
-      }
+      window.scrollTo({ top: 0 });
+      const res = await axios.get("/appointments/fetchAppointment/" + caseId, {
+        headers: { Authorization: token },
+      });
+      setAppointment(res.data);
+      setTestReports(res.data.testReports);
+      setMedicines(res.data.medicines);
+    } catch (err) {
+      console.log(err);
+    }
   }, [callback]);
 
   // handle changes
   const handleChangeLink = (e) => {
     const { name, value } = e.target;
     setLink(value);
-  }
+  };
 
   // handle submit
   const handleUploadTestReport = async (testReports) => {
-    if(link===""){
+    if (link === "") {
       alert("Re-enter the report link");
-    } else{
+    } else {
       try {
         await axios.post(
           "/appointments/addTestReports",
           {
             caseId: appointment._id,
-            testReports: testReports
-  
+            testReports: testReports,
           },
           { headers: { Authorization: token } }
         );
@@ -91,17 +91,17 @@ const Appointment_patient = () => {
         setCallback(!callback);
         alert("Test report uploaded");
       } catch (err) {
-          console.log(err);
+        console.log(err);
       }
-    }  
+    }
   };
 
   // renders
-  const renderSymptom = () =>{
-    if(appointment.symptoms.length===0) return ('None');
+  const renderSymptom = () => {
+    if (appointment.symptoms.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -118,16 +118,16 @@ const Appointment_patient = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderPreviousMedicine = () =>{
-    if(appointment.previousMedicine.length===0) return ('None');
+  const renderPreviousMedicine = () => {
+    if (appointment.previousMedicine.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -144,16 +144,16 @@ const Appointment_patient = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderPreviousTestReport = () =>{
-    if(appointment.previousTestReports.length===0) return ('None');
+  const renderPreviousTestReport = () => {
+    if (appointment.previousTestReports.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -165,7 +165,8 @@ const Appointment_patient = () => {
               {appointment.previousTestReports.map((previousTestReport) => (
                 <tr key={previousTestReport.link}>
                   <td>{"Report"}</td>
-                  <td><a href={previousTestReport.link} >
+                  <td>
+                    <a href={previousTestReport.link}>
                       <i className="fa fa-download" />
                     </a>
                   </td>
@@ -173,61 +174,97 @@ const Appointment_patient = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderTestReport = () =>{
-    if(testReports.length===0) return ('');
+  const renderTestReport = () => {
+    if (testReports.length === 0) return "";
     return (
       <div>
-      <h5>Upload Test Report</h5>
-      <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
-          <table className="medical">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Link</th>
-                <th>Upload</th>
-                <th>Download</th>
-              </tr>
-            </thead>
-            <tbody>
-              {testReports.map((testReport) => (
-                <tr key={testReport._id}>
-                  <td>{testReport.name}</td>
-                  <td> <input
+        <h5>Upload Test Report</h5>
+        <div className="col-right">
+          <div style={{ overflowX: "auto" }}>
+            <table className="medical">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Link</th>
+                  <th>Upload</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                {testReports.map((testReport) => (
+                  <tr key={testReport._id}>
+                    <td>{testReport.name}</td>
+                    <td>
+                      {" "}
+                      <input
                         className="link"
                         id="exampleInputLink1"
                         placeholder="link"
                         onChange={handleChangeLink}
                         name="link"
-                    /> 
-                  </td>
-                  <td>
-                    <i className="fas fa-angle-double-up"
-                      title="upload"
-                      onClick={() => handleUploadTestReport({name:testReport.name, link:link})}
-                    > </i>
-                  </td>
-                  <td><a href={testReport.link} >
-                      <i className="fa fa-download" />
-                    </a>
-                  </td>
+                      />
+                    </td>
+                    <td>
+                      <i
+                        className="fas fa-angle-double-up"
+                        title="upload"
+                        onClick={() =>
+                          handleUploadTestReport({
+                            name: testReport.name,
+                            link: link,
+                          })
+                        }
+                      >
+                        {" "}
+                      </i>
+                    </td>
+                    <td>
+                      <a href={testReport.link}>
+                        <i className="fa fa-download" />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <hr></hr>
+        <br></br>
+      </div>
+    );
+  };
+
+  const renderMedicine = () => {
+    if (medicines.length === 0) return "";
+    return (
+      <div className="col-right">
+        <div style={{ overflowX: "auto" }}>
+          <table className="medical">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Dose</th>
+              </tr>
+            </thead>
+            <tbody>
+              {medicines.map((med) => (
+                <tr key={med.name}>
+                  <td>{med.name}</td>
+                  <td>{med.dose}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-      <hr></hr>
-      <br></br>
-      </div>
-    )
+    );
   };
-
   return (
     <>
       <SideNav />
@@ -241,15 +278,27 @@ const Appointment_patient = () => {
               <h3> {appointment.title}</h3>
               <p>{appointment.status}</p>
             </div>
-            <p><h6>{appointment.description}</h6></p>
-            <div >
-              <h5> Meeting Detail - {new Date(appointment.meetingDetail).toDateString()} at {new Date(appointment.meetingDetail).toLocaleTimeString()}</h5>
+            <p>
+              <h6>{appointment.description}</h6>
+            </p>
+            <div>
+              <h5>
+                Meeting Detail -
+                {new Date(appointment.meetingDetail).toDateString()} at
+                {new Date(appointment.meetingDetail).toLocaleTimeString()}
+              </h5>
             </div>
-            <div >
+            <div>
               <h5> Doctor's Name - {appointment.doctor_name}</h5>
             </div>
-            <div >
-              <h5> {"Clinic Address - "+appointment.clinic_address+" ("+appointment.mode+")"}</h5>
+            <div>
+              <h5>
+                {"Clinic Address - " +
+                  appointment.clinic_address +
+                  " (" +
+                  appointment.mode +
+                  ")"}
+              </h5>
             </div>
             <hr></hr>
             <br></br>
@@ -277,42 +326,223 @@ const Appointment_patient = () => {
             <br></br>
 
             {/* Test Report */}
-            {appointment.mode==="online"?<div>
+            {appointment.mode === "online" ? (
               <div>
-                {renderTestReport()}
+                <div>
+                  <h5>Test Reports</h5>
+                  {renderTestReport()}
+                </div>
+                <hr></hr>
+                <br></br>
               </div>
-              </div>:""
-            }
+            ) : (
+              ""
+            )}
+
+            {/* Medicine */}
+            {appointment.mode === "online" ? (
+              <div>
+                <div>
+                  <h5>Medicines</h5>
+                  {renderMedicine()}
+                </div>
+                <hr></hr>
+                <br></br>
+              </div>
+            ) : (
+              ""
+            )}
 
             {/* Doctors remark */}
-            <div >
-              <h5> {appointment.doctorsNote.length === 0? "": "Doctor's remark - "+appointment.doctorsNote}</h5>
+            <div>
+              <h5>
+                {" "}
+                {appointment.doctorsNote.length === 0
+                  ? ""
+                  : "Doctor's remark - " + appointment.doctorsNote}
+              </h5>
             </div>
             <br></br>
 
             {/* download prescription */}
-            <div>
-              {appointment.mode==="online"?<button
-                  type="button"
-                  className="button"
-                  // onClick={() => window.scrollTo({ top: 0 })}
-                  >
-                  Download prescription
-                </button>:
-                <button
-                  type="button"
-                  className="button"
-                  // onClick={() => window.scrollTo({ top: 0 })}
-                  >
-                  Appointment slip
-                </button>
-              }
+            <div className="pdf_prescription">
+              {appointment.mode === "online" ? (
+                <>
+                  <p>
+                    <button
+                      class="button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapseExample"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      Prescription
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      {/* <PDF_Prescription appointment={appointment} /> */}
+                      <>
+                        <div className="Post" ref={ref}>
+                          <div class="container">
+                            <header class="row">
+                              <div class="header">
+                                <div class="logo">
+                                  <h2>
+                                    <strong>Medicaid+</strong>
+                                  </h2>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="doc-details">
+                                  <p class="doc-name">
+                                    {appointment.doctor_name}
+                                  </p>
+                                </div>
+
+                                <div class="clinic-details">
+                                  <p>{appointment.clinic_address}</p>
+                                </div>
+                              </div>
+                              <div class="col-4 datetime">
+                                <p>Date: {new Date().toLocaleDateString()}</p>
+                                <p>Time: {new Date().toLocaleTimeString()}</p>
+                              </div>
+                            </header>
+
+                            <div class="prescription">
+                              <p>
+                                Meeting Detail:{" "}
+                                {new Date(
+                                  appointment.meetingDetail
+                                ).toDateString()}
+                              </p>
+                              <h3>
+                                Patient Name : Rx {appointment.patient_name}
+                              </h3>
+
+                              {/* Medicine */}
+                              <div>
+                                <div>
+                                  <h5>Medicines</h5>
+                                  {renderMedicine()}
+                                </div>
+                                <hr></hr>
+                                <br></br>
+                              </div>
+
+                              {/* Test Report */}
+
+                              <div>
+                                <div>
+                                  <h5>Test Report</h5>
+                                  {renderTestReport()}
+                                </div>
+                                <hr></hr>
+                                <br></br>
+                              </div>
+
+                              <p>Doctors Note : {appointment.doctorsNote}</p>
+
+                              <p>
+                                Private Note : {appointment.doctorsNotePrivate}
+                              </p>
+                              <div className="pdf_footer">
+                                <p>Medicad+</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <Pdf targetRef={ref} filename="post.pdf">
+                          {({ toPdf }) => (
+                            <button className="pdf_button" onClick={toPdf}>
+                              Capture as PDF
+                            </button>
+                          )}
+                        </Pdf>
+                      </>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p>
+                    <button
+                      class="button"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapseExample"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      Prescription
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      {/* <PDF_Prescription appointment={appointment} /> */}
+                      <>
+                        <div className="Post" ref={ref}>
+                          <div class="container">
+                            <header class="row">
+                              <div class="header">
+                                <div class="logo">
+                                  <h2>
+                                    <strong>Medicaid+</strong>
+                                  </h2>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="doc-details">
+                                  <p class="doc-name">
+                                    {appointment.doctor_name}
+                                  </p>
+                                </div>
+
+                                <div class="clinic-details">
+                                  <p>{appointment.clinic_address}</p>
+                                </div>
+                              </div>
+                              <div class="col-4 datetime">
+                                <p>Date: {new Date().toLocaleDateString()}</p>
+                                <p>Time: {new Date().toLocaleTimeString()}</p>
+                              </div>
+                            </header>
+
+                            <div class="prescription">
+                              <p>
+                                Meeting Detail:{" "}
+                                {new Date(
+                                  appointment.meetingDetail
+                                ).toDateString()}
+                              </p>
+                              <h3>
+                                Patient Name : Rx {appointment.patient_name}
+                              </h3>
+
+                              <div className="pdf_footer">
+                                <p>Medicad+</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <Pdf targetRef={ref} filename="post.pdf">
+                          {({ toPdf }) => (
+                            <button className="pdf_button" onClick={toPdf}>
+                              Capture as PDF
+                            </button>
+                          )}
+                        </Pdf>
+                      </>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-
-
           </div>
         </div>
-        <Chat_Component appointment={appointment}/>
+        <Chat_Component appointment={appointment} />
       </div>
     </>
   );

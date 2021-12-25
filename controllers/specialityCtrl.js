@@ -121,6 +121,17 @@ const specialityCtrl = {
             return res.status(500).json({ msg: err.message });
         }
     },
+    fetchSpecialists: async(req, res) =>{
+        try {
+            
+            const doctors = await MedicalProfile.find({speciality_name : req.body.speciality_name});
+            console.log(req.body);
+           
+            res.json(doctors);
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    },
 
 }
 

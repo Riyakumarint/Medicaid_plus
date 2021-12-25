@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams,Link } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Chat_Component from "../chat_Component/Chat_Component.js"
+import Chat_Component from "../chat_Component/Chat_Component.js";
 import axios from "axios";
-import './get.css'
+import "./get.css";
 import {
   showErrMsg,
   showSuccessMsg,
@@ -11,6 +11,7 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import PDF_Prescription from "./PDF_Prescription ";
 
 const initialState = {
   _id: "",
@@ -39,37 +40,34 @@ const initialState = {
 };
 
 const Appointment_doctor = () => {
-
   const [appointment, setAppointment] = useState(initialState);
-  const [med, setMed] = useState({name: "", dose: ""});
+  const [med, setMed] = useState({ name: "", dose: "" });
   const [medicine, setMedicine] = useState([]);
-  const [testReport, setTestReport] = useState({name: "", link: ""});
+  const [testReport, setTestReport] = useState({ name: "", link: "" });
   const [testReports, setTestReports] = useState([]);
   const [callback, setCallback] = useState(false);
-  const [newdate,setNewDate]=useState(null);
+  const [newdate, setNewDate] = useState(null);
   const [date, setDate] = useState(null);
   const token = useSelector((state) => state.token);
-  const {user} = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const auth = useSelector((state) => state.auth);
-  const { isLogged, isAdmin, isDoctor} = auth;
+  const { isLogged, isAdmin, isDoctor } = auth;
 
-  const {caseId} = useParams();
+  const { caseId } = useParams();
 
   // data fetching
   useEffect(async () => {
     try {
-        window.scrollTo({ top: 0 })
-        const res = await axios.get(
-          "/appointments/fetchAppointment/"+caseId,
-          { headers: { Authorization: token } }
-        );
-        setAppointment(res.data);
-        setMedicine(res.data.medicines);
-        setTestReports(res.data.testReports);
-
-      } catch (err) {
-        console.log(err);
-      }
+      window.scrollTo({ top: 0 });
+      const res = await axios.get("/appointments/fetchAppointment/" + caseId, {
+        headers: { Authorization: token },
+      });
+      setAppointment(res.data);
+      setMedicine(res.data.medicines);
+      setTestReports(res.data.testReports);
+    } catch (err) {
+      console.log(err);
+    }
   }, [callback]);
 
   // handle changes
@@ -80,12 +78,12 @@ const Appointment_doctor = () => {
 
   const handleChangeMed = (e) => {
     const { name, value } = e.target;
-    setMed({ ...med, [name]: value});
+    setMed({ ...med, [name]: value });
   };
 
   const handleChangeTestReport = (e) => {
     const { name, value } = e.target;
-    setTestReport({ ...testReport, [name]: value});
+    setTestReport({ ...testReport, [name]: value });
   };
 
   // handle submit
@@ -96,8 +94,7 @@ const Appointment_doctor = () => {
         {
           caseId: appointment._id,
           doctorsNote: appointment.doctorsNote,
-          doctorsNotePrivate: appointment.doctorsNotePrivate
-
+          doctorsNotePrivate: appointment.doctorsNotePrivate,
         },
         { headers: { Authorization: token } }
       );
@@ -106,8 +103,7 @@ const Appointment_doctor = () => {
         "/appointments/addMedicines",
         {
           caseId: appointment._id,
-          medicines: medicine
-
+          medicines: medicine,
         },
         { headers: { Authorization: token } }
       );
@@ -116,16 +112,18 @@ const Appointment_doctor = () => {
         "/appointments/addTestReports",
         {
           caseId: appointment._id,
-          testReports: testReports
-
+          testReports: testReports,
         },
         { headers: { Authorization: token } }
       );
 
       setAppointment({ ...appointment, err: "", success: "Updated Success!" });
-
     } catch (err) {
-      setAppointment({ ...appointment, err: err.response.data.msg, success: "" });
+      setAppointment({
+        ...appointment,
+        err: err.response.data.msg,
+        success: "",
+      });
     }
   };
   const handleChangeStatus = async () => {
@@ -134,81 +132,91 @@ const Appointment_doctor = () => {
         "/appointments/updateStatus",
         {
           caseId: appointment._id,
-          status: appointment.status==="active"? "closed":"active"
-
+          status: appointment.status === "active" ? "closed" : "active",
         },
         { headers: { Authorization: token } }
       );
-      window.scrollTo({ top: 0 })
-      setAppointment({ ...appointment, status: appointment.status==="active"? "closed":"active", err: "", success: "Updated Success!" });
-
+      window.scrollTo({ top: 0 });
+      setAppointment({
+        ...appointment,
+        status: appointment.status === "active" ? "closed" : "active",
+        err: "",
+        success: "Updated Success!",
+      });
     } catch (err) {
-      setAppointment({ ...appointment, err: err.response.data.msg, success: "" });
+      setAppointment({
+        ...appointment,
+        err: err.response.data.msg,
+        success: "",
+      });
     }
   };
 
   const handleAddMedicine = async () => {
     try {
       setMedicine([...medicine, med]);
-      setMed({ name: "", dose: ""});
+      setMed({ name: "", dose: "" });
     } catch (err) {
-        setMed({ ...med});
+      setMed({ ...med });
     }
   };
   const handleDeleteMedicine = async (medName) => {
     try {
-        const newMedicine = medicine.filter( (med) =>{
-            return med.name !== medName;
-        });
-        setMedicine(newMedicine);
-      setMed({ name: "", dose: ""});
+      const newMedicine = medicine.filter((med) => {
+        return med.name !== medName;
+      });
+      setMedicine(newMedicine);
+      setMed({ name: "", dose: "" });
     } catch (err) {
-        setMed({ ...med});
+      setMed({ ...med });
     }
   };
 
   const handleAddTestReport = async () => {
     try {
       setTestReports([...testReports, testReport]);
-      setTestReport({name:"", link: ""});
+      setTestReport({ name: "", link: "" });
     } catch (err) {
-        setTestReport({ ...testReport});
+      setTestReport({ ...testReport });
     }
   };
   const handleDeleteTestReport = async (reportName) => {
     try {
-        const newTestReport = testReports.filter( (testReport) =>{
-            return testReport.name !== reportName;
-        });
-        setTestReports(newTestReport);
-      setTestReport({name:"", link: ""});
+      const newTestReport = testReports.filter((testReport) => {
+        return testReport.name !== reportName;
+      });
+      setTestReports(newTestReport);
+      setTestReport({ name: "", link: "" });
     } catch (err) {
-        setTestReport({ ...testReport});
+      setTestReport({ ...testReport });
     }
   };
-  const handleReshedule = async()=>{
-    if(newdate===null){
-      alert("Enter a slot")
-    } else{
-      try{
+  const handleReshedule = async () => {
+    if (newdate === null) {
+      alert("Enter a slot");
+    } else {
+      try {
         window.scrollTo({ top: 0 });
-        const temp = await axios.post("/appointments/resheduleAppointment/"+appointment._id+"/"+newdate);
+        const temp = await axios.post(
+          "/appointments/resheduleAppointment/" +
+            appointment._id +
+            "/" +
+            newdate
+        );
         setNewDate();
         setCallback(!callback);
-      }
-      catch(err){
+      } catch (err) {
         console.log(err);
       }
     }
-    
   };
 
   // renders
-  const renderSymptom = () =>{
-    if(appointment.symptoms.length===0) return ('None');
+  const renderSymptom = () => {
+    if (appointment.symptoms.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -225,16 +233,16 @@ const Appointment_doctor = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderPreviousMedicine = () =>{
-    if(appointment.previousMedicine.length===0) return ('None');
+  const renderPreviousMedicine = () => {
+    if (appointment.previousMedicine.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -251,16 +259,16 @@ const Appointment_doctor = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderPreviousTestReport = () =>{
-    if(appointment.previousTestReports.length===0) return ('None');
+  const renderPreviousTestReport = () => {
+    if (appointment.previousTestReports.length === 0) return "None";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -272,7 +280,8 @@ const Appointment_doctor = () => {
               {appointment.previousTestReports.map((previousTestReport) => (
                 <tr key={previousTestReport.link}>
                   <td>{"Report"}</td>
-                  <td><a href={previousTestReport.link} >
+                  <td>
+                    <a href={previousTestReport.link}>
                       <i className="fa fa-download" />
                     </a>
                   </td>
@@ -280,16 +289,16 @@ const Appointment_doctor = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderMedicine = () =>{
-    if(medicine.length===0) return ('');
+  const renderMedicine = () => {
+    if (medicine.length === 0) return "";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -304,7 +313,8 @@ const Appointment_doctor = () => {
                   <td>{med.name}</td>
                   <td>{med.dose}</td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
                       onClick={() => handleDeleteMedicine(med.name)}
                     ></i>
@@ -313,16 +323,16 @@ const Appointment_doctor = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
-  const renderTestReport = () =>{
-    if(testReports.length===0) return ('');
+  const renderTestReport = () => {
+    if (testReports.length === 0) return "";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -335,12 +345,20 @@ const Appointment_doctor = () => {
               {testReports.map((testReport) => (
                 <tr key={testReport.name}>
                   <td>{testReport.name}</td>
-                  <td><a href={testReport.link} >
+                  <td>
+                    <a href={testReport.link}>
                       <i className="fa fa-download" />
                     </a>
                   </td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i className="fas fa-stethoscope" title="Open">
+                      {" "}
+                      Open
+                    </i>
+                  </td>
+                  <td>
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
                       onClick={() => handleDeleteTestReport(testReport.name)}
                     ></i>
@@ -349,11 +367,11 @@ const Appointment_doctor = () => {
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
-  
+
   return (
     <>
       <SideNav />
@@ -367,15 +385,29 @@ const Appointment_doctor = () => {
               <h3> {appointment.title}</h3>
               <p>{appointment.status}</p>
             </div>
-            <p><h6>{appointment.description}</h6></p>
-            <div >
-              <h5> Meeting Detail - {new Date(appointment.meetingDetail).toDateString()} at {new Date(appointment.meetingDetail).toLocaleTimeString()}</h5>
+            <p>
+              <h6>{appointment.description}</h6>
+            </p>
+            <div>
+              <h5>
+                {" "}
+                Meeting Detail -{" "}
+                {new Date(appointment.meetingDetail).toDateString()} at{" "}
+                {new Date(appointment.meetingDetail).toLocaleTimeString()}
+              </h5>
             </div>
-            <div >
+            <div>
               <h5> Patient's Name - {appointment.patient_name}</h5>
             </div>
-            <div >
-              <h5> {"Clinic Address - "+appointment.clinic_address+" ("+appointment.mode+")"}</h5>
+            <div>
+              <h5>
+                {" "}
+                {"Clinic Address - " +
+                  appointment.clinic_address +
+                  " (" +
+                  appointment.mode +
+                  ")"}
+              </h5>
             </div>
             <hr></hr>
             <br></br>
@@ -403,209 +435,213 @@ const Appointment_doctor = () => {
             {/* view medical history of patient */}
             <div>
               <button
-                  type="button"
-                  className="button"
-                  onClick={() => window.scrollTo({ top: 0 })}
-                  
-                  >
-                    <Link to={`/medicalhistory/${appointment.patienttId}`}>View patient medical history</Link>
-                  
-                </button>
+                type="button"
+                className="button"
+                onClick={() => window.scrollTo({ top: 0 })}
+              >
+                <Link to={`/medicalhistory/${appointment.patienttId}`}>
+                  View patient medical history
+                </Link>
+              </button>
             </div>
 
             {/* add medicines */}
-                <div className="line-2">
-                  <hr></hr>
+            <div className="line-2">
+              <hr></hr>
+            </div>
+            <div>
+              <h5>Medicine</h5>
+              {renderMedicine()}
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="name">Name</label>
+                      <input
+                        className="name"
+                        id="exampleInputname1"
+                        placeholder="name"
+                        onChange={handleChangeMed}
+                        value={med.name}
+                        name="name"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="dose">Dose</label>
+                      <input
+                        className="dose"
+                        id="exampleInputdose1"
+                        placeholder="dose"
+                        onChange={handleChangeMed}
+                        value={med.dose}
+                        name="dose"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div>
-                  <h5>Medicine</h5>
-                  {renderMedicine()}
-                  <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="name">Name</label>
-                        <input
-                          className="name"
-                          id="exampleInputname1"
-                          placeholder="name"
-                          onChange={handleChangeMed}
-                          value={med.name}
-                          name="name"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="dose">Dose</label>
-                        <input
-                          className="dose"
-                          id="exampleInputdose1"
-                          placeholder="dose"
-                          onChange={handleChangeMed}
-                          value={med.dose}
-                          name="dose"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div >
-                    <div className="form-group">
-                      <div className="input-field">
-                        <i
+                  <div className="form-group">
+                    <div className="input-field">
+                      <i
                         className="fas fa-plus-circle"
                         title="Add"
                         onClick={() => handleAddMedicine()}
-                        ></i>
-                      </div>
+                      ></i>
                     </div>
                   </div>
-                  </div>
                 </div>
-
+              </div>
+            </div>
 
             {/* add tests reports */}
-                <div className="line-2">
-                  <br></br>
-                </div>
-                <div>
-                  <h5>Test Report</h5>
-                  {renderTestReport()}
-                  <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="name">Name</label>
-                        <input
-                          className="name"
-                          id="exampleInputname1"
-                          placeholder="name"
-                          onChange={handleChangeTestReport}
-                          value={testReport.name}
-                          name="name"
-                        />
-                      </div>
+            <div className="line-2">
+              <br></br>
+            </div>
+            <div>
+              <h5>Test Report</h5>
+              {renderTestReport()}
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="name">Name</label>
+                      <input
+                        className="name"
+                        id="exampleInputname1"
+                        placeholder="name"
+                        onChange={handleChangeTestReport}
+                        value={testReport.name}
+                        name="name"
+                      />
                     </div>
                   </div>
-                  <div >
-                    <div className="form-group">
-                      <div className="input-field">
-                        <i
+                </div>
+                <div>
+                  <div className="form-group">
+                    <div className="input-field">
+                      <i
                         className="fas fa-plus-circle"
                         title="Add"
                         onClick={() => handleAddTestReport()}
-                        ></i>
-                      </div>
+                      ></i>
                     </div>
                   </div>
-                  </div>
                 </div>
-                <div className="line-2">
-                  <br></br>
-                </div>
+              </div>
+            </div>
+            <div className="line-2">
+              <br></br>
+            </div>
 
             {/* doctors note */}
-                <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="doctorsNote"><h5>Doctors Note</h5></label>
-                        <textarea 
-                            rows="3" 
-                            cols="30"
-                            type="doctorsNote"
-                            className="doctorsNote"
-                            id="exampleDoctorsNote"
-                            aria-describedby="doctorsNote"
-                            placeholder="Doctors Note"
-                              onChange={handleChangeInput}
-                            name="doctorsNote"
-                            value={appointment.doctorsNote}
-                        ></textarea>
-                      </div>
-                    </div>
+            <div className="row">
+              <div class="col s12 m6 l4">
+                <div className="form-group">
+                  <div className="input-field">
+                    <label htmlFor="doctorsNote">
+                      <h5>Doctors Note</h5>
+                    </label>
+                    <textarea
+                      rows="3"
+                      cols="30"
+                      type="doctorsNote"
+                      className="doctorsNote"
+                      id="exampleDoctorsNote"
+                      aria-describedby="doctorsNote"
+                      placeholder="Doctors Note"
+                      onChange={handleChangeInput}
+                      name="doctorsNote"
+                      value={appointment.doctorsNote}
+                    ></textarea>
                   </div>
                 </div>
+              </div>
+            </div>
 
             {/* doctors private note */}
-                <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="doctorsNotePrivate"><h5>Private Note</h5></label>
-                        <textarea 
-                            rows="3" 
-                            cols="30"
-                            type="doctorsNotePrivate"
-                            className="doctorsNotePrivate"
-                            id="exampleDoctorsNote"
-                            aria-describedby="doctorsNote"
-                            placeholder="Private Note"
-                              onChange={handleChangeInput}
-                            name="doctorsNotePrivate"
-                            value={appointment.doctorsNotePrivate}
-                        ></textarea>
-                      </div>
-                    </div>
+            <div className="row">
+              <div class="col s12 m6 l4">
+                <div className="form-group">
+                  <div className="input-field">
+                    <label htmlFor="doctorsNotePrivate">
+                      <h5>Private Note</h5>
+                    </label>
+                    <textarea
+                      rows="3"
+                      cols="30"
+                      type="doctorsNotePrivate"
+                      className="doctorsNotePrivate"
+                      id="exampleDoctorsNote"
+                      aria-describedby="doctorsNote"
+                      placeholder="Private Note"
+                      onChange={handleChangeInput}
+                      name="doctorsNotePrivate"
+                      value={appointment.doctorsNotePrivate}
+                    ></textarea>
                   </div>
                 </div>
-                <div>
-                <button
-                    type="button"
-                    className="button"
-                    onClick={() => handleSave()}
-                    >
-                    <i className="fas fa-plus-circle" title="save"> </i>
-                    save
-                  </button>
               </div>
-            <hr></hr>
-
-            {/* create prescription */}
+            </div>
             <div>
               <button
-                  type="button"
-                  className="button"
-                  // onClick={() => window.scrollTo({ top: 0 })}
-                  >
-                  Create prescription
-                </button>
+                type="button"
+                className="button"
+                onClick={() => handleSave()}
+              >
+                <i className="fas fa-plus-circle" title="save">
+                  {" "}
+                </i>
+                save
+              </button>
             </div>
+            <hr></hr>
 
             {/* download prescription */}
-            <div>
-              {appointment.mode==="offline"?<button
+            {/* <div>
+              {appointment.mode === "offline" ? (
+                <button
                   type="button"
                   className="button"
                   // onClick={() => window.scrollTo({ top: 0 })}
-                  >
+                >
                   Download prescription
-                </button>:""
-              }
-            </div>
+                </button>
+              ) : (
+                ""
+              )}
+            </div> */}
 
             {/* Change meeting detail */}
             <div>
-            <DatePicker selected={newdate} minDate={new Date()} onChange={(date)=>setNewDate(date)} showTimeSelect dateFormat="Pp" />
-            <button className="button" onClick={handleReshedule}>Reshedule</button>
+              <DatePicker
+                selected={newdate}
+                minDate={new Date()}
+                onChange={(date) => setNewDate(date)}
+                showTimeSelect
+                dateFormat="Pp"
+              />
+              <button className="button" onClick={handleReshedule}>
+                Reshedule
+              </button>
             </div>
 
             {/* Change status */}
             <div>
               <button
-                  type="button"
-                  className="button"
-                  onClick={() => handleChangeStatus()}
-                  >
-                  {appointment.status==="active"? "Close case":"Open case"}
-                </button>
+                type="button"
+                className="button"
+                onClick={() => handleChangeStatus()}
+              >
+                {appointment.status === "active" ? "Close case" : "Open case"}
+              </button>
             </div>
-
           </div>
         </div>
-        <Chat_Component appointment={appointment}/>
+        <Chat_Component appointment={appointment} />
       </div>
     </>
   );
