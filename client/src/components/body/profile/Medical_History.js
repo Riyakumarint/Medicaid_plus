@@ -42,6 +42,7 @@ const Medical_history = () => {
 
   // fetching data
   useEffect(()=> {
+    window.scrollTo({ top: 0 })
     axios.get('/profiles/getMedicalHistory', { headers: {Authorization: token}})
     .then( res => {
       setProfile(res.data);
@@ -416,7 +417,9 @@ const Medical_history = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col s12 m6 l4">
+                </div>
+                <div className="row">
+                <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
                         <label htmlFor="weight">Pulse</label>
@@ -434,7 +437,7 @@ const Medical_history = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="weight">BloodSugar</label>
+                        <label htmlFor="weight">Blood Sugar</label>
                         <input
                           className="bloodSugar"
                           id="exampleInputage1"
@@ -449,7 +452,7 @@ const Medical_history = () => {
                   <div class="col s12 m6 l4">
                     <div className="form-group">
                       <div className="input-field">
-                        <label htmlFor="weight">OxygenLevel</label>
+                        <label htmlFor="weight">Oxygen Level</label>
                         <input
                           className="oxygenLevel"
                           id="exampleInputage1"

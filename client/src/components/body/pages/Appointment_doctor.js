@@ -58,6 +58,7 @@ const Appointment_doctor = () => {
   // data fetching
   useEffect(async () => {
     try {
+      window.scrollTo({ top: 0 });
       const res = await axios.get("/appointments/fetchAppointment/" + caseId, {
         headers: { Authorization: token },
       });
@@ -135,7 +136,7 @@ const Appointment_doctor = () => {
         },
         { headers: { Authorization: token } }
       );
-
+      window.scrollTo({ top: 0 });
       setAppointment({
         ...appointment,
         status: appointment.status === "active" ? "closed" : "active",
@@ -188,6 +189,25 @@ const Appointment_doctor = () => {
       setTestReport({ name: "", link: "" });
     } catch (err) {
       setTestReport({ ...testReport });
+    }
+  };
+  const handleReshedule = async () => {
+    if (newdate === null) {
+      alert("Enter a slot");
+    } else {
+      try {
+        window.scrollTo({ top: 0 });
+        const temp = await axios.post(
+          "/appointments/resheduleAppointment/" +
+            appointment._id +
+            "/" +
+            newdate
+        );
+        setNewDate();
+        setCallback(!callback);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -253,12 +273,18 @@ const Appointment_doctor = () => {
             <thead>
               <tr>
                 <th>Link</th>
+                <th>Download</th>
               </tr>
             </thead>
             <tbody>
               {appointment.previousTestReports.map((previousTestReport) => (
                 <tr key={previousTestReport.link}>
-                  <td>{previousTestReport.link}</td>
+                  <td>{"Report"}</td>
+                  <td>
+                    <a href={previousTestReport.link}>
+                      <i className="fa fa-download" />
+                    </a>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -320,6 +346,11 @@ const Appointment_doctor = () => {
                 <tr key={testReport.name}>
                   <td>{testReport.name}</td>
                   <td>
+                    <a href={testReport.link}>
+                      <i className="fa fa-download" />
+                    </a>
+                  </td>
+                  <td>
                     <i className="fas fa-stethoscope" title="Open">
                       {" "}
                       Open
@@ -340,17 +371,7 @@ const Appointment_doctor = () => {
       </div>
     );
   };
-  const handleReshedule = async () => {
-    console.log("HI|||+ " + newdate);
-    try {
-      const temp = await axios.post(
-        "/appointments/resheduleAppointment/" + appointment._id + "/" + newdate
-      );
-      console.log(temp);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   return (
     <>
       <SideNav />
@@ -409,10 +430,6 @@ const Appointment_doctor = () => {
               <h5>Previous Test Report</h5>
               {renderPreviousTestReport()}
             </div>
-
-            <a href={appointment.pdfFile} download>
-              <i className="fa fa-download" />
-            </a>
             <hr></hr>
 
             {/* view medical history of patient */}
@@ -583,7 +600,6 @@ const Appointment_doctor = () => {
             </div>
             <hr></hr>
 
-            
             {/* download prescription */}
             {/* <div>
               {appointment.mode === "offline" ? (

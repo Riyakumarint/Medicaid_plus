@@ -19,20 +19,18 @@ const initialState = {
 };
 
 function Dash_board() {
-  const auth = useSelector((state) => state.auth);
+  const { user, isAdmin,isDoctor } = useSelector((state) => state.auth);
   const token = useSelector((state) => state.token);
-
   const users = useSelector((state) => state.users);
 
-  const { user, isAdmin, isDoctor } = auth;
   const [data, setData] = useState(initialState);
   const { err, success } = data;
-
   const [callback, setCallback] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     if (isAdmin) {
       fetchAllUsers(token).then((res) => {
         dispatch(dispatchGetAllUsers(res));

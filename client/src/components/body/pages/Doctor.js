@@ -56,6 +56,7 @@ const Doctor = () => {
 
   // data fetching
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);

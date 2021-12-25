@@ -21,3 +21,14 @@
   .category_table i {
     cursor: pointer;
   }
+
+  .category_button {
+    background: #911f27;
+    color: white;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-weight: bolder;
+    letter-spacing: 1.4px;
+    margin: 12px 0;
+  }

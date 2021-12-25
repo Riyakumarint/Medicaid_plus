@@ -86,8 +86,11 @@ const profilesCtrl = {
         }
     },
     getMedicalHistory: async (req, res) => {
+        
         try {
             const medical_profile = await MedicalHistory.find({userId: req.user.id});
+            console.log("kss")
+            console.log(medical_profile[0]);
             res.json(medical_profile[0]);
         } catch (err) {
             return res.status(500).json({ msg: err.message });
@@ -322,6 +325,8 @@ const profilesCtrl = {
     getMedicalProfile: async (req, res) => {
         try {
             const medical_profile = await MedicalProfile.find({userId: req.user.id});
+            console.log("kiki");
+            console.log(medical_profile[0]);
             res.json(medical_profile[0]);
         } catch (err) {
             return res.status(500).json({ msg: err.message });

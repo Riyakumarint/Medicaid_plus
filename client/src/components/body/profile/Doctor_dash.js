@@ -177,7 +177,7 @@ export default function Doctor_dash() {
                 }
                 console.log(k[i]);
             }
-            setBarData({labels:[l1,l2,l3,l4,l5,l6,l7],
+            setBarData({labels:[l1.toDateString(),l2.toDateString(),l3.toDateString(),l4.toDateString(),l5.toDateString(),l6.toDateString(),l7.toDateString()],
                 datasets:[{
                     label:'Number Of Appointments',
                     data:[a1,a2,a3,a4,a5,a6,a7],
@@ -191,7 +191,7 @@ export default function Doctor_dash() {
                         'rgba(255, 99, 132, 0.6)'
                       ]
                 }]})
-            setPieData({labels:['Onlie','OfLine'],
+            setPieData({labels:['Online','Ofline'],
             datasets:[{
                 label:'Online vs Ofline',
                 data:[a,b],
