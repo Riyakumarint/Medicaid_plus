@@ -1,0 +1,116 @@
+/* ==== GRID SYSTEM ==== */
+
+.Post .container {
+  width: 100%;
+  /* height: 1000px; */
+  border: 1px solid black;
+  max-width: 640px;
+  min-height: 920px;
+  margin: 30px auto;
+  overflow: hidden;
+}
+
+.Post .container header {
+  min-height: 93px;
+  border-bottom: 1px solid black;
+}
+
+.Post .container .header {
+  color: #333;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Post .container .logo {
+  flex: 1;
+}
+.Post .container .logo h2 {
+  font-size: 2rem;
+  font-family: "Poppins";
+  color: crimson;
+}
+
+.Post .container .row {
+  position: relative;
+  width: 100%;
+}
+
+.Post .container .row [class^="col"] {
+  float: left;
+}
+
+.doc-name {
+  font-size: 25px;
+}
+
+.clinic-details {
+  font-size: 15px;
+}
+
+.Post .container .row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.Post .container .doc-details {
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+.Post .container .clinic-details {
+  margin-top: 5px;
+  margin-left: 15px;
+}
+.Post .container .doc-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.Post .container .doc-meta {
+  font-size: 10px;
+}
+.Post .container .datetime {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.Post .container .row.title {
+  font-weight: bold;
+  padding-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Post .container .prescription {
+  /* height: 900px; */
+  margin: 10px;
+}
+
+.pdf_footer {
+  text-align: center;
+  color: white;
+  background-color: #911f27;
+  font-family: "Poppins", sans-serif;
+  padding: 10px;
+  width: 100%;
+  max-height: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top:10px;
+}
+
+.pdf_prescription .pdf_button {
+  height: 35px;
+  max-width: 260px;
+  background: #911f27;
+  color: white;
+  padding: 5px 14px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-weight: bolder;
+  letter-spacing: 1.4px;
+  margin: 12px auto;
+}
+

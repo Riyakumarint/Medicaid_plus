@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import ReactStars from 'react-stars';
 import Doctor_card from '../doctor_card/Doctor_card'
 import axios from "axios";
 import SideNav from "../profile/sidenav/SideNav";

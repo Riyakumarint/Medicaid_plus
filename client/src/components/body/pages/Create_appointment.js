@@ -21,6 +21,7 @@ const initialState = {
   title: "",
   description: "",
   meetingDetail: "",
+  
   err: "",
   success: "",
 };
@@ -37,7 +38,7 @@ const Create_appointment = () => {
   const [previousTestReport, setPreviousTestReport] = useState({ link: "" });
   const [previousTestReports, setPreviousTestReports] = useState([]);
   const [specialities, setSpecialities] = useState([]);
-  const [speciality, setSpeciality] = useState({ speciality_name: "" });
+  const [speciality, setSpeciality] = useState({ speciality_name: "" ,fee:""});
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState({ city_name: "" });
   const [doctors, setDoctors] = useState([]);
@@ -176,6 +177,7 @@ const Create_appointment = () => {
         },
         { headers: { Authorization: token } }
       );
+     
       setDoctors(res.data);
     } catch (err) {
       console.log(err);
@@ -237,10 +239,12 @@ const Create_appointment = () => {
       previousTestReports: previousTestReports,
       meetingDetail: date.date,
       pdfFile: pdfFile,
+      fee:speciality.fee,
       err: "",
       success: "",
     }
     console.log(appointmentDetail);
+    console.log(speciality.name);
     const convo={
       senderId:user._id,
       receiverId:doctor.doctortId,
