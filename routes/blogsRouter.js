@@ -11,7 +11,7 @@ router.post("/postBlog", auth, authDoctor, blogsCtrl.postBlog);
 router.get("/getAllBlogs", blogsCtrl.getAllBlogs);
 // router.get("/getDocBlogs", blogsCtrl.getDocBlog);
 router.get("/blog/:id", blogsCtrl.getBlog);
-router.post('/rateBlog', auth,blogsCtrl.rateBlog)
+router.post("/rateBlog", auth, blogsCtrl.rateBlog);
 router.delete("/delete/:id", blogsCtrl.deleteBlog);
 
 module.exports = router;

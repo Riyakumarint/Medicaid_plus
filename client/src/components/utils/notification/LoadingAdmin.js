@@ -1,6 +1,6 @@
 import React from "react";
 import load from "../../../images/load.svg";
-import './notification.css'
+import "./notification.css";
 
 const LoadingAdmin = () => {
   return (

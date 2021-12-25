@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const blogSchema =  mongoose.Schema(
+const blogSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -32,7 +32,7 @@ const blogSchema =  mongoose.Schema(
       maxlength: 75,
     },
     createdDate: {
-      type: Date
+      type: Date,
     },
     autherId: {
       type: Schema.Types.ObjectId,
@@ -40,28 +40,30 @@ const blogSchema =  mongoose.Schema(
     },
     auther: {
       type: String,
-      required: true
+      required: true,
     },
     reviews: {
-      rating :{
-          type: Number,
-          default: 3,
-          min: 1,
-          max: 5
+      rating: {
+        type: Number,
+        default: 3,
+        min: 1,
+        max: 5,
       },
-      rater: [{
+      rater: [
+        {
           userId: {
-              type: String,
-              // unique: true
+            type: String,
+            // unique: true
           },
-          rating :{
-              type: Number,
-              default: 3,
-              min: 1,
-              max: 5
+          rating: {
+            type: Number,
+            default: 3,
+            min: 1,
+            max: 5,
           },
-      }],
-    }
+        },
+      ],
+    },
     // comments: [
     //   {
     //     autherId: String,

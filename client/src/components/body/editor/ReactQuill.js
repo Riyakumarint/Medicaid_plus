@@ -199,7 +199,7 @@ class QuillEditor extends React.Component {
   }
 
   handleChange = (html) => {
-    console.log("html", html);
+    // console.log("html", html);
 
     this.setState(
       {
@@ -328,7 +328,7 @@ class QuillEditor extends React.Component {
       e.currentTarget.files.length > 0
     ) {
       const file = e.currentTarget.files[0];
-      console.log(file);
+      // console.log(file);
 
       let formData = new FormData();
       const config = {

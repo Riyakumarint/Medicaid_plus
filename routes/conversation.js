@@ -1,35 +1,32 @@
-const router = require('express').Router()
+const router = require("express").Router();
 const Conversation = require("../models/Conversations");
 
 //new Conversation
 
 router.post("/", async (req, res) => {
-  try{
+  try {
     const conversation = await Conversation.findOne({
-      members: { $all: [req.body.senderId,req.body.receiverId] },
+      members: { $all: [req.body.senderId, req.body.receiverId] },
     });
-    console.log("hello: "+conversation);
-    if(conversation===null){
+    // console.log("hello: " + conversation);
+    if (conversation === null) {
       const newConversation = new Conversation({
         members: [req.body.senderId, req.body.receiverId],
       });
-    
+
       try {
         const savedConversation = await newConversation.save();
-        console.log("buy: "+savedConversation);
+        // console.log("buy: " + savedConversation);
         res.status(200).json(savedConversation);
       } catch (err) {
         res.status(500).json(err);
       }
+    } else {
+      res.status(200).json(conversation);
     }
-    else{
-    res.status(200).json(conversation);
-    }
-  }
-  catch(err){
+  } catch (err) {
     res.status(200).json(err);
   }
-  
 });
 
 //get Conversation of a user
@@ -46,19 +43,18 @@ router.get("/:userId", async (req, res) => {
 });
 
 //get conversation includes 2 userid
-router.get("/find/:firstUID/:secondUID",async (req,res)=>{
-  console.log("vfsv: "+req.params.firstUID+" "+req.params.secondUID);
-  try{
+router.get("/find/:firstUID/:secondUID", async (req, res) => {
+  // console.log("vfsv: " + req.params.firstUID + " " + req.params.secondUID);
+  try {
     const conversation = await Conversation.findOne({
-      members: { $all: [req.params.firstUID,req.params.secondUID] },
+      members: { $all: [req.params.firstUID, req.params.secondUID] },
     });
-    console.log(conversation);
+    // console.log(conversation);
     res.status(200).json(conversation);
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-module.exports = router
+module.exports = router;

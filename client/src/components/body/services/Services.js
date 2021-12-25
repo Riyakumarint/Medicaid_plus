@@ -9,7 +9,6 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 import Loading from "../../utils/notification/Loading";
 
-
 const Services = () => {
   const [labTests, setLabTests] = useState([]);
   const [ambulances, setAmbulances] = useState([]);
@@ -22,10 +21,9 @@ const Services = () => {
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
-
   // data fetching
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 });
     const getLabTests = async () => {
       try {
         const res1 = await axios.put(
@@ -34,22 +32,22 @@ const Services = () => {
           { headers: { Authorization: token } }
         );
         setLabTests(res1.data);
-        
+
         const res2 = await axios.put(
-            "/services/ambulance",
-            { medicalId: user._id, patientID: "" },
-            { headers: { Authorization: token } }
-          );
+          "/services/ambulance",
+          { medicalId: user._id, patientID: "" },
+          { headers: { Authorization: token } }
+        );
         setAmbulances(res2.data);
       } catch (err) {
         console.log(err);
       }
     };
     getLabTests();
-  }, [callback]);
+  }, [callback, token, user]);
 
   // handle changes
-  const handleChangeStatus =  (e) => {
+  const handleChangeStatus = (e) => {
     const { name, value } = e.target;
     setStatus(value);
   };
@@ -57,12 +55,10 @@ const Services = () => {
   // handle submit
   const handleUpdateLabTest = async (labTest) => {
     try {
-      const newLabTest = { ...labTest, status: statuss}
-      await axios.put(
-        "/services/labTest/"+labTest._id,
-        newLabTest,
-        { headers: { Authorization: token } }
-      );
+      const newLabTest = { ...labTest, status: statuss };
+      await axios.put("/services/labTest/" + labTest._id, newLabTest, {
+        headers: { Authorization: token },
+      });
       setStatus("");
       setCallback(!callback);
     } catch (err) {
@@ -71,10 +67,9 @@ const Services = () => {
   };
   const handleDeleteLabTest = async (labTestId) => {
     try {
-      await axios.delete(
-        "/services/labTest/"+labTestId,
-        { headers: { Authorization: token } }
-      );
+      await axios.delete("/services/labTest/" + labTestId, {
+        headers: { Authorization: token },
+      });
       setStatus("");
       setCallback(!callback);
     } catch (err) {
@@ -84,12 +79,10 @@ const Services = () => {
 
   const handleUpdateAmbulance = async (ambulance) => {
     try {
-      const newAmbulance = { ...ambulance, status: statuss}
-      await axios.put(
-        "/services/ambulance/"+ambulance._id,
-        newAmbulance,
-        { headers: { Authorization: token } }
-      );
+      const newAmbulance = { ...ambulance, status: statuss };
+      await axios.put("/services/ambulance/" + ambulance._id, newAmbulance, {
+        headers: { Authorization: token },
+      });
       setStatus("");
       setCallback(!callback);
     } catch (err) {
@@ -98,10 +91,9 @@ const Services = () => {
   };
   const handleDeleteAmbulance = async (ambulanceId) => {
     try {
-      await axios.delete(
-        "/services/ambulance/"+ambulanceId,
-        { headers: { Authorization: token } }
-      );
+      await axios.delete("/services/ambulance/" + ambulanceId, {
+        headers: { Authorization: token },
+      });
       setStatus("");
       setCallback(!callback);
     } catch (err) {
@@ -129,30 +121,30 @@ const Services = () => {
             <tbody>
               {labTests.map((labTest) => (
                 <tr key={labTest._id}>
-                <td>{labTest.name}</td>
-                <td>{labTest.testName}</td>
-                <td>{labTest.address}</td>
-                <td>{labTest.mobile}</td>
-                <td>{labTest.status}</td>
-                <td>
+                  <td>{labTest.name}</td>
+                  <td>{labTest.testName}</td>
+                  <td>{labTest.address}</td>
+                  <td>{labTest.mobile}</td>
+                  <td>{labTest.status}</td>
+                  <td>
                     <input
-                        className="status"
-                        id="exampleInputstatus1"
-                        placeholder="status"
-                        onChange={handleChangeStatus}
-                        name="status"
-                    /> 
+                      className="status"
+                      id="exampleInputstatus1"
+                      placeholder="status"
+                      onChange={handleChangeStatus}
+                      name="status"
+                    />
                     <i
-                        className="fas fa-edit"
-                        title="Edit"
-                        onClick={() => handleUpdateLabTest(labTest)}
+                      className="fas fa-edit"
+                      title="Edit"
+                      onClick={() => handleUpdateLabTest(labTest)}
                     ></i>
                     <i
-                        className="fas fa-trash-alt"
-                        title="Add"
-                        onClick={() => handleDeleteLabTest(labTest._id)}
+                      className="fas fa-trash-alt"
+                      title="Add"
+                      onClick={() => handleDeleteLabTest(labTest._id)}
                     ></i>
-                </td>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -180,29 +172,29 @@ const Services = () => {
             <tbody>
               {ambulances.map((ambulance) => (
                 <tr key={ambulance._id}>
-                <td>{ambulance.name}</td>
-                <td>{ambulance.address}</td>
-                <td>{ambulance.mobile}</td>
-                <td>{ambulance.status}</td>
-                <td>
+                  <td>{ambulance.name}</td>
+                  <td>{ambulance.address}</td>
+                  <td>{ambulance.mobile}</td>
+                  <td>{ambulance.status}</td>
+                  <td>
                     <input
-                        className="status"
-                        id="exampleInputstatus1"
-                        placeholder="status"
-                        onChange={handleChangeStatus}
-                        name="status"
-                    /> 
+                      className="status"
+                      id="exampleInputstatus1"
+                      placeholder="status"
+                      onChange={handleChangeStatus}
+                      name="status"
+                    />
                     <i
-                        className="fas fa-edit"
-                        title="Edit"
-                        onClick={() => handleUpdateAmbulance(ambulance)}
+                      className="fas fa-edit"
+                      title="Edit"
+                      onClick={() => handleUpdateAmbulance(ambulance)}
                     ></i>
                     <i
-                        className="fas fa-trash-alt"
-                        title="Add"
-                        onClick={() => handleDeleteAmbulance(ambulance._id)}
+                      className="fas fa-trash-alt"
+                      title="Add"
+                      onClick={() => handleDeleteAmbulance(ambulance._id)}
                     ></i>
-                </td>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -217,36 +209,33 @@ const Services = () => {
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-            <div className="profile_page">
-              <div className="profile_header">
-                <h4>Services</h4>
+          <div className="profile_page">
+            <div className="profile_header">
+              <h4>Services</h4>
+            </div>
+
+            <div className="profile-container">
+              {/* Lab tests */}
+              <div>
+                <h5>Lab Test Bookings</h5>
+                {renderLabTests()}
+                <hr></hr>
+                <br></br>
               </div>
 
-              <div className="profile-container">
-
-                {/* Lab tests */}
-                <div>
-                    <h5>Lab Test Bookings</h5>
-                    {renderLabTests()}
-                    <hr></hr>
-                    <br></br>
-                </div>
-
-                {/* Ambulance */}
-                <div>
-                    <h5>Ambulance Bookings</h5>
-                    {renderAmbulances()}
-                    <hr></hr>
-                    <br></br>
-                </div>
-
+              {/* Ambulance */}
+              <div>
+                <h5>Ambulance Bookings</h5>
+                {renderAmbulances()}
+                <hr></hr>
+                <br></br>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </>
   );
 };
-
 
 export default Services;

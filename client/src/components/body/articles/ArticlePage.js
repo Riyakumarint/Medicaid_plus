@@ -39,10 +39,8 @@ function PostPage({ match }) {
 
       data.reviews.rater.map((rater) => {
         if (rater.userId === user._id) {
-          console.log("gotch");
           setRating(rater.rating);
         }
-        console.log(rater.userId, user._id);
         return rater;
       });
 
@@ -50,7 +48,7 @@ function PostPage({ match }) {
     };
 
     fetchData();
-  }, [callback]);
+  }, [callback, token, user]);
 
   const handleRatingChange = async (e) => {
     const res = await axios.post(

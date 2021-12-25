@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import {
@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 import googleIcon from "../../../images/google.png";
 import facebookIcon from "../../../images/facebook.png";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from 'react-facebook-login';
-import Loading from '../../utils/notification/LoadingAdmin'
+import FacebookLogin from "react-facebook-login";
+import Loading from "../../utils/notification/LoadingAdmin";
 const initialState = {
   email: "",
   password: "",
@@ -28,9 +28,10 @@ function Login() {
 
   const { email, password, err, success } = user;
 
-  const GOOGLE_CLIENTID = "836200288089-9rlk2tq35ushljhs1fn1isi3sdvucpfe.apps.googleusercontent.com";
+  const GOOGLE_CLIENTID =
+    "836200288089-9rlk2tq35ushljhs1fn1isi3sdvucpfe.apps.googleusercontent.com";
   const FACEBOOK_APPID = "1049446772568446";
-  console.log(process.env.FACEBOOK_APPID)
+  // console.log(process.env.FACEBOOK_APPID)
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -73,7 +74,7 @@ function Login() {
   };
 
   const responseFacebook = async (response) => {
-    console.log(response);
+    // console.log(response);
     try {
       const { accessToken, userID } = response;
       const res = await axios.post("/user/facebook_login", {
@@ -93,7 +94,7 @@ function Login() {
   };
 
   const componentClicked = () => console.log("logging in to facebook");
-  
+
   useEffect(() => {
     // Loading function to load data or
     // fake it using setTimeout;
@@ -124,7 +125,6 @@ function Login() {
         <div className="forms-container">
           <div className="signin-signup">
             <form onSubmit={handleSubmit}>
-            
               <h3 className="title">Sign in</h3>
               {err && showErrMsg(err)}
               {success && showSuccessMsg(success)}
@@ -156,7 +156,10 @@ function Login() {
                     value={password}
                     name="password"
                   />
-                  <small className="hide" onClick={() => setTypePass(!typePass)}>
+                  <small
+                    className="hide"
+                    onClick={() => setTypePass(!typePass)}
+                  >
                     {typePass ? (
                       <i class="fa fa-eye-slash" aria-hidden="true"></i>
                     ) : (
@@ -181,9 +184,9 @@ function Login() {
                   buttonText="Login with google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
-                  cookiePolicy={'single_host_origin'}
+                  cookiePolicy={"single_host_origin"}
                 />
-            
+
                 <FacebookLogin
                   appId={FACEBOOK_APPID}
                   autoLoad={false}
@@ -196,7 +199,7 @@ function Login() {
               <Link
                 className="my-2"
                 style={{
-                  color: "#538bfa"
+                  color: "#538bfa",
                 }}
                 to="forgot_password"
                 onClick={() => window.scrollTo({ top: 0 })}
@@ -218,10 +221,8 @@ function Login() {
           </div>
         </div>
       </div>
-  
     );
   }
 }
 
 export default Login;
-

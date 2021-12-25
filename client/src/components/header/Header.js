@@ -143,7 +143,6 @@ function Header() {
               >
                 Articles
               </NavLink>
-             
 
               <li className="nav-item dropdown" style={{ opacity: 1 }}>
                 <div

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Card from "../home/Cards";
 import axios from "axios";
 
-
 function Specialist() {
   const [specialities, setSpecialities] = useState([]);
   const [callback, setCallback] = useState(false);
@@ -14,7 +13,6 @@ function Specialist() {
     getSpecialities();
   }, [callback]);
 
-  
   return (
     <>
       <div className="articles">
@@ -31,4 +29,3 @@ function Specialist() {
 }
 
 export default Specialist;
-

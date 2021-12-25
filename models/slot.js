@@ -5,14 +5,14 @@ const SlotSchema = new mongoose.Schema(
     doctID: {
       type: String,
     },
-    patientID:{
-        type: String, 
+    patientID: {
+      type: String,
     },
     date: {
-        type: Date,
+      type: Date,
     },
     status: {
-        type: Boolean,
+      type: Boolean,
     },
   },
   { timestamps: true }

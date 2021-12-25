@@ -12,7 +12,7 @@
 
 .pro {
   width: 1000px;
-  max-width:1000px;
+  max-width: 1000px;
   margin: 100px auto;
   padding: 35px;
   box-shadow: 0 0 19px 0 #911f27;
@@ -34,13 +34,13 @@
   display: flex;
 }
 
-.profile_page .dash_data{
- margin: 0 10px;
+.profile_page .dash_data {
+  margin: 0 10px;
 }
 
-.profile_page .dash_data .doc_avatar{
-width: fit-content;
-margin-left: 0;
+.profile_page .dash_data .doc_avatar {
+  width: fit-content;
+  margin-left: 0;
 }
 
 .profile_page .row {
@@ -335,15 +335,14 @@ margin-left: 0;
     } */
 }
 
-
 /*------ Chart --------*/
 
-.chart .pie_chart{
+.chart .pie_chart {
   width: 400px;
   margin: 10px auto;
 }
 
-.chart .bar_chart{
+.chart .bar_chart {
   max-width: 1000px;
   min-width: 700px;
 }

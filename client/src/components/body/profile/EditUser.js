@@ -36,19 +36,19 @@ function EditUser() {
 
   const handleUpdate = async () => {
     try {
-        const res = await axios.patch(
-          `/user/update_role/${editUser._id}`,
-          {
-            role
-          },
-          {
-            headers: { Authorization: token },
-          }
-        );
+      const res = await axios.patch(
+        `/user/update_role/${editUser._id}`,
+        {
+          role,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      );
 
-        setSuccess(res.data.msg);
-        setTimeout(() => {
-          history.push('/dash_board')
+      setSuccess(res.data.msg);
+      setTimeout(() => {
+        history.push("/dash_board");
       }, 1500);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
@@ -57,66 +57,66 @@ function EditUser() {
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    if(value==="0" || value==="1" || value==="2"){
+    if (value === "0" || value === "1" || value === "2") {
       setRole(Number(value));
     }
   };
 
-  return (<>
-    <SideNav/>
-    <div className="continer-profile">
-      <div className="edit_pro">
-              <div className="profile_page edit_user">
-              {err && showErrMsg(err)}
+  return (
+    <>
+      <SideNav />
+      <div className="continer-profile">
+        <div className="edit_pro">
+          <div className="profile_page edit_user">
+            {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
-          {/* <button onClick={() => history.goBack()} className="go_back">
+            {/* <button onClick={() => history.goBack()} className="go_back">
             <i className="fas fa-long-arrow-alt-left"></i> Go Back
           </button> */}
-          <div className="profile_header">
-            <h4>Edit User</h4>
-          </div>
-          <div className="profile-container">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                defaultValue={editUser.name}
-                disabled
-              />
+            <div className="profile_header">
+              <h4>Edit User</h4>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                defaultValue={editUser.email}
-                disabled
-              />
-            </div>
-            <div className="row">
-              <div className="form-group mycheck">
-                <label htmlFor="role">Role</label>
+            <div className="profile-container">
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
                 <input
-                  className="role"
-                  id="role"
-                  placeholder="role"
-                  onChange={handleChangeInput}
-                  defaultValue={editUser.role}
-                  name="role"
+                  type="text"
+                  name="name"
+                  defaultValue={editUser.name}
+                  disabled
                 />
               </div>
-            </div>
-            <div className="edit_btn">
-              <button onClick={handleUpdate}>Update</button>
-            </div>
 
-           
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={editUser.email}
+                  disabled
+                />
+              </div>
+              <div className="row">
+                <div className="form-group mycheck">
+                  <label htmlFor="role">Role</label>
+                  <input
+                    className="role"
+                    id="role"
+                    placeholder="role"
+                    onChange={handleChangeInput}
+                    defaultValue={editUser.role}
+                    name="role"
+                  />
+                </div>
+              </div>
+              <div className="edit_btn">
+                <button onClick={handleUpdate}>Update</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div></>
+    </>
   );
 }
 

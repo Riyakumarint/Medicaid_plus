@@ -26,7 +26,12 @@ const initialState = {
   success: "",
 };
 
-const initialState2 = {doctortId:"", doctor_name:"", clinic_address:"", speciality_name:""};
+const initialState2 = {
+  doctortId: "",
+  doctor_name: "",
+  clinic_address: "",
+  speciality_name: "",
+};
 
 const Create_appointment = () => {
   const [appointmentDetails, setAppointmentDetails] = useState(initialState);
@@ -84,7 +89,7 @@ const Create_appointment = () => {
       }
     };
     getDoctors();
-  }, [callback]);
+  }, [callback, token]);
 
   // handle changes
   const handleChangePdf = async (e) => {
@@ -189,12 +194,21 @@ const Create_appointment = () => {
 
   const handleChangeDoctor = (e) => {
     const { name1, value } = e.target;
-    const temp = doctors.filter(doctor => { return doctor.userId===value; });
-    if(Lenght(temp)===0){
-      setDoctor(initialState2)
-    } else{
-      const {userId, name, clinic_address, speciality_name} = temp[0];
-      setDoctor({...doctor, doctortId:userId, doctor_name:name, clinic_address:clinic_address, speciality_name, speciality_name})
+    const temp = doctors.filter((doctor) => {
+      return doctor.userId === value;
+    });
+    if (Lenght(temp) === 0) {
+      setDoctor(initialState2);
+    } else {
+      const { userId, name, clinic_address, speciality_name } = temp[0];
+      setDoctor({
+        ...doctor,
+        doctortId: userId,
+        doctor_name: name,
+        clinic_address: clinic_address,
+        speciality_name,
+        speciality_name,
+      });
     }
   };
   const handleChangeSymptom = (e) => {
@@ -549,14 +563,19 @@ const Create_appointment = () => {
                       </div>
                     </div>
                   </div>
-                  {doctor.doctortId!==""?
-                  <div class="col s12 m6 l4">
-                    <br />
-                    <br />
-                    <h6>Consultant Fee - {getSpecialityFee(doctor.speciality_name, specialities)} /- INR</h6>
-                  </div>
-                  :""
-                  }
+                  {doctor.doctortId !== "" ? (
+                    <div class="col s12 m6 l4">
+                      <br />
+                      <br />
+                      <h6>
+                        Consultant Fee -{" "}
+                        {getSpecialityFee(doctor.speciality_name, specialities)}{" "}
+                        /- INR
+                      </h6>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 {/* Selectdoctor block */}
@@ -801,14 +820,18 @@ const Create_appointment = () => {
 
 const Lenght = (symptoms) => symptoms.length;
 const getSpecialityName = (_id, specialities) => {
-  const spec = specialities.filter( speciality => { return speciality._id===_id});
-  if(Lenght(spec)===0) return "";
+  const spec = specialities.filter((speciality) => {
+    return speciality._id === _id;
+  });
+  if (Lenght(spec) === 0) return "";
   return spec[0].name;
-}
+};
 const getSpecialityFee = (_id, specialities) => {
-  const spec = specialities.filter( speciality => { return speciality._id===_id});
-  if(Lenght(spec)===0) return "";
+  const spec = specialities.filter((speciality) => {
+    return speciality._id === _id;
+  });
+  if (Lenght(spec) === 0) return "";
   return spec[0].fee;
-}
+};
 
 export default Create_appointment;

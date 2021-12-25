@@ -1,98 +1,102 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-
-const medicalHistorySchema = new mongoose.Schema({
-
-    userId:{
-        type: String,
-        required: true
+const medicalHistorySchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
     },
 
-    emergencyContact:{
-        name: {
-            type: String,
-            required: true
-        },
-        relation: {
-            type: String,
-            required: true
-        },
-        emailAdd: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        mobile: {
-            type: String,
-            required: true, 
-            default: ''
-        },
-        address: { 
-            type: String, 
-            default: '' 
-        }
+    emergencyContact: {
+      name: {
+        type: String,
+        required: true,
+      },
+      relation: {
+        type: String,
+        required: true,
+      },
+      emailAdd: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      mobile: {
+        type: String,
+        required: true,
+        default: "",
+      },
+      address: {
+        type: String,
+        default: "",
+      },
     },
 
     bloodGroup: {
-        type: String, 
-        required: true
+      type: String,
+      required: true,
     },
-    age:{
-        type:String,
-        required: true,
-        default:''
+    age: {
+      type: String,
+      required: true,
+      default: "",
     },
-    height:{
-        type:String,
-        default:''
+    height: {
+      type: String,
+      default: "",
     },
-    weight:{
-        type:String,
-        default:''
+    weight: {
+      type: String,
+      default: "",
     },
-    pulse:{
-        type:String,
-        default:''
+    pulse: {
+      type: String,
+      default: "",
     },
-    bloodSugar:{
-        type:String,
-        default:''
+    bloodSugar: {
+      type: String,
+      default: "",
     },
-    oxygenLevel:{
-        type:String,
-        default:''
+    oxygenLevel: {
+      type: String,
+      default: "",
     },
-    currentMedication: [{
+    currentMedication: [
+      {
         name: String,
-        dose: String
-    }],
-    medicalCondition: [{
+        dose: String,
+      },
+    ],
+    medicalCondition: [
+      {
         name: String,
         fromWhen: String,
-        currentStatus: String
-    }],
-    allergies: [{
-        name: String
-    }],
+        currentStatus: String,
+      },
+    ],
+    allergies: [
+      {
+        name: String,
+      },
+    ],
     useTobacco: String,
     useAlcohol: String,
 
-    caseRecord: [{
-        caseId: String
-    }],
-
-}, 
-{
-    timestamps: true
-})
+    caseRecord: [
+      {
+        caseId: String,
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 module.exports = {
-    medicalHistorySchema: medicalHistorySchema,
-    medicalHistoryModel: mongoose.model("MedicalHistories", medicalHistorySchema)
-}
-
-
-
+  medicalHistorySchema: medicalHistorySchema,
+  medicalHistoryModel: mongoose.model("MedicalHistories", medicalHistorySchema),
+};
 
 // sample data to post via postman (delete it)
 // {

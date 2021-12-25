@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const commentSchema =  mongoose.Schema(
+const commentSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -8,11 +8,11 @@ const commentSchema =  mongoose.Schema(
     },
     blogId: {
       type: String,
-      required: true
+      required: true,
     },
     comments: {
       type: String,
-      required: true
+      required: true,
     },
     upvote: Number,
     downvote: Number,

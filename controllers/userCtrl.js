@@ -1,9 +1,11 @@
 const Users = require("../models/userModel").userModel;
-const MedicalHistory = require("../models/medicalHistoryModel").medicalHistoryModel;
-const MedicalProfile = require("../models/medicalProfileModel").medicalProfileModel;
+const MedicalHistory =
+  require("../models/medicalHistoryModel").medicalHistoryModel;
+const MedicalProfile =
+  require("../models/medicalProfileModel").medicalProfileModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sendMail = require("./sendMail")
+const sendMail = require("./sendMail");
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
@@ -12,75 +14,74 @@ const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
 
 const { CLIENT_URL } = process.env;
 
-const createMedicalHistory = async ( userId)=> {
-    try{
-      const newMedicalHistoryData = new MedicalHistory({
-        userId: userId ,
+const createMedicalHistory = async (userId) => {
+  try {
+    const newMedicalHistoryData = new MedicalHistory({
+      userId: userId,
 
-        emergencyContact:{
-            name: "Name",
-            relation: "Relation",
-            emailAdd: "Email",
-            mobile: "Mobile",
-            address: "Address"
-        },
-    
-        bloodGroup: "BG",
-        age: "Age",
-        height: "height",
-        weight: "Kg",
-    
-        currentMedication: [],
-        medicalCondition: [],
-        allergies: [],
-        useTobacco: "No",
-        useAlcohol: "No",
-    
-      });
+      emergencyContact: {
+        name: "Name",
+        relation: "Relation",
+        emailAdd: "Email",
+        mobile: "Mobile",
+        address: "Address",
+      },
 
-      newMedicalHistoryData.save( async (error1, result1) => {
-        if(!error1){
-            await Users.findOneAndUpdate(
-                { _id: userId },
-                { "profile.medicalHistoryId": result1._id }
-            );
-            // console.log("profile created");
-            return {status: true, message: "success"};
-        } else {
-          console.log(error1.message);
-          return {status: false, message: "Fail to create medical history"};          ;
-        }
-      });
-    } catch (err){
-      return {status: false, message: err.message};
-    }
-}
+      bloodGroup: "BG",
+      age: "Age",
+      height: "height",
+      weight: "Kg",
+
+      currentMedication: [],
+      medicalCondition: [],
+      allergies: [],
+      useTobacco: "No",
+      useAlcohol: "No",
+    });
+
+    newMedicalHistoryData.save(async (error1, result1) => {
+      if (!error1) {
+        await Users.findOneAndUpdate(
+          { _id: userId },
+          { "profile.medicalHistoryId": result1._id }
+        );
+        // console.log("profile created");
+        return { status: true, message: "success" };
+      } else {
+        console.log(error1.message);
+        return { status: false, message: "Fail to create medical history" };
+      }
+    });
+  } catch (err) {
+    return { status: false, message: err.message };
+  }
+};
 
 const userCtrl = {
   // Register a User
   register: async (req, res) => {
     try {
-      const { name, username, mobile, email, password,role, gender } = req.body;
+      const { name, username, mobile, email, password, role, gender } =
+        req.body;
 
       if (!name || !email || !password || !mobile)
         return res.status(400).json({ msg: "Please fill in all fields." });
 
       let newUserName = username.toLowerCase().replace(/ /g, "");
-      
+
       if (!validateEmail(email))
         return res.status(400).json({ msg: "Invalid emails." });
 
       if (!validPhone(mobile))
-          return res.status(400).json({ msg: "Invalid phone number." });
-      
-          const user_email = await Users.findOne({ email });
-          if (user_email)
-            return res.status(400).json({ msg: "This email already exists." });
-    
-          const user_mobile = await Users.findOne({ mobile });
-          if (user_mobile)
-            return res.status(400).json({ msg: "This mobile already exists." });
-    
+        return res.status(400).json({ msg: "Invalid phone number." });
+
+      const user_email = await Users.findOne({ email });
+      if (user_email)
+        return res.status(400).json({ msg: "This email already exists." });
+
+      const user_mobile = await Users.findOne({ mobile });
+      if (user_mobile)
+        return res.status(400).json({ msg: "This mobile already exists." });
 
       if (password.length < 6)
         return res
@@ -90,13 +91,19 @@ const userCtrl = {
       const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = {
-        name, username: newUserName, mobile,email, password: passwordHash, gender,role
+        name,
+        username: newUserName,
+        mobile,
+        email,
+        password: passwordHash,
+        gender,
+        role,
       };
 
       const activation_token = createActivationToken(newUser);
 
       const url = `${CLIENT_URL}/user/activate/${activation_token}`;
-      sendMail( email, url, "Verify your email address");
+      sendMail(email, url, "Verify your email address");
 
       res.json({
         msg: "Register Success! Please activate your email to start.",
@@ -114,23 +121,29 @@ const userCtrl = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { name, username, mobile, email, password,gender,role} = user;
+      const { name, username, mobile, email, password, gender, role } = user;
 
       const check = await Users.findOne({ email });
       if (check)
         return res.status(400).json({ msg: "This email already exists." });
 
       const newUser = new Users({
-        name, username, mobile, email, password,gender,role
+        name,
+        username,
+        mobile,
+        email,
+        password,
+        gender,
+        role,
       });
 
-      newUser.save( async (error, result) => {
-        if(!error){
+      newUser.save(async (error, result) => {
+        if (!error) {
           const result1 = await createMedicalHistory(result._id);
           // if(result1.status===false)
           //   res.status(500).json({ msg: result1.message });
         } else {
-            res.status(500).json({ msg: error.message });
+          res.status(500).json({ msg: error.message });
         }
       });
     } catch (err) {
@@ -186,10 +199,10 @@ const userCtrl = {
         return res.status(400).json({ msg: "This email does not exist." });
 
       const access_token = createAccessToken({ id: user._id });
-      const url = `${ CLIENT_URL }/user/reset/${access_token}`;
+      const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
       sendMail(email, url, "Verify your email address");
-      
+
       res.json({ msg: "Re-send the password, please check your email." });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -199,7 +212,7 @@ const userCtrl = {
   resetPassword: async (req, res) => {
     try {
       const { password } = req.body;
-      console.log(password);
+      // console.log(password);
       const passwordHash = await bcrypt.hash(password, 12);
 
       // console.log(req.user)
@@ -215,7 +228,7 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  // Get single user 
+  // Get single user
   getUserInfor: async (req, res) => {
     try {
       const user = await Users.findById(req.user.id).select("-password");
@@ -228,11 +241,11 @@ const userCtrl = {
   // Get some public details of doctor's user profile
   fetchDoctorUser: async (req, res) => {
     try {
-        const user = await Users.find({_id: req.params.doctorId});
-        const {avatar, email, mobile, gender} = user[0];
-        res.json({avatar, email, mobile, gender});
+      const user = await Users.find({ _id: req.params.doctorId });
+      const { avatar, email, mobile, gender } = user[0];
+      res.json({ avatar, email, mobile, gender });
     } catch (err) {
-        return res.status(500).json({ msg: err.message });
+      return res.status(500).json({ msg: err.message });
     }
   },
   // Get all users(admin)
@@ -264,9 +277,9 @@ const userCtrl = {
         {
           name,
           avatar,
-          mobile, 
+          mobile,
           address,
-          gender
+          gender,
         }
       );
 
@@ -288,35 +301,34 @@ const userCtrl = {
       );
 
       await Users.findOneAndUpdate(
-          { _id: req.params.id },
-          { "profile.medicalProfileId": "" }
+        { _id: req.params.id },
+        { "profile.medicalProfileId": "" }
       );
-      await MedicalProfile.findOneAndDelete({userId: req.params.id});
+      await MedicalProfile.findOneAndDelete({ userId: req.params.id });
 
-      if(role===2){
+      if (role === 2) {
         const newMedicalProfileData = new MedicalProfile({
           userId: req.params.id,
-          name:"Doctor's name",
-            
+          name: "Doctor's name",
+
           bloodGroup: "O+",
           age: "35",
           qualification: [],
-          
+
           speciality_name: "Speciality",
           city_name: "Speciality",
           clinic_address: "Clinic address",
           experience_year: "Experience",
           caseRecord: [],
-          blogRecord:[]
-      
+          blogRecord: [],
         });
 
-        newMedicalProfileData.save( async (error1, result1) => {
-          if(!error1){
-              await Users.findOneAndUpdate(
-                  { _id: req.params.id },
-                  { "profile.medicalProfileId": result1._id }
-              );
+        newMedicalProfileData.save(async (error1, result1) => {
+          if (!error1) {
+            await Users.findOneAndUpdate(
+              { _id: req.params.id },
+              { "profile.medicalProfileId": result1._id }
+            );
           } else {
             console.log(error1.message);
             res.status(500).json({ msg: "failed to create medical profile" });
@@ -333,9 +345,9 @@ const userCtrl = {
   deleteUser: async (req, res) => {
     try {
       await Users.findByIdAndDelete(req.params.id);
-      await MedicalProfile.findOneAndDelete({userId: req.params.id});
-      await MedicalHistory.findOneAndDelete({userId: req.params.id});
-      
+      await MedicalProfile.findOneAndDelete({ userId: req.params.id });
+      await MedicalHistory.findOneAndDelete({ userId: req.params.id });
+
       res.json({ msg: "Deleted Success!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -349,7 +361,6 @@ const userCtrl = {
         idToken: tokenId,
         audience: process.env.MAILING_SERVICE_CLIENT_ID,
       });
-
 
       // console.log(verify)
       const { email_verified, email, name, picture } = verify.payload;
@@ -378,7 +389,7 @@ const userCtrl = {
         res.json({ msg: "Login success!" });
       } else {
         const newUser = new Users({
-          username : email.split('@')[0],
+          username: email.split("@")[0],
           name,
           email,
           mobile: "+911234567890",
@@ -405,18 +416,16 @@ const userCtrl = {
     }
   },
   //get name and photo for conversation
-  conInfo: async(req,res)=>{
-    const userId=req.params.id;
-    console.log(userId);
-    try{
+  conInfo: async (req, res) => {
+    const userId = req.params.id;
+    // console.log(userId);
+    try {
       const user = await Users.findById(userId);
       res.status(200).json(user);
-    }
-    catch(err){
+    } catch (err) {
       res.status(500).json(err);
     }
-  }
-  ,
+  },
   facebookLogin: async (req, res) => {
     try {
       const { accessToken, userID } = req.body;
@@ -451,7 +460,7 @@ const userCtrl = {
         res.json({ msg: "Login success!" });
       } else {
         const newUser = new Users({
-          username : email.split('@')[0],
+          username: email.split("@")[0],
           name,
           email,
           mobile: "+911234567890",
@@ -477,7 +486,7 @@ const userCtrl = {
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
-  }
+  },
 };
 
 function validPhone(mobile) {
@@ -486,7 +495,8 @@ function validPhone(mobile) {
 }
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 

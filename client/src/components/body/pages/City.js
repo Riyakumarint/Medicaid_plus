@@ -18,9 +18,8 @@ function City() {
 
   const token = useSelector((state) => state.token);
 
-
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 });
     const getCities = async () => {
       const res = await axios.get("/api/city");
       setCities(res.data);
@@ -35,7 +34,7 @@ function City() {
         const res = await axios.put(
           `/api/city/${id}`,
           {
-            name: city
+            name: city,
           },
           {
             headers: { Authorization: token },
@@ -46,7 +45,7 @@ function City() {
         const res = await axios.post(
           "/api/city",
           {
-            name: city
+            name: city,
           },
           {
             headers: { Authorization: token },
@@ -122,12 +121,7 @@ function City() {
                       <i
                         className="fas fa-edit"
                         title="Edit"
-                        onClick={() =>
-                          editCity(
-                            city._id,
-                            city.name
-                          )
-                        }
+                        onClick={() => editCity(city._id, city.name)}
                       ></i>
 
                       <i

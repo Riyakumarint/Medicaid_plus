@@ -1,125 +1,125 @@
-.header{
-    width: 100%;
+.header {
+  width: 100%;
 }
-.menu-bar{
-    background-image: linear-gradient(-90deg,#911F27,#911F27,#911F27);
-    opacity: 1;
-    box-shadow: 0 0 15px #911F27;
-    text-transform: uppercase;
+.menu-bar {
+  background-image: linear-gradient(-90deg, #911f27, #911f27, #911f27);
+  opacity: 1;
+  box-shadow: 0 0 15px #911f27;
+  text-transform: uppercase;
 }
 
 .navbar-nav {
-    text-align: right;
-    margin-right: 20px;
+  text-align: right;
+  margin-right: 20px;
 }
-.menu-bar .navbar-brand h1{
-    font-size: 2rem;
-    font-family: 'Poppins';
-    color:rgb(250, 248, 248);
-} 
-
-.menu-bar .navbar-brand:hover{ 
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+.menu-bar .navbar-brand h1 {
+  font-size: 2rem;
+  font-family: "Poppins";
+  color: rgb(250, 248, 248);
 }
 
-.menu-bar .navbar-toggler{
-    padding-right: 20px;
-    outline: none !important;
-    border: none !important;
-}
-.navbar .fa-bars{
-    color: white !important;
-    font-size: 26px;
+.menu-bar .navbar-brand:hover {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
 }
 
+.menu-bar .navbar-toggler {
+  padding-right: 20px;
+  outline: none !important;
+  border: none !important;
+}
+.navbar .fa-bars {
+  color: white !important;
+  font-size: 26px;
+}
 
-.menu-bar ul li{
-    display: inline-block;
-    padding: 0 20px;
+.menu-bar ul li {
+  display: inline-block;
+  padding: 0 20px;
 }
-.menu-bar ul li:hover{
-    outline: none;
-    color: aliceblue;
-    font-weight: bold;
+.menu-bar ul li:hover {
+  outline: none;
+  color: aliceblue;
+  font-weight: bold;
 }
 
-.menu-bar ul li img{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.menu-bar ul li img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
-.menu-bar a{
-    color: rgb(240, 238, 238);
-    opacity: 0.96;
-    padding: 5px ;
-    font-family: 'Poppins', sans-serif;
-    margin: 5px 5px ;
+.menu-bar a {
+  color: rgb(240, 238, 238);
+  opacity: 0.96;
+  padding: 5px;
+  font-family: "Poppins", sans-serif;
+  margin: 5px 5px;
 }
-.menu-bar a:hover{
-    opacity: 1;
-    outline: none;
+.menu-bar a:hover {
+  opacity: 1;
+  outline: none;
 }
 .menu-bar a:active {
-    color: rgb(236, 225, 235);
-    font-weight: bolder;
-  }
-
-.sign-in{
-    position: relative;
-    right: -19px;
-    top: 9px;
-    margin-bottom: 20px;
+  color: rgb(236, 225, 235);
+  font-weight: bolder;
 }
 
-.sign-in .fa-user , .fa-times{
-    font-size: 20px;
-    color: white;
+.sign-in {
+  position: relative;
+  right: -19px;
+  top: 9px;
+  margin-bottom: 20px;
+}
+
+.sign-in .fa-user,
+.fa-times {
+  font-size: 20px;
+  color: white;
 }
 
 /* --------- Dropdown ---------- */
 
-.drop-nav{
-    position: relative;
-    right: -19px;
+.drop-nav {
+  position: relative;
+  right: -19px;
 }
 
 .drop-nav .avatar_user {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
-.drop-nav a{
-    text-transform: capitalize;
-    overflow: hidden;
-    text-transform: uppercase;
+.drop-nav a {
+  text-transform: capitalize;
+  overflow: hidden;
+  text-transform: uppercase;
 }
-.drop-nav .dropdown{
-    position: absolute;
-    background: #a0232b;
-    opacity: 1;
-    width: 110px;
-    /* width: calc(100% + 55px); */
-    top: 35px;
-    right: 0;
-    border-radius: 5px;
-    text-transform: uppercase;
-    box-shadow: 0 0 15px #3f0a0d;
-    display: none;
-    padding-right: 65px;
-    text-align: center;
+.drop-nav .dropdown {
+  position: absolute;
+  background: #a0232b;
+  opacity: 1;
+  width: 110px;
+  /* width: calc(100% + 55px); */
+  top: 35px;
+  right: 0;
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px #3f0a0d;
+  display: none;
+  padding-right: 65px;
+  text-align: center;
 }
-.drop-nav .dropdown li{
-    display: block;
-    left: 10px;
-    padding: 10px 0;
-    opacity: 1;
+.drop-nav .dropdown li {
+  display: block;
+  left: 10px;
+  padding: 10px 0;
+  opacity: 1;
 }
-.drop-nav .dropdown .dropdown-profile{
-    position: relative;
-    opacity: 1;
+.drop-nav .dropdown .dropdown-profile {
+  position: relative;
+  opacity: 1;
 }
-.drop-nav:hover .dropdown{
-    display: block;
-} 
+.drop-nav:hover .dropdown {
+  display: block;
+}

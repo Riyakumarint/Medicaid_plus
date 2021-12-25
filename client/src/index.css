@@ -2,18 +2,18 @@
   padding: 0;
   box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.App{
+.App {
   /* max-width: 1200px; */
   width: 100%;
   min-height: 100vh;
@@ -21,28 +21,28 @@ code {
   margin: 0 auto;
   overflow: hidden;
 }
-a{
+a {
   color: white;
   text-decoration: none;
 }
-a:hover{
+a:hover {
   color: white;
   text-decoration: none;
 }
-ul{
+ul {
   list-style: none;
 }
-button{
+button {
   border: none;
   outline: none;
   cursor: pointer;
 }
 
 /* ----------------- Header ------------------- */
- @import url("./components/header/header.css");
+@import url("./components/header/header.css");
 
 /* ----------------- Auth ------------------- */
- @import url("./components/body/auth/auth.css"); 
+@import url("./components/body/auth/auth.css");
 
 /* ----------------- Profile ------------------- */
 @import url("./components/body/profile/profile.css");
@@ -51,8 +51,7 @@ button{
 @import url("./components/body/profile/sidenav/sidenav.css");
 
 /* ----------------- Articles ------------------- */
-@import url("./components/body/articles/articles.css"); 
-
+@import url("./components/body/articles/articles.css");
 
 /* ----------------- Footer ------------------- */
-@import url("./components/footer/footer.css"); 
+@import url("./components/footer/footer.css");

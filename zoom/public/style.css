@@ -53,7 +53,7 @@ video {
 }
 .main__controls {
   display: flex;
-  background-color: #911F27;
+  background-color: #911f27;
   color: white;
   padding: 5px;
   justify-content: space-between;
@@ -79,7 +79,7 @@ video {
 }
 .main__controls_button:hover {
   background-color: #f8bec1;
-  color: #911F27;
+  color: #911f27;
 }
 .main__controls_button i {
   font-size: 25px;
@@ -90,7 +90,7 @@ video {
 }
 .main__header {
   color: white;
-  background-color:#911F27;
+  background-color: #911f27;
   text-align: center;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
@@ -117,10 +117,10 @@ video {
 }
 
 #all_messages li {
-  color: #911F27;
+  color: #911f27;
   font-size: 19px;
   list-style: none;
-  border-bottom: 1px solid #911F27;
+  border-bottom: 1px solid #911f27;
   padding: 10px 0;
 }
 .unmute {

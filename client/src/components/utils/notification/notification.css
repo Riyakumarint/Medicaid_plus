@@ -1,51 +1,49 @@
-.errMsg{
-    position: fixed;
-    top: 97px;
-    right: 10px;
-    background: rgb(214, 10, 10);
-    color: white;
-    text-align: center;
-    padding: 12px 20px;
-    margin-bottom: 10px;
-    letter-spacing: 1.3px;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 15px;
-    z-index: 100;
-    box-shadow: 0 0 7px rgb(247, 3, 3);
-    animation: fadeOut 15s;
+.errMsg {
+  position: fixed;
+  top: 97px;
+  right: 10px;
+  background: rgb(214, 10, 10);
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  letter-spacing: 1.3px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 15px;
+  z-index: 100;
+  box-shadow: 0 0 7px rgb(247, 3, 3);
+  animation: fadeOut 15s;
 }
 
-.successMsg{
-    position:fixed;
-    top: 97px;
-    right: 10px;
-    background: rgb(9, 158, 54);
-    color: white;
-    text-align: center;
-    padding: 12px 20px;
-    margin-bottom: 10px;
-    letter-spacing: 1.3px;
-    border-radius: 5px;
-    font-weight: 700;
-    z-index: 100;
-    box-shadow: 0 0 15px rgb(12, 163, 58);
-    animation: fadeOut 12s;
+.successMsg {
+  position: fixed;
+  top: 97px;
+  right: 10px;
+  background: rgb(9, 158, 54);
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  letter-spacing: 1.3px;
+  border-radius: 5px;
+  font-weight: 700;
+  z-index: 100;
+  box-shadow: 0 0 15px rgb(12, 163, 58);
+  animation: fadeOut 12s;
 }
 
 @keyframes fadeOut {
-    from{
-        opacity: 1;
-    }
-    to{
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
-
-.loading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-

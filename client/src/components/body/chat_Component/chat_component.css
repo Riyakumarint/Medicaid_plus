@@ -19,7 +19,7 @@ body {
   margin-bottom: 5px;
   /* border-radius: 1px; */
   width: 300px;
-  
+
   padding: 15px;
   border: none;
   height: 300px;
@@ -60,7 +60,7 @@ body {
   border: 2px solid #911f27;
   outline: none;
   background: #f8e2e3;
-  
+
   border-radius: 10px;
   padding: 0 5px;
 }
@@ -140,8 +140,8 @@ body {
   grid-row-start: 1;
 }
 
-.send{
-    background-color: #f7a2a6;
+.send {
+  background-color: #f7a2a6;
 }
 .chat_btns {
   display: flex;

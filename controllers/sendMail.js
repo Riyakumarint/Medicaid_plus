@@ -11,7 +11,6 @@ const sendEmail = (email, url, txt) => {
     },
   });
 
-
   const mailOptions = {
     from: "noreply@gmail.com",
     to: email,

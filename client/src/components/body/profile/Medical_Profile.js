@@ -8,7 +8,7 @@ import {
 import SideNav from "./sidenav/SideNav";
 
 const initialState = {
-  name:"",
+  name: "",
   bloodGroup: "",
   age: "",
   major: "",
@@ -25,7 +25,11 @@ const initialState = {
 const Medical_profile = () => {
   const [profile, setProfile] = useState(initialState);
   const [qualifications, setQualifications] = useState([]);
-  const [qualification, setQualification] = useState({major: "", college: "", passingyear: ""});
+  const [qualification, setQualification] = useState({
+    major: "",
+    college: "",
+    passingyear: "",
+  });
   const [specialities, setSpecialities] = useState([]);
   const [cities, setCities] = useState([]);
   const [callback, setCallback] = useState(false);
@@ -34,7 +38,7 @@ const Medical_profile = () => {
 
   // data fetching
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 });
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
@@ -62,7 +66,7 @@ const Medical_profile = () => {
       .catch((err) => {
         setProfile({ ...profile, err: err, success: "" });
       });
-  }, []);
+  }, [token]);
 
   // handle changes
   const handleChangeInput = (e) => {
@@ -98,17 +102,30 @@ const Medical_profile = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile', { headers: {Authorization: token}})
-      .then( res => {
-        setQualifications(res.data.qualification);
-      })
-      .catch( err => {
-        setProfile({ ...profile, err: err, success: "" });
-      })
+      axios
+        .get("/profiles/getMedicalProfile", {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
+          setQualifications(res.data.qualification);
+        })
+        .catch((err) => {
+          setProfile({ ...profile, err: err, success: "" });
+        });
 
-      setQualification({ major: "", college: "", passingyear: "", err: "", success: "Updated Success!" });
+      setQualification({
+        major: "",
+        college: "",
+        passingyear: "",
+        err: "",
+        success: "Updated Success!",
+      });
     } catch (err) {
-      setQualification({ ...qualification, err: err.response.data.msg, success: "" });
+      setQualification({
+        ...qualification,
+        err: err.response.data.msg,
+        success: "",
+      });
     }
   };
   const handleDeleteQualification = async (qualificationId) => {
@@ -119,26 +136,39 @@ const Medical_profile = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile', { headers: {Authorization: token}})
-      .then( res => {
-        setQualifications(res.data.qualification);
-      })
-      .catch( err => {
-        setProfile({ ...profile, err: err, success: "" });
-      })
+      axios
+        .get("/profiles/getMedicalProfile", {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
+          setQualifications(res.data.qualification);
+        })
+        .catch((err) => {
+          setProfile({ ...profile, err: err, success: "" });
+        });
 
-      setQualification({ major: "", college: "", passingyear: "", err: "", success: "Updated Success!" });
+      setQualification({
+        major: "",
+        college: "",
+        passingyear: "",
+        err: "",
+        success: "Updated Success!",
+      });
     } catch (err) {
-      setQualification({ ...qualification, err: err.response.data.msg, success: "" });
+      setQualification({
+        ...qualification,
+        err: err.response.data.msg,
+        success: "",
+      });
     }
   };
 
   // renders
-  const renderQualification = () =>{
-    if(qualifications.length===0) return ('');
+  const renderQualification = () => {
+    if (qualifications.length === 0) return "";
     return (
       <div className="col-right">
-      <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }}>
           <table className="medical">
             <thead>
               <tr>
@@ -155,18 +185,21 @@ const Medical_profile = () => {
                   <td>{qualification.college}</td>
                   <td>{qualification.passingyear}</td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
-                      onClick={() => handleDeleteQualification(qualification._id)}
+                      onClick={() =>
+                        handleDeleteQualification(qualification._id)
+                      }
                     ></i>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
       </div>
-      </div>
-    )
+    );
   };
 
   return (
@@ -249,62 +282,62 @@ const Medical_profile = () => {
                   <h5>Qualifications</h5>
                   {renderQualification()}
                   <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="major">Major</label>
-                        <input
-                          className="major"
-                          id="exampleInputmajor1"
-                          placeholder="major"
-                          onChange={handleChangeQualification}
-                          value={qualification.major}
-                          name="major"
-                        />
+                    <div class="col s12 m6 l4">
+                      <div className="form-group">
+                        <div className="input-field">
+                          <label htmlFor="major">Major</label>
+                          <input
+                            className="major"
+                            id="exampleInputmajor1"
+                            placeholder="major"
+                            onChange={handleChangeQualification}
+                            value={qualification.major}
+                            name="major"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="college">College</label>
-                        <input
-                          className="college"
-                          id="exampleInputcollege1"
-                          placeholder="college"
-                          onChange={handleChangeQualification}
-                          value={qualification.college}
-                          name="college"
-                        />
+                    <div class="col s12 m6 l4">
+                      <div className="form-group">
+                        <div className="input-field">
+                          <label htmlFor="college">College</label>
+                          <input
+                            className="college"
+                            id="exampleInputcollege1"
+                            placeholder="college"
+                            onChange={handleChangeQualification}
+                            value={qualification.college}
+                            name="college"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="passingyear">Year</label>
-                        <input
-                          className="passingyear"
-                          id="exampleInputpassingyear1"
-                          placeholder="passingyear"
-                          onChange={handleChangeQualification}
-                          value={qualification.passingyear}
-                          name="passingyear"
-                        />
+                    <div class="col s12 m6 l4">
+                      <div className="form-group">
+                        <div className="input-field">
+                          <label htmlFor="passingyear">Year</label>
+                          <input
+                            className="passingyear"
+                            id="exampleInputpassingyear1"
+                            placeholder="passingyear"
+                            onChange={handleChangeQualification}
+                            value={qualification.passingyear}
+                            name="passingyear"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div >
-                    <div className="form-group">
-                      <div className="input-field">
-                        <i
-                        className="fas fa-plus-circle"
-                        title="Add"
-                        onClick={() => handleAddQualification()}
-                        ></i>
+                    <div>
+                      <div className="form-group">
+                        <div className="input-field">
+                          <i
+                            className="fas fa-plus-circle"
+                            title="Add"
+                            onClick={() => handleAddQualification()}
+                          ></i>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </div>
                 </div>
 
@@ -315,7 +348,7 @@ const Medical_profile = () => {
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                    <label htmlFor="speciality_name">Speciality Name</label>
+                      <label htmlFor="speciality_name">Speciality Name</label>
                       <select
                         className="form-control text-capitalize speciality_name"
                         value={profile.speciality_name}
@@ -355,7 +388,7 @@ const Medical_profile = () => {
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                    <label htmlFor="city_name">City Name</label>
+                      <label htmlFor="city_name">City Name</label>
                       <select
                         className="form-control text-capitalize speciality_name"
                         value={profile.city_name}
@@ -387,7 +420,6 @@ const Medical_profile = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </form>

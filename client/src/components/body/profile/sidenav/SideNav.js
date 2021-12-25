@@ -5,7 +5,6 @@ function SideNav() {
   const auth = useSelector((state) => state.auth);
   const { isAdmin, isDoctor } = auth;
 
-  
   return (
     <div id="mySidenav" className="sidebar fixed-left">
       <ul>
@@ -118,7 +117,9 @@ function SideNav() {
               </span>
               <span class="title">Create Slots</span>
             </a>
-          ) : ("")}
+          ) : (
+            ""
+          )}
         </li>
         <li>
           {isDoctor ? (
@@ -128,10 +129,10 @@ function SideNav() {
               </span>
               <span class="title">Services</span>
             </a>
-          ) : ("")}
+          ) : (
+            ""
+          )}
         </li>
-
-
       </ul>
     </div>
   );

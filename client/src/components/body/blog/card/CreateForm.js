@@ -4,10 +4,10 @@ import axios from "axios";
 import Loading from "../../../utils/notification/Loading";
 function CreateForm({ blog, setBlog }) {
   const [categories, setCategories] = useState([]);
-    const [callback, setCallback] = useState(false);
-    const [coverImage, setCoverImage] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const token = useSelector((state) => state.token);
+  const [callback, setCallback] = useState(false);
+  const [coverImage, setCoverImage] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const token = useSelector((state) => state.token);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -16,7 +16,7 @@ function CreateForm({ blog, setBlog }) {
     };
 
     getCategories();
-  }, [callback]);
+  }, [callback, token]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -27,14 +27,14 @@ function CreateForm({ blog, setBlog }) {
     e.preventDefault();
     try {
       const file = e.target.files[0];
-      if(file)
-      console.log(file)
+      if (file)
         if (!file)
-        return setBlog({
-          ...blog,
-          err: "No files were uploaded.",
-          success: "",
-        });
+          // console.log(file)
+          return setBlog({
+            ...blog,
+            err: "No files were uploaded.",
+            success: "",
+          });
 
       if (file.type !== "image/jpeg" && file.type !== "image/png")
         return setBlog({
@@ -85,7 +85,7 @@ function CreateForm({ blog, setBlog }) {
           type="file"
           className="form-control"
           accept="image/*"
-            onChange={handleChangeThumbnail}
+          onChange={handleChangeThumbnail}
         />
       </div>
 

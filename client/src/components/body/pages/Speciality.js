@@ -13,7 +13,6 @@ function Speciality() {
   const [callback, setCallback] = useState(false);
   const [speciality, setSpeciality] = useState("");
   const [fee, setFee] = useState("");
-  const token = useSelector((state) => state.token);
   const [image, setImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
@@ -21,8 +20,10 @@ function Speciality() {
   const [err, setErr] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const token = useSelector((state) => state.token);
+
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 });
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);

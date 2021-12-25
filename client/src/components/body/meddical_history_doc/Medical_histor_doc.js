@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Charts from "../charts/Chart";
-import {Chart, ArcElement,CategoryScale,registerables } from 'chart.js'
+import { Chart, ArcElement, CategoryScale, registerables } from "chart.js";
 import {
   showErrMsg,
   showSuccessMsg,
@@ -37,79 +37,85 @@ const initialStateEmergency = {
 
 const Medical_histor_doc = () => {
   const [profile, setProfile] = useState(initialState);
-  const [emergencyContact, setEmergencyContact] = useState(initialStateEmergency);
+  const [emergencyContact, setEmergencyContact] = useState(
+    initialStateEmergency
+  );
   const [currentMedication, setCurrentMedication] = useState([]);
   const [currMed, setCurrMed] = useState({ name: "", dose: "" });
   const [medicalCondition, setMedicalCondition] = useState([]);
-  const [medCond, setMedCond] = useState({ name: "", fromWhen: "", currentStatus: "" });
+  const [medCond, setMedCond] = useState({
+    name: "",
+    fromWhen: "",
+    currentStatus: "",
+  });
   const [allergies, setAllergies] = useState([]);
   const [allergie, setAllergie] = useState({ name: "" });
-  const [barblood,setBarblood] = useState(null);
-  const [baroxygen,setBarOxygen] = useState(null);
-  const [barpulse,setBarPulse] = useState(null);
+  const [barblood, setBarblood] = useState(null);
+  const [baroxygen, setBarOxygen] = useState(null);
+  const [barpulse, setBarPulse] = useState(null);
   const token = useSelector((state) => state.token);
   const { user } = useParams();
   // fetching data
   useEffect(() => {
-    console.log("Done   " + user);
-    axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-      .then(res => {
+    axios
+      .get("/profiles/getMedicalProfile_doc/" + user, {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
         setProfile(res.data);
         setEmergencyContact(res.data.emergencyContact);
         setCurrentMedication(res.data.currentMedication);
         setMedicalCondition(res.data.medicalCondition);
         setAllergies(res.data.allergies);
-        console.log("Done");
+        // console.log("Done");
       })
-      .catch(err => {
+      .catch((err) => {
         setProfile({ ...profile, err: err, success: "" });
-      })
-    
-  }, [])
+      });
+  }, [token]);
   useEffect(() => {
     var a = profile.bloodSugar;
     var b = profile.oxygenLevel;
     var c = profile.pulse;
-    console.log("hihih: " +a+" " + b+ " "+ c);
     setBarblood({
-      labels: ['Blood Sugar Heigh', 'User Blood sugar', 'Blood Sugar Low'],
-      datasets: [{
-        label: 'Blood Sugar',
-        data: [141, parseInt(a), 70],
-        backgroundColor: [
-          'rgba(235, 52, 67)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(235, 52, 67)',
-        ]
-      }]
+      labels: ["Blood Sugar Heigh", "User Blood sugar", "Blood Sugar Low"],
+      datasets: [
+        {
+          label: "Blood Sugar",
+          data: [141, parseInt(a), 70],
+          backgroundColor: [
+            "rgba(235, 52, 67)",
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(235, 52, 67)",
+          ],
+        },
+      ],
     });
     setBarOxygen({
-      labels: ['Low Blood Oxygen Level', 'User Blood Oxygen Level'],
-      datasets: [{
-        label: 'Blood Oxygen',
-        data: [80, parseInt(b)],
-        backgroundColor: [
-          'rgba(235, 52, 67)',
-          'rgba(255, 99, 132, 0.6)'
-        ]
-      }]
+      labels: ["Low Blood Oxygen Level", "User Blood Oxygen Level"],
+      datasets: [
+        {
+          label: "Blood Oxygen",
+          data: [80, parseInt(b)],
+          backgroundColor: ["rgba(235, 52, 67)", "rgba(255, 99, 132, 0.6)"],
+        },
+      ],
     });
     setBarPulse({
-      labels: ['Low Pulse Rate', 'User Pulse Rate', 'High Pulse Rate'],
-      datasets: [{
-        label: 'Pulse Rate',
-        data: [50, parseInt(c), 140],
-        backgroundColor: [
-          'rgba(235, 52, 67)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(235, 52, 67)',
-        ]
-      }]
+      labels: ["Low Pulse Rate", "User Pulse Rate", "High Pulse Rate"],
+      datasets: [
+        {
+          label: "Pulse Rate",
+          data: [50, parseInt(c), 140],
+          backgroundColor: [
+            "rgba(235, 52, 67)",
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(235, 52, 67)",
+          ],
+        },
+      ],
     });
-    console.log(barpulse);
-    console.log(baroxygen);
-    console.log(barblood);
-  }, [profile])
+  }, [profile]);
   // handle changes
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -117,7 +123,12 @@ const Medical_histor_doc = () => {
   };
   const handleEmergencyChangeInput = (e) => {
     const { name, value } = e.target;
-    setEmergencyContact({ ...emergencyContact, [name]: value, err: "", success: "" });
+    setEmergencyContact({
+      ...emergencyContact,
+      [name]: value,
+      err: "",
+      success: "",
+    });
   };
   const handleCurrMedChangeInput = (e) => {
     const { name, value } = e.target;
@@ -140,7 +151,7 @@ const Medical_histor_doc = () => {
         "/profiles/updateMedicalHistory_doc/" + user,
         {
           profile,
-          emergencyContact
+          emergencyContact,
         },
         { headers: { Authorization: token } }
       );
@@ -159,13 +170,16 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setCurrentMedication(res.data.currentMedication);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
       setCurrMed({ name: "", dose: "", err: "", success: "Updated Success!" });
     } catch (err) {
@@ -180,13 +194,16 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setCurrentMedication(res.data.currentMedication);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
       setCurrMed({ name: "", dose: "", err: "", success: "Updated Success!" });
     } catch (err) {
@@ -202,15 +219,24 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setMedicalCondition(res.data.medicalCondition);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
-      setMedCond({ name: "", fromWhen: "", currentStatus: "", err: "", success: "Updated Success!" });
+      setMedCond({
+        name: "",
+        fromWhen: "",
+        currentStatus: "",
+        err: "",
+        success: "Updated Success!",
+      });
     } catch (err) {
       setMedCond({ ...medCond, err: err.response.data.msg, success: "" });
     }
@@ -223,15 +249,24 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setMedicalCondition(res.data.medicalCondition);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
-      setMedCond({ name: "", fromWhen: "", currentStatus: "", err: "", success: "Updated Success!" });
+      setMedCond({
+        name: "",
+        fromWhen: "",
+        currentStatus: "",
+        err: "",
+        success: "Updated Success!",
+      });
     } catch (err) {
       setMedCond({ ...medCond, err: err.response.data.msg, success: "" });
     }
@@ -245,13 +280,16 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setAllergies(res.data.allergies);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
       setAllergie({ name: "", err: "", success: "Updated Success!" });
     } catch (err) {
@@ -266,13 +304,16 @@ const Medical_histor_doc = () => {
         { headers: { Authorization: token } }
       );
 
-      axios.get('/profiles/getMedicalProfile_doc/' + user, { headers: { Authorization: token } })
-        .then(res => {
+      axios
+        .get("/profiles/getMedicalProfile_doc/" + user, {
+          headers: { Authorization: token },
+        })
+        .then((res) => {
           setAllergies(res.data.allergies);
         })
-        .catch(err => {
+        .catch((err) => {
           setProfile({ ...profile, err: err, success: "" });
-        })
+        });
 
       setAllergie({ name: "", err: "", success: "Updated Success!" });
     } catch (err) {
@@ -282,7 +323,7 @@ const Medical_histor_doc = () => {
 
   // renders
   const renderCurrentMedication = () => {
-    if (currentMedication.length === 0) return ('');
+    if (currentMedication.length === 0) return "";
     return (
       <div className="col-right">
         <div style={{ overflowX: "auto" }}>
@@ -300,7 +341,8 @@ const Medical_histor_doc = () => {
                   <td>{currMed.name}</td>
                   <td>{currMed.dose}</td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
                       onClick={() => handleDeleteMed(currMed._id)}
                     ></i>
@@ -311,11 +353,11 @@ const Medical_histor_doc = () => {
           </table>
         </div>
       </div>
-    )
+    );
   };
 
   const renderMedicalCondition = () => {
-    if (medicalCondition.length === 0) return ('');
+    if (medicalCondition.length === 0) return "";
     return (
       <div className="col-right">
         <div style={{ overflowX: "auto" }}>
@@ -335,7 +377,8 @@ const Medical_histor_doc = () => {
                   <td>{medCond.fromWhen}</td>
                   <td>{medCond.currentStatus}</td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
                       onClick={() => handleDeleteMedCond(medCond._id)}
                     ></i>
@@ -346,11 +389,11 @@ const Medical_histor_doc = () => {
           </table>
         </div>
       </div>
-    )
+    );
   };
 
   const renderAllergies = () => {
-    if (allergies.length === 0) return ('');
+    if (allergies.length === 0) return "";
     return (
       <div className="col-right">
         <div style={{ overflowX: "auto" }}>
@@ -366,7 +409,8 @@ const Medical_histor_doc = () => {
                 <tr key={allergie._id}>
                   <td>{allergie.name}</td>
                   <td>
-                    <i className="fas fa-trash-alt"
+                    <i
+                      className="fas fa-trash-alt"
                       title="Remove"
                       onClick={() => handleDeleteAllergie(allergie._id)}
                     ></i>
@@ -377,7 +421,7 @@ const Medical_histor_doc = () => {
           </table>
         </div>
       </div>
-    )
+    );
   };
 
   return (
@@ -389,8 +433,6 @@ const Medical_histor_doc = () => {
           {profile.success && showSuccessMsg(profile.success)}
           <form onSubmit={handleSubmit}>
             <div className="profile_page">
-
-
               <div className="profile_header">
                 <h4>Medical History</h4>
                 <button
@@ -516,13 +558,17 @@ const Medical_histor_doc = () => {
                           name="oxygenLevel"
                         />
                       </div>
-                      
                     </div>
                   </div>
-                  
                 </div>
                 <div>
-                <Charts chartData3={barblood} chartData4={baroxygen} chartData5={barpulse} location="Massachusetts" legendPosition="bottom"/>
+                  <Charts
+                    chartData3={barblood}
+                    chartData4={baroxygen}
+                    chartData5={barpulse}
+                    location="Massachusetts"
+                    legendPosition="bottom"
+                  />
                 </div>
                 {/* current medicine block */}
                 <div className="line-2">
@@ -629,7 +675,7 @@ const Medical_histor_doc = () => {
                         </div>
                       </div>
                     </div>
-                    <div >
+                    <div>
                       <div className="form-group">
                         <div className="input-field">
                           <i
@@ -807,7 +853,6 @@ const Medical_histor_doc = () => {
                   <hr></hr>
                 </div>
               </div>
-
             </div>
           </form>
         </div>

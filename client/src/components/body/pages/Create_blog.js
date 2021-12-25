@@ -76,7 +76,7 @@ const Create_blog = () => {
 
   const onEditorChange = (value) => {
     setContent(value);
-    console.log(content);
+    // console.log(content);
   };
 
   const onFilesChange = (files) => {

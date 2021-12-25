@@ -29,7 +29,7 @@ export default function Chat_Component(props) {
   // const [avatar, setAvatar] = useState(false);
   const [loading, setLoading] = useState(false);
   const [callback, setCallback] = useState(false);
-  console.log(user);
+  // console.log(user);
 
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -42,7 +42,7 @@ export default function Chat_Component(props) {
     props.appointment.doctortId +
     "/" +
     props.appointment.patienttId;
-  console.log(t);
+  // console.log(t);
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
@@ -53,7 +53,7 @@ export default function Chat_Component(props) {
         createdAt: Date.now(),
       });
     });
-  }, []);
+  }, [user, callback]);
 
   useEffect(() => {
     arrivalMessages &&
@@ -66,7 +66,7 @@ export default function Chat_Component(props) {
     socket?.current.on("getUsers", (users) => {
       setOnlineUserse(users);
     });
-    console.log(onlineUsers);
+    // console.log(onlineUsers);
   }, [user]);
   const socket = useRef();
 
@@ -75,7 +75,7 @@ export default function Chat_Component(props) {
       try {
         const res = await axios.get("/messages/" + currentChat?._id);
         setMessages(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -87,9 +87,8 @@ export default function Chat_Component(props) {
       try {
         const res = await axios.get(t);
         setCurrentChat(res.data);
-        console.log("Heyyyyy" + res.data);
+        // console.log("Heyyyyy" + res.data);
       } catch (err) {
-        console.log("vfefv");
         console.log(err);
       }
     };
@@ -100,63 +99,64 @@ export default function Chat_Component(props) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-    useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-    }, [messages]);
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log("kky:   "+newMessages);
-      if(newMessages!==""){
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log("kky:   " + newMessages);
+    if (newMessages !== "") {
       const message = {
-          sender: user._id,
-          text: newMessages,
-          conversationId: currentChat._id,
+        sender: user._id,
+        text: newMessages,
+        conversationId: currentChat._id,
       };
-      const receiverId = currentChat.members.find((member) => member !== user._id);
+      const receiverId = currentChat.members.find(
+        (member) => member !== user._id
+      );
       socket.current.emit("sendMessage", {
-          senderId: user._id,
-          receiverId: receiverId,
-          text: newMessages,
-      })
+        senderId: user._id,
+        receiverId: receiverId,
+        text: newMessages,
+      });
       try {
-          const res = await axios.post("/messages", message);
-          setMessages([...messages, res.data]);
-          console.log(res.data);
-          setNewMessage("");
+        const res = await axios.post("/messages", message);
+        setMessages([...messages, res.data]);
+        // console.log(res.data);
+        setNewMessage("");
+      } catch (err) {
+        console.log(err);
       }
-      catch (err) {
-          console.log(err);
-      }
-      };
-    };
+    }
+  };
 
-    const handleSubmit_video = async (e) => {
-        e.preventDefault();
-        const text = "http://localhost:3001/"+user._id;
-        setNewMessage(text);
-        const message = {
-            sender: user._id,
-            text: text,
-            conversationId: currentChat._id,
-        };
-        const receiverId = currentChat.members.find((member) => member !== user._id);
-        socket.current.emit("sendMessage", {
-            senderId: user._id,
-            receiverId: receiverId,
-            text: text,
-        });
-        const tab = window.open(text, '_blank');
-        try {
-            const res = await axios.post("/messages", message);
-            setMessages([...messages, res.data]);
-            setNewMessage("");
-        }
-        catch (err) {
-            console.log(err);
-        }
+  const handleSubmit_video = async (e) => {
+    e.preventDefault();
+    const text = "http://localhost:3001/" + user._id;
+    setNewMessage(text);
+    const message = {
+      sender: user._id,
+      text: text,
+      conversationId: currentChat._id,
     };
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId: receiverId,
+      text: text,
+    });
+    const tab = window.open(text, "_blank");
+    try {
+      const res = await axios.post("/messages", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -206,19 +206,25 @@ export default function Chat_Component(props) {
                   name="messageInp"
                   id="messageInp"
                   onChange={(e) => setNewMessage(e.target.value)}
-                    name="Chatmessage"
-                    value={newMessages}
-                  ></textarea>
-                
+                  name="Chatmessage"
+                  value={newMessages}
+                ></textarea>
+
                 {/* <button className="btnM" onClick={handleSubmit}>Send</button> */}
 
-                <img src={Send} alt=" " className="btnM" onClick={handleSubmit}/>
+                <img
+                  src={Send}
+                  alt=" "
+                  className="btnM"
+                  onClick={handleSubmit}
+                />
 
                 {/* <button type="button" className="btnM cancel" onClick={() => { document.getElementById("myForm").style.display = "none"; }}>Close</button> */}
               </div>
               <img
                 src={Close}
-                alt=" " className="btn_cancel"
+                alt=" "
+                className="btn_cancel"
                 onClick={() => {
                   document.getElementById("myForm").style.display = "none";
                 }}

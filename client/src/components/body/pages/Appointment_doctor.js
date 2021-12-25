@@ -68,7 +68,7 @@ const Appointment_doctor = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [callback]);
+  }, [callback, user, token, caseId]);
 
   // handle changes
   const handleChangeInput = (e) => {

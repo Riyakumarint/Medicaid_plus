@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 export default function Chart(props) {
-  console.log("cfvghbnj:     " + props.chartData3);
-  console.log(props.chartData4);
-  console.log(props.chartData5);
   return (
     <div className="chart">
       {props.barData ? (
@@ -22,74 +19,17 @@ export default function Chart(props) {
                 position: props.legendPosition,
               },
             }}
-          /></div>
+          />
+        </div>
       ) : (
         ""
       )}
       {props.chartData3 ? (
-      <div className="bar_chart">
-      <Bar
-        data={props.chartData3}
-        options={{
-          indexAxis: 'y',
-          title: {
-            display: props.displayTitle,
-            text: 'Largest Cities In ' + props.location,
-            fontSize: 25
-          },
-          legend: {
-            display: props.displayLegend,
-            position: props.legendPosition
-          }
-        }}
-      />
-      </div>
-      ) : ("try")}
-      {props.chartData4 ? (
-      <div className="bar_chart">
-      <Bar
-        data={props.chartData4}
-        options={{
-          indexAxis: 'y',
-          title: {
-            display: props.displayTitle,
-            text: 'Largest Cities In ' + props.location,
-            fontSize: 25
-          },
-          legend: {
-            display: props.displayLegend,
-            position: props.legendPosition
-          }
-        }}
-      />
-      </div>
-      ) : ("try")}
-      {props.chartData5 ? (
-      <div className="bar_chart">
-      <Bar
-        data={props.chartData5}
-        options={{
-          indexAxis: 'y',
-          title: {
-            display: props.displayTitle,
-            text: 'Largest Cities In ' + props.location,
-            fontSize: 25
-          },
-          legend: {
-            display: props.displayLegend,
-            position: props.legendPosition
-          }
-        }}
-      />
-      </div>
-      ) : ("try")}
-
-
-      <div className="row">
-        <div className="pie_chart">
-          {props.chartData ? (<Pie
-            data={props.chartData}
+        <div className="bar_chart">
+          <Bar
+            data={props.chartData3}
             options={{
+              indexAxis: "y",
               title: {
                 display: props.displayTitle,
                 text: "Largest Cities In " + props.location,
@@ -100,8 +40,74 @@ export default function Chart(props) {
                 position: props.legendPosition,
               },
             }}
-          />) : ("")}
+          />
+        </div>
+      ) : (
+        "try"
+      )}
+      {props.chartData4 ? (
+        <div className="bar_chart">
+          <Bar
+            data={props.chartData4}
+            options={{
+              indexAxis: "y",
+              title: {
+                display: props.displayTitle,
+                text: "Largest Cities In " + props.location,
+                fontSize: 25,
+              },
+              legend: {
+                display: props.displayLegend,
+                position: props.legendPosition,
+              },
+            }}
+          />
+        </div>
+      ) : (
+        "try"
+      )}
+      {props.chartData5 ? (
+        <div className="bar_chart">
+          <Bar
+            data={props.chartData5}
+            options={{
+              indexAxis: "y",
+              title: {
+                display: props.displayTitle,
+                text: "Largest Cities In " + props.location,
+                fontSize: 25,
+              },
+              legend: {
+                display: props.displayLegend,
+                position: props.legendPosition,
+              },
+            }}
+          />
+        </div>
+      ) : (
+        "try"
+      )}
 
+      <div className="row">
+        <div className="pie_chart">
+          {props.chartData ? (
+            <Pie
+              data={props.chartData}
+              options={{
+                title: {
+                  display: props.displayTitle,
+                  text: "Largest Cities In " + props.location,
+                  fontSize: 25,
+                },
+                legend: {
+                  display: props.displayLegend,
+                  position: props.legendPosition,
+                },
+              }}
+            />
+          ) : (
+            ""
+          )}
         </div>
         {props.chartData2 ? (
           <div className="pie_chart">

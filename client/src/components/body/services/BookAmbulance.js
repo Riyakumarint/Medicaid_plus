@@ -9,13 +9,13 @@ import {
 } from "../../utils/notification/Notification";
 
 const initialState = {
-    name: "", 
-    medicalId: "", 
-    patientID: "",
-    mobile: "", 
-    address: "", 
-    status: "On the way", 
-}
+  name: "",
+  medicalId: "",
+  patientID: "",
+  mobile: "",
+  address: "",
+  status: "On the way",
+};
 
 function BookAmbulance() {
   const { medicalId } = useParams();
@@ -29,49 +29,53 @@ function BookAmbulance() {
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
 
-
   // Fetch data
   useEffect(() => {
-    window.scrollTo({ top: 0 })
-    setBookingDetail({...bookingDetail, name: user.name, medicalId:medicalId, patientID:user._id, mobile:user.mobile, address:user.address})
+    window.scrollTo({ top: 0 });
+    setBookingDetail({
+      ...bookingDetail,
+      name: user.name,
+      medicalId: medicalId,
+      patientID: user._id,
+      mobile: user.mobile,
+      address: user.address,
+    });
   }, [callback, user, medicalId]);
-  
+
   // handle change
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-      setBookingDetail({...bookingDetail, [name]:value});
+    setBookingDetail({ ...bookingDetail, [name]: value });
   };
 
   // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post(
-            "/services/ambulance",
-            {bookingDetail},
-            { headers: { Authorization: token } }
-        );
+      const res = await axios.post(
+        "/services/ambulance",
+        { bookingDetail },
+        { headers: { Authorization: token } }
+      );
 
-        setSuccess(res.data.msg);
-        setTimeout(() => {
-            history.push("/find_ambulance");
-          }, 2000);
+      setSuccess(res.data.msg);
+      setTimeout(() => {
+        history.push("/find_ambulance");
+      }, 2000);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
     }
   };
-
 
   return (
     <>
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-        {err && showErrMsg(err)}
-              {success && showSuccessMsg(success)}
-        <form onSubmit={handleSubmit}>
-          <div className="profile_page">
-           
+          {err && showErrMsg(err)}
+          {success && showSuccessMsg(success)}
+          <form onSubmit={handleSubmit}>
+            <div className="profile_page">
               <div className="profile_header">
                 <h4>Book Ambulance</h4>
                 <button
@@ -135,8 +139,8 @@ function BookAmbulance() {
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
           </form>
         </div>
       </div>
