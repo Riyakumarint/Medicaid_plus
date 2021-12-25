@@ -27,8 +27,11 @@ import Articles from "../body/articles/Articles"
 import ArticlePage from "../body/articles/ArticlePage"
 import Find_doctor from "../body/pages/Find_doctor";
 import Doctor from "../body/pages/Doctor";
-import LabTest from "../body/pages/LabTest";
-import Ambulance from "../body/pages/Ambulance";
+import LabTest from "../body/services/LabTest";
+import BookLabTest from "../body/services/BookLabTest";
+import Ambulance from "../body/services/Ambulance";
+import BookAmbulance from "../body/services/BookAmbulance";
+import Services from "../body/services/Services";
 import Create_Slots from "./create_Slot/Create_Slot";
 import Book_Slots from "./book_Slots/Book_Slots";
 import Specialist from "../body/pages/Specialist";
@@ -168,12 +171,51 @@ function Body() {
           component={Doctor}
           exact
         />
-        <Route path="/find_lab_test" component={LabTest} />
-        <Route path="/find_ambulance" component={Ambulance} />
-        <Route path="/specialist" component={Specialist} />
-        <Route path="/articles" component={Articles} />
-        <Route path="/detail/:id" component={ArticlePage} />
-        <Route path="/about_us" component={About} />
+        <Route 
+          path="/find_lab_test" 
+          component={isLogged ? LabTest : Login} 
+          exact
+        />
+        <Route
+          path="/book_lab_test/:medicalId"
+          component={isLogged ? BookLabTest : Login}
+          exact
+        />
+        <Route 
+          path="/find_ambulance" 
+          component={isLogged ? Ambulance : Login} 
+          exact
+        />
+        <Route
+          path="/book_ambulance/:medicalId"
+          component={isLogged ? BookAmbulance : Login}
+          exact
+        />
+        <Route  
+          path="/services" 
+          component={isLogged&&isDoctor?Services:NotFound} 
+          exact
+        />
+        <Route 
+          path="/specialist" 
+          component={Specialist} 
+          exact
+        />
+        <Route 
+          path="/articles" 
+          component={Articles} 
+          exact
+        />
+        <Route 
+          path="/detail/:id" 
+          component={ArticlePage} 
+          exact
+        />
+        <Route 
+          path="/about_us" 
+          component={About} 
+          exact
+        />
         <Route
           path="/contact_us"
           component={isLogged ? Contact : Login}

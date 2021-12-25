@@ -15,10 +15,35 @@ const Ambulance = () => {
   const [city, setCity] = useState({city_name: ""});
   const [doctors, setDoctors] = useState([]);
   const [doctor, setDoctor] = useState({doctortId:"", doctor_name:"", clinic_address:""});
+  const [ambulances, setAmbulances] = useState([]);
+  const [statuss, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   const [callback, setCallback] = useState(false);
- 
+
+  const history = useHistory();
+
+  const token = useSelector((state) => state.token);
+  const { user } = useSelector((state) => state.auth);
+
 
   // data fetching
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+    const getLabTests = async () => {
+      try {
+        const res = await axios.put(
+            "/services/ambulance",
+            { medicalId: "", patientID: user._id },
+            { headers: { Authorization: token } }
+          );
+        setAmbulances(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getLabTests();
+  }, [callback, user]);
+
   useEffect(() => {
     window.scrollTo({ top: 0 })
     const getCities = async () => {
@@ -26,7 +51,7 @@ const Ambulance = () => {
       setCities(res.data);
     };
     getCities();
-  }, [callback]);
+  }, [callback, user]);
 
   useEffect(() => {
     const getDoctors = async () => {
@@ -41,7 +66,7 @@ const Ambulance = () => {
       }
     };
     getDoctors();
-  }, [callback]);
+  }, [callback, user]);
 
   // handle changes
   const handleChangeCity = async (e) => {
@@ -60,13 +85,22 @@ const Ambulance = () => {
   };
 
   // handle submit
-  const handleBookTest = () => {
-    alert("Our abmulance is on the way to your home, we will get in touch with you for further assistence!!!")
+  const handleDeleteAmbulance = async (ambulanceId) => {
+    try {
+      await axios.delete(
+        "/services/ambulance/"+ambulanceId,
+        { headers: { Authorization: token } }
+      );
+      setStatus("");
+      setCallback(!callback);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // renders
   const renderDoctors = (doctors) =>{
-    if(doctors.length===0) return ('No Ambulance Service Avilable');
+    if(doctors.length===0) return ('No Center Avilable');
     return (
       <div className="col-right">
       <div style={{ overflowX: "auto" }}>
@@ -74,14 +108,16 @@ const Ambulance = () => {
             <thead>
               <tr>
                 <th>Facility Name</th>
+                <th>City</th>
                 <th>Rating</th>
-                <th>Call Ambulance</th>
+                <th>Book Ambulance</th>
               </tr>
             </thead>
             <tbody>
               {doctors.map((doctor) => (
                 <tr key={doctor._id}>
                   <td>{doctor.clinic_address}</td>
+                  <td>{getCityName(doctor.city_name, cities)}</td>
                   <td><ReactStars
                         count={5}
                         value={Number(doctor.reviews.rating)}
@@ -90,11 +126,9 @@ const Ambulance = () => {
                         edit={false}
                     /></td>
                   <td>
-                    <i
-                        className="fas fa-ambulance"
-                        title="Add"
-                        onClick={() => handleBookTest()}
-                  > Call</i>
+                    <Link to={`/book_ambulance/${doctor.userId}`}>
+                      <i className="fas fa-ambulance" title="Add" > Call</i>
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -103,6 +137,44 @@ const Ambulance = () => {
       </div>
       </div>
     )
+  };
+
+  const renderAmbulances = () => {
+    if (ambulances.length === 0) return "No ambulance bookings";
+    return (
+      <div className="col-right">
+        <div style={{ overflowX: "auto" }}>
+          <table className="medical">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Status</th>
+                <th>Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ambulances.map((ambulance) => (
+                <tr key={ambulance._id}>
+                <td>{ambulance.name}</td>
+                <td>{ambulance.address}</td>
+                <td>{ambulance.mobile}</td>
+                <td>{ambulance.status}</td>
+                <td>
+                    <i
+                        className="fas fa-trash-alt"
+                        title="Add"
+                        onClick={() => handleDeleteAmbulance(ambulance._id)}
+                    ></i>
+                </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -116,12 +188,18 @@ const Ambulance = () => {
               </div>
 
               <div className="profile-container">
+                <div>
+                    <h5>Bookings</h5>
+                    {renderAmbulances()}
+                </div>
+                <hr></hr>
+                <br></br>
 
                 {/* Selectdoctor block */}
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                    <label htmlFor="city_name">City</label>
+                    <label htmlFor="city_name"><h5>Select a City</h5></label>
                       <select
                         className="form-control text-capitalize speciality_name"
                         value={city.city_name}
@@ -154,15 +232,9 @@ const Ambulance = () => {
 
 const Lenght = (symptoms) => symptoms.length;
 
-const getSpecialityName = (_id, specialities) => {
-    const spec = specialities.filter( speciality => { return speciality._id===_id});
+const getCityName = (_id, cities) => {
+    const spec = cities.filter( city => { return city._id===_id});
     if(Lenght(spec)===0) return "";
     return spec[0].name;
 }
-const getSpecialityFee = (_id, specialities) => {
-    const spec = specialities.filter( speciality => { return speciality._id===_id});
-    if(Lenght(spec)===0) return "";
-    return spec[0].fee;
-}
-
 export default Ambulance

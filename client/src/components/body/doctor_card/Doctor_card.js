@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ReactStars from 'react-stars'
 import axios from "axios";
 
-function Doctor_card({doctor}) {
+function Doctor_card({doctor, speciality_name}) {
     const [doctorUser, setDoctorUser] = useState({avatar:"", email:"", mobile:"", gender:""});
     const [callback, setCallback] = useState(false);
     const [specialities, setSpecialities] = useState([]);
@@ -67,7 +67,7 @@ function Doctor_card({doctor}) {
                     edit={false}
             />
               </div>
-            <div className="card_doc_text" title={doctor.clinic_address}>{doctor.clinic_address}</div>
+            <div className="card_doc_text" title={speciality_name}>{speciality_name}</div>
             <Link className='btn_doc_view' onClick={() => window.scrollTo({ top: 0 })} to={`/doctor/${doctor.userId}`}>
            View
           </Link>

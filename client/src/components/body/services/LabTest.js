@@ -11,15 +11,39 @@ import SideNav from "../profile/sidenav/SideNav";
 
 
 const LabTest = () => {
-  const [name, setName] = useState("");
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState({city_name: ""});
   const [doctors, setDoctors] = useState([]);
   const [doctor, setDoctor] = useState({doctortId:"", doctor_name:"", clinic_address:""});
+  const [labTests, setLabTests] = useState([]);
+  const [statuss, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   const [callback, setCallback] = useState(false);
- 
+
+  const history = useHistory();
+
+  const token = useSelector((state) => state.token);
+  const { user } = useSelector((state) => state.auth);
+
 
   // data fetching
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+    const getLabTests = async () => {
+      try {
+        const res = await axios.put(
+          "/services/labTest",
+          { medicalId: "", patientID: user._id },
+          { headers: { Authorization: token } }
+        );
+        setLabTests(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getLabTests();
+  }, [callback, user]);
+
   useEffect(() => {
     window.scrollTo({ top: 0 })
     const getCities = async () => {
@@ -27,7 +51,7 @@ const LabTest = () => {
       setCities(res.data);
     };
     getCities();
-  }, [callback]);
+  }, [callback, user]);
 
   useEffect(() => {
     const getDoctors = async () => {
@@ -42,7 +66,7 @@ const LabTest = () => {
       }
     };
     getDoctors();
-  }, [callback]);
+  }, [callback, user]);
 
   // handle changes
   const handleChangeCity = async (e) => {
@@ -60,17 +84,17 @@ const LabTest = () => {
     }
   };
 
-  const handleChangeName = (e) => {
-    const { name, value } = e.target;
-    setName(value);
-  };
-
   // handle submit
-  const handleBookTest = () => {
-    if(name===""){
-        alert("Enter the test name")
-    } else{
-        alert("Thanks for booking "+name+" test, We will take samples from your doorsteps, sit tight, stay safe !!!");
+  const handleDeleteLabTest = async (labTestId) => {
+    try {
+      await axios.delete(
+        "/services/labTest/"+labTestId,
+        { headers: { Authorization: token } }
+      );
+      setStatus("");
+      setCallback(!callback);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -84,6 +108,7 @@ const LabTest = () => {
             <thead>
               <tr>
                 <th>Facility Name</th>
+                <th>City</th>
                 <th>Rating</th>
                 <th>Enter Test</th>
               </tr>
@@ -92,6 +117,7 @@ const LabTest = () => {
               {doctors.map((doctor) => (
                 <tr key={doctor._id}>
                   <td>{doctor.clinic_address}</td>
+                  <td>{getCityName(doctor.city_name, cities)}</td>
                   <td><ReactStars
                         count={5}
                         value={Number(doctor.reviews.rating)}
@@ -100,18 +126,10 @@ const LabTest = () => {
                         edit={false}
                     /></td>
                   <td>
-                    <input
-                        className="name"
-                        id="exampleInputname1"
-                        placeholder="name"
-                        onChange={handleChangeName}
-                        name="name"
-                    /> 
-                    <i
-                        className="fas fa-vial"
-                        title="Add"
-                        onClick={() => handleBookTest()}
-                  > </i>
+                    <Link to={`/book_lab_test/${doctor.userId}`}>
+                      <i className="fas fa-vial" title="Add"> Book Test</i>
+                    </Link>
+                    
                   </td>
                 </tr>
               ))}
@@ -120,6 +138,46 @@ const LabTest = () => {
       </div>
       </div>
     )
+  };
+
+  const renderLabTests = () => {
+    if (labTests.length === 0) return "No lab test bookings";
+    return (
+      <div className="col-right">
+        <div style={{ overflowX: "auto" }}>
+          <table className="medical">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Test</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Status</th>
+                <th>Cancle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {labTests.map((labTest) => (
+                <tr key={labTest._id}>
+                <td>{labTest.name}</td>
+                <td>{labTest.testName}</td>
+                <td>{labTest.address}</td>
+                <td>{labTest.mobile}</td>
+                <td>{labTest.status}</td>
+                <td>
+                    <i
+                        className="fas fa-trash-alt"
+                        title="Add"
+                        onClick={() => handleDeleteLabTest(labTest._id)}
+                    ></i>
+                </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -133,12 +191,18 @@ const LabTest = () => {
               </div>
 
               <div className="profile-container">
+                <div>
+                    <h5>Bookings</h5>
+                    {renderLabTests()}
+                </div>
+                <hr></hr>
+                <br></br>
 
                 {/* Selectdoctor block */}
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                    <label htmlFor="city_name">City</label>
+                    <label htmlFor="city_name"><h5>Select a City</h5></label>
                       <select
                         className="form-control text-capitalize speciality_name"
                         value={city.city_name}
@@ -171,15 +235,9 @@ const LabTest = () => {
 
 const Lenght = (symptoms) => symptoms.length;
 
-const getSpecialityName = (_id, specialities) => {
-    const spec = specialities.filter( speciality => { return speciality._id===_id});
+const getCityName = (_id, cities) => {
+    const spec = cities.filter( city => { return city._id===_id});
     if(Lenght(spec)===0) return "";
     return spec[0].name;
 }
-const getSpecialityFee = (_id, specialities) => {
-    const spec = specialities.filter( speciality => { return speciality._id===_id});
-    if(Lenght(spec)===0) return "";
-    return spec[0].fee;
-}
-
 export default LabTest

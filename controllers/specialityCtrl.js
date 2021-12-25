@@ -44,7 +44,7 @@ const specialityCtrl = {
     updateSpeciality: async(req, res) =>{
         try {
             const {name,fee} = req.body;
-            await Speciality.findOneAndUpdate({_id: req.params.id}, {name})
+            await Speciality.findOneAndUpdate({_id: req.params.id}, {name, fee})
 
             res.json({msg: "Updated a speciality"})
         } catch (err) {

@@ -95,7 +95,7 @@ const Find_doctor = () => {
       <div className="col-right">
           <div className="show_blogs">
               {doctors.map((doctor) => (
-                <Doctor_card doctor={doctor}/>
+                <Doctor_card doctor={doctor} speciality_name = {getSpecialityName(doctor.speciality_name, specialities)}/>
               ))}
               </div>
       </div>

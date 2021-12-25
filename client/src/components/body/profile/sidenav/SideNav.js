@@ -110,7 +110,6 @@ function SideNav() {
             </a>
           )}
         </li>
-
         <li>
           {isDoctor ? (
             <a href="/createSlot" onClick={() => window.scrollTo({ top: 0 })}>
@@ -118,6 +117,16 @@ function SideNav() {
                 <i class="fas fa-clock" aria-hidden="true"></i>
               </span>
               <span class="title">Create Slots</span>
+            </a>
+          ) : ("")}
+        </li>
+        <li>
+          {isDoctor ? (
+            <a href="/services" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fas fa-hand-holding-medical" aria-hidden="true"></i>
+              </span>
+              <span class="title">Services</span>
             </a>
           ) : ("")}
         </li>
