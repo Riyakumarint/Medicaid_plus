@@ -51,7 +51,7 @@ function AboutUs() {
                 <div className="single-team">
                   <div className="img-area">
                     <img
-                      src="https://res.cloudinary.com/dg3d7tlpg/image/upload/v1640325659/WhatsApp_Image_2021-06-30_at_9.03.51_PM_jphogu.jpg"
+                      src="https://res.cloudinary.com/dg3d7tlpg/image/upload/v1640556406/B612_20211227_033155_597_ymedwm.jpg"
                       class="img-responsive"
                       alt=""
                     />

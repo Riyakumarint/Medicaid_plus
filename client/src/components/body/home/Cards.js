@@ -14,7 +14,7 @@ function Cards({ speciality }) {
             ₹{speciality.fee}
           </p>
 
-          <a href="#">
+          <a href="/create_appointments">
             Book now <i class="fa fa-arrow-right" aria-hidden="true"></i>
           </a>
         </div>

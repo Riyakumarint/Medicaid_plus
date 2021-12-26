@@ -10,8 +10,9 @@
   min-height: 300px;
 }
 .carousel-caption {
-  bottom: 250px;
+  bottom: 37%;
   z-index: 2;
+
 }
 .carousel-caption h5 {
   font-size: 35px;
@@ -40,6 +41,8 @@
   color: #fff;
   margin-top: 15px;
   border-radius: 5px;
+  font-weight: bolder;
+  letter-spacing: 1.4px;
 }
 .carousel-inner:before {
   content: "";
@@ -53,9 +56,7 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .carousel-caption {
-    bottom: 295px;
-  }
+  
   .carousel-caption h5 {
     font-size: 20px;
     margin-top: 25px;
@@ -68,9 +69,7 @@
 }
 
 @media only screen and (max-width: 400px) {
-  .carousel-caption {
-    bottom: 245px;
-  }
+  
   .carousel-caption h5 {
     font-size: 20px;
     margin-top: 25px;
@@ -79,7 +78,7 @@
   .carousel-caption a {
     padding: 10px 14px;
     font-size: 14px;
-    font-weight: bold;
+    letter-spacing: 1.1px;
   }
 }
 
@@ -196,7 +195,7 @@
   justify-content: center;
 }
 
-.doc_card_img{
+.docter_card_img{
   position: absolute;
   max-width: 110px;
   max-height: 110px;

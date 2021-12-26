@@ -233,12 +233,13 @@ function Profile() {
                   <div className="form-group">
                     <label htmlFor="mobile">Mobile Number</label>
                     <input
-                      type="text"
+                      type="tel"
                       name="mobile"
-                      id="mobile"
+                      id="phone"
                       defaultValue={user.mobile}
                       placeholder="Mobile Number"
                       onChange={handleChange}
+                      autocomplete="off"
                     />
                   </div>
                 </div>
@@ -279,6 +280,7 @@ function Profile() {
                       placeholder="Your password"
                       value={password}
                       onChange={handleChange}
+                      autocomplete="off"
                     />
                   </div>
                 </div>
@@ -292,6 +294,7 @@ function Profile() {
                       placeholder="Confirm password"
                       value={cf_password}
                       onChange={handleChange}
+                      autocomplete="off"
                     />
                   </div>
                 </div>

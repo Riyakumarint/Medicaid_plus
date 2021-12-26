@@ -11,7 +11,6 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import PDF_Prescription from "./PDF_Prescription ";
 
 const initialState = {
   _id: "",

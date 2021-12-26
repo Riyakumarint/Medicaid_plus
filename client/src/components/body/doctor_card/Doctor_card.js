@@ -43,7 +43,7 @@ function Doctor_card({ doctor, speciality_name }) {
   return (
     <div className="cards">
       <div className="card_speciality center-align ">
-        <img src={doctorUser.avatar} alt="s1" className="doc_card_img" />
+        <img src={doctorUser.avatar} alt="s1" className="docter_card_img" />
         <div className="doc_card_body">
           <h5 className="card_title" title={doctor.name}>
             {doctor.name}

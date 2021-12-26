@@ -72,7 +72,7 @@
   overflow: hidden;
   position: relative;
   margin: 10px;
-  border: 2px solid #911f27;
+  border: 3px solid #911f27;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -83,7 +83,7 @@
   overflow: hidden;
   position: relative;
   margin: 0 10px 20px 0px;
-  border: 2px solid #911f27;
+  border: 3px solid #911f27;
   border-radius: 10%;
   cursor: pointer;
 }
@@ -264,6 +264,10 @@
   font-size: 10px;
   margin-left: 7px;
   height: 25px;
+}
+
+.fa-vial, .fa-ambulance{
+  color: #911f27;
 }
 
 /* -------------- Edit User ----------------- */

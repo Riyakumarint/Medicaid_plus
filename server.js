@@ -9,6 +9,8 @@ const messageRoute = require("./routes/messages");
 const slotRoute = require("./routes/slotRouter");
 const router = express.Router();
 const path = require("path");
+const stripe = require("stripe")(process.env.STRIPE_KEY)
+const uuid = require("uuid")
 
 const app = express();
 app.use(express.json());
@@ -34,6 +36,28 @@ app.use("/conversations", conversationRoute);
 app.use("/messages", messageRoute);
 app.use("/slots", slotRoute);
 app.use("/comment", require("./routes/commentsRouter"));
+
+
+
+app.post("/", async (req, res) => {
+  const { appointment, token } = req.body;
+  const idempontencyKey = uuid()
+  return stripe.patient.create({
+      email: token.email,
+      source:token.id
+  }).then(patient => {
+      stripe.charges.create({
+          amount: appointment.fee * 100,
+          currency: 'inr',
+          patient: patient.id,
+          patient_email: token.email,
+          description: `{appointment.description}`
+      },{idempontencyKey})
+  })
+      .then(result => res.status(200).json(result))
+  .catch(err => console.log(err))
+})
+
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;
 mongoose.connect(
@@ -56,6 +80,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 }
+
 
 const PORT = process.env.PORT || 5013;
 

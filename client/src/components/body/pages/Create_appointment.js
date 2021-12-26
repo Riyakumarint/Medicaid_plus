@@ -9,7 +9,7 @@ import {
 import SideNav from "../profile/sidenav/SideNav";
 import Loading from "../../utils/notification/Loading";
 import Book_Slots from "../book_Slots/Book_Slots";
-
+import StripeCheckout from "react-stripe-checkout";
 const initialState = {
   patienttId: "",
   doctortId: "",
@@ -57,7 +57,12 @@ const Create_appointment = () => {
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
   const { user } = useSelector((state) => state.auth);
-
+  const [success, setSuccess] = useState(false);
+  const [showItem, setShowItem] = useState(false);
+  const [payment, setPayment] = useState({
+    name: user.name,
+    fee: speciality.fee,
+  });
   // data fetching
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -226,6 +231,27 @@ const Create_appointment = () => {
     setPreviousTestReport({ ...previousTestReport, [name]: value });
   };
 
+  const makePayment = (token) => {
+    const body = {
+      token,
+      payment,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    return fetch(`http://localhost:5013/payment`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log("RESPONSE", response);
+        const { status } = response;
+        setSuccess(true);
+        console.log("STATUS", status);
+      })
+      .catch((error) => console.log(error));
+  };
   // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -279,6 +305,13 @@ const Create_appointment = () => {
       console.log("heloo:   " + err);
     }
     try {
+      if (!success) {
+        return setAppointmentDetails({
+          ...appointmentDetails,
+          err: "Make Payment",
+          success: "",
+        });
+      }
       const res = await axios.post(
         "/appointments/createAppointment",
         { appointmentDetail },
@@ -479,339 +512,355 @@ const Create_appointment = () => {
           {appointmentDetails.success &&
             showSuccessMsg(appointmentDetails.success)}
           {loading && <Loading />}
-          <form onSubmit={handleSubmit}>
-            <div className="profile_page">
-              <div className="profile_header">
-                <h4>Book Appointment</h4>
-                <button
-                  type="submit"
-                  className="button"
-                  onClick={() => window.scrollTo({ top: 0 })}
-                >
-                  Book
-                </button>
+          {/* <form onSubmit={handleSubmit}> */}
+          <div className="profile_page">
+            <div className="profile_header">
+              <h4>Book Appointment</h4>
+            </div>
+
+            <div className="profile-container">
+              {/* title and description block */}
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="title"><span class="required-field"></span>Title</label>
+                      <input
+                        type="title"
+                        className="title"
+                        id="exampleTitle"
+                        aria-describedby="title"
+                        placeholder="title"
+                        onChange={handleChangeInput}
+                        name="title"
+                        value={appointmentDetails.title}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="description"><span class="required-field"></span>Description</label>
+                      <textarea
+                        rows="3"
+                        cols="30"
+                        type="description"
+                        className="appointment_description"
+                        id="exampleDescription"
+                        aria-describedby="description"
+                        placeholder="description"
+                        onChange={handleChangeInput}
+                        name="description"
+                        value={appointmentDetails.description}
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="profile-container">
-                {/* title and description block */}
-                <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="title">Title</label>
+              {/* Mode of appointment */}
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <div className="input-field">
+                      <label htmlFor="mode"><span class="required-field"></span>Mode of Appointment</label>
+                      <div className="Mode_of_Appointment">
+                        <label for="online">Online</label>
                         <input
-                          type="title"
-                          className="title"
-                          id="exampleTitle"
-                          aria-describedby="title"
-                          placeholder="title"
+                          type="radio"
+                          id="online"
                           onChange={handleChangeInput}
-                          name="title"
-                          value={appointmentDetails.title}
+                          name="mode"
+                          defaultChecked
+                          value="online"
+                          className="mode_o"
+                        />
+                        <label for="offline">Offline</label>
+                        <input
+                          type="radio"
+                          id="offline"
+                          onChange={handleChangeInput}
+                          name="mode"
+                          value="offline"
+                          className="mode_o"
                         />
                       </div>
                     </div>
                   </div>
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                          rows="3"
-                          cols="30"
-                          type="description"
-                          className="appointment_description"
-                          id="exampleDescription"
-                          aria-describedby="description"
-                          placeholder="description"
-                          onChange={handleChangeInput}
-                          name="description"
-                          value={appointmentDetails.description}
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-
-                {/* Mode of appointment */}
-                <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <div className="input-field">
-                        <label htmlFor="mode">Mode of Appointment</label>
-                        <div className="Mode_of_Appointment">
-                          <label for="online">Online</label>
-                          <input
-                            type="radio"
-                            id="online"
-                            onChange={handleChangeInput}
-                            name="mode"
-                            defaultChecked
-                            value="online"
-                            className="mode_o"
-                          />
-                          <label for="offline">Offline</label>
-                          <input
-                            type="radio"
-                            id="offline"
-                            onChange={handleChangeInput}
-                            name="mode"
-                            value="offline"
-                            className="mode_o"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {doctor.doctortId !== "" ? (
+                {/* {doctor.doctortId !== "" ? (
                     <div class="col s12 m6 l4">
                       <br />
                       <br />
                       <h6>
-                        Consultant Fee -{" "}
-                        {getSpecialityFee(doctor.speciality_name, specialities)}{" "}
-                        /- INR
+                        Consultant Fee - ₹
+                        {getSpecialityFee(doctor.speciality_name, specialities)}
+                        
                       </h6>
                     </div>
                   ) : (
                     ""
-                  )}
+                  )} */}
+              </div>
+
+              {/* Selectdoctor block */}
+              <div className="row">
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <label htmlFor="speciality_name">Speciality</label>
+                    <select
+                      className="form-control text-capitalize speciality_name"
+                      value={speciality.speciality_name}
+                      name="speciality_name"
+                      onChange={handleChangeSpeciality}
+                    >
+                      <option value="">Choose a speciality</option>
+                      {specialities.map((speciality) => (
+                        <option key={speciality._id} value={speciality._id}>
+                          {speciality.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                {appointmentDetails.mode === "offline" ? (
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <label htmlFor="city_name">City</label>
+                      <select
+                        className="form-control text-capitalize speciality_name"
+                        value={city.city_name}
+                        name="city_name"
+                        onChange={handleChangeCity}
+                      >
+                        <option value="">Choose a city</option>
+                        {cities.map((city) => (
+                          <option key={city._id} value={city._id}>
+                            {city.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    <label htmlFor="doctortId"><span class="required-field"></span>Doctor</label>
+                    <select
+                      className="form-control text-capitalize speciality_name"
+                      value={doctor.doctortId}
+                      name="doctortId"
+                      onChange={handleChangeDoctor}
+                    >
+                      <option value="">Choose a doctor</option>
+                      {doctors.map((doctor) => (
+                        <option key={doctor.userId} value={doctor.userId}>
+                          {doctor.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
-                {/* Selectdoctor block */}
+                <div class="col s12 m6 l4">
+                  <div className="form-group">
+                    {console.log("jijiji :: " + date)}
+                    {doctor !== initialState2 ? (
+                      <>
+                        <Book_Slots doctor={doctor} setDate={setDate} />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* symptom block */}
+              <div className="line-2">
+                <hr></hr>
+              </div>
+              <div>
+                <h5><span class="required-field"></span>Symptom</h5>
+                {renderSymptom()}
                 <div className="row">
                   <div class="col s12 m6 l4">
                     <div className="form-group">
-                      <label htmlFor="speciality_name">Speciality</label>
-                      <select
-                        className="form-control text-capitalize speciality_name"
-                        value={speciality.speciality_name}
-                        name="speciality_name"
-                        onChange={handleChangeSpeciality}
-                      >
-                        <option value="">Choose a speciality</option>
-                        {specialities.map((speciality) => (
-                          <option key={speciality._id} value={speciality._id}>
-                            {speciality.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  {appointmentDetails.mode === "offline" ? (
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <label htmlFor="city_name">City</label>
-                        <select
-                          className="form-control text-capitalize speciality_name"
-                          value={city.city_name}
-                          name="city_name"
-                          onChange={handleChangeCity}
-                        >
-                          <option value="">Choose a city</option>
-                          {cities.map((city) => (
-                            <option key={city._id} value={city._id}>
-                              {city.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      <label htmlFor="doctortId">Doctor</label>
-                      <select
-                        className="form-control text-capitalize speciality_name"
-                        value={doctor.doctortId}
-                        name="doctortId"
-                        onChange={handleChangeDoctor}
-                      >
-                        <option value="">Choose a doctor</option>
-                        {doctors.map((doctor) => (
-                          <option key={doctor.userId} value={doctor.userId}>
-                            {doctor.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col s12 m6 l4">
-                    <div className="form-group">
-                      {console.log("jijiji :: " + date)}
-                      {doctor !== initialState2 ? (
-                        <>
-                          <Book_Slots doctor={doctor} setDate={setDate} />
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* symptom block */}
-                <div className="line-2">
-                  <hr></hr>
-                </div>
-                <div>
-                  <h5>Symptom</h5>
-                  {renderSymptom()}
-                  <div className="row">
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <div className="input-field">
-                          <label htmlFor="name">Name</label>
-                          <input
-                            className="name"
-                            id="exampleInputname1"
-                            placeholder="name"
-                            onChange={handleChangeSymptom}
-                            value={symptom.name}
-                            name="name"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <div className="input-field">
-                          <label htmlFor="fromWhen">From when</label>
-                          <input
-                            className="fromWhen"
-                            id="exampleInputfromWhen1"
-                            placeholder="fromWhen"
-                            onChange={handleChangeSymptom}
-                            value={symptom.fromWhen}
-                            name="fromWhen"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="form-group">
-                        <div className="input-field">
-                          <i
-                            className="fas fa-plus-circle"
-                            title="Add"
-                            onClick={() => handleAddSymptom()}
-                          ></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* PreviousMedicine block */}
-                <div className="line-2">
-                  <hr></hr>
-                </div>
-                <div>
-                  <h5>Previous Medicine</h5>(if any)
-                  {renderPreviousMedicine()}
-                  <div className="row">
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <div className="input-field">
-                          <label htmlFor="name">Name</label>
-                          <input
-                            className="name"
-                            id="exampleInputname1"
-                            placeholder="name"
-                            onChange={handleChangePreviousMed}
-                            value={previousMed.name}
-                            name="name"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <div className="input-field">
-                          <label htmlFor="dose">Dose</label>
-                          <input
-                            className="dose"
-                            id="exampleInputdose1"
-                            placeholder="dose"
-                            onChange={handleChangePreviousMed}
-                            value={previousMed.dose}
-                            name="dose"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="form-group">
-                        <div className="input-field">
-                          <i
-                            className="fas fa-plus-circle"
-                            title="Add"
-                            onClick={() => handleAddPreviousMedicine()}
-                          ></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* previousTestReport block */}
-                <div className="line-2">
-                  <hr></hr>
-                </div>
-                <div>
-                  <h5>Previous Test Report</h5>(if any)
-                  {renderPreviousTestReport()}
-                  <div className="row">
-                    <div class="col s12 m6 l4">
-                      <div className="form-group">
-                        <div className="input-field">
-                          <label htmlFor="link">link</label>
-                          <input
-                            className="link"
-                            id="exampleInputlink1"
-                            placeholder="link"
-                            onChange={handleChangePreviousTestReport}
-                            value={previousTestReport.link}
-                            name="link"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="form-group">
-                        <div className="input-field">
-                          <i
-                            className="fas fa-plus-circle"
-                            title="Add"
-                            onClick={() => handleAddPreviousTestReport()}
-                          ></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="row">
-                  <div class="col s12 m6 l4">
-                    <div className="input-field">
-                      <div className="form-group my-3">
+                      <div className="input-field">
+                        <label htmlFor="name">Name</label>
                         <input
-                          type="file"
-                          className="pdf_of_test form-control"
-                          accept="application/pdf"
-                          onChange={handleChangePdf}
-                          name="pdfFile"
+                          className="name"
+                          id="exampleInputname1"
+                          placeholder="name"
+                          onChange={handleChangeSymptom}
+                          value={symptom.name}
+                          name="name"
                         />
                       </div>
                     </div>
                   </div>
-                </div> */}
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="fromWhen">From when</label>
+                        <input
+                          className="fromWhen"
+                          id="exampleInputfromWhen1"
+                          placeholder="fromWhen"
+                          onChange={handleChangeSymptom}
+                          value={symptom.fromWhen}
+                          name="fromWhen"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                          className="fas fa-plus-circle"
+                          title="Add"
+                          onClick={() => handleAddSymptom()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* PreviousMedicine block */}
+              <div className="line-2">
+                <hr></hr>
+              </div>
+              <div>
+                <h5>Previous Medicine</h5>(if any)
+                {renderPreviousMedicine()}
+                <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="name">Name</label>
+                        <input
+                          className="name"
+                          id="exampleInputname1"
+                          placeholder="name"
+                          onChange={handleChangePreviousMed}
+                          value={previousMed.name}
+                          name="name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="dose">Dose</label>
+                        <input
+                          className="dose"
+                          id="exampleInputdose1"
+                          placeholder="dose"
+                          onChange={handleChangePreviousMed}
+                          value={previousMed.dose}
+                          name="dose"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                          className="fas fa-plus-circle"
+                          title="Add"
+                          onClick={() => handleAddPreviousMedicine()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* previousTestReport block */}
+              <div className="line-2">
+                <hr></hr>
+              </div>
+              <div>
+                <h5>Previous Test Report</h5>(if any)
+                {renderPreviousTestReport()}
+                <div className="row">
+                  <div class="col s12 m6 l4">
+                    <div className="form-group">
+                      <div className="input-field">
+                        <label htmlFor="link">link</label>
+                        <input
+                          className="link"
+                          id="exampleInputlink1"
+                          placeholder="link"
+                          onChange={handleChangePreviousTestReport}
+                          value={previousTestReport.link}
+                          name="link"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="form-group">
+                      <div className="input-field">
+                        <i
+                          className="fas fa-plus-circle"
+                          title="Add"
+                          onClick={() => handleAddPreviousTestReport()}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </form>
+            {doctor.doctortId !== "" &&
+            appointmentDetails.title !== "" &&
+            appointmentDetails.description !== "" &&
+            Lenght(symptoms) !== 0 &&
+            date.slotId !== "" ? (
+              <>
+                {!success ? (
+                  <StripeCheckout
+                      stripeKey=
+                      "pk_test_51HQTH8J8AwZ227xYwVHlWH1ysskV58ngCxoIRrJiw9cdcfhzo0MZhUdikO4YinRuIypDCQRFikQNDvNwhOiVKjN400Yvu6iafA"
+                    // {process.env.REACT_APP_KEY}
+                    token={makePayment}
+                    name="Make Payment"
+                    amount={
+                      getSpecialityFee(doctor.speciality_name, specialities) *
+                      100
+                    }
+                  >
+                    <button className="blog_post_btn mt-3 d-block mx-auto">
+                      Make Payment ₹
+                      {getSpecialityFee(doctor.speciality_name, specialities)}
+                    </button>
+                  </StripeCheckout>
+                ) : (
+                  <button
+                    type="submit"
+                    className="blog_post_btn mt-3 d-block mx-auto"
+                    onClick={handleSubmit}
+                  >
+                    Book
+                  </button>
+                )}
+              </>
+            ) : (
+              <div className="fill_all_btn mt-3 d-block mx-auto">
+                Fill all the required fields
+              </div>
+            )}
+          </div>
+          {/* </form> */}
         </div>
       </div>
     </>

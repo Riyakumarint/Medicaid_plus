@@ -136,7 +136,7 @@ const LabTest = () => {
                   <td>
                     <Link to={`/book_lab_test/${doctor.userId}`}>
                       <i className="fas fa-vial" title="Add">
-                        {" "}
+                        
                         Book Test
                       </i>
                     </Link>

@@ -406,18 +406,13 @@ const Appointment_patient = () => {
                                 </div>
                               </div>
                               <div class="col-4 datetime">
-                                <p>Date: {new Date().toLocaleDateString()}</p>
-                                <p>Time: {new Date().toLocaleTimeString()}</p>
+                                <p>Date: {new Date(appointment.meetingDetail).toLocaleDateString()}</p>
+                                <p>Time: {new Date(appointment.meetingDetail).toLocaleTimeString()}</p>
                               </div>
                             </header>
 
                             <div class="prescription">
-                              <p>
-                                Meeting Detail:{" "}
-                                {new Date(
-                                  appointment.meetingDetail
-                                ).toDateString()}
-                              </p>
+                              
                               <h3>
                                 Patient Name : Rx {appointment.patient_name}
                               </h3>
@@ -505,23 +500,23 @@ const Appointment_patient = () => {
                                 </div>
                               </div>
                               <div class="col-4 datetime">
-                                <p>Date: {new Date().toLocaleDateString()}</p>
-                                <p>Time: {new Date().toLocaleTimeString()}</p>
+                                <p>Date: {new Date(appointment.meetingDetail).toLocaleDateString()}</p>
+                                <p>Time: {new Date(appointment.meetingDetail).toLocaleTimeString()}</p>
                               </div>
                             </header>
 
                             <div class="prescription">
-                              <p>
+                              {/* <p>
                                 Meeting Detail:{" "}
                                 {new Date(
                                   appointment.meetingDetail
                                 ).toDateString()}
-                              </p>
+                              </p> */}
                               <h3>
                                 Patient Name : Rx {appointment.patient_name}
                               </h3>
 
-                              <div className="pdf_footer">
+                              <div className="pdf_empty_footer">
                                 <p>Medicad+</p>
                               </div>
                             </div>
