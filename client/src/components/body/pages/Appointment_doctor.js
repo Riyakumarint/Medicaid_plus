@@ -51,7 +51,7 @@ const Appointment_doctor = () => {
   const { user } = useSelector((state) => state.auth);
   const auth = useSelector((state) => state.auth);
   const { isLogged, isAdmin, isDoctor } = auth;
-
+  const history = useHistory();
   const { caseId } = useParams();
 
   // data fetching
@@ -140,7 +140,7 @@ const Appointment_doctor = () => {
         ...appointment,
         status: appointment.status === "active" ? "closed" : "active",
         err: "",
-        success: "Updated Success!",
+        success: appointment.status === "active" ? "Case Closed" : "Case Open",
       });
     } catch (err) {
       setAppointment({
@@ -350,12 +350,6 @@ const Appointment_doctor = () => {
                     </a>
                   </td>
                   <td>
-                    <i className="fas fa-stethoscope" title="Open">
-                      {" "}
-                      Open
-                    </i>
-                  </td>
-                  <td>
                     <i
                       className="fas fa-trash-alt"
                       title="Remove"
@@ -385,13 +379,12 @@ const Appointment_doctor = () => {
               <p>{appointment.status}</p>
             </div>
             <p>
-              <h6>{appointment.description}</h6>
+              <h6>Description : {appointment.description}</h6>
             </p>
             <div>
               <h5>
-                {" "}
-                Meeting Detail -{" "}
-                {new Date(appointment.meetingDetail).toDateString()} at{" "}
+                Meeting Detail -&nbsp;
+                           {new Date(appointment.meetingDetail).toDateString()} at &nbsp;
                 {new Date(appointment.meetingDetail).toLocaleTimeString()}
               </h5>
             </div>
@@ -400,7 +393,6 @@ const Appointment_doctor = () => {
             </div>
             <div>
               <h5>
-                {" "}
                 {"Clinic Address - " +
                   appointment.clinic_address +
                   " (" +
@@ -548,7 +540,7 @@ const Appointment_doctor = () => {
                       rows="3"
                       cols="30"
                       type="doctorsNote"
-                      className="doctorsNote"
+                      className="appointment_description"
                       id="exampleDoctorsNote"
                       aria-describedby="doctorsNote"
                       placeholder="Doctors Note"
@@ -573,7 +565,7 @@ const Appointment_doctor = () => {
                       rows="3"
                       cols="30"
                       type="doctorsNotePrivate"
-                      className="doctorsNotePrivate"
+                      className="appointment_description"
                       id="exampleDoctorsNote"
                       aria-describedby="doctorsNote"
                       placeholder="Private Note"
@@ -588,31 +580,13 @@ const Appointment_doctor = () => {
             <div>
               <button
                 type="button"
-                className="button"
+                className="blog_post_btn"
                 onClick={() => handleSave()}
               >
-                <i className="fas fa-plus-circle" title="save">
-                  {" "}
-                </i>
                 save
               </button>
             </div>
             <hr></hr>
-
-            {/* download prescription */}
-            {/* <div>
-              {appointment.mode === "offline" ? (
-                <button
-                  type="button"
-                  className="button"
-                  // onClick={() => window.scrollTo({ top: 0 })}
-                >
-                  Download prescription
-                </button>
-              ) : (
-                ""
-              )}
-            </div> */}
 
             {/* Change meeting detail */}
             <div>

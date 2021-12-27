@@ -240,6 +240,35 @@ const Appointment_patient = () => {
     );
   };
 
+  const renderTestReportPdf = () => {
+    if (testReports.length === 0) return "";
+    return (
+      <div>
+        {/* <h5>Upload Test Report</h5> */}
+        <div className="col-right">
+          <div style={{ overflowX: "auto" }}>
+            <table className="pdf_app">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {testReports.map((testReport) => (
+                  <tr key={testReport._id}>
+                    <td>• {testReport.name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <hr></hr>
+        <br></br>
+      </div>
+    );
+  };
+
   const renderMedicine = () => {
     if (medicines.length === 0) return "";
     return (
@@ -256,6 +285,32 @@ const Appointment_patient = () => {
               {medicines.map((med) => (
                 <tr key={med.name}>
                   <td>{med.name}</td>
+                  <td>{med.dose}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+
+  const renderMedicinePdf = () => {
+    if (medicines.length === 0) return "";
+    return (
+      <div className="col-right">
+        <div style={{ overflowX: "auto" }}>
+          <table className="pdf_app">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Dose</th>
+              </tr>
+            </thead>
+            <tbody>
+              {medicines.map((med) => (
+                <tr key={med.name}>
+                  <td>• {med.name}</td>
                   <td>{med.dose}</td>
                 </tr>
               ))}
@@ -283,8 +338,8 @@ const Appointment_patient = () => {
             </p>
             <div>
               <h5>
-                Meeting Detail -
-                {new Date(appointment.meetingDetail).toDateString()} at
+                Meeting Detail -&nbsp;
+                {new Date(appointment.meetingDetail).toDateString()} at &nbsp;
                 {new Date(appointment.meetingDetail).toLocaleTimeString()}
               </h5>
             </div>
@@ -332,8 +387,6 @@ const Appointment_patient = () => {
                   <h5>Test Reports</h5>
                   {renderTestReport()}
                 </div>
-                <hr></hr>
-                <br></br>
               </div>
             ) : (
               ""
@@ -346,12 +399,12 @@ const Appointment_patient = () => {
                   <h5>Medicines</h5>
                   {renderMedicine()}
                 </div>
-                <hr></hr>
-                <br></br>
               </div>
             ) : (
               ""
             )}
+ <hr></hr>
+            <br></br>
 
             {/* Doctors remark */}
             <div>
@@ -362,7 +415,9 @@ const Appointment_patient = () => {
                   : "Doctor's remark - " + appointment.doctorsNote}
               </h5>
             </div>
+            <hr></hr>
             <br></br>
+
 
             {/* download prescription */}
             <div className="pdf_prescription">
@@ -406,13 +461,22 @@ const Appointment_patient = () => {
                                 </div>
                               </div>
                               <div class="col-4 datetime">
-                                <p>Date: {new Date(appointment.meetingDetail).toLocaleDateString()}</p>
-                                <p>Time: {new Date(appointment.meetingDetail).toLocaleTimeString()}</p>
+                                <p>
+                                  Date:{" "}
+                                  {new Date(
+                                    appointment.meetingDetail
+                                  ).toLocaleDateString()}
+                                </p>
+                                <p>
+                                  Time:{" "}
+                                  {new Date(
+                                    appointment.meetingDetail
+                                  ).toLocaleTimeString()}
+                                </p>
                               </div>
                             </header>
 
                             <div class="prescription">
-                              
                               <h3>
                                 Patient Name : Rx {appointment.patient_name}
                               </h3>
@@ -421,10 +485,8 @@ const Appointment_patient = () => {
                               <div>
                                 <div>
                                   <h5>Medicines</h5>
-                                  {renderMedicine()}
+                                  {renderMedicinePdf()}
                                 </div>
-                                <hr></hr>
-                                <br></br>
                               </div>
 
                               {/* Test Report */}
@@ -432,17 +494,21 @@ const Appointment_patient = () => {
                               <div>
                                 <div>
                                   <h5>Test Report</h5>
-                                  {renderTestReport()}
+                                  {renderTestReportPdf()}
                                 </div>
-                                <hr></hr>
-                                <br></br>
                               </div>
 
-                              <p>Doctors Note : {appointment.doctorsNote}</p>
+                              <div>
+              <h5>
+               
+                {appointment.doctorsNote.length === 0
+                  ? ""
+                  : "Doctor's remark - " + appointment.doctorsNote}
+              </h5>
+            </div>
+            <hr></hr>
 
-                              <p>
-                                Private Note : {appointment.doctorsNotePrivate}
-                              </p>
+                             
                               <div className="pdf_footer">
                                 <p>Medicad+</p>
                               </div>
@@ -471,7 +537,7 @@ const Appointment_patient = () => {
                       aria-expanded="false"
                       aria-controls="collapseExample"
                     >
-                      Prescription
+                      Appointment Slip
                     </button>
                   </p>
                   <div class="collapse" id="collapseExample">
@@ -479,7 +545,7 @@ const Appointment_patient = () => {
                       {/* <PDF_Prescription appointment={appointment} /> */}
                       <>
                         <div className="Post" ref={ref}>
-                          <div class="container">
+                          <div class="container offline_con">
                             <header class="row">
                               <div class="header">
                                 <div class="logo">
@@ -500,18 +566,22 @@ const Appointment_patient = () => {
                                 </div>
                               </div>
                               <div class="col-4 datetime">
-                                <p>Date: {new Date(appointment.meetingDetail).toLocaleDateString()}</p>
-                                <p>Time: {new Date(appointment.meetingDetail).toLocaleTimeString()}</p>
+                                <p>
+                                  Date:{" "}
+                                  {new Date(
+                                    appointment.meetingDetail
+                                  ).toLocaleDateString()}
+                                </p>
+                                <p>
+                                  Time:{" "}
+                                  {new Date(
+                                    appointment.meetingDetail
+                                  ).toLocaleTimeString()}
+                                </p>
                               </div>
                             </header>
 
                             <div class="prescription">
-                              {/* <p>
-                                Meeting Detail:{" "}
-                                {new Date(
-                                  appointment.meetingDetail
-                                ).toDateString()}
-                              </p> */}
                               <h3>
                                 Patient Name : Rx {appointment.patient_name}
                               </h3>

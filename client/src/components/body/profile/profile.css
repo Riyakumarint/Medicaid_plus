@@ -34,6 +34,17 @@
   display: flex;
 }
 
+.profile_header p{
+  color: rgb(7, 6, 6);
+  background-color: white;
+  padding: 10px 15px;
+  margin: 5px;
+  right: 10px;
+  font-size: 15px;
+  box-shadow: 0 0 5px 1px #911f27;
+  border-radius: 10px;
+}
+
 .profile_page .dash_data {
   margin: 0 10px;
 }
@@ -54,6 +65,7 @@
   padding: 10px 25px;
   margin: 10px 0;
 }
+
 .profile_page .avatar_box {
   display: flex;
 }
@@ -220,17 +232,48 @@
 .medical td,
 .medical th {
   border: 2px solid #ad5157;
-  padding: 8px;
+  padding: 5px 8px;
   min-width: 100px;
 }
+
+.medical td,
+.medical th {
+  border: 2px solid #ad5157;
+  padding: 3px 8px;
+  min-width: 100px;
+}
+
+.medical input{
+  height: 30px;
+  margin: 0 auto;
+}
+
+.pdf_app td, .pdf_app th{
+padding: 0 150px 0 20px;
+}
+
+.medical .fa-download{
+  background: rgb(245, 245, 245);
+  padding: 7px;
+color: rgb(5, 5, 5);
+font-size: 20px;
+}
+
 .customers tr:nth-child(even),
 .medical tr:nth-child(even) {
   background: #fce8e9;
 }
-.customers th,
+.customers th{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  background: #911f27;
+  color: white;
+}
+
 .medical th {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 8px;
+  padding-bottom: 6px;
   text-align: left;
   background: #911f27;
   color: white;

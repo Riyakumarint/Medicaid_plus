@@ -43,7 +43,7 @@ export default function Chart(props) {
           />
         </div>
       ) : (
-        "try"
+        ""
       )}
       {props.chartData4 ? (
         <div className="bar_chart">
@@ -64,7 +64,7 @@ export default function Chart(props) {
           />
         </div>
       ) : (
-        "try"
+        ""
       )}
       {props.chartData5 ? (
         <div className="bar_chart">
@@ -85,7 +85,7 @@ export default function Chart(props) {
           />
         </div>
       ) : (
-        "try"
+        ""
       )}
 
       <div className="row">

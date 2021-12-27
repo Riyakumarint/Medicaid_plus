@@ -83,7 +83,8 @@ export default function Create_Slots() {
                     <td>{new Date(slot.date).toLocaleTimeString()}</td>
                     <td>{slot.patientID}</td>
                     <td>
-                      <button onClick={() => handleDelete(slot)}>
+                      <button 
+                        onClick={() => handleDelete(slot)}>
                         Finished
                       </button>
                     </td>
@@ -172,10 +173,7 @@ export default function Create_Slots() {
                 className="category_button"
                 onClick={() => handleOnClick()}
               >
-                <i className="fas fa-plus-circle" title="Add">
-                  {" "}
-                  Create
-                </i>
+                Create
               </button>
             </div>
           </div>

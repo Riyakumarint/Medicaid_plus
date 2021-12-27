@@ -514,8 +514,8 @@ const Create_appointment = () => {
           {loading && <Loading />}
           {/* <form onSubmit={handleSubmit}> */}
           <div className="profile_page">
-            <div className="profile_header">
-              <h4>Book Appointment</h4>
+            <div className="book_appointment">
+              <h3>Book Appointment</h3>
             </div>
 
             <div className="profile-container">
