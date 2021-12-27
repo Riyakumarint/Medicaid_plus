@@ -83,9 +83,11 @@ export default function Create_Slots() {
                     <td>{new Date(slot.date).toLocaleTimeString()}</td>
                     <td>{slot.patientName}</td>
                     <td>
-                      <button onClick={() => handleDelete(slot)}>
-                        Finished
-                      </button>
+                      <i
+                        class="fa fa-check-square-o"
+                        onClick={() => handleDelete(slot)}
+                        aria-hidden="true"
+                      ></i>
                     </td>
                   </tr>
                 ) : (
@@ -120,13 +122,10 @@ export default function Create_Slots() {
                     <td>{new Date(slot.date).toLocaleTimeString()}</td>
                     <td>
                       <i
-                        className="fas fa-times-circle"
+                        className="fas fa-trash-alt"
                         title="Open"
                         onClick={() => handleDelete(slot)}
-                      >
-                        {" "}
-                        Delete
-                      </i>
+                      ></i>
                     </td>
                   </tr>
                 ) : (

@@ -48,8 +48,8 @@ export default function Chat_Component(props) {
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
+        avatar: user.avatar,
         text: data.text,
-        avatar: data.avatar,
         createdAt: Date.now(),
       });
     });
@@ -109,6 +109,7 @@ export default function Chat_Component(props) {
     if (newMessages !== "") {
       const message = {
         sender: user._id,
+        avatar: user.avatar,
         text: newMessages,
         conversationId: currentChat._id,
       };
@@ -117,6 +118,7 @@ export default function Chat_Component(props) {
       );
       socket.current.emit("sendMessage", {
         senderId: user._id,
+        avatar: user.avatar,
         receiverId: receiverId,
         text: newMessages,
       });
@@ -137,6 +139,7 @@ export default function Chat_Component(props) {
     setNewMessage(text);
     const message = {
       sender: user._id,
+      avatar: user.avatar,
       text: text,
       conversationId: currentChat._id,
     };
@@ -145,6 +148,7 @@ export default function Chat_Component(props) {
     );
     socket.current.emit("sendMessage", {
       senderId: user._id,
+      avatar: user.avatar,
       receiverId: receiverId,
       text: text,
     });

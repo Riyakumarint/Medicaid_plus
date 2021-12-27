@@ -6,6 +6,7 @@ import { Chart, ArcElement, CategoryScale, registerables } from "chart.js";
 Chart.register(ArcElement);
 Chart.register(CategoryScale);
 Chart.register(...registerables);
+Chart.defaults.font.size=16;
 const initData1 = {
   labels: [],
   datasets: [
@@ -25,10 +26,10 @@ const initData1 = {
   ],
 };
 const initData2 = {
-  labels: ["Onlie", "OfLine"],
+  labels: ["Online", "Offline"],
   datasets: [
     {
-      label: "Online vs Ofline",
+      label: "Online vs Offline",
       data: [],
       backgroundColor: ["rgba(255, 99, 132, 0.6)", "rgba(54, 162, 235, 0.6)"],
     },
@@ -45,7 +46,7 @@ const initData3 = {
   ],
 };
 const initData4 = {
-  labels: ["Blood Sugar Upper", "Blood Sugar Lower", "User Blood sugar"],
+  labels: ["Blood Sugar Upper", "Blood Sugar Lower", "User Blood Sugar"],
   datasets: [
     {
       label: "Blood Sugar",
@@ -214,10 +215,10 @@ export default function Patient_dah() {
         ],
       });
       setPieData({
-        labels: ["Onlnie", "Ofline"],
+        labels: ["Online", "Offline"],
         datasets: [
           {
-            label: "Online vs Ofline",
+            label: "Online vs Offline",
             data: [a, b],
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
@@ -280,7 +281,7 @@ export default function Patient_dah() {
       }
       // console.log(a + " " + b + " " + c);
       setBarblood({
-        labels: ["Blood Sugar Heigh", "User Blood sugar", "Blood Sugar Low"],
+        labels: ["Blood Sugar High", "User Blood sugar", "Blood Sugar Low"],
         datasets: [
           {
             label: "Blood Sugar",
