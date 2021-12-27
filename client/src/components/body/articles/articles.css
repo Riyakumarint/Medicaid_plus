@@ -30,7 +30,7 @@
 .blog_card {
   max-width: 300px;
   overflow: hidden;
-  height: 450px;
+  height: 425px;
   padding: 15px;
   box-shadow: 0 0 19px 0 #911f27;
   margin: 20px 0;
@@ -85,7 +85,7 @@
   border-radius: 5px;
   font-weight: bolder;
   letter-spacing: 1.4px;
-  margin: 12px 100px;
+  margin: 0 100px ;
 }
 
 .blog_card input {
@@ -157,6 +157,13 @@
   position: relative;
 }
 
+.star_rating{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 70px;
+}
+
 .blog_cover_image {
   top: 94px;
   width: 100%;
@@ -194,23 +201,33 @@
   text-transform: uppercase;
 }
 
+.comment_heading{
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
 .blog_auther {
   text-transform: uppercase;
-  color: gray;
-  font-size: 13px;
+  color: rgb(221, 13, 13);
+  font-size: 18px;
   text-align: left;
+  font-weight: bold;
 }
 
 .blog_auther:hover{
   text-transform: uppercase;
-  color: gray;
-  font-size: 13px;
+  color: rgb(221, 13, 13);
+  font-size: 18px;
   text-align: left;
+  font-weight: bold;
 }
 
 .blog_date {
   display: flex;
   justify-content: space-between;
+  cursor:pointer;
 }
 
 .blog_date p {
@@ -221,13 +238,13 @@
 }
 
 .blog_date .blog_delete {
-  margin: 12px 0;
+  margin: 12px 0 0 0;
   border-radius: 5px;
   background: #911f27;
   color: white;
   display: flex;
   justify-content: end;
-  padding: 5px 15px;
+  padding: 7px 15px;
   text-transform: uppercase;
   border-radius: 5px;
   font-weight: bolder;

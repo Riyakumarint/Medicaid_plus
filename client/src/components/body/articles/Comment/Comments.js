@@ -48,7 +48,7 @@ const Comments = ({ blog }) => {
   
   return (
       <div>
-          <h4>Comments</h4>
+          <h4 className="comment_heading">Comments</h4>
           {/* Post comments*/}
       {(isDoctor || isAdmin) && (
         <>

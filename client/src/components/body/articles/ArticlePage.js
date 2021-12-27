@@ -80,7 +80,7 @@ function PostPage({ match }) {
           <Grid item lg={8} md={8} sm={12}>
             <div className="blog_component">
               <h2 className="blog_heading">{blog.title}</h2>
-              <p>
+              <h6 className="star_rating">
                 <ReactStars
                   count={5}
                   value={Number(blog.reviews.rating)}
@@ -88,10 +88,10 @@ function PostPage({ match }) {
                   color2={"#ffd700"}
                   edit={false}
                 />
-              </p>
-              {/* <p className="blog_auther">DR. {blog.auther}</p> */}
+              </h6>
+
               <Link className="blog_auther" to={`/doctor/${blog.autherId}`}>
-                DR. {blog.auther}{" "}
+                DR. {blog.auther}
                 <i class="fa fa-external-link" aria-hidden="true"></i>
               </Link>
               <div className="blog_date">
@@ -119,14 +119,16 @@ function PostPage({ match }) {
             <Grid item lg={4} md={4} sm={12}>
               <div className="blog_comment_component">
                 <div>
-                  <h5> Rate Blog</h5>
-                  <ReactStars
-                    count={5}
-                    value={rating}
-                    onChange={handleRatingChange}
-                    size={30}
-                    color2={"#ffd700"}
-                  />
+                  <h4 className="comment_heading"> Rate Blog</h4>
+                  <h6 className="star_rating">
+                    <ReactStars
+                      count={5}
+                      value={rating}
+                      onChange={handleRatingChange}
+                      size={30}
+                      color2={"#ffd700"}
+                    />
+                  </h6>
                   <br></br>
                 </div>
                 <Comments blog={blog} />

@@ -73,7 +73,7 @@ export default function Book_Slots(props) {
                     <td>{new Date(slot.date).toLocaleTimeString()}</td>
                     <td>
                       <i
-                        className="fas fa-plus-circle"
+                        className="fa fa-plus-circle"
                         title="Open"
                         onClick={() => handleBook(slot)}
                       ></i>

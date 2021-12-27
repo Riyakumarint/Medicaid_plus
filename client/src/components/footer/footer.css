@@ -17,6 +17,11 @@
   text-transform: uppercase;
 }
 
+.contact_footer{
+font-weight: bold;
+text-transform: uppercase;
+}
+
 .footer p {
   margin-top: 15px;
 }

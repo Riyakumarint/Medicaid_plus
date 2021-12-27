@@ -23,14 +23,14 @@ function Doctor_card({ doctor, speciality_name }) {
       }
     };
     getDoctorUser();
-  }, [callback]);
+  }, [callback,doctor]);
   useEffect(() => {
     const getSpecialities = async () => {
       const res = await axios.get("/api/speciality");
       setSpecialities(res.data);
     };
     getSpecialities();
-  }, [callback]);
+  }, [callback,doctor]);
   const getSpecialityFee = (_id, specialities) => {
     const spec = specialities.filter((speciality) => {
       return speciality._id === _id;
