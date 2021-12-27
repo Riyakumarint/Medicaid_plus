@@ -100,8 +100,7 @@ const Create_blog = () => {
 
       if (
         file.type !== "image/jpeg" &&
-        file.type !== "image/png" &&
-        file.type !== "application/pdf"
+        file.type !== "image/png" 
       )
         return setBlog({
           ...blog,
@@ -116,8 +115,6 @@ const Create_blog = () => {
       const res = await axios.post("/api/upload_coverImage", formData, {
         headers: {
           "content-type": "multipart/form-data",
-          "content-type": "text/plain",
-
           Authorization: token,
         },
       });
@@ -232,7 +229,7 @@ const Create_blog = () => {
                 <input
                   type="file"
                   className="form-control"
-                  accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+                  accept="image/jpeg,image/png"
                   onChange={handleChangeThumbnail}
                   name="coverImage"
                 />

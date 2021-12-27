@@ -3,7 +3,7 @@
   min-height: 100vh;
   overflow: hidden;
   /* position: relative; */
-  margin-left: 20px;
+  margin-left: 30px;
   background-color: #f8bec1;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
 }
 
 .pro {
-  width: 1000px;
+  /* width: 1000px; */
   max-width: 1000px;
   margin: 100px auto;
   padding: 35px;
@@ -27,6 +27,8 @@
   width: 100%;
   padding: 0 10px;
   margin: auto;
+  /* display: flex;
+  flex-wrap: wrap; */
 }
 
 .profile_header {
@@ -403,7 +405,7 @@ font-size: 20px;
 .chart .bar_chart {
   display: block;
   max-width: 700px;
-  min-width: 300px;
+  min-width: 500px;
   justify-content: center;
   margin: 10px auto;
 }

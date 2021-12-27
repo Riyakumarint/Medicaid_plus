@@ -47,8 +47,7 @@ function Speciality() {
 
       if (
         file.type !== "image/jpeg" &&
-        file.type !== "image/png" &&
-        file.type !== "application/pdf"
+        file.type !== "image/png" 
       )
         return setSuccess({
           err: "File format is incorrect.",
@@ -105,7 +104,7 @@ function Speciality() {
       setOnEdit(false);
       setSpeciality("");
       setFee("");
-      setImage("");
+      setImage(false);
       setCallback(!callback);
     } catch (err) {
       err.response.data.msg && setErr(err.response.data.msg);
@@ -161,7 +160,7 @@ function Speciality() {
               <input
                 type="file"
                 className="form-control"
-                accept="image/jpeg,image/gif,image/png"
+                accept="image/jpeg,image/png"
                 onChange={handleChangeImage}
                 name="image"
               />

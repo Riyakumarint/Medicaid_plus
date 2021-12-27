@@ -431,7 +431,7 @@
 .aboutUsPage .img-area .social ul{
   text-align: center;
   position: relative;
-  top: 175px;
+  top: 0px;
 }
 .aboutUsPage .img-area .social ul li a{
   border: 1px solid #fff;
