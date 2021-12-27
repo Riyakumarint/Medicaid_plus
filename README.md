@@ -39,7 +39,7 @@ Feel free to file an issue if you come across any bugs
 * Fork repository and contribute
   
 ## Contributors:
-* [Purushotum](https://github.com/)
+* [Purushotam Kumar Agrawal](https://github.com/puru2411)
 * [Riya Kumari](https://github.com/Riyakumarint)
 * [Yaggya Garg](https://github.com/yaggya01)
   
