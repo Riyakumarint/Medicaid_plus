@@ -6,6 +6,7 @@ import { Chart, ArcElement, CategoryScale, registerables } from "chart.js";
 Chart.register(ArcElement);
 Chart.register(CategoryScale);
 Chart.register(...registerables);
+Chart.defaults.font.size=16;
 const initData1 = {
   labels: [],
   datasets: [
@@ -280,7 +281,7 @@ export default function Patient_dah() {
       }
       // console.log(a + " " + b + " " + c);
       setBarblood({
-        labels: ["Blood Sugar Heigh", "User Blood sugar", "Blood Sugar Low"],
+        labels: ["Blood Sugar High", "User Blood sugar", "Blood Sugar Low"],
         datasets: [
           {
             label: "Blood Sugar",

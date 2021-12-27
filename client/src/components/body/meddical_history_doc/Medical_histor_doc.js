@@ -78,7 +78,7 @@ const Medical_histor_doc = () => {
     var b = profile.oxygenLevel;
     var c = profile.pulse;
     setBarblood({
-      labels: ["Blood Sugar Heigh", "User Blood sugar", "Blood Sugar Low"],
+      labels: ["Blood Sugar High", "User Blood sugar", "Blood Sugar Low"],
       datasets: [
         {
           label: "Blood Sugar",
