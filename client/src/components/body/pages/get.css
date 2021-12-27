@@ -178,6 +178,7 @@
   font-weight: bolder;
   letter-spacing: 1.4px;
   margin: 12px 0;
+  max-height: 40px;
 }
 
 .fill_all_btn{
@@ -481,7 +482,38 @@
 .required-field::before {
   content: "*";
   color: red;
+  font-size: 22px;
 }
 
+.profile_page .book_appointment{
+  text-align: center;
+  justify-content: center;
+}
 
+.profile_page .book_appointment h3{
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-family: "Poppins", sans-serif;
+}
 
+.fa-plus-circle{
+  margin-top: 50px;
+}
+.fa-calendar-plus-o{
+  margin: 0 8px;
+  padding: 0 4px;
+}
+.slot_p{
+  background-color: #911f27;
+  color: white;
+  width: 300px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.slot_header{
+  margin-top: 7px;
+}

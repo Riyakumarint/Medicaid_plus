@@ -96,6 +96,7 @@ export default function Messenger() {
     if (newMessages !== "") {
       const message = {
         sender: user._id,
+        avatar: user.avatar,
         text: newMessages,
         conversationId: currentChat._id,
       };
@@ -104,6 +105,7 @@ export default function Messenger() {
       );
       socket.current.emit("sendMessage", {
         senderId: user._id,
+        avatar: user.avatar,
         receiverId: receiverId,
         text: newMessages,
       });
@@ -153,7 +155,7 @@ export default function Messenger() {
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input
-              placeholder="   Search for Doctor"
+              placeholder="Search for Doctor"
               className="chatMenuInput"
             />
             {conversations.map((c) => (

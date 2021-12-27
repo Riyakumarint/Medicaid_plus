@@ -5,9 +5,13 @@
   /* height: 1000px; */
   border: 1px solid black;
   max-width: 640px;
-  min-height: 920px;
+  /* min-height: 920px; */
   margin: 30px auto;
   overflow: hidden;
+}
+
+.Post .offline_con{
+  min-height: 920px;
 }
 
 .Post .container header {
