@@ -92,28 +92,12 @@ function SideNav() {
             ""
           )}
         </li>
-        <li>
-          {isAdmin ? (
-            <a href="/category" onClick={() => window.scrollTo({ top: 0 })}>
-              <span class="icon">
-                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-              </span>
-              <span class="title">Category</span>
-            </a>
-          ) : (
-            <a href="/contact_us" onClick={() => window.scrollTo({ top: 0 })}>
-              <span class="icon">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="title">Contact</span>
-            </a>
-          )}
-        </li>
+        
         <li>
           {isDoctor ? (
             <a href="/createSlot" onClick={() => window.scrollTo({ top: 0 })}>
               <span class="icon">
-                <i class="fas fa-clock" aria-hidden="true"></i>
+                <i class="fas fa-calendar" aria-hidden="true"></i>
               </span>
               <span class="title">Create Slots</span>
             </a>
@@ -131,6 +115,23 @@ function SideNav() {
             </a>
           ) : (
             ""
+          )}
+        </li>
+        <li>
+          {isAdmin ? (
+            <a href="/category" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+              </span>
+              <span class="title">Category</span>
+            </a>
+          ) : (
+            <a href="/contact_us" onClick={() => window.scrollTo({ top: 0 })}>
+              <span class="icon">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="title">Contact</span>
+            </a>
           )}
         </li>
       </ul>
