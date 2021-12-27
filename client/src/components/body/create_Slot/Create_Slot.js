@@ -81,10 +81,9 @@ export default function Create_Slots() {
                   <tr key={slot._id}>
                     <td>{new Date(slot.date).toDateString()}</td>
                     <td>{new Date(slot.date).toLocaleTimeString()}</td>
-                    <td>{slot.patientID}</td>
+                    <td>{slot.patientName}</td>
                     <td>
-                      <button 
-                        onClick={() => handleDelete(slot)}>
+                      <button onClick={() => handleDelete(slot)}>
                         Finished
                       </button>
                     </td>

@@ -299,7 +299,8 @@ const Create_appointment = () => {
     }
     try {
       const res = await axios.post(
-        "/slots/book/" + date.slotId + "/" + user._id
+        "/slots/book/" + date.slotId + "/" + user._id,
+        { patientName: user.name }
       );
     } catch (err) {
       console.log("heloo:   " + err);
@@ -524,7 +525,9 @@ const Create_appointment = () => {
                 <div class="col s12 m6 l4">
                   <div className="form-group">
                     <div className="input-field">
-                      <label htmlFor="title"><span class="required-field"></span>Title</label>
+                      <label htmlFor="title">
+                        <span class="required-field"></span>Title
+                      </label>
                       <input
                         type="title"
                         className="title"
@@ -541,7 +544,9 @@ const Create_appointment = () => {
                 <div class="col s12 m6 l4">
                   <div className="form-group">
                     <div className="input-field">
-                      <label htmlFor="description"><span class="required-field"></span>Description</label>
+                      <label htmlFor="description">
+                        <span class="required-field"></span>Description
+                      </label>
                       <textarea
                         rows="3"
                         cols="30"
@@ -564,7 +569,9 @@ const Create_appointment = () => {
                 <div class="col s12 m6 l4">
                   <div className="form-group">
                     <div className="input-field">
-                      <label htmlFor="mode"><span class="required-field"></span>Mode of Appointment</label>
+                      <label htmlFor="mode">
+                        <span class="required-field"></span>Mode of Appointment
+                      </label>
                       <div className="Mode_of_Appointment">
                         <label for="online">Online</label>
                         <input
@@ -649,7 +656,9 @@ const Create_appointment = () => {
 
                 <div class="col s12 m6 l4">
                   <div className="form-group">
-                    <label htmlFor="doctortId"><span class="required-field"></span>Doctor</label>
+                    <label htmlFor="doctortId">
+                      <span class="required-field"></span>Doctor
+                    </label>
                     <select
                       className="form-control text-capitalize speciality_name"
                       value={doctor.doctortId}
@@ -685,7 +694,9 @@ const Create_appointment = () => {
                 <hr></hr>
               </div>
               <div>
-                <h5><span class="required-field"></span>Symptom</h5>
+                <h5>
+                  <span class="required-field"></span>Symptom
+                </h5>
                 {renderSymptom()}
                 <div className="row">
                   <div class="col s12 m6 l4">
@@ -829,8 +840,7 @@ const Create_appointment = () => {
               <>
                 {!success ? (
                   <StripeCheckout
-                      stripeKey=
-                      "pk_test_51HQTH8J8AwZ227xYwVHlWH1ysskV58ngCxoIRrJiw9cdcfhzo0MZhUdikO4YinRuIypDCQRFikQNDvNwhOiVKjN400Yvu6iafA"
+                    stripeKey="pk_test_51HQTH8J8AwZ227xYwVHlWH1ysskV58ngCxoIRrJiw9cdcfhzo0MZhUdikO4YinRuIypDCQRFikQNDvNwhOiVKjN400Yvu6iafA"
                     // {process.env.REACT_APP_KEY}
                     token={makePayment}
                     name="Make Payment"

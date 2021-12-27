@@ -8,6 +8,9 @@ const SlotSchema = new mongoose.Schema(
     patientID: {
       type: String,
     },
+    patientName: {
+      type: String,
+    },
     date: {
       type: Date,
     },

@@ -123,7 +123,11 @@ router.post("/book/:slotId/:patientId", async (req, res) => {
   try {
     await Slots.findOneAndUpdate(
       { _id: req.params.slotId },
-      { patientID: req.params.patientId, status: true }
+      {
+        patientID: req.params.patientId,
+        status: true,
+        patientName: req.body.patientName,
+      }
     );
     //console.log(slot);
     res.status(200).json({ msg: "Update Success!" });

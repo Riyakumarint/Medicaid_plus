@@ -35,6 +35,8 @@ router.get("/conInfo/:id", userCtrl.conInfo);
 
 router.get("/fetchDoctorUser/:doctorId", userCtrl.fetchDoctorUser);
 
+router.get("/fetchUser/:userId", userCtrl.fetchUser);
+
 // Social Login
 router.post("/google_login", userCtrl.googleLogin);
 

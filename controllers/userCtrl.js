@@ -248,6 +248,16 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  // Get some public details of user's user profile
+  fetchUser: async (req, res) => {
+    try {
+      const user = await Users.find({ _id: req.params.userId });
+      const { name, avatar, email, mobile, gender } = user[0];
+      res.json({ name, avatar, email, mobile, gender });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
   // Get all users(admin)
   getUsersAllInfor: async (req, res) => {
     try {
