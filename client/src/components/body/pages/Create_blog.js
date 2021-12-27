@@ -204,7 +204,7 @@ const Create_blog = () => {
           {err && showErrMsg(err)}
           {success && showSuccessMsg(success)}
           {loading && <Loading />}
-          <h1>Create blog</h1>
+          <h1>Create Article</h1>
           <div className="row">
             <div className="col">
               <div className="form-group position-relative">

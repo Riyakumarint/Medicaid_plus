@@ -236,7 +236,7 @@ const Doctor = () => {
 
               {/* blogs */}
               <div>
-                <h5> Blogs of this doctor goes here</h5>
+                <h5> Articles of this doctor goes here</h5>
                 {renderBlogs(blogs)}
               </div>
               <hr></hr>

@@ -102,7 +102,7 @@ function PostPage({ match }) {
                       onClick={() => deletePost()}
                       className="blog_delete"
                     >
-                      Delete Blog
+                      Delete Article
                     </button>
                   </>
                 )}
@@ -119,7 +119,7 @@ function PostPage({ match }) {
             <Grid item lg={4} md={4} sm={12}>
               <div className="blog_comment_component">
                 <div>
-                  <h4 className="comment_heading"> Rate Blog</h4>
+                  <h4 className="comment_heading"> Rate Article</h4>
                   <h6 className="star_rating">
                     <ReactStars
                       count={5}
