@@ -19,6 +19,7 @@
 1) [Technology Stack](#depend)
 2) [Feedback](#feed)
 3) [Contribute](#contri)
+4) [Sreen Shorts](#scre)
   
 <a name="depend"></a>
 ## Technology Stack:
@@ -38,6 +39,15 @@ Feel free to file an issue if you come across any bugs
 * Feel free to report issues and bugs. It will be helpful for future lauches of the application
 * All suggestions are welcome
 * Fork repository and contribute
+<a name="scre"></a>
+<img src="client/public/sc.jpeg"><br>
+  <img src="client/public/sc1.jpeg"><br>
+  <img src="client/public/sc2.jpeg"><br>
+  <img src="client/public/sc3.jpeg"><br>
+  <img src="client/public/sc5.jpeg"><br>
+  <img src="client/public/sc6.jpeg"><br>
+  <img src="client/public/sc7.jpeg"><br>
+  <img src="client/public/sc4.jpeg"><br>
   
 ## Contributors:
 * [Purushotam Kumar Agrawal](https://github.com/puru2411)
