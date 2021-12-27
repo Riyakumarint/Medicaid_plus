@@ -9,7 +9,8 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-<img src="client/public/heart-beat.png" width="200" height="200">
+<br>
+<img src="client/public/heart-beat.png" width="200" height="200" align="center">
 ## Introduction:
 <b>MEDCAD+</b> connects patients and doctors in a way never done before. By chats, Video conferences, the ability for doctors to check patient vitals(eg blood sugar, blood oxygen, and puls) regularly to keep a tight check on their health. Along with this patients can also book offline slots if the patient is still old school in this world full of zoomers. Doctors can control their free slots and reschedule them to manage their workload. In these difficult times are website tries to connect users and doctors in the most transparent and personal ways possible. Along with this doctors can also write articles to advise users on their day-to-day activities and debunk myths about diseases. Along with this we also provide the ability to book ambulances and lab tests from nearby hospitals.
 
