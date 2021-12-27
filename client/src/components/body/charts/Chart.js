@@ -12,7 +12,7 @@ export default function Chart(props) {
               title: {
                 display: props.displayTitle,
                 text: "Largest Cities In " + props.location,
-                fontSize: 25,
+                fontSize: 20,
               },
               legend: {
                 display: props.displayLegend,
@@ -25,7 +25,7 @@ export default function Chart(props) {
         ""
       )}
       {props.chartData3 ? (
-        <div className="bar_chart">
+        <div className="sidebar_chart">
           <Bar
             data={props.chartData3}
             options={{
@@ -33,7 +33,7 @@ export default function Chart(props) {
               title: {
                 display: props.displayTitle,
                 text: "Largest Cities In " + props.location,
-                fontSize: 25,
+                fontSize: 20,
               },
               legend: {
                 display: props.displayLegend,
@@ -46,7 +46,7 @@ export default function Chart(props) {
         ""
       )}
       {props.chartData4 ? (
-        <div className="bar_chart">
+        <div className="sidebar_chart">
           <Bar
             data={props.chartData4}
             options={{
@@ -54,7 +54,7 @@ export default function Chart(props) {
               title: {
                 display: props.displayTitle,
                 text: "Largest Cities In " + props.location,
-                fontSize: 25,
+                fontSize: 20,
               },
               legend: {
                 display: props.displayLegend,
@@ -67,7 +67,7 @@ export default function Chart(props) {
         ""
       )}
       {props.chartData5 ? (
-        <div className="bar_chart">
+        <div className="sidebar_chart">
           <Bar
             data={props.chartData5}
             options={{
@@ -75,7 +75,7 @@ export default function Chart(props) {
               title: {
                 display: props.displayTitle,
                 text: "Largest Cities In " + props.location,
-                fontSize: 25,
+                fontSize: 20,
               },
               legend: {
                 display: props.displayLegend,
@@ -97,7 +97,7 @@ export default function Chart(props) {
                 title: {
                   display: props.displayTitle,
                   text: "Largest Cities In " + props.location,
-                  fontSize: 25,
+                  fontSize: 20,
                 },
                 legend: {
                   display: props.displayLegend,
@@ -117,7 +117,7 @@ export default function Chart(props) {
                 title: {
                   display: props.displayTitle,
                   text: "Largest Cities In " + props.location,
-                  fontSize: 25,
+                  fontSize: 20,
                 },
                 legend: {
                   display: props.displayLegend,

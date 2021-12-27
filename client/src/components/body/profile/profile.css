@@ -313,6 +313,11 @@ font-size: 20px;
   color: #911f27;
 }
 
+.fa-check-square-o{
+  color: green;
+  font-size: 20px;
+}
+
 /* -------------- Edit User ----------------- */
 
 .edit_pro {
@@ -390,6 +395,18 @@ font-size: 20px;
 }
 
 .chart .bar_chart {
-  max-width: 1000px;
-  min-width: 700px;
+  display: block;
+  max-width: 700px;
+  min-width: 300px;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.chart .sidebar_chart{
+  display: block;
+  max-width: 700px;
+  min-width: 300px;
+  max-height: 500px;
+  justify-content: center;
+  margin: 10px auto;
 }
