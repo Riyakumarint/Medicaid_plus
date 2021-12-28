@@ -13,6 +13,11 @@ const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [currentAppointments, setCurrentAppointments] = useState([]);
   const [previousAppointments, setPreviousAppointments] = useState([]);
+  const [appointmentsP, setAppointmentsP] = useState([]);
+  const [currentAppointmentsP, setCurrentAppointmentsP] = useState([]);
+  const [previousAppointmentsP, setPreviousAppointmentsP] = useState([]);
+  const [err, seterr] = useState("");
+  const [success, setSuccess] = useState("");
   const [callback, setCallback] = useState(false);
 
   const token = useSelector((state) => state.token);
@@ -27,15 +32,25 @@ const Appointments = () => {
       const res = await axios.get("/appointments/fetchAppointments", {
         headers: { Authorization: token },
       });
-      setAppointments(res.data);
-      const currAppointments = res.data.filter(
+      setAppointments(res.data.asDoctor);
+      const currAppointments = res.data.asDoctor.filter(
         (appointment) => appointment.status === "active"
       );
       setCurrentAppointments(currAppointments);
-      const preAppointments = res.data.filter(
+      const preAppointments = res.data.asDoctor.filter(
         (appointment) => appointment.status !== "active"
       );
       setPreviousAppointments(preAppointments);
+
+      setAppointmentsP(res.data.asPatient);
+      const currAppointmentsP = res.data.asPatient.filter(
+        (appointment) => appointment.status === "active"
+      );
+      setCurrentAppointmentsP(currAppointmentsP);
+      const preAppointmentsP = res.data.asPatient.filter(
+        (appointment) => appointment.status !== "active"
+      );
+      setPreviousAppointmentsP(preAppointmentsP);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +61,7 @@ const Appointments = () => {
   // handle submit
 
   // renders
-  const renderAppointments = (appointments) => {
+  const renderAppointments = (appointments, flag) => {
     if (appointments.length === 0) return "No current appointments";
     return (
       <div className="col-right">
@@ -56,7 +71,7 @@ const Appointments = () => {
               <tr>
                 <th>Meeting Detail</th>
                 <th>Case</th>
-                <th>{isDoctor ? "Patient's name" : "Doctor's name"}</th>
+                <th>{!flag ? "Patient's name" : "Doctor's name"}</th>
                 <th>Mode</th>
                 <th>Action</th>
               </tr>
@@ -70,19 +85,26 @@ const Appointments = () => {
                   </td>
                   <td>{appointment.title}</td>
                   <td>
-                    {isDoctor
-                      ? appointment.patient_name
-                      : appointment.doctor_name}
+                    {!flag ? appointment.patient_name : appointment.doctor_name}
                     {}
                   </td>
                   <td>{appointment.mode}</td>
                   <td>
-                    <Link to={`/appointment/${appointment._id}`}>
-                      <i className="fas fa-stethoscope" title="Open">
-                        {" "}
-                        Open
-                      </i>
-                    </Link>
+                    {flag ? (
+                      <Link to={`/appointmentP/${appointment._id}`}>
+                        <i className="fas fa-stethoscope" title="Open">
+                          {" "}
+                          Open
+                        </i>
+                      </Link>
+                    ) : (
+                      <Link to={`/appointment/${appointment._id}`}>
+                        <i className="fas fa-stethoscope" title="Open">
+                          {" "}
+                          Open
+                        </i>
+                      </Link>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -98,8 +120,8 @@ const Appointments = () => {
       <SideNav />
       <div className="continer-profile">
         <div className="pro">
-          {appointments.err && showErrMsg(appointments.err)}
-          {appointments.success && showSuccessMsg(appointments.success)}
+          {err && showErrMsg(err)}
+          {success && showSuccessMsg(success)}
 
           <div className="profile_page">
             <div className="profile_header">
@@ -129,15 +151,33 @@ const Appointments = () => {
               </button>
             </div>
 
+            {isDoctor ? (
+              <div>
+                <div>
+                  <h5>Booked Appointments</h5>
+                  {renderAppointments(currentAppointments, 0)}
+                </div>
+                <hr></hr>
+                <br></br>
+                <div>
+                  <h5>Previous Appointments</h5>
+                  {renderAppointments(previousAppointments, 0)}
+                </div>
+                <hr></hr>
+                <br></br>
+              </div>
+            ) : (
+              ""
+            )}
             <div>
-              <h5>Current Appointments</h5>
-              {renderAppointments(currentAppointments)}
+              <h5>My Appointments</h5>
+              {renderAppointments(currentAppointmentsP, 1)}
             </div>
             <hr></hr>
             <br></br>
             <div>
-              <h5>Previous Appointments</h5>
-              {renderAppointments(previousAppointments)}
+              <h5>My Previous Appointments</h5>
+              {renderAppointments(previousAppointmentsP, 1)}
             </div>
           </div>
         </div>

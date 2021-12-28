@@ -37,6 +37,21 @@ function SideNav() {
           </a>
         </li>
         <li>
+          {isDoctor ? (
+            <a
+              href={isDoctor ? "/medical_history" : ""}
+              onClick={() => window.scrollTo({ top: 0 })}
+            >
+              <span class="icon">
+                <i class="fa fa-medkit" aria-hidden="true"></i>
+              </span>
+              <span class="title">History</span>
+            </a>
+          ) : (
+            ""
+          )}
+        </li>
+        <li>
           <a
             href="/get_appointments"
             onClick={() => window.scrollTo({ top: 0 })}
@@ -92,7 +107,7 @@ function SideNav() {
             ""
           )}
         </li>
-        
+
         <li>
           {isDoctor ? (
             <a href="/createSlot" onClick={() => window.scrollTo({ top: 0 })}>

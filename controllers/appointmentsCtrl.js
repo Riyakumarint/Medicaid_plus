@@ -144,15 +144,19 @@ const appointmentsCtrl = {
   fetchAppointments: async (req, res) => {
     try {
       const user = await Users.find({ _id: req.user.id });
-      // console.log(user);
       if (user[0].role === 2) {
-        const appointments = await Appointment.find({ doctortId: req.user.id });
-        res.json(appointments);
+        const appointments1 = await Appointment.find({
+          doctortId: req.user.id,
+        });
+        const appointments2 = await Appointment.find({
+          patienttId: req.user.id,
+        });
+        res.json({ asDoctor: appointments1, asPatient: appointments2 });
       } else {
         const appointments = await Appointment.find({
           patienttId: req.user.id,
         });
-        res.json(appointments);
+        res.json({ asDoctor: [], asPatient: appointments });
       }
     } catch (err) {
       return res.status(500).json({ msg: err.message });

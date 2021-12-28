@@ -138,6 +138,11 @@ function Body() {
           exact
         />
         <Route
+          path="/appointmentP/:caseId"
+          component={isLogged ? Appointment_patient : Login}
+          exact
+        />
+        <Route
           path="/messenger"
           component={isLogged ? Messenger : Login}
           exact
