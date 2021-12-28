@@ -1,7 +1,7 @@
 # Team !ABHIMANYU
 
-<h1 align="center">MEDICAD+</h1>
-<h3>Every Thing feels safe when we are by your side, MEDICAD+ your one-stop healthcare tool<h3>
+<h1 align="center">MEDICAID+</h1>
+<h3>Every Thing feels safe when we are by your side, MEDICAID+ your one-stop healthcare tool<h3>
   
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
@@ -12,7 +12,7 @@
 <br>
 <img src="client/public/heart-beat.png" width="200" height="200" align="center">
 ## Introduction:
-<b>MEDCAD+</b> connects patients and doctors in a way never done before. By chats, Video conferences, the ability for doctors to check patient vitals(eg blood sugar, blood oxygen, and puls) regularly to keep a tight check on their health. Along with this patients can also book offline slots if the patient is still old school in this world full of zoomers. Doctors can control their free slots and reschedule them to manage their workload. In these difficult times are website tries to connect users and doctors in the most transparent and personal ways possible. Along with this doctors can also write articles to advise users on their day-to-day activities and debunk myths about diseases. Along with this we also provide the ability to book ambulances and lab tests from nearby hospitals.
+<b>MEDCAD+</b> connects patients and doctors in a way never done before. By chats, Video conferences, the ability for doctors to check patient vitals(eg blood sugar, blood oxygen, and pulse) regularly to keep a tight check on their health. Along with this patients can also book offline slots if the patient is still old school in this world full of zoomers. Doctors can control their free slots and reschedule them to manage their workload. In these difficult times are website tries to connect users and doctors in the most transparent and personal ways possible. Along with this doctors can also write articles to advise users on their day-to-day activities and debunk myths about diseases. Along with this we also provide the ability to book ambulances and lab tests from nearby hospitals.
 
 ## Table of Contents:
 
