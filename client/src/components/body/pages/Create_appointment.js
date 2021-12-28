@@ -15,6 +15,7 @@ const initialState = {
   doctortId: "",
   patient_name: "",
   doctor_name: "",
+  
   status: "",
   mode: "online",
   clinic_address: "",
@@ -97,55 +98,55 @@ const Create_appointment = () => {
   }, [callback, token]);
 
   // handle changes
-  const handleChangePdf = async (e) => {
-    e.preventDefault();
-    try {
-      const file = e.target.files[0];
+  // const handleChangePdf = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const file = e.target.files[0];
 
-      if (!file)
-        return setAppointmentDetails({
-          ...appointmentDetails,
-          err: "No files were uploaded.",
-          success: "",
-        });
+  //     if (!file)
+  //       return setAppointmentDetails({
+  //         ...appointmentDetails,
+  //         err: "No files were uploaded.",
+  //         success: "",
+  //       });
 
-      if (file.size > 2048 * 2048)
-        return setAppointmentDetails({
-          ...appointmentDetails,
-          err: "Size too large.",
-          success: "",
-        });
+  //     if (file.size > 2048 * 2048)
+  //       return setAppointmentDetails({
+  //         ...appointmentDetails,
+  //         err: "Size too large.",
+  //         success: "",
+  //       });
 
-      if (file.type !== "application/pdf")
-        return setAppointmentDetails({
-          ...appointmentDetails,
-          err: "File format is incorrect.",
-          success: "",
-        });
+  //     if (file.type !== "application/pdf")
+  //       return setAppointmentDetails({
+  //         ...appointmentDetails,
+  //         err: "File format is incorrect.",
+  //         success: "",
+  //       });
 
-      let formData = new FormData();
-      formData.append("file", file);
+  //     let formData = new FormData();
+  //     formData.append("file", file);
 
-      setLoading(true);
-      const res = await axios.post("/api/upload_pdf", formData, {
-        headers: {
-          // "content-type": "multipart/form-data",
-          "content-type": "text/plain",
+  //     setLoading(true);
+  //     const res = await axios.post("/api/upload_pdf", formData, {
+  //       headers: {
+  //         // "content-type": "multipart/form-data",
+  //         "content-type": "text/plain",
 
-          Authorization: token,
-        },
-      });
+  //         Authorization: token,
+  //       },
+  //     });
 
-      setLoading(false);
-      setPdfFile(res.data.url);
-    } catch (err) {
-      setAppointmentDetails({
-        ...appointmentDetails,
-        err: err.response.data.msg,
-        success: "",
-      });
-    }
-  };
+  //     setLoading(false);
+  //     setPdfFile(res.data.url);
+  //   } catch (err) {
+  //     setAppointmentDetails({
+  //       ...appointmentDetails,
+  //       err: err.response.data.msg,
+  //       success: "",
+  //     });
+  //   }
+  // };
 
   const handleChangeInput = async (e) => {
     const { name, value } = e.target;
@@ -272,6 +273,7 @@ const Create_appointment = () => {
       ...appointmentDetails,
       patienttId: user._id,
       patient_name: user.name,
+      
       status: "active",
       doctortId: doctor.doctortId,
       doctor_name: doctor.doctor_name,
@@ -315,13 +317,13 @@ const Create_appointment = () => {
       }
       const res = await axios.post(
         "/appointments/createAppointment",
-        { appointmentDetail },
+        { appointmentDetail,patient_email: user.email },
         { headers: { Authorization: token } }
       );
 
       setAppointmentDetails({
         ...appointmentDetails,
-
+        
         err: "",
         success: "Appointment Created Success!",
       });

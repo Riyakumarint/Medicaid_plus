@@ -24,7 +24,6 @@ const initialState = {
   title: "",
   description: "",
   meetingDetail: "",
-
   symptoms: [],
   previousMedicine: [],
   previousTestReports: [],
@@ -33,13 +32,15 @@ const initialState = {
   doctorsNote: "",
   doctorsNotePrivate: "",
   prescription: "",
-
   err: "",
   success: "",
 };
 
 const Appointment_doctor = () => {
   const [appointment, setAppointment] = useState(initialState);
+  const [patientUser, setPatientUser] = useState({
+    name:"", avatar:"", email:"", mobile:"", gender:""
+  });
   const [med, setMed] = useState({ name: "", dose: "" });
   const [medicine, setMedicine] = useState([]);
   const [testReport, setTestReport] = useState({ name: "", link: "" });
@@ -68,6 +69,18 @@ const Appointment_doctor = () => {
       console.log(err);
     }
   }, [callback, user, token, caseId]);
+
+  useEffect(() => {
+    const getPatientUser = async () => {
+      try {
+        const res = await axios.get("/user/fetchUser/" + appointment.patienttId);
+        setPatientUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getPatientUser();
+  }, [callback,appointment]);
 
   // handle changes
   const handleChangeInput = (e) => {
@@ -200,9 +213,15 @@ const Appointment_doctor = () => {
           "/appointments/resheduleAppointment/" +
             appointment._id +
             "/" +
-            newdate
+          newdate, {
+            prevDate: appointment.meetingDetail,
+            doctorName: appointment.doctor_name,
+            patientName: appointment.patient_name,
+            patientEmail: patientUser.email,
+            }
         );
         setNewDate();
+        console.log("emailend")
         setCallback(!callback);
       } catch (err) {
         console.log(err);
