@@ -6,7 +6,8 @@ const MedicalProfile =
 const Appointment = require("../models/appointmentModel").appointmentModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sendMail = require("./sendMail");
+const rescheduleEmail = require("./rescheduleEmail");
+const scheduleEmail = require("./scheduleEmail");
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const fetch = require("node-fetch");
@@ -25,7 +26,6 @@ const appointmentsCtrl = {
         doctor_name: req.body.appointmentDetail.doctor_name,
         status: req.body.appointmentDetail.status,
         mode: req.body.appointmentDetail.mode,
-        pdfFile: req.body.appointmentDetail.pdfFile,
         clinic_address: req.body.appointmentDetail.clinic_address,
         title: req.body.appointmentDetail.title,
         description: req.body.appointmentDetail.description,
@@ -44,6 +44,13 @@ const appointmentsCtrl = {
           await MedicalProfile.findOneAndUpdate(
             { userId: req.body.appointmentDetail.doctortId },
             { $push: { caseRecord: { caseId: result._id } } }
+          );
+          scheduleEmail(
+            req.body.patient_email,
+            req.body.appointmentDetail.patient_name,
+            req.body.appointmentDetail.doctor_name,
+            req.body.appointmentDetail.mode,
+            req.body.appointmentDetail.meetingDetail,
           );
           res.json({ msg: "Appointment created!" });
         } else {
@@ -173,14 +180,26 @@ const appointmentsCtrl = {
     }
   },
   reshedule: async (req, res) => {
-    // console.log("whhyyyy");
     try {
-      // console.log(req.params);
+      // console.log(req. params);
       await Appointment.findOneAndUpdate(
         { _id: req.params.apppointmentID },
         { meetingDetail: req.params.date }
       );
-
+      // patient_email, patient_name,doc_name, prevDate,newDate
+      
+      
+      // console.log(req.body.patientEmail)
+      rescheduleEmail(
+        req.body.patientEmail,
+        req.body.patientName,
+        req.body.doctorName,
+        req.body.prevDate,
+       req.params.date
+      );
+  
+      // console.log(apppointmentID)
+      // console.log(req.params.date)
       res.json({ msg: "Update Success!" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });

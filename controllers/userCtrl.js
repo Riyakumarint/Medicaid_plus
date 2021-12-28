@@ -103,6 +103,7 @@ const userCtrl = {
       const activation_token = createActivationToken(newUser);
 
       const url = `${CLIENT_URL}/user/activate/${activation_token}`;
+      
       sendMail(email, url, "Verify your email address");
 
       res.json({
@@ -253,6 +254,7 @@ const userCtrl = {
     try {
       const user = await Users.find({ _id: req.params.userId });
       const { name, avatar, email, mobile, gender } = user[0];
+      // console.log(req.body)
       res.json({ name, avatar, email, mobile, gender });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
