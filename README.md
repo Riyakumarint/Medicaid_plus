@@ -52,7 +52,7 @@ Feel free to file an issue if you come across any bugs
 
 <a name="demo"></a>
 ## Demo:
-<p><a href="https://vimeo.com/662984473">Medicaid+</a> from <a href="https://vimeo.com/user162669795">Purushotam K. Agrawal</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<p><a href="https://vimeo.com/662984473">Medicaid+</a></p>
   
 ## Contributors:
 * [Purushotam Kumar Agrawal](https://github.com/puru2411)
