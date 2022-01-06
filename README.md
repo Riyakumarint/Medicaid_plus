@@ -20,6 +20,7 @@
 2) [Feedback](#feed)
 3) [Contribute](#contri)
 4) [Sreen Shorts](#scre)
+5) [Demo](#demo)
   
 <a name="depend"></a>
 ## Technology Stack:
@@ -48,6 +49,10 @@ Feel free to file an issue if you come across any bugs
   <img src="client/public/sc6.jpeg"><br>
   <img src="client/public/sc7.jpeg"><br>
   <img src="client/public/sc4.jpeg"><br>
+
+<a name="demo"></a>
+## Demo:
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/662984473?h=65656b25a7" width="640" height="360" frameborder="0" allowfullscreen></iframe>
   
 ## Contributors:
 * [Purushotam Kumar Agrawal](https://github.com/puru2411)
